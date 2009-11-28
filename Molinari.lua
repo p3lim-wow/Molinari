@@ -7,7 +7,13 @@ button:SetBackdropColor(1, 0.5, 0.5, 0.4)
 
 button:RegisterEvent('MODIFIER_STATE_CHANGED')
 button:SetScript('OnEvent', function(self, event, ...) self[event](self, event, ...) end)
-button:SetScript('OnLeave', function(self) self:Hide() end)
+button:SetScript('OnLeave', function(self)
+	if(InCombatLockdown()) then
+		self:RegisterEvent('PLAYER_REGEN_ENABLED')
+	else
+		self:Hide()
+	end
+end)
 
 local macro = '/cast %s\n/use %s %s'
 local spell = GetSpellInfo(51005)
@@ -18,8 +24,13 @@ function button:MODIFIER_STATE_CHANGED(event, key)
 	end
 end
 
+function button:PLAYER_REGEN_ENABLED(event)
+	self:UnregisterEvent(event)
+	self:Hide()
+end
+
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
-	if(self:GetItem() and IsAltKeyDown()) then
+	if(self:GetItem() and IsAltKeyDown() and not InCombatLockdown()) then
 		if(GameTooltipTextLeft2:GetText() == ITEM_MILLABLE) then
 			
 			button:SetAttribute('macrotext', macro:format(spell, GetMouseFocus():GetParent():GetID(), GetMouseFocus():GetID()))
