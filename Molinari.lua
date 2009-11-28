@@ -5,6 +5,7 @@ button:SetAttribute('*type*', 'macro')
 button:SetBackdrop({bgFile = [=[Interface\ChatFrame\ChatFrameBackground]=]})
 button:SetBackdropColor(0, 0, 0, 0.4)
 
+button:RegisterEvent('PLAYER_LOGIN')
 button:RegisterEvent('MODIFIER_STATE_CHANGED')
 button:SetScript('OnEvent', function(self, event, ...) self[event](self, event, ...) end)
 button:SetScript('OnLeave', function(self)
@@ -16,11 +17,7 @@ button:SetScript('OnLeave', function(self)
 end)
 
 local macro = '/cast %s\n/use %s %s'
-
-local spells = {
-	[ITEM_MILLABLE] = {GetSpellInfo(51005), 0.5, 1, 0.5},
-	[ITEM_PROSPECTABLE] = {GetSpellInfo(31252), 1, 0.5, 0.5},
-}
+local spells = {}
 
 function button:MODIFIER_STATE_CHANGED(event, key)
 	if(self:IsShown() and (key == 'LALT' or key == 'RALT')) then
@@ -71,3 +68,15 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		end
 	end
 end)
+
+function button:PLAYER_LOGIN()
+	if(IsSpellKnown(51005)) then
+		spells[ITEM_MILLABLE] = {GetSpellInfo(51005), 0.5, 1, 0.5}
+	end
+	if(IsSpellKnown(31252)) then
+		spells[ITEM_PROSPECTABLE] = {GetSpellInfo(31252), 1, 0.5, 0.5}
+	end
+	if(not IsSpellKnown(13262)) then
+		Disenchantable = function() end
+	end
+end
