@@ -38,10 +38,18 @@ local function Disenchantable(item)
 	return (type == ARMOR or type == ENCHSLOT_WEAPON) and quality > 1 and quality < 5 and GetSpellInfo(13262)
 end
 
+local function ScanTooltip()
+	local spell = nil
+	for index = 1, GameTooltip:NumLines() do
+		spell = spells[_G['GameTooltipTextLeft'..index]:GetText()]
+	end
+	return spell
+end
+
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	local item = self:GetItem()
 	if(item and IsAltKeyDown() and not InCombatLockdown()) then
-		local spell = spells[GameTooltipTextLeft2:GetText()] or Disenchantable(item)
+		local spell = ScanTooltip() or Disenchantable(item)
 		if(spell) then
 			local slot = GetMouseFocus()
 			button:SetAttribute('macrotext', macro:format(spell, slot:GetParent():GetID(), slot:GetID()))
