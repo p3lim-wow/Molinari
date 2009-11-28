@@ -33,9 +33,15 @@ function button:PLAYER_REGEN_ENABLED(event)
 	self:Hide()
 end
 
+local function Disenchantable(item)
+	local _, _, quality, _, _, type = GetItemInfo(item)
+	return (type == ARMOR or type == ENCHSLOT_WEAPON) and quality > 1 and quality < 5 and GetSpellInfo(13262)
+end
+
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
-	if(self:GetItem() and IsAltKeyDown() and not InCombatLockdown()) then
-		local spell = spells[GameTooltipTextLeft2:GetText()]
+	local item = self:GetItem()
+	if(item and IsAltKeyDown() and not InCombatLockdown()) then
+		local spell = spells[GameTooltipTextLeft2:GetText()] or Disenchantable(item)
 		if(spell) then
 			button:SetAttribute('macrotext', macro:format(spell, GetMouseFocus():GetParent():GetID(), GetMouseFocus():GetID()))
 			button:SetAllPoints(GetMouseFocus())
