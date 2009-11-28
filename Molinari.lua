@@ -1,9 +1,12 @@
-local button = CreateFrame('Button', 'Molinari', UIParent, 'SecureActionButtonTemplate')
+local button = CreateFrame('Button', 'Molinari', UIParent, 'SecureActionButtonTemplate, AutoCastShineTemplate')
 button:RegisterForClicks('LeftButtonUp')
 button:SetAttribute('*type*', 'macro')
+button:Hide()
 
-button:SetBackdrop({bgFile = [=[Interface\ChatFrame\ChatFrameBackground]=]})
-button:SetBackdropColor(0, 0, 0, 0.4)
+for _, spark in pairs(button.sparkles) do
+	spark:SetHeight(spark:GetHeight() * 3)
+	spark:SetWidth(spark:GetWidth() * 3)
+end
 
 button:RegisterEvent('PLAYER_LOGIN')
 button:RegisterEvent('MODIFIER_STATE_CHANGED')
@@ -13,6 +16,7 @@ button:SetScript('OnLeave', function(self)
 		self:RegisterEvent('PLAYER_REGEN_ENABLED')
 	else
 		self:Hide()
+		AutoCastShine_AutoCastStop(self)
 	end
 end)
 
@@ -52,7 +56,7 @@ end
 
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	local item = self:GetItem()
-	if(item and Clickable) then
+	if(item and Clickable()) then
 		local spell, r, g, b = ScanTooltip()
 		if(not spell) then
 			spell, r, g, b = Disenchantable(item)
@@ -64,7 +68,7 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 			button:SetAllPoints(slot)
 			button:SetParent(slot)
 			button:Show()
-			button:SetBackdropColor(r, g, b, 0.4)
+			AutoCastShine_AutoCastStart(button, r, g, b)
 		end
 	end
 end)
