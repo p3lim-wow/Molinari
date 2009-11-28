@@ -43,9 +43,10 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	if(item and IsAltKeyDown() and not InCombatLockdown()) then
 		local spell = spells[GameTooltipTextLeft2:GetText()] or Disenchantable(item)
 		if(spell) then
-			button:SetAttribute('macrotext', macro:format(spell, GetMouseFocus():GetParent():GetID(), GetMouseFocus():GetID()))
-			button:SetAllPoints(GetMouseFocus())
-			button:SetParent(GetMouseFocus())
+			local slot = GetMouseFocus()
+			button:SetAttribute('macrotext', macro:format(spell, slot:GetParent():GetID(), slot:GetID()))
+			button:SetAllPoints(slot)
+			button:SetParent(slot)
 			button:Show()
 		end
 	end
