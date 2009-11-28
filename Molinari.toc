@@ -2,6 +2,6 @@
 ## Author: p3lim
 ## Version: Alpha
 ## Title: Molinari
-## Notes: One-click milling
+## Notes: One-click Milling/Prospecting!
 
 Molinari.lua

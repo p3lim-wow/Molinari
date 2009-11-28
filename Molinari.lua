@@ -16,7 +16,11 @@ button:SetScript('OnLeave', function(self)
 end)
 
 local macro = '/cast %s\n/use %s %s'
-local spell = GetSpellInfo(51005)
+
+local spells = {
+	[ITEM_MILLABLE] = GetSpellInfo(51005),
+	[ITEM_PROSPECTABLE] = GetSpellInfo(31252),
+}
 
 function button:MODIFIER_STATE_CHANGED(event, key)
 	if(self:IsShown() and (key == 'LALT' or key == 'RALT')) then
@@ -31,8 +35,8 @@ end
 
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	if(self:GetItem() and IsAltKeyDown() and not InCombatLockdown()) then
-		if(GameTooltipTextLeft2:GetText() == ITEM_MILLABLE) then
-			
+		local spell = spells[GameTooltipTextLeft2:GetText()]
+		if(spell) then
 			button:SetAttribute('macrotext', macro:format(spell, GetMouseFocus():GetParent():GetID(), GetMouseFocus():GetID()))
 			button:SetAllPoints(GetMouseFocus())
 			button:SetParent(GetMouseFocus())
