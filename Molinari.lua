@@ -8,6 +8,7 @@ for _, spark in pairs(button.sparkles) do
 	spark:SetWidth(spark:GetWidth() * 3)
 end
 
+button:SetFrameStrata('DIALOG')
 button:RegisterEvent('PLAYER_LOGIN')
 button:RegisterEvent('MODIFIER_STATE_CHANGED')
 button:SetScript('OnEvent', function(self, event, ...) self[event](self, event, ...) end)
