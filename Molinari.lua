@@ -16,6 +16,7 @@ button:SetScript('OnLeave', function(self)
 		self:RegisterEvent('PLAYER_REGEN_ENABLED')
 	else
 		self:Hide()
+		self:ClearAllPoints()
 		AutoCastShine_AutoCastStop(self)
 	end
 end)
@@ -66,7 +67,6 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 			local slot = GetMouseFocus()
 			button:SetAttribute('macrotext', macro:format(spell, slot:GetParent():GetID(), slot:GetID()))
 			button:SetAllPoints(slot)
-			button:SetParent(slot)
 			button:Show()
 			AutoCastShine_AutoCastStart(button, r, g, b)
 		end
