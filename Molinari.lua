@@ -9,7 +9,6 @@ for _, spark in pairs(button.sparkles) do
 end
 
 button:SetFrameStrata('DIALOG')
-button:RegisterEvent('PLAYER_LOGIN')
 button:RegisterEvent('MODIFIER_STATE_CHANGED')
 button:SetScript('OnEvent', function(self, event, ...) self[event](self, event, ...) end)
 button:SetScript('OnLeave', function(self)
@@ -75,13 +74,15 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	end
 end)
 
-function button:PLAYER_LOGIN()
+do
 	if(IsSpellKnown(51005)) then
 		spells[ITEM_MILLABLE] = {GetSpellInfo(51005), 0.5, 1, 0.5}
 	end
+
 	if(IsSpellKnown(31252)) then
 		spells[ITEM_PROSPECTABLE] = {GetSpellInfo(31252), 1, 0.5, 0.5}
 	end
+
 	if(not IsSpellKnown(13262)) then
 		Disenchantable = function() end
 	end
