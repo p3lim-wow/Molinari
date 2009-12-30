@@ -53,7 +53,7 @@ local function ScanTooltip()
 end
 
 local function Clickable(spell)
-	return (not IsAddOnLoaded('Blizzard_AuctionUI') or (AuctionFrame and not AuctionFrame:IsShown())) and (spell == disenchanting and not CharacterFrame:IsShown()) and not InCombatLockdown() and IsAltKeyDown()
+	return (not IsAddOnLoaded('Blizzard_AuctionUI') or (AuctionFrame and not AuctionFrame:IsShown())) and not (spell == disenchanting and CharacterFrame:IsShown()) and not InCombatLockdown() and IsAltKeyDown()
 end
 
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
