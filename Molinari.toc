@@ -1,6 +1,6 @@
 ## Interface: 30300
 ## Author: p3lim
-## Version: Alpha
+## Version: 30300.2-Beta
 ## Title: Molinari
 ## Notes: One-click Milling/Prospecting/Disenchanting!
 
