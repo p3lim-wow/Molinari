@@ -52,19 +52,19 @@ local function ScanTooltip()
 	end
 end
 
-local function Clickable(spell)
-	return (not IsAddOnLoaded('Blizzard_AuctionUI') or (AuctionFrame and not AuctionFrame:IsShown())) and not (spell == disenchanting and CharacterFrame:IsShown()) and not InCombatLockdown() and IsAltKeyDown()
+local function Clickable()
+	return not InCombatLockdown() and IsAltKeyDown()
 end
 
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	local item = self:GetItem()
-	if(item) then
+	if(item and Clickable()) then
 		local spell, r, g, b = ScanTooltip()
 		if(not spell) then
 			spell, r, g, b = Disenchantable(item)
 		end
 
-		if(spell and Clickable(spell)) then
+		if(spell) then
 			local slot = GetMouseFocus()
 			button:SetAttribute('macrotext', macro:format(spell, slot:GetParent():GetID(), slot:GetID()))
 			button:SetAllPoints(slot)
