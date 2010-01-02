@@ -64,9 +64,9 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 			spell, r, g, b = Disenchantable(item)
 		end
 
-		if(spell) then
-			local slot = GetMouseFocus()
-			button:SetAttribute('macrotext', macro:format(spell, slot:GetParent():GetID(), slot:GetID()))
+		local bag, slot = GetMouseFocus():GetParent(), GetMouseFocus()
+		if(spell and GetContainerItemInfo(bag:GetID(), slot:GetID()) and bag ~= PaperDollFrameItemFlyoutButtons) then
+			button:SetAttribute('macrotext', macro:format(spell, bag:GetID(), slot:GetID()))
 			button:SetAllPoints(slot)
 			button:Show()
 			AutoCastShine_AutoCastStart(button, r, g, b)
