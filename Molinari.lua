@@ -1,3 +1,10 @@
+﻿local ARMORTYPE
+if(GetLocale() == 'ruRU') then
+	ARMORTYPE = 'Доспехи' -- DIAF Blizzard
+else
+	ARMORTYPE = ARMOR
+end
+
 local button = CreateFrame('Button', 'Molinari', UIParent, 'SecureActionButtonTemplate, AutoCastShineTemplate')
 button:RegisterForClicks('LeftButtonUp')
 button:SetAttribute('*type*', 'macro')
@@ -39,7 +46,7 @@ end
 
 local function Disenchantable(item)
 	local _, _, quality, _, _, type = GetItemInfo(item)
-	if ((type == ARMOR or type == ENCHSLOT_WEAPON) and quality > 1 and quality < 5) then
+	if((type == ARMORTYPE or type == ENCHSLOT_WEAPON) and quality > 1 and quality < 5) then
 		return disenchanting, 0.5, 0.5, 1
 	end
 end
