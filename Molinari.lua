@@ -28,7 +28,7 @@ function button:PLAYER_LOGIN()
 			local spell, r, g, b = ScanTooltip(self, spells)
 
 			local bag, slot = GetMouseFocus():GetParent(), GetMouseFocus()
-			if(spell) then
+			if(spell and GetContainerItemLink(bag:GetID(), slot:GetID()) == link) then
 				button:SetAttribute('macrotext', string.format('/cast %s\n/use %s %s', spell, slot:GetParent():GetID(), slot:GetID()))
 				button:GetNormalTexture():SetVertexColor(r, g, b)
 				button:SetAllPoints(slot)
