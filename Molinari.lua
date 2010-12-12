@@ -51,6 +51,7 @@ function button:MODIFIER_STATE_CHANGED(key)
 	if(not self:IsShown() and not key and key ~= 'LALT' and key ~= 'RALT') then return end
 	
 	if(InCombatLockdown()) then
+		self:SetAlpha(0)
 		self:RegisterEvent('PLAYER_REGEN_ENABLED')
 	else
 		self:ClearAllPoints()
@@ -61,5 +62,6 @@ end
 function button:PLAYER_REGEN_ENABLED()
 	self:UnregisterEvent('PLAYER_REGEN_ENABLED')
 	self:ClearAllPoints()
+	self:SetAlpha(1)
 	self:Hide()
 end
