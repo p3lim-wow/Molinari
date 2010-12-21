@@ -1,0 +1,5 @@
+local _, notDisenchantable = ...
+
+notDisenchantable = {
+	
+}

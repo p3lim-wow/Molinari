@@ -1,5 +1,8 @@
 ﻿
-local button = CreateFrame('Button', 'Molinari', UIParent, 'SecureActionButtonTemplate')
+local addonName, notDisenchantable = ...
+local armorType = GetLocale() == 'ruRU' and '' or ARMOR
+
+local button = CreateFrame('Button', addonName, UIParent, 'SecureActionButtonTemplate')
 button:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
 button:RegisterEvent('PLAYER_LOGIN')
 
@@ -13,7 +16,7 @@ local function ScanTooltip(self, spells)
 end
 
 function button:PLAYER_LOGIN()
-	local spells = {}
+	local spells, disenchantable = {}
 	if(IsSpellKnown(51005)) then
 		spells[ITEM_MILLABLE] = {GetSpellInfo(51005), 1/2, 1, 1/2}
 	end
@@ -22,10 +25,23 @@ function button:PLAYER_LOGIN()
 		spells[ITEM_PROSPECTABLE] = {GetSpellInfo(31252), 1, 1/3, 1/3}
 	end
 
+	-- I wish Blizzard could treat disenchanting the same way
+	if(IsSpellKnown(13262)) then
+		disenchantable = {GetSpellInfo(13262), 1, 1, 1}
+	end
+
 	GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		local item, link = self:GetItem()
 		if(item and not InCombatLockdown() and IsAltKeyDown()) then
 			local spell, r, g, b = ScanTooltip(self, spells)
+
+			if(not spell and disenchantable and not notDisenchantable[link:match('item:(%d+):')]) then
+				local _, _, quality, _, _, type = GetItemInfo(item)
+
+				if((type == armorType or type == ENCHSLOT_WEAPON) and (quality and (quality > 1 or quality < 5))) then
+					spell, r, g, b = unpack(disenchantable)
+				end
+			end
 
 			local bag, slot = GetMouseFocus():GetParent(), GetMouseFocus()
 			if(spell and GetContainerItemLink(bag:GetID(), slot:GetID()) == link) then
