@@ -2,7 +2,7 @@
 ## Author: p3lim
 ## Version: 40000.7-Beta
 ## Title: Molinari
-## Notes: One-click Milling & Prospecting!
+## Notes: One-click Milling, Prospecting and Disenchanting!
 
 Database.lua
 Molinari.lua
