@@ -1,5 +1,5 @@
 ﻿
-local addonName, notDisenchantable = ...
+local addonName, ns = ...
 local armorType = GetLocale() == 'ruRU' and '' or ARMOR
 
 local button = CreateFrame('Button', addonName, UIParent, 'SecureActionButtonTemplate')
@@ -35,10 +35,11 @@ function button:PLAYER_LOGIN()
 		if(item and not InCombatLockdown() and IsAltKeyDown()) then
 			local spell, r, g, b = ScanTooltip(self, spells)
 
-			if(not spell and disenchantable and not notDisenchantable[link:match('item:(%d+):')]) then
-				local _, _, quality, _, _, type = GetItemInfo(item)
+			
+			if(not spell and disenchantable and not ns.notDisenchantable[link:match('item:(%d+):')]) then
+				local _, _, quality, _, _, itemType = GetItemInfo(item)
 
-				if((type == armorType or type == ENCHSLOT_WEAPON) and (quality and (quality > 1 or quality < 5))) then
+				if((itemType == armorType or itemType == ENCHSLOT_WEAPON) and (quality and (quality > 1 or quality < 5))) then
 					spell, r, g, b = unpack(disenchantable)
 				end
 			end
@@ -65,7 +66,7 @@ end
 
 function button:MODIFIER_STATE_CHANGED(key)
 	if(not self:IsShown() and not key and key ~= 'LALT' and key ~= 'RALT') then return end
-	
+
 	if(InCombatLockdown()) then
 		self:SetAlpha(0)
 		self:RegisterEvent('PLAYER_REGEN_ENABLED')

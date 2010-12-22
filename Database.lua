@@ -1,5 +1,5 @@
-local _, notDisenchantable = ...
+local _, ns = ...
 
-notDisenchantable = {
-	
+ns.notDisenchantable = {
+
 }
