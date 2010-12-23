@@ -31,7 +31,7 @@ local notDisenchantable = {
 function ns.Disenchantable(link)
 	local _, _, quality = GetItemInfo(link)
 
-	if(IsEquippableItem(link) and (quality and (quality > 1 or quality < 5))) then
+	if(IsEquippableItem(link) and quality and quality > 1 and quality < 5) then
 		return not notDisenchantable[link:match('item:(%d+):')]
 	end
 end
