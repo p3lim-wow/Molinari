@@ -1,6 +1,6 @@
 ## Interface: 40000
 ## Author: p3lim
-## Version: 40000.7-Beta
+## Version: 40000.8-Beta
 ## Title: Molinari
 ## Notes: One-click Milling, Prospecting and Disenchanting!
 
