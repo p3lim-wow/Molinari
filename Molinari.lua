@@ -47,7 +47,7 @@ function button:PLAYER_LOGIN()
 		end
 	end)
 
-	self:SetFrameStrata('DIALOG')
+	self:SetFrameStrata('TOOLTIP')
 	self:SetAttribute('alt-type1', 'macro')
 	self:SetNormalTexture([=[Interface\PaperDollInfoFrame\UI-GearManager-ItemButton-Highlight]=])
 	self:GetNormalTexture():SetTexCoord(0.11, 0.66, .11, 0.66)
