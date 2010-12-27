@@ -39,7 +39,7 @@ function button:PLAYER_LOGIN()
 
 			local bag, slot = GetMouseFocus():GetParent(), GetMouseFocus()
 			if(spell and GetContainerItemLink(bag:GetID(), slot:GetID()) == link) then
-				button:SetAttribute('macrotext', string.format('/cast %s\n/use %s %s', spell, slot:GetParent():GetID(), slot:GetID()))
+				button:SetAttribute('macrotext', string.format('/cast %s\n/use %s %s', spell, bag:GetID(), slot:GetID()))
 				button:GetNormalTexture():SetVertexColor(r, g, b)
 				button:SetAllPoints(slot)
 				button:Show()
@@ -65,13 +65,12 @@ function button:MODIFIER_STATE_CHANGED(key)
 		self:RegisterEvent('PLAYER_REGEN_ENABLED')
 	else
 		self:ClearAllPoints()
+		self:SetAlpha(1)
 		self:Hide()
 	end
 end
 
 function button:PLAYER_REGEN_ENABLED()
 	self:UnregisterEvent('PLAYER_REGEN_ENABLED')
-	self:ClearAllPoints()
-	self:SetAlpha(1)
-	self:Hide()
+	self:MODIFIER_STATE_CHANGED()
 end
