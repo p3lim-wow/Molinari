@@ -1,6 +1,6 @@
 ﻿
 local addonName, ns = ...
-local button = CreateFrame('Button', addonName, UIParent, 'SecureActionButtonTemplate')
+local button = CreateFrame('Button', addonName, UIParent, 'SecureActionButtonTemplate, AutoCastShineTemplate')
 button:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
 button:RegisterEvent('PLAYER_LOGIN')
 
@@ -25,7 +25,7 @@ function button:PLAYER_LOGIN()
 
 	-- I wish Blizzard could treat disenchanting the same way
 	if(IsSpellKnown(13262)) then
-		disenchanter = {GetSpellInfo(13262), 1, 1, 1}
+		disenchanter = true
 	end
 
 	GameTooltip:HookScript('OnTooltipSetItem', function(self)
@@ -34,27 +34,30 @@ function button:PLAYER_LOGIN()
 			local spell, r, g, b = ScanTooltip(self, spells)
 
 			if(not spell and disenchanter and ns.Disenchantable(link)) then
-				spell, r, g, b = unpack(disenchanter)
+				spell, r, g, b = GetSpellInfo(13262), 1/2, 1/2, 1
 			end
 
 			local bag, slot = GetMouseFocus():GetParent(), GetMouseFocus()
 			if(spell and GetContainerItemLink(bag:GetID(), slot:GetID()) == link) then
 				button:SetAttribute('macrotext', string.format('/cast %s\n/use %s %s', spell, bag:GetID(), slot:GetID()))
-				button:GetNormalTexture():SetVertexColor(r, g, b)
 				button:SetAllPoints(slot)
 				button:Show()
+				AutoCastShine_AutoCastStart(button, r, g, b)
 			end
 		end
 	end)
 
 	self:SetFrameStrata('TOOLTIP')
 	self:SetAttribute('alt-type1', 'macro')
-	self:SetNormalTexture([=[Interface\PaperDollInfoFrame\UI-GearManager-ItemButton-Highlight]=])
-	self:GetNormalTexture():SetTexCoord(0.11, 0.66, .11, 0.66)
 	self:SetScript('OnLeave', self.MODIFIER_STATE_CHANGED)
 
 	self:RegisterEvent('MODIFIER_STATE_CHANGED')
 	self:Hide()
+
+	for _, sparks in pairs(self.sparkles) do
+		sparks:SetHeight(sparks:GetHeight() * 3)
+		sparks:SetWidth(sparks:GetWidth() * 3)
+	end
 end
 
 function button:MODIFIER_STATE_CHANGED(key)
@@ -67,6 +70,7 @@ function button:MODIFIER_STATE_CHANGED(key)
 		self:ClearAllPoints()
 		self:SetAlpha(1)
 		self:Hide()
+		AutoCastShine_AutoCastStop(self)
 	end
 end
 
