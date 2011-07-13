@@ -4,5 +4,5 @@
 ## Title: Molinari
 ## Notes: One-click Milling, Prospecting and Disenchanting!
 
-Molinari.lua
 Disenchanting.lua
+Molinari.lua
