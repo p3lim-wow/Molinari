@@ -14,7 +14,7 @@ local function ScanTooltip(self, spells)
 end
 
 function button:PLAYER_LOGIN()
-	local spells, disenchanter = {}
+	local spells, disenchanter, rogue = {}
 	if(IsSpellKnown(51005)) then
 		spells[ITEM_MILLABLE] = {GetSpellInfo(51005), 1/2, 1, 1/2}
 	end
@@ -28,6 +28,11 @@ function button:PLAYER_LOGIN()
 		disenchanter = true
 	end
 
+	if(IsSpellKnown(1804)) then
+		-- Commence localization hack
+		rogue = ERR_USE_LOCKED_WITH_SPELL_KNOWN_SI:gsub('%%s', (GetSpellInfo(1810))):gsub('%%d', '%(.*%)')
+	end
+
 	GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		local item, link = self:GetItem()
 		if(item and not InCombatLockdown() and IsAltKeyDown()) then
@@ -35,6 +40,12 @@ function button:PLAYER_LOGIN()
 
 			if(not spell and disenchanter and ns.Disenchantable(link)) then
 				spell, r, g, b = GetSpellInfo(13262), 1/2, 1/2, 1
+			elseif(not spell and rogue) then
+				for index = 1, self:NumLines() do
+					if(string.match(_G['GameTooltipTextLeft' .. index]:GetText(), rogue)) then
+						spell, r, g, b = GetSpellInfo(1804), 0, 1, 1
+					end
+				end
 			end
 
 			local bag, slot = GetMouseFocus():GetParent(), GetMouseFocus()
