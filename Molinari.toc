@@ -1,8 +1,8 @@
 ## Interface: 40200
 ## Author: p3lim
-## Version: 40200.12-Beta
+## Version: 40200.13-Beta
 ## Title: Molinari
-## Notes: One-click Milling, Prospecting and Disenchanting!
+## Notes: One-click Milling, Prospecting, Disenchanting and Lockpicking!
 
 Molinari.lua
 Disenchanting.lua
