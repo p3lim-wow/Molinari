@@ -30,7 +30,7 @@ function button:PLAYER_LOGIN()
 
 	if(IsSpellKnown(1804)) then
 		-- Commence localization hack
-		rogue = ERR_USE_LOCKED_WITH_SPELL_KNOWN_SI:gsub('%%s', (GetSpellInfo(1810))):gsub('%%d', '%(.*%)')
+		rogue = ITEM_MIN_SKILL:gsub('%%s', (GetSpellInfo(1810))):gsub('%%d', '%(.*%)')
 	end
 
 	GameTooltip:HookScript('OnTooltipSetItem', function(self)
