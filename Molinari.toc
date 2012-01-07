@@ -1,6 +1,6 @@
 ## Interface: 40300
 ## Author: p3lim
-## Version: 40200.13-Beta
+## Version: 40300.14-Beta
 ## Title: Molinari
 ## Notes: One-click Milling, Prospecting, Disenchanting and Lockpicking!
 
