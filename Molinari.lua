@@ -35,7 +35,7 @@ function button:PLAYER_LOGIN()
 
 	GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		local item, link = self:GetItem()
-		if(item and not InCombatLockdown() and IsAltKeyDown()) then
+		if(item and not InCombatLockdown() and IsAltKeyDown() and not (AuctionFrame and AuctionFrame:IsShown())) then
 			local spell, r, g, b = ScanTooltip(self, spells)
 
 			if(not spell and disenchanter and ns.Disenchantable(link)) then
