@@ -42,7 +42,7 @@ function button:PLAYER_LOGIN()
 				spell, r, g, b = GetSpellInfo(13262), 1/2, 1/2, 1
 			elseif(not spell and rogue) then
 				for index = 1, self:NumLines() do
-					if(string.match(_G['GameTooltipTextLeft' .. index]:GetText(), rogue)) then
+					if(string.match(_G['GameTooltipTextLeft' .. index]:GetText() or '', rogue)) then
 						spell, r, g, b = GetSpellInfo(1804), 0, 1, 1
 					end
 				end
