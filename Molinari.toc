@@ -6,3 +6,4 @@
 
 Molinari.lua
 Disenchanting.lua
+Lockpicking.lua
