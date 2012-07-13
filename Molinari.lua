@@ -29,8 +29,7 @@ function button:PLAYER_LOGIN()
 	end
 
 	if(IsSpellKnown(1804)) then
-		-- Commence localization hack
-		rogue = ITEM_MIN_SKILL:gsub('%%s', (GetSpellInfo(1810))):gsub('%%d', '%(.*%)')
+		rogue = true
 	end
 
 	GameTooltip:HookScript('OnTooltipSetItem', function(self)
@@ -38,18 +37,18 @@ function button:PLAYER_LOGIN()
 		if(item and not InCombatLockdown() and IsAltKeyDown() and not (AuctionFrame and AuctionFrame:IsShown())) then
 			local spell, r, g, b = ScanTooltip(self, spells)
 
-			if(not spell and disenchanter and ns.Disenchantable(link)) then
-				spell, r, g, b = GetSpellInfo(13262), 1/2, 1/2, 1
-			elseif(not spell and rogue) then
-				for index = 1, self:NumLines() do
-					if(string.match(_G['GameTooltipTextLeft' .. index]:GetText() or '', rogue)) then
-						spell, r, g, b = GetSpellInfo(1804), 0, 1, 1
-					end
+			if(not spell) then
+				if(disenchanter and ns.Disenchantable(link)) then
+					spell, r, g, b = GetSpellInfo(13262), 1/2, 1/2, 1
+				elseif(rogue and ns.Pickable) then
+					spell, r, g, b = GetSpellInfo(1804), 0, 1, 1
+				else
+					return
 				end
 			end
 
 			local bag, slot = GetMouseFocus():GetParent(), GetMouseFocus()
-			if(spell and GetContainerItemLink(bag:GetID(), slot:GetID()) == link) then
+			if(GetContainerItemLink(bag:GetID(), slot:GetID()) == link) then
 				button:SetAttribute('macrotext', string.format('/cast %s\n/use %s %s', spell, bag:GetID(), slot:GetID()))
 				button:SetAllPoints(slot)
 				button:Show()
