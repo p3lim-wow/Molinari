@@ -37,14 +37,16 @@ function button:PLAYER_LOGIN()
 		if(item and not InCombatLockdown() and IsAltKeyDown() and not (AuctionFrame and AuctionFrame:IsShown())) then
 			local spell, r, g, b = ScanTooltip(self, spells)
 
+			if(not spell and disenchanter and ns.Disenchantable(link)) then
+				spell, r, g, b = GetSpellInfo(13262), 1/2, 1/2, 1
+			end
+
+			if(not spell and rogue and ns.Openable) then
+				spell, r, g, b = GetSpellInfo(1804), 0, 1, 1
+			end
+
 			if(not spell) then
-				if(disenchanter and ns.Disenchantable(link)) then
-					spell, r, g, b = GetSpellInfo(13262), 1/2, 1/2, 1
-				elseif(rogue and ns.Openable) then
-					spell, r, g, b = GetSpellInfo(1804), 0, 1, 1
-				else
-					return
-				end
+				return
 			end
 
 			local bag, slot = GetMouseFocus():GetParent(), GetMouseFocus()
