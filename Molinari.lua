@@ -41,7 +41,7 @@ function button:PLAYER_LOGIN()
 				spell, r, g, b = GetSpellInfo(13262), 1/2, 1/2, 1
 			end
 
-			if(not spell and rogue and ns.Openable) then
+			if(not spell and rogue and ns.Openable(link)) then
 				spell, r, g, b = GetSpellInfo(1804), 0, 1, 1
 			end
 

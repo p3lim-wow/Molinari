@@ -1,8 +1,10 @@
 local _, ns = ...
 
+-- http://www.wowhead.com/items?filter=cr=10:5;crs=1:2;crv=0:0
+
 local openable = {
-	['68729'] = true, -- MoP
-	['63349'] = true, -- MoP
+	['68729'] = true,
+	['63349'] = true,
 	['45986'] = true,
 	['43624'] = true,
 	['43622'] = true,
@@ -13,6 +15,7 @@ local openable = {
 	['5760'] = true,
 	['13918'] = true,
 	['5759'] = true,
+	['16885'] = true,
 	['5758'] = true,
 	['13875'] = true,
 	['4638'] = true,
@@ -26,8 +29,6 @@ local openable = {
 	['6354'] = true,
 	['16882'] = true,
 	['4632'] = true,
-	['88165'] = true,
-	['88567'] = true,
 	['88165'] = true,
 	['88567'] = true,
 }
