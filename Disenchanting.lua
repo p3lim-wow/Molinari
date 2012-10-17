@@ -1,4 +1,4 @@
-local __, ns = ...
+local _, ns = ...
 
 -- http://www.wowhead.com/items=2?filter=qu=2:3:4;cr=8:161;crs=2:1;crv=0:0
 -- http://www.wowhead.com/items=4.1?filter=qu=2:3:4;cr=8:161;crs=2:1;crv=0:0
@@ -1737,7 +1737,7 @@ local notDisenchantable = {
 }
 
 function ns.Disenchantable(link)
-	local __, __, quality = GetItemInfo(link)
+	local _, _, quality = GetItemInfo(link)
 
 	if(IsEquippableItem(link) and quality and quality > 1 and quality < 5) then
 		return not notDisenchantable[link:match('item:(%d+):')]
