@@ -14,7 +14,7 @@ local function ScanTooltip(self, spells)
 end
 
 function button:PLAYER_LOGIN()
-	local spells, disenchanter, rogue = {}
+	local spells, disenchanter, rogue, smith = {}
 	if(IsSpellKnown(51005)) then
 		spells[ITEM_MILLABLE] = {GetSpellInfo(51005), 1/2, 1, 1/2}
 	end
@@ -24,13 +24,9 @@ function button:PLAYER_LOGIN()
 	end
 
 	-- I wish Blizzard could treat disenchanting the same way
-	if(IsSpellKnown(13262)) then
-		disenchanter = true
-	end
-
-	if(IsSpellKnown(1804)) then
-		rogue = true
-	end
+	disenchanter = IsSpellKnown(13262)
+	rogue = IsSpellKnown(1804)
+	smith = GetSpellBookItemInfo((GetSpellInfo(2018))) and true
 
 	GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		local item, link = self:GetItem()
@@ -43,6 +39,10 @@ function button:PLAYER_LOGIN()
 
 			if(not spell and rogue and ns.Openable(link)) then
 				spell, r, g, b = GetSpellInfo(1804), 0, 1, 1
+			end
+
+			if(not spell and smith and ns.Openable(link)) then
+				spell, r, g, b = ns.SkeletonKey(link), 0, 1, 1
 			end
 
 			if(not spell) then

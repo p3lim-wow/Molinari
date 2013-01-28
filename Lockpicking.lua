@@ -36,3 +36,26 @@ local openable = {
 function ns.Openable(link)
 	return openable[link:match('item:(%d+)')]
 end
+
+
+-- Blacksmith Lockpicking
+
+local keys = {
+	(GetSpellInfo(130100)), -- Ghostly
+	(GetSpellInfo(94574)), -- Obsidium
+	(GetSpellInfo(59403)), -- Titanium
+	(GetSpellInfo(59404)), -- Colbat
+	(GetSpellInfo(20709)), -- Arcanite
+	(GetSpellInfo(19651)), -- Truesilver
+	(GetSpellInfo(19649)), -- Golden
+	(GetSpellInfo(19646)), -- Silver
+}
+
+-- find the highest level key in your bags
+function ns.SkeletonKey(link)
+	for _,v in ipairs(keys) do
+		if GetItemCount(v) > 0 then
+			return v
+		end
+	end
+end
