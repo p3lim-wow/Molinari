@@ -37,25 +37,23 @@ function ns.Openable(link)
 	return openable[link:match('item:(%d+)')]
 end
 
-
--- Blacksmith Lockpicking
+-- http://www.wowhead.com/items?filter=na=key;cr=86;crs=2;crv=0
 
 local keys = {
-	(GetSpellInfo(130100)), -- Ghostly
-	(GetSpellInfo(94574)), -- Obsidium
-	(GetSpellInfo(59403)), -- Titanium
-	(GetSpellInfo(59404)), -- Colbat
-	(GetSpellInfo(20709)), -- Arcanite
-	(GetSpellInfo(19651)), -- Truesilver
-	(GetSpellInfo(19649)), -- Golden
-	(GetSpellInfo(19646)), -- Silver
+	[GetItemInfo(82960)] = true, -- Ghostly Skeleton Key
+	[GetItemInfo(55053)] = true, -- Obsidium Skeleton Key
+	[GetItemInfo(43853)] = true, -- Titanium Skeleton Key
+	[GetItemInfo(43854)] = true, -- Cobalt Skeleton Key
+	[GetItemInfo(15872)] = true, -- Arcanite Skeleton Key
+	[GetItemInfo(15871)] = true, -- Truesilver Skeleton Key
+	[GetItemInfo(15870)] = true, -- Golden Skeleton Key
+	[GetItemInfo(15869)] = true, -- Silver Skeleton Key
 }
 
--- find the highest level key in your bags
-function ns.SkeletonKey(link)
-	for _,v in ipairs(keys) do
-		if GetItemCount(v) > 0 then
-			return v
+function ns.SkeletonKey()
+	for key in pairs(keys) do
+		if(GetItemCount(key) > 0) then
+			return key
 		end
 	end
 end
