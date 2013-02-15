@@ -26,7 +26,7 @@ function button:PLAYER_LOGIN()
 	-- I wish Blizzard could treat disenchanting the same way
 	disenchanter = IsSpellKnown(13262)
 	rogue = IsSpellKnown(1804)
-	smith = GetSpellBookItemInfo((GetSpellInfo(2018))) and true
+	smith = GetSpellBookItemInfo((GetSpellInfo(2018)))
 
 	GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		local item, link = self:GetItem()
@@ -42,7 +42,7 @@ function button:PLAYER_LOGIN()
 			end
 
 			if(not spell and smith and ns.Openable(link)) then
-				spell, r, g, b = ns.SkeletonKey(link), 0, 1, 1
+				spell, r, g, b = ns.SkeletonKey(), 0, 1, 1
 			end
 
 			if(not spell) then
