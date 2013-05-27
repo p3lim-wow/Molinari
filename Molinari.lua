@@ -13,6 +13,22 @@ local function ScanTooltip(self, spells)
 	end
 end
 
+local scripts = {'OnClick', 'OnMouseUp', 'OnMouseDown'}
+
+local function ParentClick(self, button, ...)
+	if(button ~= 'LeftButton') then
+		local _, parent = self:GetPoint()
+		if(parent) then
+			for _, script in pairs(scripts) do
+				local handler = parent:GetScript(script)
+				if(handler) then
+					handler(parent, button, ...)
+				end
+			end
+		end
+	end
+end
+
 local function ApplyButton(itemLink, spell, r, g, b)
 	local slot = GetMouseFocus()
 	local bag = slot:GetParent():GetID()
@@ -60,9 +76,11 @@ function button:PLAYER_LOGIN()
 		end
 	end)
 
+	self:RegisterForClicks('AnyUp')
 	self:SetFrameStrata('TOOLTIP')
 	self:SetAttribute('alt-type1', 'spell')
 	self:SetScript('OnLeave', self.MODIFIER_STATE_CHANGED)
+	self:HookScript('OnClick', ParentClick)
 
 	self:RegisterEvent('MODIFIER_STATE_CHANGED')
 	self:Hide()
