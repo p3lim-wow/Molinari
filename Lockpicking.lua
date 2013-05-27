@@ -40,14 +40,14 @@ end
 -- http://www.wowhead.com/items?filter=na=key;cr=86;crs=2;crv=0
 
 local keys = {
-	[GetItemInfo(82960)] = true, -- Ghostly Skeleton Key
-	[GetItemInfo(55053)] = true, -- Obsidium Skeleton Key
-	[GetItemInfo(43853)] = true, -- Titanium Skeleton Key
-	[GetItemInfo(43854)] = true, -- Cobalt Skeleton Key
-	[GetItemInfo(15872)] = true, -- Arcanite Skeleton Key
-	[GetItemInfo(15871)] = true, -- Truesilver Skeleton Key
-	[GetItemInfo(15870)] = true, -- Golden Skeleton Key
-	[GetItemInfo(15869)] = true, -- Silver Skeleton Key
+	[GetSpellInfo(130100)] = true, -- Ghostly Skeleton Key
+	[GetSpellInfo(94574)] = true, -- Obsidium Skeleton Key
+	[GetSpellInfo(59403)] = true, -- Titanium Skeleton Key
+	[GetSpellInfo(59404)] = true, -- Colbat Skeleton Key
+	[GetSpellInfo(20709)] = true, -- Arcanite Skeleton Key
+	[GetSpellInfo(19651)] = true, -- Truesilver Skeleton Key
+	[GetSpellInfo(19649)] = true, -- Golden Skeleton Key
+	[GetSpellInfo(19646)] = true, -- Silver Skeleton Key
 }
 
 function ns.SkeletonKey()
