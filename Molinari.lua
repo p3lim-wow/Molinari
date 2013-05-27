@@ -4,15 +4,6 @@ local button = CreateFrame('Button', addonName, UIParent, 'SecureActionButtonTem
 button:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
 button:RegisterEvent('PLAYER_LOGIN')
 
-local function ScanTooltip(self, spells)
-	for index = 1, self:NumLines() do
-		local info = spells[_G['GameTooltipTextLeft' .. index]:GetText()]
-		if(info) then
-			return unpack(info)
-		end
-	end
-end
-
 local scripts = {'OnClick', 'OnMouseUp', 'OnMouseDown'}
 
 local function ParentClick(self, button, ...)
@@ -41,6 +32,15 @@ local function ApplyButton(itemLink, spell, r, g, b)
 		button:Show()
 
 		AutoCastShine_AutoCastStart(button, r, g, b)
+	end
+end
+
+local function ScanTooltip(self, spells)
+	for index = 1, self:NumLines() do
+		local info = spells[_G['GameTooltipTextLeft' .. index]:GetText()]
+		if(info) then
+			return unpack(info)
+		end
 	end
 end
 
