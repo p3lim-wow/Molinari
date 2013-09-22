@@ -45,7 +45,7 @@ local function ScanTooltip(self, spells)
 end
 
 function button:PLAYER_LOGIN()
-	local spells, disenchanter, lockpicking, smith = {}
+	local spells, disenchanting, lockpicking, smith = {}
 	if(IsSpellKnown(51005)) then
 		spells[ITEM_MILLABLE] = {GetSpellInfo(51005), 1/2, 1, 1/2}
 	end
