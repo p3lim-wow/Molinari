@@ -10,7 +10,7 @@ local function ParentClick(self, button, ...)
 	if(button ~= 'LeftButton') then
 		local _, parent = self:GetPoint()
 		if(parent) then
-			for _, script in pairs(scripts) do
+			for _, script in next, scripts do
 				local handler = parent:GetScript(script)
 				if(handler) then
 					handler(parent, button, ...)
@@ -85,7 +85,7 @@ function button:PLAYER_LOGIN()
 	self:RegisterEvent('MODIFIER_STATE_CHANGED')
 	self:Hide()
 
-	for _, sparks in pairs(self.sparkles) do
+	for _, sparks in next, self.sparkles do
 		sparks:SetHeight(sparks:GetHeight() * 3)
 		sparks:SetWidth(sparks:GetWidth() * 3)
 	end

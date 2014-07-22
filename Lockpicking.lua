@@ -51,7 +51,7 @@ local keys = {
 }
 
 function ns.SkeletonKey()
-	for key in pairs(keys) do
+	for key in next, keys do
 		if(GetItemCount(key) > 0) then
 			return key
 		end
