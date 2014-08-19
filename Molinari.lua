@@ -1,6 +1,6 @@
-local button = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, AutoCastShineTemplate')
-button:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
-button:RegisterEvent('PLAYER_LOGIN')
+local Molinari = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, AutoCastShineTemplate')
+Molinari:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
+Molinari:RegisterEvent('PLAYER_LOGIN')
 
 local LibProcessable = LibStub('LibProcessable')
 
@@ -26,23 +26,23 @@ local function ApplyButton(itemLink, spell, r, g, b)
 
 	if(GetContainerItemLink(bag, slot) == itemLink) then
 		if(type(spell) == 'number') then
-			button:SetAttribute('alt-type1', 'item')
-			button:SetAttribute('item', GetItemInfo(spell))
+			Molinari:SetAttribute('alt-type1', 'item')
+			Molinari:SetAttribute('item', GetItemInfo(spell))
 		else
-			button:SetAttribute('alt-type1', 'spell')
-			button:SetAttribute('spell', spell)
+			Molinari:SetAttribute('alt-type1', 'spell')
+			Molinari:SetAttribute('spell', spell)
 		end
 
-		button:SetAttribute('target-bag', bag)
-		button:SetAttribute('target-slot', slot)
-		button:SetAllPoints(parent)
-		button:Show()
+		Molinari:SetAttribute('target-bag', bag)
+		Molinari:SetAttribute('target-slot', slot)
+		Molinari:SetAllPoints(parent)
+		Molinari:Show()
 
-		AutoCastShine_AutoCastStart(button, r, g, b)
+		AutoCastShine_AutoCastStart(Molinari, r, g, b)
 	end
 end
 
-function button:PLAYER_LOGIN()
+function Molinari:PLAYER_LOGIN()
 	local MILLING = GetSpellInfo()
 	local PROSPECTING = GetSpellInfo(31252)
 	local DISENCHANTING = GetSpellInfo(13262)
@@ -85,7 +85,7 @@ function button:PLAYER_LOGIN()
 	end
 end
 
-function button:MODIFIER_STATE_CHANGED(key)
+function Molinari:MODIFIER_STATE_CHANGED(key)
 	if(not self:IsShown() and not key and key ~= 'LALT' and key ~= 'RALT') then return end
 
 	if(InCombatLockdown()) then
@@ -99,7 +99,7 @@ function button:MODIFIER_STATE_CHANGED(key)
 	end
 end
 
-function button:PLAYER_REGEN_ENABLED()
+function Molinari:PLAYER_REGEN_ENABLED()
 	self:UnregisterEvent('PLAYER_REGEN_ENABLED')
 	self:MODIFIER_STATE_CHANGED()
 end
