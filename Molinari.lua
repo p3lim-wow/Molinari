@@ -52,9 +52,9 @@ function Molinari:PLAYER_LOGIN()
 		local _, itemLink = self:GetItem()
 		if(itemLink and not InCombatLockdown() and IsAltKeyDown() and not (AuctionFrame and AuctionFrame:IsShown())) then
 			local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
-			if(LibProcessable:IsMillable(itemID)) then
+			if(LibProcessable:IsMillable(itemID) and GetItemCount(itemID) >= 5) then
 				ApplyButton(itemLink, MILLING, 1/2, 1, 1/2)
-			elseif(LibProcessable:IsProspectable(itemID)) then
+			elseif(LibProcessable:IsProspectable(itemID) and GetItemCount(itemID) >= 5) then
 				ApplyButton(itemLink, PROSPECTING, 1, 1/3, 1/3)
 			elseif(LibProcessable:IsDisenchantable(itemID)) then
 				ApplyButton(itemLink, DISENCHANTING, 1/2, 1/2, 1)
