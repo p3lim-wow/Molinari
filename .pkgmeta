@@ -1,0 +1,14 @@
+package-as: Molinari
+
+externals:
+    embeds/LibStub:
+        url: svn://svn.wowace.com/wow/libstub/mainline/trunk
+    embeds/LibProcessable:
+        url: git://github.com/p3lim-wow/LibProcessable.git
+        tag: latest
+
+ignore:
+    - embeds/LibStub/tests
+    - embeds/LibStub/.pkgmeta
+    - embeds/LibProcessable/.pkgmeta
+    - embeds/LibProcessable/README.md
