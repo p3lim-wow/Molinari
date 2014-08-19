@@ -1,11 +1,10 @@
-﻿
-local addonName, ns = ...
-local button = CreateFrame('Button', addonName, UIParent, 'SecureActionButtonTemplate, AutoCastShineTemplate')
+local button = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, AutoCastShineTemplate')
 button:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
 button:RegisterEvent('PLAYER_LOGIN')
 
-local scripts = {'OnClick', 'OnMouseUp', 'OnMouseDown'}
+local LibProcessable = LibStub('LibProcessable')
 
+local scripts = {'OnClick', 'OnMouseUp', 'OnMouseDown'}
 local function ParentClick(self, button, ...)
 	if(button ~= 'LeftButton') then
 		local _, parent = self:GetPoint()
@@ -21,56 +20,52 @@ local function ParentClick(self, button, ...)
 end
 
 local function ApplyButton(itemLink, spell, r, g, b)
-	local slot = GetMouseFocus()
-	local bag = slot:GetParent():GetID()
+	local parent = GetMouseFocus()
+	local slot = parent:GetID()
+	local bag = parent:GetParent():GetID()
 
-	if(GetContainerItemLink(bag, slot:GetID()) == itemLink) then
-		button:SetAttribute('spell', spell)
+	if(GetContainerItemLink(bag, slot) == itemLink) then
+		if(type(spell) == 'number') then
+			button:SetAttribute('alt-type1', 'item')
+			button:SetAttribute('item', GetItemInfo(spell))
+		else
+			button:SetAttribute('alt-type1', 'spell')
+			button:SetAttribute('spell', spell)
+		end
+
 		button:SetAttribute('target-bag', bag)
-		button:SetAttribute('target-slot', slot:GetID())
-		button:SetAllPoints(slot)
+		button:SetAttribute('target-slot', slot)
+		button:SetAllPoints(parent)
 		button:Show()
 
 		AutoCastShine_AutoCastStart(button, r, g, b)
 	end
 end
 
-local function ScanTooltip(self, spells)
-	for index = 1, self:NumLines() do
-		local info = spells[_G['GameTooltipTextLeft' .. index]:GetText()]
-		if(info) then
-			return unpack(info)
-		end
-	end
-end
-
 function button:PLAYER_LOGIN()
-	local spells, disenchanting, lockpicking, smith = {}
-	if(IsSpellKnown(51005)) then
-		spells[ITEM_MILLABLE] = {GetSpellInfo(51005), 1/2, 1, 1/2}
-	end
-
-	if(IsSpellKnown(31252)) then
-		spells[ITEM_PROSPECTABLE] = {GetSpellInfo(31252), 1, 1/3, 1/3}
-	end
-
-	disenchanting = IsSpellKnown(13262) and GetSpellInfo(13262)
-	lockpicking = IsSpellKnown(1804) and GetSpellInfo(1804)
-	smith = GetSpellBookItemInfo((GetSpellInfo(2018)))
+	local MILLING = GetSpellInfo()
+	local PROSPECTING = GetSpellInfo(31252)
+	local DISENCHANTING = GetSpellInfo(13262)
+	local LOCKPICKING = GetSpellInfo(1804)
 
 	GameTooltip:HookScript('OnTooltipSetItem', function(self)
-		local item, itemLink = self:GetItem()
-		if(item and not InCombatLockdown() and IsAltKeyDown() and not (AuctionFrame and AuctionFrame:IsShown())) then
-			local spell, r, g, b = ScanTooltip(self, spells)
-			if(spell) then
-				ApplyButton(itemLink, spell, r, g, b)
+		local _, itemLink = self:GetItem()
+		if(itemLink and not InCombatLockdown() and IsAltKeyDown() and not (AuctionFrame and AuctionFrame:IsShown())) then
+			local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
+			if(LibProcessable:IsMillable(itemID)) then
+				ApplyButton(itemLink, MILLING, 1/2, 1, 1/2)
+			elseif(LibProcessable:IsProspectable(itemID)) then
+				ApplyButton(itemLink, PROSPECTING, 1, 1/3, 1/3)
+			elseif(LibProcessable:IsDisenchantable(itemID)) then
+				ApplyButton(itemLink, DISENCHANTING, 1/2, 1/2, 1)
 			else
-				if(disenchanting and ns.Disenchantable(itemLink)) then
-					ApplyButton(itemLink, disenchanting, 1/2, 1/2, 1)
-				elseif(lockpicking and ns.Openable(itemLink)) then
-					ApplyButton(itemLink, lockpicking, 0, 1, 1)
-				elseif(smith and ns.Openable(itemLink)) then
-					ApplyButton(itemLink, ns.SkeletonKey(), 0, 1, 1)
+				local openable, keyID = LibProcessable:IsOpenable(itemID)
+				if(openable) then
+					if(keyID) then
+						ApplyButton(itemLink, keyID, 0, 1, 1)
+					else
+						ApplyButton(itemLink, LOCKPICKING, 0, 1, 1)
+					end
 				end
 			end
 		end
@@ -78,7 +73,6 @@ function button:PLAYER_LOGIN()
 
 	self:RegisterForClicks('AnyUp')
 	self:SetFrameStrata('TOOLTIP')
-	self:SetAttribute('alt-type1', 'spell')
 	self:SetScript('OnLeave', self.MODIFIER_STATE_CHANGED)
 	self:HookScript('OnClick', ParentClick)
 

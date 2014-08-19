@@ -3,7 +3,9 @@
 ## Version: @project-version@
 ## Title: Molinari
 ## Notes: One-click Milling, Prospecting, Disenchanting and Lockpicking!
+## OptionalDeps: LibStub, LibProcessable
+
+embeds\LibStub\LibStub.lua
+embeds\LibProcessable\LibProcessable.lua
 
 Molinari.lua
-Disenchanting.lua
-Lockpicking.lua
