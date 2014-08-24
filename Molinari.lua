@@ -24,7 +24,11 @@ local function ApplyButton(itemLink, spell, r, g, b)
 	local slot = parent:GetID()
 	local bag = parent:GetParent():GetID()
 
-	if(GetContainerItemLink(bag, slot) == itemLink) then
+	local show = true
+	if(GetTradeTargetItemLink(7) == itemLink) then
+		Molinari:SetAttribute('alt-type1', 'macro')
+		Molinari:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', spell))
+	elseif(GetContainerItemLink(bag, slot) == itemLink) then
 		if(type(spell) == 'number') then
 			Molinari:SetAttribute('alt-type1', 'item')
 			Molinari:SetAttribute('item', GetItemInfo(spell))
@@ -35,6 +39,11 @@ local function ApplyButton(itemLink, spell, r, g, b)
 
 		Molinari:SetAttribute('target-bag', bag)
 		Molinari:SetAttribute('target-slot', slot)
+	else
+		show = false
+	end
+
+	if(show) then
 		Molinari:SetAllPoints(parent)
 		Molinari:Show()
 
