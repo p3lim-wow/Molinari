@@ -1,4 +1,4 @@
-local Molinari = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, SecureHandlerStateTemplate, AutoCastShineTemplate')
+local Molinari = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, SecureHandlerStateTemplate, SecureHandlerEnterLeaveTemplate, AutoCastShineTemplate')
 RegisterStateDriver(Molinari, 'visible', '[nomod:alt] hide; show')
 Molinari:SetAttribute('_onstate-visible', [[
 	if(newstate == 'hide' and self:IsShown()) then
@@ -19,13 +19,6 @@ function Molinari:OnClick(button, ...)
 				end
 			end
 		end
-	end
-end
-
-function Molinari:OnLeave()
-	if(not InCombatLockdown()) then
-		self:ClearAllPoints()
-		self:Hide()
 	end
 end
 
@@ -54,6 +47,7 @@ function Molinari:Apply(itemLink, spell, r, g, b)
 	end
 
 	if(show) then
+		self:SetAttribute('_entered', true)
 		self:SetAllPoints(parent)
 		self:Show()
 
@@ -98,8 +92,9 @@ Molinari:SetScript('OnEvent', function(self)
 	self:Hide()
 	self:RegisterForClicks('AnyUp')
 	self:SetFrameStrata('TOOLTIP')
+	self:SetAttribute('_onleave', 'self:ClearAllPoints() self:Hide()')
 	self:SetScript('OnHide', AutoCastShine_AutoCastStop)
-	self:SetScript('OnLeave', self.OnLeave)
+	self:HookScript('OnLeave', AutoCastShine_AutoCastStop)
 	self:HookScript('OnClick', self.OnClick)
 
 	for _, sparkle in next, self.sparkles do
