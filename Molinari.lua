@@ -1,7 +1,4 @@
 local Molinari = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, SecureHandlerStateTemplate, AutoCastShineTemplate')
-Molinari:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
-Molinari:RegisterEvent('PLAYER_LOGIN')
-
 RegisterStateDriver(Molinari, 'visible', '[nomod:alt] hide; show')
 Molinari:SetAttribute('_onstate-visible', [[
 	if(newstate == 'hide' and self:IsShown()) then
@@ -66,7 +63,8 @@ local function ApplyButton(itemLink, spell, r, g, b)
 	end
 end
 
-function Molinari:PLAYER_LOGIN()
+Molinari:RegisterEvent('PLAYER_LOGIN')
+Molinari:SetScript('OnEvent', function(self)
 	local MILLING = GetSpellInfo()
 	local PROSPECTING = GetSpellInfo(31252)
 	local DISENCHANTING = GetSpellInfo(13262)
@@ -106,4 +104,4 @@ function Molinari:PLAYER_LOGIN()
 		sparks:SetHeight(sparks:GetHeight() * 3)
 		sparks:SetWidth(sparks:GetWidth() * 3)
 	end
-end
+end)
