@@ -7,10 +7,8 @@ Molinari:SetAttribute('_onstate-visible', [[
 	end
 ]])
 
-local LibProcessable = LibStub('LibProcessable')
-
 local scripts = {'OnClick', 'OnMouseUp', 'OnMouseDown'}
-local function ParentClick(self, button, ...)
+function Molinari:OnClick(button, ...)
 	if(button ~= 'LeftButton') then
 		local _, parent = self:GetPoint()
 		if(parent) then
@@ -24,84 +22,88 @@ local function ParentClick(self, button, ...)
 	end
 end
 
-local function OnLeave(self)
+function Molinari:OnLeave()
 	if(not InCombatLockdown()) then
 		self:ClearAllPoints()
 		self:Hide()
 	end
 end
 
-local function ApplyButton(itemLink, spell, r, g, b)
+function Molinari:Apply(itemLink, spell, r, g, b)
 	local parent = GetMouseFocus()
 	local slot = parent:GetID()
 	local bag = parent:GetParent():GetID()
 
 	local show = true
 	if(GetTradeTargetItemLink(7) == itemLink) then
-		Molinari:SetAttribute('alt-type1', 'macro')
-		Molinari:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', spell))
+		self:SetAttribute('alt-type1', 'macro')
+		self:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', spell))
 	elseif(GetContainerItemLink(bag, slot) == itemLink) then
 		if(type(spell) == 'number') then
-			Molinari:SetAttribute('alt-type1', 'item')
-			Molinari:SetAttribute('item', GetItemInfo(spell))
+			self:SetAttribute('alt-type1', 'item')
+			self:SetAttribute('item', GetItemInfo(spell))
 		else
-			Molinari:SetAttribute('alt-type1', 'spell')
-			Molinari:SetAttribute('spell', spell)
+			self:SetAttribute('alt-type1', 'spell')
+			self:SetAttribute('spell', spell)
 		end
 
-		Molinari:SetAttribute('target-bag', bag)
-		Molinari:SetAttribute('target-slot', slot)
+		self:SetAttribute('target-bag', bag)
+		self:SetAttribute('target-slot', slot)
 	else
 		show = false
 	end
 
 	if(show) then
-		Molinari:SetAllPoints(parent)
-		Molinari:Show()
+		self:SetAllPoints(parent)
+		self:Show()
 
-		AutoCastShine_AutoCastStart(Molinari, r, g, b)
+		AutoCastShine_AutoCastStart(self, r, g, b)
+	end
+end
+
+local MILLING, PROSPECTING, DISENCHANTING, LOCKPICKING
+local LibProcessable = LibStub('LibProcessable')
+function Molinari:OnTooltipSetItem()
+	local _, itemLink = self:GetItem()
+	if(itemLink and not InCombatLockdown() and IsAltKeyDown() and not (AuctionFrame and AuctionFrame:IsShown())) then
+		local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
+		if(LibProcessable:IsMillable(itemID) and GetItemCount(itemID) >= 5) then
+			Molinari:Apply(itemLink, MILLING, 1/2, 1, 1/2)
+		elseif(LibProcessable:IsProspectable(itemID) and GetItemCount(itemID) >= 5) then
+			Molinari:Apply(itemLink, PROSPECTING, 1, 1/3, 1/3)
+		elseif(LibProcessable:IsDisenchantable(itemID)) then
+			Molinari:Apply(itemLink, DISENCHANTING, 1/2, 1/2, 1)
+		else
+			local openable, keyID = LibProcessable:IsOpenable(itemID)
+			if(openable) then
+				if(keyID) then
+					Molinari:Apply(itemLink, keyID, 0, 1, 1)
+				else
+					Molinari:Apply(itemLink, LOCKPICKING, 0, 1, 1)
+				end
+			end
+		end
 	end
 end
 
 Molinari:RegisterEvent('PLAYER_LOGIN')
 Molinari:SetScript('OnEvent', function(self)
-	local MILLING = GetSpellInfo()
-	local PROSPECTING = GetSpellInfo(31252)
-	local DISENCHANTING = GetSpellInfo(13262)
-	local LOCKPICKING = GetSpellInfo(1804)
+	MILLING = GetSpellInfo(51005)
+	PROSPECTING = GetSpellInfo(31252)
+	DISENCHANTING = GetSpellInfo(13262)
+	LOCKPICKING = GetSpellInfo(1804)
 
-	GameTooltip:HookScript('OnTooltipSetItem', function(self)
-		local _, itemLink = self:GetItem()
-		if(itemLink and not InCombatLockdown() and IsAltKeyDown() and not (AuctionFrame and AuctionFrame:IsShown())) then
-			local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
-			if(LibProcessable:IsMillable(itemID) and GetItemCount(itemID) >= 5) then
-				ApplyButton(itemLink, MILLING, 1/2, 1, 1/2)
-			elseif(LibProcessable:IsProspectable(itemID) and GetItemCount(itemID) >= 5) then
-				ApplyButton(itemLink, PROSPECTING, 1, 1/3, 1/3)
-			elseif(LibProcessable:IsDisenchantable(itemID)) then
-				ApplyButton(itemLink, DISENCHANTING, 1/2, 1/2, 1)
-			else
-				local openable, keyID = LibProcessable:IsOpenable(itemID)
-				if(openable) then
-					if(keyID) then
-						ApplyButton(itemLink, keyID, 0, 1, 1)
-					else
-						ApplyButton(itemLink, LOCKPICKING, 0, 1, 1)
-					end
-				end
-			end
-		end
-	end)
+	GameTooltip:HookScript('OnTooltipSetItem', self.OnTooltipSetItem)
 
 	self:Hide()
 	self:RegisterForClicks('AnyUp')
 	self:SetFrameStrata('TOOLTIP')
 	self:SetScript('OnHide', AutoCastShine_AutoCastStop)
-	self:SetScript('OnLeave', OnLeave)
-	self:HookScript('OnClick', ParentClick)
+	self:SetScript('OnLeave', self.OnLeave)
+	self:HookScript('OnClick', self.OnClick)
 
-	for _, sparks in next, self.sparkles do
-		sparks:SetHeight(sparks:GetHeight() * 3)
-		sparks:SetWidth(sparks:GetWidth() * 3)
+	for _, sparkle in next, self.sparkles do
+		sparkle:SetHeight(sparkle:GetHeight() * 3)
+		sparkle:SetWidth(sparkle:GetWidth() * 3)
 	end
 end)
