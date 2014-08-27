@@ -59,22 +59,26 @@ local MILLING, PROSPECTING, DISENCHANTING, LOCKPICKING
 local LibProcessable = LibStub('LibProcessable')
 function Molinari:OnTooltipSetItem()
 	local _, itemLink = self:GetItem()
-	if(itemLink and not InCombatLockdown() and IsAltKeyDown() and not (AuctionFrame and AuctionFrame:IsShown())) then
-		local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
-		if(LibProcessable:IsMillable(itemID) and GetItemCount(itemID) >= 5) then
-			Molinari:Apply(itemLink, MILLING, 1/2, 1, 1/2)
-		elseif(LibProcessable:IsProspectable(itemID) and GetItemCount(itemID) >= 5) then
-			Molinari:Apply(itemLink, PROSPECTING, 1, 1/3, 1/3)
-		elseif(LibProcessable:IsDisenchantable(itemID)) then
-			Molinari:Apply(itemLink, DISENCHANTING, 1/2, 1/2, 1)
-		else
-			local openable, keyID = LibProcessable:IsOpenable(itemID)
-			if(openable) then
-				if(keyID) then
-					Molinari:Apply(itemLink, keyID, 0, 1, 1)
-				else
-					Molinari:Apply(itemLink, LOCKPICKING, 0, 1, 1)
-				end
+	if(not itemLink) then return end
+	if(not IsAltKeyDown()) then return end
+	if(InCombatLockdown()) then return end
+	if(MailFrame:IsShown()) then return end
+	if((AuctionFrame and AuctionFrame:IsShown())) then return end
+
+	local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
+	if(LibProcessable:IsMillable(itemID) and GetItemCount(itemID) >= 5) then
+		Molinari:Apply(itemLink, MILLING, 1/2, 1, 1/2)
+	elseif(LibProcessable:IsProspectable(itemID) and GetItemCount(itemID) >= 5) then
+		Molinari:Apply(itemLink, PROSPECTING, 1, 1/3, 1/3)
+	elseif(LibProcessable:IsDisenchantable(itemID)) then
+		Molinari:Apply(itemLink, DISENCHANTING, 1/2, 1/2, 1)
+	else
+		local openable, keyID = LibProcessable:IsOpenable(itemID)
+		if(openable) then
+			if(keyID) then
+				Molinari:Apply(itemLink, keyID, 0, 1, 1)
+			else
+				Molinari:Apply(itemLink, LOCKPICKING, 0, 1, 1)
 			end
 		end
 	end
