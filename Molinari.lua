@@ -1,6 +1,14 @@
-local Molinari = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, AutoCastShineTemplate')
+local Molinari = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, SecureHandlerStateTemplate, AutoCastShineTemplate')
 Molinari:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
 Molinari:RegisterEvent('PLAYER_LOGIN')
+
+RegisterStateDriver(Molinari, 'visible', '[nomod:alt] hide; show')
+Molinari:SetAttribute('_onstate-visible', [[
+	if(newstate == 'hide' and self:IsShown()) then
+		self:ClearAllPoints()
+		self:Hide()
+	end
+]])
 
 local LibProcessable = LibStub('LibProcessable')
 
@@ -16,6 +24,13 @@ local function ParentClick(self, button, ...)
 				end
 			end
 		end
+	end
+end
+
+local function OnLeave(self)
+	if(not InCombatLockdown()) then
+		self:ClearAllPoints()
+		self:Hide()
 	end
 end
 
@@ -80,35 +95,15 @@ function Molinari:PLAYER_LOGIN()
 		end
 	end)
 
+	self:Hide()
 	self:RegisterForClicks('AnyUp')
 	self:SetFrameStrata('TOOLTIP')
-	self:SetScript('OnLeave', self.MODIFIER_STATE_CHANGED)
+	self:SetScript('OnHide', AutoCastShine_AutoCastStop)
+	self:SetScript('OnLeave', OnLeave)
 	self:HookScript('OnClick', ParentClick)
-
-	self:RegisterEvent('MODIFIER_STATE_CHANGED')
-	self:Hide()
 
 	for _, sparks in next, self.sparkles do
 		sparks:SetHeight(sparks:GetHeight() * 3)
 		sparks:SetWidth(sparks:GetWidth() * 3)
 	end
-end
-
-function Molinari:MODIFIER_STATE_CHANGED(key)
-	if(not self:IsShown() and not key and key ~= 'LALT' and key ~= 'RALT') then return end
-
-	if(InCombatLockdown()) then
-		self:SetAlpha(0)
-		self:RegisterEvent('PLAYER_REGEN_ENABLED')
-	else
-		self:ClearAllPoints()
-		self:SetAlpha(1)
-		self:Hide()
-		AutoCastShine_AutoCastStop(self)
-	end
-end
-
-function Molinari:PLAYER_REGEN_ENABLED()
-	self:UnregisterEvent('PLAYER_REGEN_ENABLED')
-	self:MODIFIER_STATE_CHANGED()
 end
