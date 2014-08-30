@@ -28,7 +28,7 @@ function Molinari:Apply(itemLink, spell, r, g, b)
 	local bag = parent:GetParent():GetID()
 
 	local show = true
-	if(GetTradeTargetItemLink(7) == itemLink) then
+	if(GetTradeTargetItemLink(7) == itemLink and type(spell) ~= 'number') then
 		self:SetAttribute('alt-type1', 'macro')
 		self:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', spell))
 	elseif(GetContainerItemLink(bag, slot) == itemLink) then
