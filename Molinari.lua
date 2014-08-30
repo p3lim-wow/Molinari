@@ -26,11 +26,15 @@ function Molinari:Apply(itemLink, spell, r, g, b)
 	local parent = GetMouseFocus()
 	local slot = parent:GetID()
 	local bag = parent:GetParent():GetID()
+	if(not bag or bag < 0) then return end
 
-	local show = true
-	if(GetTradeTargetItemLink(7) == itemLink and type(spell) ~= 'number') then
-		self:SetAttribute('alt-type1', 'macro')
-		self:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', spell))
+	if(GetTradeTargetItemLink(7) == itemLink) then
+		if(type(spell) == 'number') then
+			return
+		else
+			self:SetAttribute('alt-type1', 'macro')
+			self:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', spell))
+		end
 	elseif(GetContainerItemLink(bag, slot) == itemLink) then
 		if(type(spell) == 'number') then
 			self:SetAttribute('alt-type1', 'item')
@@ -43,16 +47,14 @@ function Molinari:Apply(itemLink, spell, r, g, b)
 		self:SetAttribute('target-bag', bag)
 		self:SetAttribute('target-slot', slot)
 	else
-		show = false
+		return
 	end
 
-	if(show) then
-		self:SetAttribute('_entered', true)
-		self:SetAllPoints(parent)
-		self:Show()
+	self:SetAttribute('_entered', true)
+	self:SetAllPoints(parent)
+	self:Show()
 
-		AutoCastShine_AutoCastStart(self, r, g, b)
-	end
+	AutoCastShine_AutoCastStart(self, r, g, b)
 end
 
 local MILLING, PROSPECTING, DISENCHANTING, LOCKPICKING
@@ -63,8 +65,9 @@ function Molinari:OnTooltipSetItem()
 	if(not IsAltKeyDown()) then return end
 	if(InCombatLockdown()) then return end
 	if(UnitHasVehicleUI('player')) then return end
-	if(MailFrame:IsShown()) then return end
-	if((AuctionFrame and AuctionFrame:IsShown())) then return end
+	if(MailFrame:IsVisible()) then return end
+	if(EquipmentFlyoutFrame:IsVisible()) then return end
+	if(AuctionFrame and AuctionFrame:IsVisible()) then return end
 
 	local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
 	if(LibProcessable:IsMillable(itemID) and GetItemCount(itemID) >= 5) then
