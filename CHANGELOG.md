@@ -1,3 +1,8 @@
+## Changes in 50400.30-Release:
+
+- Fixed: Disenchantable items comparison error
+- Removed: Disable while at the mailbox
+
 ## Changes in 50400.29-Release:
 
 - Fixed: Button showing when it's not supposed to
