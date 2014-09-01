@@ -65,7 +65,6 @@ function Molinari:OnTooltipSetItem()
 	if(not IsAltKeyDown()) then return end
 	if(InCombatLockdown()) then return end
 	if(UnitHasVehicleUI('player')) then return end
-	if(MailFrame:IsVisible()) then return end
 	if(EquipmentFlyoutFrame:IsVisible()) then return end
 	if(AuctionFrame and AuctionFrame:IsVisible()) then return end
 
