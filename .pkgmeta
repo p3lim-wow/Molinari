@@ -12,7 +12,9 @@ manual-changelog:
     markup-type: markdown
 
 ignore:
+    - .gitmodules
     - embeds/LibStub/tests
     - embeds/LibStub/.pkgmeta
+    - embeds/LibProcessable/.gitmodules
     - embeds/LibProcessable/.pkgmeta
     - embeds/LibProcessable/README.md

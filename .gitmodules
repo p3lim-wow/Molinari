@@ -1,0 +1,6 @@
+[submodule "LibStub"]
+	path = embeds/LibStub
+	url = git://github.com/p3lim-wow/LibStub.git
+[submodule "LibProcessable"]
+	path = embeds/LibProcessable
+	url = git://github.com/p3lim-wow/LibProcessable.git
