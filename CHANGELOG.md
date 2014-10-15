@@ -1,3 +1,8 @@
+## Changes in 60000.31-Release:
+
+- Changed: Update Interface version
+- Changed: Update embedded libraries
+
 ## Changes in 50400.30-Release:
 
 - Fixed: Disenchantable items comparison error
