@@ -1,5 +1,12 @@
 local Molinari = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, SecureHandlerStateTemplate, SecureHandlerEnterLeaveTemplate, AutoCastShineTemplate')
+Molinari:RegisterForClicks('AnyUp')
+Molinari:SetFrameStrata('TOOLTIP')
+Molinari:SetScript('OnHide', AutoCastShine_AutoCastStop)
+Molinari:HookScript('OnLeave', AutoCastShine_AutoCastStop)
+Molinari:Hide()
+
 RegisterStateDriver(Molinari, 'visible', '[nomod:alt] hide; show')
+Molinari:SetAttribute('_onleave', 'self:ClearAllPoints() self:Hide()')
 Molinari:SetAttribute('_onstate-visible', [[
 	if(newstate == 'hide' and self:IsShown()) then
 		self:ClearAllPoints()
@@ -8,7 +15,7 @@ Molinari:SetAttribute('_onstate-visible', [[
 ]])
 
 local scripts = {'OnClick', 'OnMouseUp', 'OnMouseDown'}
-function Molinari:OnClick(button, ...)
+Molinari:HookScript('OnClick', function(button, ...)
 	if(button ~= 'LeftButton') then
 		local _, parent = self:GetPoint()
 		if(parent) then
@@ -20,7 +27,7 @@ function Molinari:OnClick(button, ...)
 			end
 		end
 	end
-end
+end)
 
 function Molinari:Apply(itemLink, spell, r, g, b)
 	local parent = GetMouseFocus()
@@ -57,9 +64,13 @@ function Molinari:Apply(itemLink, spell, r, g, b)
 	AutoCastShine_AutoCastStart(self, r, g, b)
 end
 
-local MILLING, PROSPECTING, DISENCHANTING, LOCKPICKING
+local MILLING = GetSpellInfo(51005)
+local PROSPECTING = GetSpellInfo(31252)
+local DISENCHANTING = GetSpellInfo(13262)
+local LOCKPICKING = GetSpellInfo(1804)
+
 local LibProcessable = LibStub('LibProcessable')
-function Molinari:OnTooltipSetItem()
+GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	local _, itemLink = self:GetItem()
 	if(not itemLink) then return end
 	if(not IsAltKeyDown()) then return end
@@ -85,27 +96,9 @@ function Molinari:OnTooltipSetItem()
 			end
 		end
 	end
-end
-
-Molinari:RegisterEvent('PLAYER_LOGIN')
-Molinari:SetScript('OnEvent', function(self)
-	MILLING = GetSpellInfo(51005)
-	PROSPECTING = GetSpellInfo(31252)
-	DISENCHANTING = GetSpellInfo(13262)
-	LOCKPICKING = GetSpellInfo(1804)
-
-	GameTooltip:HookScript('OnTooltipSetItem', self.OnTooltipSetItem)
-
-	self:Hide()
-	self:RegisterForClicks('AnyUp')
-	self:SetFrameStrata('TOOLTIP')
-	self:SetAttribute('_onleave', 'self:ClearAllPoints() self:Hide()')
-	self:SetScript('OnHide', AutoCastShine_AutoCastStop)
-	self:HookScript('OnLeave', AutoCastShine_AutoCastStop)
-	self:HookScript('OnClick', self.OnClick)
-
-	for _, sparkle in next, self.sparkles do
-		sparkle:SetHeight(sparkle:GetHeight() * 3)
-		sparkle:SetWidth(sparkle:GetWidth() * 3)
-	end
 end)
+
+for _, sparkle in next, Molinari.sparkles do
+	sparkle:SetHeight(sparkle:GetHeight() * 3)
+	sparkle:SetWidth(sparkle:GetWidth() * 3)
+end
