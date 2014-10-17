@@ -1,3 +1,7 @@
+## Changes in 60000.33-Release:
+
+- Fixed: Missing self reference
+
 ## Changes in 60000.32-Release:
 
 - Changed: Loading procedure to make sure other addons don't disrupt functionality
