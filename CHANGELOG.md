@@ -1,3 +1,7 @@
+## Changes in 60000.32-Release:
+
+- Changed: Loading procedure to make sure other addons don't disrupt functionality
+
 ## Changes in 60000.31-Release:
 
 - Changed: Update Interface version
