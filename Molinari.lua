@@ -29,23 +29,23 @@ Molinari:HookScript('OnClick', function(self, button, ...)
 	end
 end)
 
-function Molinari:Apply(itemLink, spell, r, g, b)
+function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 	local parent = GetMouseFocus()
 	local slot = parent:GetID()
 	local bag = parent:GetParent():GetID()
 	if(not bag or bag < 0) then return end
 
 	if(GetTradeTargetItemLink(7) == itemLink) then
-		if(type(spell) == 'number') then
+		if(isItem) then
 			return
 		else
 			self:SetAttribute('alt-type1', 'macro')
 			self:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', spell))
 		end
 	elseif(GetContainerItemLink(bag, slot) == itemLink) then
-		if(type(spell) == 'number') then
+		if(isItem) then
 			self:SetAttribute('alt-type1', 'item')
-			self:SetAttribute('item', GetItemInfo(spell))
+			self:SetAttribute('item', 'item:' .. spell)
 		else
 			self:SetAttribute('alt-type1', 'spell')
 			self:SetAttribute('spell', spell)
@@ -64,11 +64,6 @@ function Molinari:Apply(itemLink, spell, r, g, b)
 	AutoCastShine_AutoCastStart(self, r, g, b)
 end
 
-local MILLING = GetSpellInfo(51005)
-local PROSPECTING = GetSpellInfo(31252)
-local DISENCHANTING = GetSpellInfo(13262)
-local LOCKPICKING = GetSpellInfo(1804)
-
 local LibProcessable = LibStub('LibProcessable')
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	local _, itemLink = self:GetItem()
@@ -81,18 +76,18 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 
 	local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
 	if(LibProcessable:IsMillable(itemID) and GetItemCount(itemID) >= 5) then
-		Molinari:Apply(itemLink, MILLING, 1/2, 1, 1/2)
+		Molinari:Apply(itemLink, 51005, 1/2, 1, 1/2)
 	elseif(LibProcessable:IsProspectable(itemID) and GetItemCount(itemID) >= 5) then
-		Molinari:Apply(itemLink, PROSPECTING, 1, 1/3, 1/3)
+		Molinari:Apply(itemLink, 31252, 1, 1/3, 1/3)
 	elseif(LibProcessable:IsDisenchantable(itemID)) then
-		Molinari:Apply(itemLink, DISENCHANTING, 1/2, 1/2, 1)
+		Molinari:Apply(itemLink, 13262, 1/2, 1/2, 1)
 	else
 		local openable, keyID = LibProcessable:IsOpenable(itemID)
 		if(openable) then
 			if(keyID) then
-				Molinari:Apply(itemLink, keyID, 0, 1, 1)
+				Molinari:Apply(itemLink, keyID, 0, 1, 1, true)
 			else
-				Molinari:Apply(itemLink, LOCKPICKING, 0, 1, 1)
+				Molinari:Apply(itemLink, 1804, 0, 1, 1)
 			end
 		end
 	end
