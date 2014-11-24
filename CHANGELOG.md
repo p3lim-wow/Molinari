@@ -1,3 +1,8 @@
+## Changes in 60000.34-Release:
+
+- Changed: Update LibProcessable embed with updated Draenor data
+- Changed: Internal simplifications
+
 ## Changes in 60000.33-Release:
 
 - Fixed: Missing self reference
