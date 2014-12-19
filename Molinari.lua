@@ -14,16 +14,23 @@ Molinari:SetAttribute('_onstate-visible', [[
 	end
 ]])
 
-local scripts = {'OnClick', 'OnMouseUp', 'OnMouseDown'}
-Molinari:HookScript('OnClick', function(self, button, ...)
+Molinari:HookScript('OnClick', function(self, button, down)
 	if(button ~= 'LeftButton') then
 		local _, parent = self:GetPoint()
 		if(parent) then
-			for _, script in next, scripts do
-				local handler = parent:GetScript(script)
-				if(handler) then
-					handler(parent, button, ...)
-				end
+			local onClick = parent:GetScript('OnClick')
+			if(onClick) then
+				onClick(self, button, down)
+			end
+
+			local onMouseDown = parent:GetScript('OnMouseDown')
+			if(down and onMouseDown) then
+				onMouseDown(self, button)
+			end
+
+			local onMouseUp = parent:GetScript('OnMouseUp')
+			if(not down and onMouseUp) then
+				onMouseUp(self, button)
 			end
 		end
 	end
