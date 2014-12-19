@@ -75,8 +75,10 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	if(AuctionFrame and AuctionFrame:IsVisible()) then return end
 
 	local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
-	if(LibProcessable:IsMillable(itemID) and GetItemCount(itemID) >= 5) then
-		Molinari:Apply(itemLink, 51005, 1/2, 1, 1/2)
+
+	local isMillable, _, _, mortarItem = LibProcessable:IsMillable(itemID)
+	if(isMillable and GetItemCount(itemID) >= 5) then
+		Molinari:Apply(itemLink, mortarItem or 51005, 1/2, 1, 1/2, not not mortarItem)
 	elseif(LibProcessable:IsProspectable(itemID) and GetItemCount(itemID) >= 5) then
 		Molinari:Apply(itemLink, 31252, 1, 1/3, 1/3)
 	elseif(LibProcessable:IsDisenchantable(itemID, true)) then
