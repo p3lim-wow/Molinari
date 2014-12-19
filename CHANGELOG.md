@@ -1,3 +1,9 @@
+## Changes in 60000.35-Release:
+
+- Added: Support for the Draenic Mortar
+- Changed: Update LibProcessable embed
+- Fixed: Rare issue with misbehaving click passthrough
+
 ## Changes in 60000.34-Release:
 
 - Changed: Update LibProcessable embed with updated Draenor data
