@@ -20,3 +20,4 @@ ignore:
     - embeds/LibProcessable/.gitmodules
     - embeds/LibProcessable/.pkgmeta
     - embeds/LibProcessable/README.md
+    - embeds/LibProcessable/CONTRIBUTING.md
