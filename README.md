@@ -6,15 +6,15 @@ It can be downloaded at [Curse](http://curse.com/addons/wow/molinari) or at [WoW
 ## Description
 
 Molinari was made to aid the player in processing various items throughout the game.  
-As an example; when you'd want to mill herbs, you would normally cast [[Milling]](http://wowhead.com/spell=51005) and then click the item in your bags.  
+As an example; when you'd want to mill herbs, you would normally cast [Milling](http://wowhead.com/spell=51005) and then click the item in your bags.  
 With Molinari, you simply hold down the `Alt` key and click the item directly.
 
 The following spells/processes are supported:
 
-* [[Milling]](http://wowhead.com/spell=51005) & [[Draenic Mortar]](http://wowhead.com/item=114942)
-* [[Prospecting]](http://wowhead.com/spell=31252)
-* [[Disenchanting]](http://wowhead.com/spell=13262)
-* [[Lockpicking]](http://wowhead.com/spell=1804) & [skeleton keys](http://wowhead.com/items?filter=na=key;cr=86;crs=2)
+- [Milling](http://wowhead.com/spell=51005) & [Draenic Mortar](http://wowhead.com/item=114942)
+- [Prospecting](http://wowhead.com/spell=31252)
+- [Disenchanting](http://wowhead.com/spell=13262)
+- [Lockpicking](http://wowhead.com/spell=1804) & [skeleton keys](http://wowhead.com/items?filter=na=key;cr=86;crs=2)
 
 In addition, Molinari also works for lockpicking in the trade window.
 
