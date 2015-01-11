@@ -13,6 +13,7 @@ manual-changelog:
 
 ignore:
     - .gitmodules
+    - README.md
     - CONTRIBUTING.md
     - embeds/LibStub/tests
     - embeds/LibStub/.pkgmeta
