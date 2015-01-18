@@ -7,6 +7,10 @@ externals:
         url: git://github.com/p3lim-wow/LibProcessable.git
         tag: latest
 
+optional-dependencies:
+    - libstub
+    - libprocessable
+
 manual-changelog:
     filename: CHANGELOG.md
     markup-type: markdown
