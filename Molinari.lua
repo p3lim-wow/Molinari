@@ -14,6 +14,18 @@ Molinari:SetAttribute('_onstate-visible', [[
 	end
 ]])
 
+local BlackListedItems = {
+	116916,	-- Gorepetal's Gentle Grasp (WoD Herbalism Gloves)
+	116913	-- Peon's Mining Pick (WoD Mining Pick)
+}
+
+local function IsBlackListedItem(ItemID)
+	for i, BlackID in ipairs(BlackListedItems) do
+		if ItemID == BlackID then return true end
+	end
+	return false
+end
+
 Molinari:HookScript('OnClick', function(self, button, down)
 	if(button ~= 'LeftButton') then
 		local _, parent = self:GetPoint()
@@ -41,6 +53,10 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 	local slot = parent:GetID()
 	local bag = parent:GetParent():GetID()
 	if(not bag or bag < 0) then return end
+
+	local ItemID = (GetContainerItemID(bag,slot) or 0)
+	if ItemID == 0 then return end	
+	if IsBlackListedItem(ItemID) then return end
 
 	if(GetTradeTargetItemLink(7) == itemLink) then
 		if(isItem) then
