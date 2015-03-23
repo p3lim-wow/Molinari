@@ -82,6 +82,9 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	if(AuctionFrame and AuctionFrame:IsVisible()) then return end
 
 	local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
+	if(MolinariDB.itemBlacklist[itemID]) then
+		return
+	end
 
 	local isMillable, _, _, mortarItem = LibProcessable:IsMillable(itemID)
 	if(isMillable and GetItemCount(itemID) >= 5) then
