@@ -3,11 +3,12 @@
 ## Version: @project-version@
 ## Title: Molinari
 ## Notes: One-click Milling, Prospecting, Disenchanting and Lockpicking!
-## OptionalDeps: LibStub, LibProcessable
-## SavedVariables: MolinariDB
+## OptionalDeps: LibStub, LibProcessable, Wasabi
+## SavedVariables: MolinariBlacklistDB
 
 libs\LibStub\LibStub.lua
 libs\LibProcessable\LibProcessable.lua
+libs\Wasabi\Wasabi.xml
 
 Localization.lua
 Config.lua
