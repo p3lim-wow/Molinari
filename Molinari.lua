@@ -109,3 +109,10 @@ for _, sparkle in next, Molinari.sparkles do
 	sparkle:SetHeight(sparkle:GetHeight() * 3)
 	sparkle:SetWidth(sparkle:GetWidth() * 3)
 end
+
+Molinari:RegisterEvent('BAG_UPDATE_DELAYED')
+Molinari:SetScript('OnEvent', function(self, ...)
+	if(self:IsShown() and not InCombatLockdown()) then
+		self:Hide()
+	end
+end)
