@@ -1,9 +1,9 @@
 package-as: Molinari
 
 externals:
-    embeds/LibStub:
+    libs/LibStub:
         url: svn://svn.wowace.com/wow/libstub/mainline/trunk
-    embeds/LibProcessable:
+    libs/LibProcessable:
         url: git://git.curseforge.net/wow/libprocessable/mainline.git
         tag: latest
 
@@ -19,9 +19,9 @@ ignore:
     - .gitmodules
     - README.md
     - CONTRIBUTING.md
-    - embeds/LibStub/tests
-    - embeds/LibStub/.pkgmeta
-    - embeds/LibProcessable/.gitmodules
-    - embeds/LibProcessable/.pkgmeta
-    - embeds/LibProcessable/README.md
-    - embeds/LibProcessable/CONTRIBUTING.md
+    - libs/LibStub/tests
+    - libs/LibStub/.pkgmeta
+    - libs/LibProcessable/.gitmodules
+    - libs/LibProcessable/.pkgmeta
+    - libs/LibProcessable/README.md
+    - libs/LibProcessable/CONTRIBUTING.md

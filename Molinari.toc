@@ -6,8 +6,8 @@
 ## OptionalDeps: LibStub, LibProcessable
 ## SavedVariables: MolinariDB
 
-embeds\LibStub\LibStub.lua
-embeds\LibProcessable\LibProcessable.lua
+libs\LibStub\LibStub.lua
+libs\LibProcessable\LibProcessable.lua
 
 Localization.lua
 Config.lua
