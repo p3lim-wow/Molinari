@@ -27,8 +27,8 @@ Options:Initialize(function(self)
 	end
 
 	local Items = self:CreateObjectContainer('items')
-	Items:SetPoint('TOPLEFT', Description, 'BOTTOMLEFT', -12, -8)
-	Items:SetPoint('BOTTOMRIGHT', -8, 8)
+	Items:SetPoint('TOPLEFT', Description, 'BOTTOMLEFT', -20, -8)
+	Items:SetSize(self:GetWidth(), 500)
 	Items:SetObjectSize(34)
 	Items:SetObjectSpacing(2)
 	Items:On('ObjectCreate', function(self, event, Object)
@@ -44,31 +44,40 @@ Options:Initialize(function(self)
 		local _, _, _, _, _, _, _, _, _, textureFile = GetItemInfo(Object.key)
 		if(textureFile) then
 			Object:SetNormalTexture(textureFile)
-		elseif(not self.queryItems) then
-			self.queryItems = true
+		elseif(not self.queryItems[Object.key]) then
+			self.queryItems[Object.key] = true
 			self:RegisterEvent('GET_ITEM_INFO_RECEIVED')
 		end
 	end)
 
-	Items:On('PreUpdate', function(self)
-		self.queryItems = nil
-	end)
-
-	Items:On('PostUpdate', function(self)
-		if(not self.queryItems) then
-			self:UnregisterEvent('GET_ITEM_INFO_RECEIVED')
+	Items:On('ObjectClick', function(self, event, Object, button)
+		if(button == 'RightButton') then
+			Object:Remove()
 		end
 	end)
 
-	Items:HookScript('OnEvent', Items.Update)
+	Items:HookScript('OnEvent', function(self, event, itemID)
+		if(event == 'GET_ITEM_INFO_RECEIVED') then
+			if(self.queryItems[itemID]) then
+				self.queryItems[itemID] = nil
+				self:AddObject(itemID)
+
+				if(#self.queryItems == 0) then
+					self:UnregisterEvent('GET_ITEM_INFO_RECEIVED')
+				end
+			end
+		end
+	end)
+
 	Items:SetScript('OnMouseUp', function(self)
 		if(CursorHasItem()) then
 			local _, itemID = GetCursorInfo()
 			if(not self:HasObject(itemID)) then
 				ClearCursor()
 				self:AddObject(itemID)
-				self:Update()
 			end
 		end
 	end)
+
+	Items.queryItems = {}
 end)
