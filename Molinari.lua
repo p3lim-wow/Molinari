@@ -36,6 +36,21 @@ Molinari:HookScript('OnClick', function(self, button, down)
 	end
 end)
 
+Molinari:HookScript('OnLeave', GameTooltip_Hide)
+Molinari:HookScript('OnEnter', function(self)
+	local point, anchor, relative, x, y = GameTooltip:GetPoint()
+	GameTooltip:SetOwner(self, 'ANCHOR_NONE')
+
+	if(anchor == select(2, self:GetPoint())) then
+		GameTooltip:SetPoint(point, self, relative, x, y)
+	else
+		GameTooltip:SetPoint('BOTTOMRIGHT', self, 'TOPLEFT')
+	end
+
+	GameTooltip:SetBagItem(self:GetAttribute('target-bag'), self:GetAttribute('target-slot'))
+	GameTooltip:Show()
+end)
+
 function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 	local parent = GetMouseFocus()
 	local slot = parent:GetID()
@@ -73,6 +88,7 @@ end
 
 local LibProcessable = LibStub('LibProcessable')
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
+	if(self:GetOwner() == Molinari) then return end
 	local _, itemLink = self:GetItem()
 	if(not itemLink) then return end
 	if(not IsAltKeyDown()) then return end
