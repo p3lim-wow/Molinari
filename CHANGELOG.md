@@ -1,3 +1,11 @@
+## Changes in 70000.36-Release:
+
+- Added: Item blacklist and options
+- Added: Localization support (please contribute!)
+- Changed: Update Interface version
+- Changed: Made the license readable by mortal beings
+- Changed: Using a new library to handle options
+
 ## Changes in 60000.35-Release:
 
 - Added: Support for the Draenic Mortar
