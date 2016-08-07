@@ -1,20 +1,20 @@
 package-as: Molinari
 
 externals:
-    libs/LibProcessable:
-        url: git://git.curseforge.net/wow/libprocessable/mainline.git
-        tag: latest
-    libs/Wasabi:
-        url: git://git.curseforge.net/wow/wasabi/mainline.git
-        tag: latest
+  libs/LibProcessable:
+    url: git://git.curseforge.net/wow/libprocessable/mainline.git
+    tag: latest
+  libs/Wasabi:
+    url: git://git.curseforge.net/wow/wasabi/mainline.git
+    tag: latest
 
 optional-dependencies:
-    - libstub
-    - libprocessable
+  - libprocessable
+  - wasabi
 
 manual-changelog:
-    filename: CHANGELOG.md
-    markup-type: markdown
+  filename: CHANGELOG.md
+  markup-type: markdown
 
 ignore:
-    - README.md
+  - README.md
