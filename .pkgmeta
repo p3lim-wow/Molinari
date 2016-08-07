@@ -1,13 +1,11 @@
 package-as: Molinari
 
 externals:
-    libs/LibStub:
-        url: git://github.com/wowace-mirror/LibStub.git
     libs/LibProcessable:
         url: git://git.curseforge.net/wow/libprocessable/mainline.git
         tag: latest
     libs/Wasabi:
-        url: git://github.com/p3lim-wow/Wasabi.git
+        url: git://git.curseforge.net/wow/wasabi/mainline.git
         tag: latest
 
 optional-dependencies:
@@ -19,15 +17,5 @@ manual-changelog:
     markup-type: markdown
 
 ignore:
-    - .gitmodules
     - README.md
     - CONTRIBUTING.md
-    - libs/LibStub/tests
-    - libs/LibStub/.pkgmeta
-    - libs/LibProcessable/.gitmodules
-    - libs/LibProcessable/.pkgmeta
-    - libs/LibProcessable/README.md
-    - libs/LibProcessable/CONTRIBUTING.md
-    - libs/Wasabi/tests
-    - libs/Wasabi/.gitmodules
-    - libs/Wasabi/.pkgmeta
