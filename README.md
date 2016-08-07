@@ -21,7 +21,7 @@ In addition, Molinari also works for lockpicking in the trade window.
 ## Feedback
 
 If you have a question, please use the comments section on Curse/WoWInterface.  
-If you would like to report a bug or contribute to the project, please follow [this link](https://github.com/p3lim-wow/Molinari/blob/master/CONTRIBUTING.md) to get started.
+If you would like to report a bug or contribute to the project, please follow [this link](//github.com/p3lim-wow/Molinari/issues?q=) to get started.
 
 ## Legal
 
