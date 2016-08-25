@@ -1,3 +1,7 @@
+### Changes in 70000.38-Release:
+
+- Fixed: Libraries not being loaded correctly
+
 ### Changes in 70000.37-Release:
 
 - Fixed: Parent click handlers not getting the correct frame
