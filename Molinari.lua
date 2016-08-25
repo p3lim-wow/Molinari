@@ -20,17 +20,17 @@ Molinari:HookScript('OnClick', function(self, button, down)
 		if(parent) then
 			local onClick = parent:GetScript('OnClick')
 			if(onClick) then
-				onClick(self, button, down)
+				onClick(parent, button, down)
 			end
 
 			local onMouseDown = parent:GetScript('OnMouseDown')
 			if(down and onMouseDown) then
-				onMouseDown(self, button)
+				onMouseDown(parent, button)
 			end
 
 			local onMouseUp = parent:GetScript('OnMouseUp')
 			if(not down and onMouseUp) then
-				onMouseUp(self, button)
+				onMouseUp(parent, button)
 			end
 		end
 	end
