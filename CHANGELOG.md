@@ -1,3 +1,7 @@
+## Changes in 70000.37-Release:
+
+- Fixed: Parent click handlers not getting the correct frame
+
 ## Changes in 70000.36-Release:
 
 - Added: Item blacklist and options
