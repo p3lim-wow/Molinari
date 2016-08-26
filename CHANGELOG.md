@@ -1,3 +1,7 @@
+### Changes in 70000.39-Release:
+
+- Fixed: Issue with LibProcessible library
+
 ### Changes in 70000.38-Release:
 
 - Fixed: Libraries not being loaded correctly
