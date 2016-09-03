@@ -1,3 +1,7 @@
+### Changes in 70000.40-Release:
+
+- Added: Support for artifact relics
+
 ### Changes in 70000.39-Release:
 
 - Fixed: Issue with LibProcessible library
