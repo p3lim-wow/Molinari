@@ -36,20 +36,15 @@ Molinari:HookScript('OnClick', function(self, button, down)
 	end
 end)
 
-Molinari:HookScript('OnLeave', GameTooltip_Hide)
-Molinari:HookScript('OnEnter', function(self)
-	local point, anchor, relative, x, y = GameTooltip:GetPoint()
-	GameTooltip:SetOwner(self, 'ANCHOR_NONE')
-
-	if(anchor == select(2, self:GetPoint())) then
-		GameTooltip:SetPoint(point, self, relative, x, y)
+local function OnEnter(self)
+	if(self:GetRight() >= (GetScreenWidth() / 2)) then
+		GameTooltip:SetOwner(self, 'ANCHOR_LEFT')
 	else
-		GameTooltip:SetPoint('BOTTOMRIGHT', self, 'TOPLEFT')
+		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT')
 	end
 
 	GameTooltip:SetBagItem(self:GetAttribute('target-bag'), self:GetAttribute('target-slot'))
-	GameTooltip:Show()
-end)
+end
 
 function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 	local parent = GetMouseFocus()
@@ -126,9 +121,16 @@ for _, sparkle in next, Molinari.sparkles do
 	sparkle:SetWidth(sparkle:GetWidth() * 3)
 end
 
+Molinari:HookScript('OnEnter', OnEnter)
+Molinari:HookScript('OnLeave', GameTooltip_Hide)
 Molinari:RegisterEvent('BAG_UPDATE_DELAYED')
-Molinari:SetScript('OnEvent', function(self, ...)
-	if(self:IsShown() and not InCombatLockdown()) then
-		self:Hide()
+Molinari:RegisterEvent('MODIFIER_STATE_CHANGED')
+Molinari:SetScript('OnEvent', function(self, event)
+	if(self:IsShown()) then
+		if(event == 'BAG_UPDATE_DELAYED' and not InCombatLockdown()) then
+			self:Hide()
+		elseif(event == 'MODIFIER_STATE_CHANGED') then
+			OnEnter(self)
+		end
 	end
 end)
