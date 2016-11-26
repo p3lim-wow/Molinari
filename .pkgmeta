@@ -2,10 +2,10 @@ package-as: Molinari
 
 externals:
   libs/LibProcessable:
-    url: git://git.curseforge.net/wow/libprocessable/mainline.git
+    url: git://github.com/p3lim-wow/LibProcessable
     tag: latest
   libs/Wasabi:
-    url: git://git.curseforge.net/wow/wasabi/mainline.git
+    url: git://github.com/p3lim-wow/Wasabi
     tag: latest
 
 optional-dependencies:
