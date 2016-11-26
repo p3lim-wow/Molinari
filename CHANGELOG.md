@@ -1,3 +1,7 @@
+### Changes in 70100.42-Release:
+
+- Fixed: Libraries path
+
 ### Changes in 70100.41-Release:
 
 - Changed: Tooltip now anchors depending on screen corners
