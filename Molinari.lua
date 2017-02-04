@@ -93,7 +93,7 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	if(AuctionFrame and AuctionFrame:IsVisible()) then return end
 
 	local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
-	if(MolinariBlacklistDB.items[itemID]) then
+	if(not itemID or MolinariBlacklistDB.items[itemID]) then
 		return
 	end
 
