@@ -1,3 +1,8 @@
+### Changes in 70100.43-Release:
+
+- Fixed: Not accounting for effective item level when disenchanting
+- Fixed: Errors encountered while at a vendor
+
 ### Changes in 70100.42-Release:
 
 - Fixed: Libraries path
