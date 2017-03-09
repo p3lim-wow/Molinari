@@ -102,7 +102,7 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		Molinari:Apply(itemLink, mortarItem or 51005, 1/2, 1, 1/2, not not mortarItem)
 	elseif(LibProcessable:IsProspectable(itemID) and GetItemCount(itemID) >= 5) then
 		Molinari:Apply(itemLink, 31252, 1, 1/3, 1/3)
-	elseif(LibProcessable:IsDisenchantable(itemID, true)) then
+	elseif(LibProcessable:IsDisenchantable(itemLink, true)) then
 		Molinari:Apply(itemLink, 13262, 1/2, 1/2, 1)
 	else
 		local isOpenable, _, _, keyItem = LibProcessable:IsOpenable(itemID)
