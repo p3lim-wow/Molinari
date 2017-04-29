@@ -1,3 +1,7 @@
+### Changes in 70200.45-Release:
+
+- Added: Support for an additional modifier
+
 ### Changes in 70200.44-Release:
 
 - Changed: Update Interface version
