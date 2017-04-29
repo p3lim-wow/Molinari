@@ -1,5 +1,7 @@
 package-as: Molinari
 
+enable-nolib-creation: no
+
 externals:
   libs/LibProcessable:
     url: git://github.com/p3lim-wow/LibProcessable
