@@ -14,7 +14,9 @@ The following spells/processes are supported:
 - [Milling](//wowhead.com/spell=51005) & [Draenic Mortar](//wowhead.com/item=114942)
 - [Prospecting](//wowhead.com/spell=31252)
 - [Disenchanting](//wowhead.com/spell=13262)
-- [Lockpicking](//wowhead.com/spell=1804) & [skeleton keys](//wowhead.com/items?filter=na=key;cr=86;crs=2)
+- [Lockpicking](http://www.wowhead.com/spell=1804)
+- [Skeleton keys](http://www.wowhead.com/items/name:key?filter=86;2;0)
+- [Jeweled keys](http://www.wowhead.com/items/name:lock?filter=86;7;0)
 
 In addition, Molinari also works for lockpicking in the trade window.
 
