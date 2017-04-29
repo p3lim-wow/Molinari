@@ -1,14 +1,39 @@
 local addonName, L = ...
 local defaults = {
+	modifier = 'ALT',
+}
+
+local Options = LibStub('Wasabi'):New(addonName, 'MolinariDB', defaults)
+Options:AddSlash('/molinari')
+Options:Initialize(function(self)
+	local Title = self:CreateTitle()
+	Title:SetPoint('TOPLEFT', 16, -16)
+	Title:SetText(addonName)
+
+	local Modifier = self:CreateDropDown('modifier')
+	Modifier:SetPoint('TOPLEFT', Title, 'BOTTOMLEFT', 0, -8)
+	Modifier:SetFormattedText(L['Modifier to show enable %s'], addonName)
+	Modifier:SetValues({
+		ALT = L['ALT key'],
+		CTRL = L['ALT + CTRL key'],
+		SHIFT = L['ALT + SHIFT key']
+	})
+	Modifier:SetNewFeature(true)
+end)
+
+Options:On('Okay', function()
+	Molinari:UpdateModifier()
+end)
+
+local defaultBlacklist = {
 	items = {
 		[116913] = true, -- Peon's Mining Pick
 		[116916] = true, -- Gorepetal's Gentle Grasp
 	}
 }
 
-local Options = LibStub('Wasabi'):New(addonName, 'MolinariBlacklistDB', defaults)
-Options:AddSlash('/molinari')
-Options:Initialize(function(self)
+local Blacklist = Options:CreateChild('Item Blacklist', 'MolinariBlacklistDB', defaultBlacklist)
+Blacklist:Initialize(function(self)
 	local Title = self:CreateTitle()
 	Title:SetPoint('TOPLEFT', 20, -16)
 	Title:SetFontObject('GameFontNormalMed1')

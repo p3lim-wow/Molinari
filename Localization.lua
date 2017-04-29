@@ -6,6 +6,10 @@ setmetatable(L, {__index = function(L, key)
 	return value
 end})
 
+L['ALT key'] = ALT_KEY
+L['ALT + CTRL key'] = ALT_KEY_TEXT .. ' + ' .. CTRL_KEY
+L['ALT + SHIFT key'] = ALT_KEY_TEXT .. ' + ' .. SHIFT_KEY
+
 local locale = GetLocale()
 if(locale == 'deDE') then
 	--@localization(locale="deDE", format="lua_additive_table")@

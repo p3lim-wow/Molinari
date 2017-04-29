@@ -5,7 +5,12 @@ Molinari:SetScript('OnHide', AutoCastShine_AutoCastStop)
 Molinari:HookScript('OnLeave', AutoCastShine_AutoCastStop)
 Molinari:Hide()
 
-RegisterStateDriver(Molinari, 'visible', '[nomod:alt] hide; show')
+local modifiers = {
+	ALT = {'[mod:alt]', 'alt'},
+	CTRL = {'[mod:alt, mod:ctrl]', 'alt-ctrl'},
+	SHIFT = {'[mod:alt, mod:shift]', 'alt-shift'},
+}
+
 Molinari:SetAttribute('_onleave', 'self:ClearAllPoints() self:Hide()')
 Molinari:SetAttribute('_onstate-visible', [[
 	if(newstate == 'hide' and self:IsShown()) then
@@ -52,19 +57,20 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 	local bag = parent:GetParent():GetID()
 	if(not bag or bag < 0) then return end
 
+	local modifier = modifiers[MolinariDB.modifier][2]
 	if(GetTradeTargetItemLink(7) == itemLink) then
 		if(isItem) then
 			return
 		else
-			self:SetAttribute('alt-type1', 'macro')
+			self:SetAttribute(modifier .. '-type1', 'macro')
 			self:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', spell))
 		end
 	elseif(GetContainerItemLink(bag, slot) == itemLink) then
 		if(isItem) then
-			self:SetAttribute('alt-type1', 'item')
+			self:SetAttribute(modifier .. '-type1', 'item')
 			self:SetAttribute('item', 'item:' .. spell)
 		else
-			self:SetAttribute('alt-type1', 'spell')
+			self:SetAttribute(modifier .. '-type1', 'spell')
 			self:SetAttribute('spell', spell)
 		end
 
@@ -81,13 +87,19 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 	AutoCastShine_AutoCastStart(self, r, g, b)
 end
 
+function Molinari:UpdateModifier()
+	RegisterStateDriver(self, 'visible', modifiers[MolinariDB.modifier][1] .. ' show; hide')
+end
+
 local LibProcessable = LibStub('LibProcessable')
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	if(self:GetOwner() == Molinari) then return end
 	local _, itemLink = self:GetItem()
 	if(not itemLink) then return end
-	if(not IsAltKeyDown()) then return end
 	if(InCombatLockdown()) then return end
+	if(not IsAltKeyDown()) then return end
+	if(MolinariDB.modifier == 'CTRL' and not IsControlKeyDown()) then return end
+	if(MolinariDB.modifier == 'SHIFT' and not IsShiftKeyDown()) then return end
 	if(UnitHasVehicleUI('player')) then return end
 	if(EquipmentFlyoutFrame:IsVisible()) then return end
 	if(AuctionFrame and AuctionFrame:IsVisible()) then return end
@@ -121,14 +133,19 @@ end
 
 Molinari:HookScript('OnEnter', OnEnter)
 Molinari:HookScript('OnLeave', GameTooltip_Hide)
+Molinari:RegisterEvent('PLAYER_LOGIN')
 Molinari:RegisterEvent('BAG_UPDATE_DELAYED')
 Molinari:RegisterEvent('MODIFIER_STATE_CHANGED')
 Molinari:SetScript('OnEvent', function(self, event)
-	if(self:IsShown()) then
-		if(event == 'BAG_UPDATE_DELAYED' and not InCombatLockdown()) then
-			self:Hide()
-		elseif(event == 'MODIFIER_STATE_CHANGED') then
-			OnEnter(self)
+	if(event == 'PLAYER_LOGIN') then
+		self:UpdateModifier()
+	else
+		if(self:IsShown()) then
+			if(event == 'BAG_UPDATE_DELAYED' and not InCombatLockdown()) then
+				self:Hide()
+			elseif(event == 'MODIFIER_STATE_CHANGED') then
+				OnEnter(self)
+			end
 		end
 	end
 end)

@@ -4,7 +4,7 @@
 ## Title: Molinari
 ## Notes: One-click Milling, Prospecting, Disenchanting and Lockpicking!
 ## OptionalDeps: LibProcessable, Wasabi
-## SavedVariables: MolinariBlacklistDB
+## SavedVariables: MolinariBlacklistDB, MolinariDB
 
 libs\Wasabi\embed.xml
 libs\LibProcessable\embed.xml
