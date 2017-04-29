@@ -1,3 +1,8 @@
+### Changes in 70200.44-Release:
+
+- Changed: Update Interface version
+- Changed: Update LibProcessable embed
+
 ### Changes in 70100.43-Release:
 
 - Fixed: Not accounting for effective item level when disenchanting
