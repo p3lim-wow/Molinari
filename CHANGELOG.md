@@ -1,3 +1,7 @@
+### Changes in 70200.47-Release:
+
+- Changed: Updated embedded libraries
+
 ### Changes in 70200.46-Release:
 
 - Changed: Updated embedded libraries
