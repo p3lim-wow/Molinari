@@ -1,3 +1,7 @@
+### Changes in 70200.48-Release:
+
+- Fixed: Items not showing up in the blacklist on first load
+
 ### Changes in 70200.47-Release:
 
 - Changed: Updated embedded libraries
