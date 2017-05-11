@@ -104,7 +104,7 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	if(EquipmentFlyoutFrame:IsVisible()) then return end
 	if(AuctionFrame and AuctionFrame:IsVisible()) then return end
 
-	local itemID = tonumber(string.match(itemLink, 'item:(%d+):'))
+	local itemID = GetItemInfoFromHyperlink(itemLink)
 	if(not itemID or MolinariBlacklistDB.items[itemID]) then
 		return
 	end
