@@ -9,6 +9,12 @@
 libs\Wasabi\embed.xml
 libs\LibProcessable\embed.xml
 
+#@do-not-package@
+..\LibStub\LibStub.lua
+..\Wasabi\embed.xml
+..\LibProcessable\embed.xml
+#@end-do-not-package@
+
 Localization.lua
 Config.lua
 Molinari.lua
