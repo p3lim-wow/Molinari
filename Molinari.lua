@@ -48,7 +48,11 @@ local function OnEnter(self)
 		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT')
 	end
 
-	GameTooltip:SetBagItem(self:GetAttribute('target-bag'), self:GetAttribute('target-slot'))
+	if(self.itemLink) then
+		GameTooltip:SetHyperlink(self.itemLink)
+	else
+		GameTooltip:SetBagItem(self:GetAttribute('target-bag'), self:GetAttribute('target-slot'))
+	end
 end
 
 function Molinari:Apply(itemLink, spell, r, g, b, isItem)
@@ -65,6 +69,8 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 			self:SetAttribute(modifier .. '-type1', 'macro')
 			self:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', (GetSpellInfo(spell))))
 		end
+
+		self.itemLink = itemLink
 	elseif(GetContainerItemLink(bag, slot) == itemLink) then
 		if(isItem) then
 			self:SetAttribute(modifier .. '-type1', 'item')
@@ -74,6 +80,7 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 			self:SetAttribute('spell', spell)
 		end
 
+		self.itemLink = nil
 		self:SetAttribute('target-bag', bag)
 		self:SetAttribute('target-slot', slot)
 	else
