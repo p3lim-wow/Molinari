@@ -63,7 +63,7 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 			return
 		else
 			self:SetAttribute(modifier .. '-type1', 'macro')
-			self:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', spell))
+			self:SetAttribute('macrotext', string.format('/cast %s\n/run ClickTargetTradeButton(7)', (GetSpellInfo(spell))))
 		end
 	elseif(GetContainerItemLink(bag, slot) == itemLink) then
 		if(isItem) then
