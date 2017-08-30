@@ -6,6 +6,7 @@
 ## OptionalDeps: LibProcessable, Wasabi
 ## SavedVariables: MolinariBlacklistDB, MolinariDB
 
+libs\LibStub\LibStub.lua
 libs\Wasabi\embed.xml
 libs\LibProcessable\embed.xml
 
