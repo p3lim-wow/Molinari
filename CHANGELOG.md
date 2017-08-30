@@ -1,3 +1,8 @@
+### Changes in 70300.49-Release:
+
+- Changed: Update Interface version
+- Fixed: Lockpicking in trade window
+
 ### Changes in 70200.48-Release:
 
 - Fixed: Items not showing up in the blacklist on first load
