@@ -6,6 +6,9 @@
 ## OptionalDeps: LibProcessable, Wasabi
 ## SavedVariables: MolinariBlacklistDB, MolinariDB
 
+## X-Curse-Project-ID: 20338
+## X-WoWI-ID: 13188
+
 libs\LibStub\LibStub.lua
 libs\Wasabi\embed.xml
 libs\LibProcessable\embed.xml
