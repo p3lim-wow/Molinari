@@ -1,3 +1,8 @@
+### Changes in 70300.52-Release:
+
+- Changed: Update LibProcessable logic
+- Changed: Update LibProcessable embed
+
 ### Changes in 70300.51-Release:
 
 - Changed: Update LibProcessable embed
