@@ -1,3 +1,8 @@
+### Changes in 70300.53-Release:
+
+- Changed: Update LibProcessable embed
+- Fixed: Legion enchanting quest line items not disenchantable
+
 ### Changes in 70300.52-Release:
 
 - Changed: Update LibProcessable logic
