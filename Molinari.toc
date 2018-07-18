@@ -13,6 +13,17 @@ libs\LibStub\LibStub.lua
 libs\LibProcessable\embed.xml
 libs\Wasabi\embed.xml
 
-Localization.lua
+locale\initialize.lua
+locale\deDE.lua
+locale\esES.lua
+locale\esMX.lua
+locale\frFR.lua
+locale\itIT.lua
+locale\koKR.lua
+locale\ptBR.lua
+locale\ruRU.lua
+locale\zhCN.lua
+locale\zhTW.lua
+
 Config.lua
 Molinari.lua
