@@ -1,3 +1,9 @@
+### Changes in 80000.54-Release:
+
+- Added: Support for Battle for Azeroth items
+- Changed: Update LibProcessable embed
+- Changed: Update Interface version
+
 ### Changes in 70300.53-Release:
 
 - Changed: Update LibProcessable embed
