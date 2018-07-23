@@ -116,19 +116,19 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		return
 	end
 
-	local isMillable, _, _, mortarItem = LibProcessable:IsMillable(itemID)
+	local isMillable, isMortar = LibProcessable:IsMillable(itemID)
 	if(isMillable and GetItemCount(itemID) >= 5) then
-		Molinari:Apply(itemLink, mortarItem or 51005, 1/2, 1, 1/2, not not mortarItem)
-	elseif(LibProcessable:IsProspectable(itemID) and GetItemCount(itemID) >= 5) then
+		Molinari:Apply(itemLink, isMortar and 114942 or 51005, 1/2, 1, 1/2, isMortar)
+	elseif(LibProcessable:IsProspectable(itemID, true) and GetItemCount(itemID) >= 5) then
 		Molinari:Apply(itemLink, 31252, 1, 1/3, 1/3)
 	elseif(LibProcessable:IsDisenchantable(itemLink)) then
 		Molinari:Apply(itemLink, 13262, 1/2, 1/2, 1)
 	elseif(LibProcessable:IsOpenable(itemID)) then
 		Molinari:Apply(itemLink, 1804, 0, 1, 1)
 	else
-		local isOpenable, _, professionData = LibProcessable:IsOpenableProfession(itemID)
-		if(isOpenable and GetItemCount(professionData.itemID) > 0) then
-			Molinari:Apply(itemLink, keyItem, 0, 1, 1, true)
+		local isOpenable, keyItemID = LibProcessable:IsOpenableProfession(itemID)
+		if(isOpenable) then
+			Molinari:Apply(itemLink, keyItemID, 0, 1, 1, true)
 		end
 	end
 end)
