@@ -1,3 +1,9 @@
+### Changes in 80000.57-Release:
+
+- Changed: Update LibProcessable embed
+- Fixed: Error when opening secondary professions
+- Fixed: Error when the player has Blacksmithing as one of the primary professions
+
 ### Changes in 80000.56-Release:
 
 - Added: Support for Battle for Azeroth items
