@@ -1,3 +1,9 @@
+### Changes in 80000.55-Release:
+
+- Added: Warning if the skill requirement to process an item is not met
+- Changed: Update LibProcessable embed
+- Fixed: Herbs/ores not being detected correctly
+
 ### Changes in 80000.54-Release:
 
 - Added: Support for Battle for Azeroth items
