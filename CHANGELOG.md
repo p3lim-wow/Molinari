@@ -1,3 +1,9 @@
+### Changes in 80000.56-Release:
+
+- Added: Support for Battle for Azeroth items
+- Changed: Update LibProcessable embed
+- Fixed: Compatibility issues (on our end) with TradeSkillMaster
+
 ### Changes in 80000.55-Release:
 
 - Added: Warning if the skill requirement to process an item is not met
@@ -6,7 +12,6 @@
 
 ### Changes in 80000.54-Release:
 
-- Added: Support for Battle for Azeroth items
 - Changed: Update LibProcessable embed
 - Changed: Update Interface version
 
