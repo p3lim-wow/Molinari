@@ -1,3 +1,9 @@
+### Changes in 80000.58-Release:
+
+- Changed: Update LibProcessable embed
+- Fixed: All incompatibilities with other addons
+- Fixed: Errors when logging in or opening certain professions
+
 ### Changes in 80000.57-Release:
 
 - Changed: Update LibProcessable embed
