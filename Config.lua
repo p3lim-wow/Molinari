@@ -10,7 +10,7 @@ Options:AddSlash('/molinari')
 Options:Initialize(function(self)
 	local Title = self:CreateTitle()
 	Title:SetPoint('TOPLEFT', 16, -16)
-	Title:SetText(addonName)
+	Title:SetFormattedText('%s |cffffffffv%s|r', addonName, GetAddOnMetadata(addonName, 'version'))
 
 	local Modifier = self:CreateDropDown('modifier')
 	Modifier:SetPoint('TOPLEFT', Title, 'BOTTOMLEFT', 0, -8)
