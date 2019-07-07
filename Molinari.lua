@@ -88,6 +88,7 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 	end
 
 	self:SetAttribute('_entered', true)
+	self:ClearAllPoints()
 	self:SetAllPoints(parent)
 	self:Show()
 
