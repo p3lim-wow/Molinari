@@ -1,3 +1,9 @@
+### Changes in 80200.59-Release:
+
+- Added: Support for 8.2 ores, herbs and lockboxes
+- Changed: Update LibProcessable embed
+- Fixed: Incompatibilities with bag addons (thanks @deNoor)
+
 ### Changes in 80000.58-Release:
 
 - Changed: Update LibProcessable embed
