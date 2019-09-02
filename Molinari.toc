@@ -1,4 +1,9 @@
+#@non-retail@
+## Interface: 11302
+#@end-non-retail@
+#@retail@
 ## Interface: 80200
+#@end-retail@
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: Molinari
