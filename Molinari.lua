@@ -108,8 +108,8 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	if(not IsAltKeyDown()) then return end
 	if(MolinariDB.modifier == 'CTRL' and not IsControlKeyDown()) then return end
 	if(MolinariDB.modifier == 'SHIFT' and not IsShiftKeyDown()) then return end
-	if(UnitHasVehicleUI('player')) then return end
-	if(EquipmentFlyoutFrame:IsVisible()) then return end
+	if(UnitHasVehicleUI and UnitHasVehicleUI('player')) then return end
+	if(EquipmentFlyoutFrame and EquipmentFlyoutFrame:IsVisible()) then return end
 	if(AuctionFrame and AuctionFrame:IsVisible()) then return end
 
 	local itemID = GetItemInfoFromHyperlink(itemLink)
