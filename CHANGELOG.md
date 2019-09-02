@@ -1,3 +1,7 @@
+### Changes in 80200.60-Release:
+
+- Added: Support for Classic
+
 ### Changes in 80200.59-Release:
 
 - Added: Support for 8.2 ores, herbs and lockboxes
