@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: release.sh
-      - run: WOWI_API_TOKEN= release.sh -g 1.13.2
+      - run: release.sh -g 1.13.2 -w 0
 workflows:
   version: 2
   release:
