@@ -1,3 +1,7 @@
+### Changes in 80200.62-Release:
+
+- Fixed: Enchanting not being recognized in Classic
+
 ### Changes in 80200.61-Release:
 
 - Fixed: Regression resulting in nil table lookups
