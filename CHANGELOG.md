@@ -1,3 +1,7 @@
+### Changes in 80200.61-Release:
+
+- Fixed: Regression resulting in nil table lookups
+
 ### Changes in 80200.60-Release:
 
 - Added: Support for Classic
