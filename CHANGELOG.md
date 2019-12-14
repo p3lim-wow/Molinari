@@ -1,3 +1,7 @@
+### Changes in 80200.64-Release:
+
+- Fixed: Errors from updated Classic client
+
 ### Changes in 80200.63-Release:
 
 - Fixed: Errors on initial logins in Classic
