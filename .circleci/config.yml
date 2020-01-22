@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: release.sh
-      - run: release.sh -g 1.13.2 -w 0
+      - run: release.sh -g 1.13.3 -w 0
 workflows:
   version: 2
   release:
