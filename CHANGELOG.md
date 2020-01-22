@@ -1,3 +1,9 @@
+### Changes in 80300.65-Release:
+
+- Added: Support for Mechagnome lockpicking skill
+- Changed: Update Interface version
+- Changed: Update LibProcessable embed
+
 ### Changes in 80200.64-Release:
 
 - Fixed: Errors from updated Classic client
