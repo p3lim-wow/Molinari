@@ -1,3 +1,7 @@
+### Changes in 80300.66-Release:
+
+- Fixed: Classic client detection
+
 ### Changes in 80300.65-Release:
 
 - Added: Support for Mechagnome lockpicking skill
