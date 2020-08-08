@@ -8,7 +8,7 @@
 ## Version: @project-version@
 ## Title: Molinari
 ## Notes: One-click Milling, Prospecting, Disenchanting and Lockpicking!
-## OptionalDeps: LibProcessable, Wasabi
+## OptionalDeps: LibStub, LibProcessable, Wasabi
 ## SavedVariables: MolinariBlacklistDB, MolinariDB
 
 ## X-Curse-Project-ID: 20338
