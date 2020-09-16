@@ -1,4 +1,5 @@
-local Molinari = CreateFrame('Button', (...), UIParent, 'SecureActionButtonTemplate, SecureHandlerStateTemplate, SecureHandlerEnterLeaveTemplate, AutoCastShineTemplate')
+local addonName, ns = ...
+local Molinari = CreateFrame('Button', addonName, UIParent, 'SecureActionButtonTemplate, SecureHandlerStateTemplate, SecureHandlerEnterLeaveTemplate, AutoCastShineTemplate')
 Molinari:RegisterForClicks('AnyUp')
 Molinari:SetFrameStrata('TOOLTIP')
 Molinari:SetScript('OnHide', AutoCastShine_AutoCastStop)
@@ -61,7 +62,7 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 	local bag = parent:GetParent():GetID()
 	if(not bag or bag < 0) then return end
 
-	local modifier = modifiers[MolinariDB.modifier][2]
+	local modifier = modifiers[ns.db.profile.general.modifierKey][2]
 	if(GetTradeTargetItemLink(7) == itemLink) then
 		if(isItem) then
 			return
@@ -96,10 +97,10 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 end
 
 function Molinari:UpdateModifier()
-	RegisterStateDriver(self, 'visible', modifiers[MolinariDB.modifier][1] .. ' show; hide')
+	RegisterStateDriver(self, 'visible', modifiers[ns.db.profile.general.modifierKey][1] .. ' show; hide')
 end
 
-function Molinari:AreStarsAligned(_, itemLink)
+function Molinari:AreStarsAligned(itemLink)
 	if(not itemLink) then
 		return false
 	elseif(InCombatLockdown()) then
@@ -112,9 +113,9 @@ function Molinari:AreStarsAligned(_, itemLink)
 		return false
 	elseif(not IsAltKeyDown()) then
 		return false
-	elseif(MolinariDB.modifier == 'CTRL' and not IsControlKeyDown()) then
+	elseif(ns.db.profile.general.modifierKey == 'CTRL' and not IsControlKeyDown()) then
 		return false
-	elseif(MolinariDB.modifier == 'SHIFT' and not IsShiftKeyDown()) then
+	elseif(ns.db.profile.general.modifierKey == 'SHIFT' and not IsShiftKeyDown()) then
 		return false
 	end
 
@@ -133,7 +134,7 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 	end
 
 	local itemID = GetItemInfoFromHyperlink(itemLink)
-	if(not itemID or MolinariBlacklistDB.items[itemID]) then
+	if(not itemID or ns.db.profile.blocklist.items[itemID]) then
 		return
 	end
 

@@ -5,6 +5,8 @@ L['ALT + CTRL key'] = ALT_KEY_TEXT .. ' + ' .. CTRL_KEY
 L['ALT + SHIFT key'] = ALT_KEY_TEXT .. ' + ' .. SHIFT_KEY
 
 -- config
-L['Drag items into the window below to add more.'] = '將物品拖曳到下方的視窗內，加入到忽略清單。'
-L['Items blacklisted from potentially being processed.'] = '請將要避免不小心被處理掉的物品加入忽略清單。'
-L['Right-click to remove item'] = '點一下右鍵移除物品'
+-- L['Modified to use %s'] -- MISSING! %s = "Molinari"
+-- L['Item Blocklist'] = '' -- MISSING!
+-- L['Block Item'] = '' -- MISSING!
+-- L['Items in this list will not be processed.'] = '' -- MISSING!
+-- L['Block a new item by ID'] = '' -- MISSING!
