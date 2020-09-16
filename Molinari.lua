@@ -127,7 +127,8 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		return
 	end
 
-	if(not Molinari:AreStarsAligned(self:GetItem())) then
+	local _, itemLink = self:GetItem()
+	if(not Molinari:AreStarsAligned(itemLink)) then
 		return
 	end
 
