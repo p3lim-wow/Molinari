@@ -99,18 +99,37 @@ function Molinari:UpdateModifier()
 	RegisterStateDriver(self, 'visible', modifiers[MolinariDB.modifier][1] .. ' show; hide')
 end
 
+function Molinari:AreStarsAligned(_, itemLink)
+	if(not itemLink) then
+		return false
+	elseif(InCombatLockdown()) then
+		return false
+	elseif(UnitHasVehicleUI and UnitHasVehicleUI('player')) then
+		return false
+	elseif(EquipmentFlyoutFrame and EquipmentFlyoutFrame:IsVisible()) then
+		return false
+	elseif(AuctionFrame and AuctionFrame:IsVisible()) then
+		return false
+	elseif(not IsAltKeyDown()) then
+		return false
+	elseif(MolinariDB.modifier == 'CTRL' and not IsControlKeyDown()) then
+		return false
+	elseif(MolinariDB.modifier == 'SHIFT' and not IsShiftKeyDown()) then
+		return false
+	end
+
+	return true
+end
+
 local LibProcessable = LibStub('LibProcessable')
 GameTooltip:HookScript('OnTooltipSetItem', function(self)
-	if(self:GetOwner() == Molinari) then return end
-	local _, itemLink = self:GetItem()
-	if(not itemLink) then return end
-	if(InCombatLockdown()) then return end
-	if(not IsAltKeyDown()) then return end
-	if(MolinariDB.modifier == 'CTRL' and not IsControlKeyDown()) then return end
-	if(MolinariDB.modifier == 'SHIFT' and not IsShiftKeyDown()) then return end
-	if(UnitHasVehicleUI and UnitHasVehicleUI('player')) then return end
-	if(EquipmentFlyoutFrame and EquipmentFlyoutFrame:IsVisible()) then return end
-	if(AuctionFrame and AuctionFrame:IsVisible()) then return end
+	if(self:GetOwner() == Molinari) then
+		return
+	end
+
+	if(not Molinari:AreStarsAligned(self:GetItem())) then
+		return
+	end
 
 	local itemID = GetItemInfoFromHyperlink(itemLink)
 	if(not itemID or MolinariBlacklistDB.items[itemID]) then
