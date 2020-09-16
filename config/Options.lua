@@ -17,7 +17,6 @@ local function CreateOptions()
 				order = 1,
 				name = string.format(L['Modified to use %s'], addonName),
 				type = 'select',
-				width = 'double',
 				values = {
 					ALT = L['ALT key'],
 					CTRL = L['ALT + CTRL key'],
