@@ -14,7 +14,7 @@ function ButtonPoolMixin.Reposition(pool)
 	local cols = math.floor((pool.parent:GetParent():GetWidth() - pool.offset) / (pool.buttonWidth + pool.buttonSpacing))
 
 	local index = 1
-	for button in pool:EnumerateActive() do
+	for _, button in pool:EnumerateActiveSorted() do
 		local col = (index - 1) % cols
 		local row = math.floor((index - 1) / cols)
 
@@ -29,6 +29,28 @@ function ButtonPoolMixin.Reposition(pool)
 
 	-- update the width of the parent so the buttons can be displayed properly
 	pool.parent:SetWidth(pool.parent:GetParent():GetWidth())
+end
+
+function ButtonPoolMixin:SetSortField(field)
+	self.sortField = field
+end
+
+do
+	local objects = {}
+	function ButtonPoolMixin:EnumerateActiveSorted()
+		table.wipe(objects)
+
+		for obj in self:EnumerateActive() do
+			table.insert(objects, obj)
+		end
+
+		local sortField = self.sortField
+		table.sort(objects, function(a, b)
+			return a[sortField] < b[sortField]
+		end)
+
+		return pairs(objects)
+	end
 end
 
 local function ReleaseButton(pool, button)
