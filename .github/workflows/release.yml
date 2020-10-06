@@ -12,12 +12,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Package and release
-        uses: BigWigsMods/packager@064e524
+        uses: BigWigsMods/packager@75faeae
 
       - name: Package and release for Classic
-        uses: BigWigsMods/packager@064e524
+        uses: BigWigsMods/packager@75faeae
         with:
           args: -g 1.13.5 -w 0
     env:
       CF_API_KEY: ${{ secrets.CF_API_KEY }}
       WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
