@@ -21,7 +21,8 @@ local function CreateOptions()
 					ALT = L['ALT key'],
 					CTRL = L['ALT + CTRL key'],
 					SHIFT = L['ALT + SHIFT key']
-				}
+				},
+				disabled = InCombatLockdown,
 			},
 		},
 	})
