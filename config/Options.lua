@@ -1,6 +1,12 @@
 local addonName, ns = ...
 local L = ns.L
 
+local function UpdateOptions()
+	if(InterfaceOptionsFrameAddOns:IsShown()) then
+		LibStub('AceConfigRegistry-3.0'):NotifyChange(addonName)
+	end
+end
+
 local function CreateOptions()
 	CreateOptions = nop -- we only want to load this once
 
@@ -28,10 +34,22 @@ local function CreateOptions()
 				end,
 				disabled = InCombatLockdown,
 			},
+			combatWarning = {
+				order = 2,
+				name = string.format('|cff990000%s|r', L['You can\'t do that while in combat']),
+				type = 'description',
+				hidden = function() return not InCombatLockdown() end,
+			},
 		},
 	})
 
 	LibStub('AceConfigDialog-3.0'):AddToBlizOptions(addonName)
+
+	-- handle combat updates
+	local EventHandler = CreateFrame('Frame', nil, InterfaceOptionsFrameAddOns)
+	EventHandler:RegisterEvent('PLAYER_REGEN_ENABLED')
+	EventHandler:RegisterEvent('PLAYER_REGEN_DISABLED')
+	EventHandler:SetScript('OnEvent', UpdateOptions)
 end
 
 InterfaceOptionsFrameAddOns:HookScript('OnShow', function()
