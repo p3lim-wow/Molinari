@@ -22,6 +22,10 @@ local function CreateOptions()
 					CTRL = L['ALT + CTRL key'],
 					SHIFT = L['ALT + SHIFT key']
 				},
+				set = function(info, value)
+					ns.db.profile.general[info[#info]] = value
+					Molinari:UpdateModifier()
+				end,
 				disabled = InCombatLockdown,
 			},
 		},
