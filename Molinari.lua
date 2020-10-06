@@ -97,7 +97,11 @@ function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 end
 
 function Molinari:UpdateModifier()
-	RegisterStateDriver(self, 'visible', modifiers[ns.db.profile.general.modifierKey][1] .. ' show; hide')
+	if(InCombatLockdown()) then
+		self:RegisterEvent('PLAYER_REGEN_ENABLED')
+	else
+		RegisterStateDriver(self, 'visible', modifiers[ns.db.profile.general.modifierKey][1] .. ' show; hide')
+	end
 end
 
 function Molinari:AreStarsAligned(itemLink)
@@ -172,6 +176,9 @@ Molinari:RegisterEvent('MODIFIER_STATE_CHANGED')
 Molinari:SetScript('OnEvent', function(self, event)
 	if(event == 'PLAYER_LOGIN') then
 		self:UpdateModifier()
+	elseif(event == 'PLAYER_REGEN_ENABLED') then
+		self:UpdateModifier()
+		self:UnregisterEvent(event)
 	else
 		if(self:IsShown()) then
 			if(event == 'BAG_UPDATE_DELAYED' and not InCombatLockdown()) then
