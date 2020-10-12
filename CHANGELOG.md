@@ -1,3 +1,11 @@
+### Changes in 90000.67-Release:
+
+- Changed: Update Interface version
+- Changed: Replaced custom config with Ace3
+- Changed: Item blocklist is now sorted
+- Fixed: Shadowlands compatibility
+- Fixed: Taint when changing modifier option in combat
+
 ### Changes in 80300.66-Release:
 
 - Fixed: Classic client detection
