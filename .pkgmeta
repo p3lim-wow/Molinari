@@ -17,4 +17,3 @@ manual-changelog:
 
 ignore:
   - README.md
-  - utils
