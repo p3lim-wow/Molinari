@@ -1,3 +1,8 @@
+### Changes in 90000.68-Release:
+
+- Fixed: Missing libraries
+- Fixed: Incorrect game version for retail
+
 ### Changes in 90000.67-Release:
 
 - Changed: Update Interface version
