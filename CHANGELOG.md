@@ -1,3 +1,9 @@
+### Changes in 90000.70-Release:
+
+- Fixed: Opening lockboxes for Rogues and Mechagnomes
+- Fixed: Opening lockboxes using Blacksmithing
+- Fixed: Opening lockboxes using Inscription
+
 ### Changes in 90000.69-Release:
 
 - Fixed: Incorrect Interface version
