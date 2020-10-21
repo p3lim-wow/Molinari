@@ -1,3 +1,7 @@
+### Changes in 90000.71-Release:
+
+- Fixed: Opening lockboxes previously thought to be unobtainable
+
 ### Changes in 90000.70-Release:
 
 - Fixed: Opening lockboxes for Rogues and Mechagnomes
