@@ -1,3 +1,8 @@
+### Changes in 90000.72-Release:
+
+- Changed: Update Interface version
+- Changed: Update LibProcessable embed
+
 ### Changes in 90000.71-Release:
 
 - Fixed: Opening lockboxes previously thought to be unobtainable
