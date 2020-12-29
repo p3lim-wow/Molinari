@@ -1,3 +1,8 @@
+### Changes in 90000.73-Release:
+
+- Added: Support for disenchanting Shadowlands profession world quest items
+- Changed: Update LibProcessable embed
+
 ### Changes in 90000.72-Release:
 
 - Changed: Update Interface version
