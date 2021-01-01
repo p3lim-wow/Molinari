@@ -1,5 +1,5 @@
-Copyright (c) 2006-2020 Trond A Ekseth
-Copyright (c) 2009-2020 Adrian L Lange
+Copyright (c) 2006-2021 Trond A Ekseth
+Copyright (c) 2009-2021 Adrian L Lange
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
