@@ -15,10 +15,10 @@ jobs:
         run: sed -ni '1p;2,/^###/{/^###/q;p;}' CHANGELOG.md
 
       - name: Package and release
-        uses: BigWigsMods/packager@75faeae
+        uses: BigWigsMods/packager@5e59fc3
 
       - name: Package and release for Classic
-        uses: BigWigsMods/packager@75faeae
+        uses: BigWigsMods/packager@5e59fc3
         with:
           args: -g classic -w 0
     env:

@@ -1,9 +1,5 @@
-#@non-retail@
-# ## Interface: 11306
-#@end-non-retail@
-#@retail@
 ## Interface: 90002
-#@end-retail@
+## Interface-Classic: 11306
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: Molinari
