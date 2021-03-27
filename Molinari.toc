@@ -1,4 +1,4 @@
-## Interface: 90002
+## Interface: 90005
 ## Interface-Classic: 11306
 ## Author: p3lim
 ## Version: @project-version@
