@@ -1,3 +1,8 @@
+### Changes in 90000.74-Release:
+
+- Added: Support for Burning Crusade Classic
+- Changed: Updated Interface version for Classic
+
 ### Changes in 90000.73-Release:
 
 - Added: Support for disenchanting Shadowlands profession world quest items
