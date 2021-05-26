@@ -1,3 +1,7 @@
+### Changes in 90000.75-Release:
+
+- Fixed: Regression from BCC update on Classic
+
 ### Changes in 90000.74-Release:
 
 - Added: Support for Burning Crusade Classic
