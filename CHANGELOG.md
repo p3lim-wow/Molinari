@@ -1,3 +1,9 @@
+### Changes in 90100.77-Release:
+
+- Changed: Update LibProcessable embed
+- Fixed: Disenchanting two-handed maces not working
+- Fixed: Disenchanting shirts not prevented
+
 ### Changes in 90100.76-Release:
 
 - Changed: Update Interface version
