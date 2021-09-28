@@ -18,12 +18,12 @@ jobs:
         uses: BigWigsMods/packager@v1.0.2
 
       - name: Package and release for Classic
-        uses: BigWigsMods/packager@v1.0.2
+        uses: BigWigsMods/packager@ff497ddc591e87719d9da67f6dc106a4aa6a873d
         with:
           args: -g classic
 
       - name: Package and release for BCC
-        uses: BigWigsMods/packager@v1.0.2
+        uses: BigWigsMods/packager@ff497ddc591e87719d9da67f6dc106a4aa6a873d
         with:
           args: -g bcc
     env:
