@@ -1,3 +1,9 @@
+### Changes in 90100.79-Release:
+
+- Fixed: Packager not releasing correctly to classic/tbc (again)
+- Fixed: Disenchanting two-handed maces not working (classic/tbc)
+- Fixed: Disenchanting shirts not prevented (classic/tbc)
+
 ### Changes in 90100.78-Release:
 
 - Fixed: Packager not releasing correctly to classic/tbc
