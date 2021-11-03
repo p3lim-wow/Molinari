@@ -1,3 +1,7 @@
+### Changes in 90105.80-Release:
+
+- Changed: Update Interface version
+
 ### Changes in 90100.79-Release:
 
 - Fixed: Packager not releasing correctly to classic/tbc (again)
