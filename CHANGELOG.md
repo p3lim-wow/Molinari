@@ -1,3 +1,9 @@
+### Changes in 90105.81-Release:
+
+- Added: Support for 9.1 lockboxes
+- Added: Preliminary support for 9.2 lockboxes, ores, and herbs
+- Fixed: Incorrect ID used for Tiny Titanium Lockbox
+
 ### Changes in 90105.80-Release:
 
 - Changed: Update Interface version
