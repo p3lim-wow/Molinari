@@ -1,7 +1,12 @@
 # Molinari
 
 This is an addon for the popular MMORPG "World of Warcraft".  
-It can be downloaded at [CurseForge](https://www.curseforge.com/wow/addons/molinari), at [WoWInterface](//wowinterface.com/downloads/info13188), or from the releases on GitHub.
+It can be downloaded at one of the following sites:
+
+- [Curse](https://www.curseforge.com/wow/addons/molinari)
+- [WoWInterface](https://wowinterface.com/downloads/info13188)
+- [Wago](https://addons.wago.io/addons/molinari)
+- [GitHub](https://github.com/p3lim-wow/Molinari/releases)
 
 ## Description
 
