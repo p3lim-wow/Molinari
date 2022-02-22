@@ -1,3 +1,7 @@
+### Changes in 90200.82-Release:
+
+- Changed: Update Interface version
+
 ### Changes in 90105.81-Release:
 
 - Added: Support for 9.1 lockboxes
