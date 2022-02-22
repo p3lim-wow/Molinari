@@ -1,6 +1,4 @@
 ## Interface: 90200
-## Interface-Classic: 11401
-## Interface-BCC: 20503
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: Molinari
