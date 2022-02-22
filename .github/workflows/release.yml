@@ -15,17 +15,7 @@ jobs:
         run: sed -ni '1p;2,/^###/{/^###/q;p;}' CHANGELOG.md
 
       - name: Package and release
-        uses: BigWigsMods/packager@v1.0.2
-
-      - name: Package and release for Classic
-        uses: BigWigsMods/packager@ff497ddc591e87719d9da67f6dc106a4aa6a873d
-        with:
-          args: -g classic
-
-      - name: Package and release for BCC
-        uses: BigWigsMods/packager@ff497ddc591e87719d9da67f6dc106a4aa6a873d
-        with:
-          args: -g bcc
+        uses: BigWigsMods/packager@v2
     env:
       CF_API_KEY: ${{ secrets.CF_API_KEY }}
       WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
