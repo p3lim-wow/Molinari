@@ -10,12 +10,14 @@
 ## X-WoWI-ID: 13188
 ## X-Wago-ID: WqKQQEKx
 
-libs\LibStub\LibStub.lua
-libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
-libs\AceDB-3.0\AceDB-3.0.xml
-libs\AceGUI-3.0\AceGUI-3.0.xml
-libs\AceConfig-3.0\AceConfig-3.0.xml
-libs\LibProcessable\embed.xml
+#@non-debug@
+# libs\LibStub\LibStub.lua
+# libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+# libs\AceDB-3.0\AceDB-3.0.xml
+# libs\AceGUI-3.0\AceGUI-3.0.xml
+# libs\AceConfig-3.0\AceConfig-3.0.xml
+# libs\LibProcessable\embed.xml
+#@end-non-debug@
 
 locale\initialize.lua
 locale\deDE.lua
