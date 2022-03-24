@@ -13,7 +13,7 @@ externals:
   libs/AceConfig-3.0:
     url: https://repos.curseforge.com/wow/ace3/trunk/AceConfig-3.0
   libs/LibProcessable:
-    url: git://github.com/p3lim-wow/LibProcessable
+    url: https://github.com/p3lim-wow/LibProcessable
     tag: latest
 
 manual-changelog:
