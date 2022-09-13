@@ -1,4 +1,4 @@
-## Interface: 30000
+## Interface: 30400
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: Molinari
