@@ -1,3 +1,8 @@
+### Changes in 90207.83-Release:
+
+- Added: Support for Wrath of the Lich King
+- Changed: Update LibProcessable embed
+
 ### Changes in 90200.82-Release:
 
 - Changed: Update Interface version
