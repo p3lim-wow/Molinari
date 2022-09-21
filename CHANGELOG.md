@@ -1,3 +1,7 @@
+### Changes in 90207.84-Release:
+
+- Fixed: Incorrect interface versions
+
 ### Changes in 90207.83-Release:
 
 - Added: Support for Wrath of the Lich King
