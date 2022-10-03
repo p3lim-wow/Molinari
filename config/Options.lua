@@ -21,7 +21,7 @@ local function CreateOptions()
 		args = {
 			modifierKey = {
 				order = 1,
-				name = string.format(L['Modified to use %s'], addonName),
+				name = string.format(L['Modifier to activate %s'], addonName),
 				type = 'select',
 				values = {
 					ALT = L['ALT key'],

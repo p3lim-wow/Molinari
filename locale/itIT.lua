@@ -6,7 +6,7 @@ L['ALT + SHIFT key'] = ALT_KEY_TEXT .. ' + ' .. SHIFT_KEY
 L['You can\'t do that while in combat'] = ERR_NOT_IN_COMBAT
 
 -- config
--- L['Modified to use %s'] -- MISSING! %s = "Molinari"
+-- L['Modifier to activate %s'] -- MISSING! %s = "Molinari"
 -- L['Item Blocklist'] = '' -- MISSING!
 -- L['Block Item'] = '' -- MISSING!
 -- L['Items in this list will not be processed.'] = '' -- MISSING!
