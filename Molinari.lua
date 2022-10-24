@@ -115,6 +115,8 @@ function Molinari:AreStarsAligned(itemLink)
 		return false
 	elseif(AuctionFrame and AuctionFrame:IsVisible()) then
 		return false
+	elseif(AuctionHouseFrame and AuctionHouseFrame:IsVisible()) then
+		return false
 	elseif(not IsAltKeyDown()) then
 		return false
 	elseif(ns.db.profile.general.modifierKey == 'CTRL' and not IsControlKeyDown()) then
