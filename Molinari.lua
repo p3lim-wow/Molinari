@@ -156,8 +156,8 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 			return
 		end
 
-		local isOpenable, keyItemID = LibProcessable:IsOpenableProfession(itemID)
-		if(isOpenable) then
+		local isOpenableProfession, keyItemID = LibProcessable:IsOpenableProfession(itemID)
+		if(isOpenableProfession) then
 			Molinari:Apply(itemLink, keyItemID, 0, 1, 1, true)
 		end
 	end

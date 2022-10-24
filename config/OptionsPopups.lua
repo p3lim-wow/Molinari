@@ -7,7 +7,7 @@ StaticPopupDialogs[addonName .. 'ItemBlocklistPopup'] = {
 	button2 = L['Cancel'],
 	hasEditBox = true,
 	EditBoxOnEnterPressed = function(self)
-		self.data.callback(self.data.pool, tonumber(strtrim(self.editBox:GetText())))
+		self.data.callback(self.data.pool, tonumber(self.editBox:GetText():trim()))
 		self:GetParent():Hide()
 	end,
 	EditBoxOnEscapePressed = function(self)
@@ -15,10 +15,10 @@ StaticPopupDialogs[addonName .. 'ItemBlocklistPopup'] = {
 	end,
 	EditBoxOnTextChanged = function(editBox)
 		local self = editBox:GetParent()
-		local text = strtrim(editBox:GetText()):match('[0-9]+')
+		local text = editBox:GetText():trim():match('[0-9]+')
 		editBox:SetText(text or '')
 
-		local itemID, _, _, _, texture = GetItemInfoInstant(tonumber(text) or '')
+		local itemID  = GetItemInfoInstant(tonumber(text) or '')
 		if itemID then
 			self.data = self.data or {}
 			self.data.link = '|Hitem:' .. itemID .. '|h'
@@ -30,7 +30,7 @@ StaticPopupDialogs[addonName .. 'ItemBlocklistPopup'] = {
 		end
 	end,
 	OnAccept = function(self)
-		self.data.callback(self.data.pool, tonumber(strtrim(self.editBox:GetText())))
+		self.data.callback(self.data.pool, tonumber(self.editBox:GetText():trim()))
 	end,
 	OnShow = function(self)
 		self.editBox:SetFocus()

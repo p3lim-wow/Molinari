@@ -29,7 +29,7 @@ local function CreateOptionsPanel(name, localizedName, description, buttonLocali
 	desc:SetPoint('TOPLEFT', title, 'BOTTOMLEFT', 0, -8)
 	desc:SetText(description)
 
-	local bounds = CreateFrame('Frame', '$parentBounds', panel, BackdropTemplateMixin and 'BackdropTemplate')
+	local bounds = CreateFrame('Frame', '$parentBounds', panel, 'BackdropTemplate')
 	bounds:SetPoint('TOPLEFT', 15, -60)
 	bounds:SetPoint('BOTTOMRIGHT', -15, 15)
 	bounds:SetBackdrop(BACKDROP)
