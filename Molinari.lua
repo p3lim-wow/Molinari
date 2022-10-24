@@ -58,8 +58,19 @@ end
 
 function Molinari:Apply(itemLink, spell, r, g, b, isItem)
 	local parent = GetMouseFocus()
-	local slot = parent:GetID()
-	local bag = parent:GetParent():GetID()
+	local bag, slot
+	if parent.GetSlotAndBagID then
+		slot, bag = parent:GetSlotAndBagID()
+	elseif parent.GetBagID then
+		-- the above would still be preferred
+		bag = parent:GetBagID()
+		slot = parent:GetID()
+	else
+		-- this becomes a guesswork, bag addons should implement one of the new APIs
+		slot = parent:GetID()
+		bag = parent:GetParent():GetID()
+	end
+
 	if(not bag or bag < 0) then return end
 
 	local modifier = modifiers[ns.db.profile.general.modifierKey][2]
