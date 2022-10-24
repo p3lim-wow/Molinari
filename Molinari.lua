@@ -1,6 +1,6 @@
 local addonName, ns = ...
 local Molinari = CreateFrame('Button', addonName, UIParent, 'SecureActionButtonTemplate, SecureHandlerStateTemplate, SecureHandlerEnterLeaveTemplate, AutoCastShineTemplate')
-Molinari:RegisterForClicks('AnyUp')
+Molinari:RegisterForClicks('AnyUp', 'AnyDown')
 Molinari:SetFrameStrata('TOOLTIP')
 Molinari:SetScript('OnHide', AutoCastShine_AutoCastStop)
 Molinari:HookScript('OnLeave', AutoCastShine_AutoCastStop)
