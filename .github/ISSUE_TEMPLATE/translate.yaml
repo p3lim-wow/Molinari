@@ -1,0 +1,59 @@
+name: Translation
+description: Provide a translation for in-game strings.
+title: 'Translation: '
+labels:
+  - enhancement
+  - translation
+assignees:
+  - p3lim
+body:
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Which locale are these translations for?
+      options:
+        - deDE (German)
+        - esES (Spanish, Spain)
+        - esMX (Spanish, Mexico)
+        - frFR (French)
+        - itIT (Italian)
+        - koKR (Korean)
+        - ptBR (Portuguese, Brazil)
+        - ruRU (Russian)
+        - zhCN (Chinese, Simplified, PRC)
+        - zhTW (Chinese, Traditional, Taiwan)
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Please translate each sentence below into the fields next to them.  
+        It is not required to translate all of them.
+
+        ---
+# the rest is a list of strings to translate
+  - type: input
+    attributes:
+      label: '"Modifier to activate %s"'
+      description: Used in the settings, "%s" is the addon name "Molinari"
+      placeholder: Translation here
+  - type: input
+    attributes:
+      label: '"Item Blocklist"'
+      description: Used in the settings
+      placeholder: Translation here
+  - type: input
+    attributes:
+      label: '"Block Item"'
+      description: Used in the settings
+      placeholder: Translation here
+  - type: input
+    attributes:
+      label: '"Items in this list will not be processed."'
+      description: Used in the settings
+      placeholder: Translation here
+  - type: input
+    attributes:
+      label: '"Block a new item by ID"'
+      description: Used in the settings
+      placeholder: Translation here
