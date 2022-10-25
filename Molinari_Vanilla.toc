@@ -29,6 +29,8 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
+mixins\event.lua
+
 Molinari.lua
 
 config\ButtonPoolMixin.lua

@@ -32,7 +32,7 @@ local function CreateOptions()
 				},
 				set = function(info, value)
 					ns.db.profile.general[info[#info]] = value
-					Molinari:UpdateModifier()
+					Molinari:UpdateStateDriver()
 				end,
 				disabled = InCombatLockdown,
 			},
