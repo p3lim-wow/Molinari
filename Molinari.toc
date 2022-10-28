@@ -35,8 +35,6 @@ mixins\event.lua
 
 Molinari.lua
 
-hack.lua
-
 config\ButtonPoolMixin.lua
 config\SavedVariables.lua
 config\Options.lua
