@@ -1,3 +1,8 @@
+### Changes in 100000.87-Release:
+
+- Changed: Update LibProcessable embed
+- Fixed: Unintended global leak
+
 ### Changes in 100000.86-Release:
 
 - Added: Tooltip warning users of changes to milling/prospecting
