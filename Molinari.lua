@@ -82,6 +82,10 @@ function Molinari:ApplyTradeSkill(itemLink, recipeSpellID, tradeSkillID, r, g, b
 	self:SetAttribute(self:GetModifier() .. '-type1', 'macro')
 	self:SetAttribute('macrotext', MACRO_TRADESKILL:format(tradeSkillID, recipeSpellID))
 
+	-- for tooltip
+	self.tradeSkillID = tradeSkillID
+	self.recipeSpellID = recipeSpellID
+
 	self:SetAttribute('target-bag', bagID)
 	self:SetAttribute('target-slot', slotID)
 
@@ -296,6 +300,10 @@ end
 
 -- tooltip
 Molinari:HookScript('OnLeave', GameTooltip_Hide)
+Molinari:HookScript('OnLeave', function(self)
+	self.tradeSkillID = nil
+	self.recipeSpellID = nil
+end)
 Molinari:SetScript('OnEnter', function(self)
 	if(self:GetRight() >= (GetScreenWidth() / 2)) then
 		GameTooltip:SetOwner(self, 'ANCHOR_LEFT')
@@ -303,7 +311,12 @@ Molinari:SetScript('OnEnter', function(self)
 		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT')
 	end
 
-	if(self.itemLink) then
+	if self.recipeSpellID and not C_TradeSkillUI.GetRecipeInfo(self.recipeSpellID) then
+		local professionInfo = C_TradeSkillUI.GetProfessionInfoBySkillLineID(self.tradeSkillID)
+		GameTooltip:AddLine('You need to open ' .. professionInfo.professionName .. ' once before Molinari works.')
+		GameTooltip:AddLine('This is a Blizzard bug/issue, don\'t blame Molinari.')
+		GameTooltip:Show()
+	elseif self.itemLink then
 		-- this is only ever triggered by the trade skill window
 		GameTooltip:SetHyperlink(self.itemLink)
 	else
