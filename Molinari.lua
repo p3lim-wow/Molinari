@@ -209,7 +209,7 @@ function Molinari:UpdateStateDriver()
 	end
 end
 
-function shouldActivate(itemLink)
+local function shouldActivate(itemLink)
 	if not itemLink then
 		return false
 	elseif InCombatLockdown() then
