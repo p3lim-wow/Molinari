@@ -42,7 +42,7 @@ function Molinari:ApplySpell(itemLink, spellID, r, g, b)
 	self:Show()
 end
 
-function Molinari:ApplyItem(itemLink, itemID, r, g, b)
+function Molinari:ApplyItem(_, itemID, r, g, b)
 	local bagID, slotID = self:GetBagAndSlotID()
 	if not bagID or not slotID then
 		return

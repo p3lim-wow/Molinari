@@ -63,6 +63,7 @@ read_globals = {
 	'CreateFramePool', -- SharedXML/Pools.lua
 	'FramePool_HideAndClearAnchors', -- SharedXML/Pools.lua
 	'GetItemInfoFromHyperlink', -- SharedXML/LinkUtil.lua
+	'CreateColor', -- SharedXML/Color.lua
 
 	-- GlobalStrings
 	'ALT_KEY',
@@ -74,6 +75,7 @@ read_globals = {
 
 	-- namespaces
 	'C_Timer',
+	'C_TradeSkillUI',
 
 	-- API
 	'CreateFrame',
