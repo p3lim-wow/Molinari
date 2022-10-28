@@ -1,3 +1,11 @@
+### Changes in 100000.86-Release:
+
+- Added: Tooltip warning users of changes to milling/prospecting
+- Added: Support for combined bags
+- Changed: Update Interface version
+- Changed: Support for Dragonflight settings API
+- Fixed: API changes for Dragonflight
+
 ### Changes in 90207.85-Release:
 
 - Fixed: Support for Wrath of the Lich King
