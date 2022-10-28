@@ -4,7 +4,7 @@ local L = ns.L
 local WOW_10 = select(4, GetBuildInfo()) >= 100000
 
 local function UpdateOptions()
-	if(InterfaceOptionsFrameAddOns:IsShown()) then
+	if((InterfaceOptionsFrameAddOns or SettingsPanel):IsShown()) then
 		LibStub('AceConfigRegistry-3.0'):NotifyChange(addonName)
 	end
 end
@@ -48,7 +48,7 @@ local function CreateOptions()
 	LibStub('AceConfigDialog-3.0'):AddToBlizOptions(addonName)
 
 	-- handle combat updates
-	local EventHandler = CreateFrame('Frame', nil, InterfaceOptionsFrameAddOns)
+	local EventHandler = CreateFrame('Frame', nil, InterfaceOptionsFrameAddOns or SettingsPanel)
 	EventHandler:RegisterEvent('PLAYER_REGEN_ENABLED')
 	EventHandler:RegisterEvent('PLAYER_REGEN_DISABLED')
 	EventHandler:SetScript('OnEvent', UpdateOptions)
