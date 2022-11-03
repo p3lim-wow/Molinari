@@ -98,6 +98,10 @@ end
 
 function Molinari:GetBagAndSlotID()
 	local parent = GetMouseFocus()
+	if not parent then
+		return
+	end
+
 	local bagID, slotID
 	if parent.GetSlotAndBagID then
 		-- this is the preferred API to use, added in Dragonflight, as it's 100% accurate
