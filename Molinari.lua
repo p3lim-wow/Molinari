@@ -110,7 +110,7 @@ function Molinari:GetBagAndSlotID()
 		-- the above is preferred
 		bagID = parent:GetBagID()
 		slotID = parent:GetID()
-	else
+	elseif parent:GetParent() then
 		-- this is a complete guesswork, bag addons should implement one of the two above APIs
 		bagID = parent:GetParent():GetID()
 		slotID = parent:GetID()
