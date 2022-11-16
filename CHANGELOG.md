@@ -1,3 +1,8 @@
+### Changes in 100002.90-Release:
+
+- Changed: Update Interface version
+- Fixed: Compatibility with 10.0.2 patch
+
 ### Changes in 100000.89-Release:
 
 - Fixed: More errors on non-bag items
