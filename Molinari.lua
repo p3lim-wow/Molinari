@@ -2,6 +2,8 @@ local addonName, addon = ...
 
 local CLASSIC = select(4, GetBuildInfo()) < 100000
 
+local GetContainerItemLink = GetContainerItemLink or C_Container.GetContainerItemLink -- 10.0.2
+
 local Molinari = CreateFrame('Button', addonName, UIParent, 'SecureActionButtonTemplate, SecureHandlerStateTemplate, SecureHandlerEnterLeaveTemplate, AutoCastShineTemplate')
 Molinari:RegisterForClicks('AnyUp', 'AnyDown') -- we need to register both in Dragonflight, doesn't seem to hurt in older expansions
 Molinari:SetFrameStrata('TOOLTIP')
