@@ -239,14 +239,7 @@ local function shouldActivate(itemLink)
 	return true
 end
 
--- TODO: this needs another rewrite in 10.0.2
-GameTooltip:HookScript('OnTooltipSetItem', function(self)
-	if self:GetOwner() == Molinari then
-		-- avoid triggering on ourselves
-		return
-	end
-
-	local _, itemLink = self:GetItem()
+local function handleItem(itemLink)
 	if not shouldActivate(itemLink) then
 		-- there are a lot of conditions that we look for to _not_ activate
 		return
@@ -296,7 +289,31 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		Molinari:ApplyItem(itemLink, keyItemID, 0, 1, 1)
 		return
 	end
-end)
+end
+
+if select(4, GetBuildInfo()) >= 100002 then
+	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
+		if tooltip:GetOwner() == Molinari then
+			-- avoid triggering on ourselves
+			return
+		end
+
+		local itemLink = data.guid and C_Item.GetItemLinkByGUID(data.guid) or data.hyperlink
+		if itemLink then
+			handleItem(itemLink)
+		end
+	end)
+else
+	GameTooltip:HookScript('OnTooltipSetItem', function(self)
+		if self:GetOwner() == Molinari then
+			-- avoid triggering on ourselves
+			return
+		end
+
+		local _, itemLink = self:GetItem()
+		handleItem(itemLink)
+	end)
+end
 
 -- adjust the glow sparkles
 for _, sparkle in next, Molinari.sparkles do
