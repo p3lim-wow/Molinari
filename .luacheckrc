@@ -64,6 +64,7 @@ read_globals = {
 	'FramePool_HideAndClearAnchors', -- SharedXML/Pools.lua
 	'GetItemInfoFromHyperlink', -- SharedXML/LinkUtil.lua
 	'CreateColor', -- SharedXML/Color.lua
+	'TooltipDataProcessor', -- SharedXML/Tooltip/TooltipDataHandler.lua
 
 	-- GlobalStrings
 	'ALT_KEY',
@@ -76,6 +77,9 @@ read_globals = {
 	-- namespaces
 	'C_Timer',
 	'C_TradeSkillUI',
+	'C_Container',
+	'C_Item',
+	'Enum',
 
 	-- API
 	'CreateFrame',
