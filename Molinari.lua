@@ -112,10 +112,15 @@ function Molinari:GetBagAndSlotID()
 		-- the above is preferred
 		bagID = parent:GetBagID()
 		slotID = parent:GetID()
-	elseif parent:GetParent() then
-		-- this is a complete guesswork, bag addons should implement one of the two above APIs
-		bagID = parent:GetParent():GetID()
-		slotID = parent:GetID()
+	elseif parent.GetID then
+		-- TODO: remove this section if classic starts using the above APIs,
+		--       it'll be up to bag addons to support the same API then
+		local grandParent = parent:GetParent()
+		if grandParent and grandParent.GetID then
+			-- this is a complete guesswork, bag addons should implement one of the two above APIs
+			bagID = grandParent:GetID()
+			slotID = parent:GetID()
+		end
 	end
 
 	if bagID and bagID >= 0 and slotID and slotID >= 0 then
