@@ -1,3 +1,7 @@
+### Changes in 100002.91-Release:
+
+- Fixed: Error from mousing over items in ElvUI chat
+
 ### Changes in 100002.90-Release:
 
 - Changed: Update Interface version
