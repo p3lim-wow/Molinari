@@ -1,3 +1,7 @@
+### Changes in 100002.93-Release:
+
+- Changed: Update LibProcessable embed
+
 ### Changes in 100002.92-Release:
 
 - Added: Support for disenchanting profession equipment
