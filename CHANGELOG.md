@@ -1,3 +1,8 @@
+### Changes in 100002.92-Release:
+
+- Added: Support for disenchanting profession equipment
+- Added: Support for disenchanting "mystic" special items
+
 ### Changes in 100002.91-Release:
 
 - Fixed: Error from mousing over items in ElvUI chat
