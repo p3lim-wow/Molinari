@@ -64,14 +64,10 @@ function Molinari:ApplyItem(_, itemID, r, g, b)
 end
 
 -- to prospect or mill since the 10.0.0 patch we need to cast the expansion-specific milling spell
--- for a given ore or herb, which is not a spell but rather a tradeskill recipe. we can only cast
--- this when the tradeskill ui is open, which requires a hardware event to open, hence this macro.
-local MACRO_TRADESKILL = [[
-/run C_TradeSkillUI.OpenTradeSkill(%d)
-/run C_TradeSkillUI.CraftRecipe(%d, 1, {})
-/run C_TradeSkillUI.CloseTradeSkill()
-]]
-function Molinari:ApplyTradeSkill(itemLink, recipeSpellID, tradeSkillID, r, g, b)
+-- for a given ore or herb, which is not a spell but rather a tradeskill recipe. we'll use the
+-- tradeskill API for salvaging items to do this, which requires a hardware event, hence the macro.
+local MACRO_TRADESKILL = '/run C_TradeSkillUI.CraftSalvage(%d, 1, ItemLocation:CreateFromBagAndSlot(%d, %d))'
+function Molinari:ApplyTradeSkill(itemLink, recipeSpellID, r, g, b)
 	local bagID, slotID = self:GetBagAndSlotID()
 	if not bagID or not slotID then
 		return
@@ -82,11 +78,7 @@ function Molinari:ApplyTradeSkill(itemLink, recipeSpellID, tradeSkillID, r, g, b
 	end
 
 	self:SetAttribute(self:GetModifier() .. '-type1', 'macro')
-	self:SetAttribute('macrotext', MACRO_TRADESKILL:format(tradeSkillID, recipeSpellID))
-
-	-- for tooltip
-	self.tradeSkillID = tradeSkillID
-	self.recipeSpellID = recipeSpellID
+	self:SetAttribute('macrotext', MACRO_TRADESKILL:format(recipeSpellID, bagID, slotID))
 
 	self:SetAttribute('target-bag', bagID)
 	self:SetAttribute('target-slot', slotID)
@@ -263,7 +255,7 @@ local function handleItem(itemLink)
 		elseif CLASSIC then
 			Molinari:ApplySpell(itemLink, 51005, 1/2, 1, 1/2)
 		elseif millingSpellID then
-			Molinari:ApplyTradeSkill(itemLink, millingSpellID, 773, 1/2, 1, 1/2)
+			Molinari:ApplyTradeSkill(itemLink, millingSpellID, 1/2, 1, 1/2)
 		end
 		return
 	end
@@ -273,7 +265,7 @@ local function handleItem(itemLink)
 		if CLASSIC then
 			Molinari:ApplySpell(itemLink, 31252, 1, 1/3, 1/3)
 		elseif prospectingSpellID then
-			Molinari:ApplyTradeSkill(itemLink, prospectingSpellID, 755, 1, 1/3, 1/3)
+			Molinari:ApplyTradeSkill(itemLink, prospectingSpellID, 1, 1/3, 1/3)
 		end
 		return
 	end
@@ -328,10 +320,6 @@ end
 
 -- tooltip
 Molinari:HookScript('OnLeave', GameTooltip_Hide)
-Molinari:HookScript('OnLeave', function(self)
-	self.tradeSkillID = nil
-	self.recipeSpellID = nil
-end)
 Molinari:SetScript('OnEnter', function(self)
 	if(self:GetRight() >= (GetScreenWidth() / 2)) then
 		GameTooltip:SetOwner(self, 'ANCHOR_LEFT')
@@ -339,12 +327,7 @@ Molinari:SetScript('OnEnter', function(self)
 		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT')
 	end
 
-	if self.recipeSpellID and not C_TradeSkillUI.GetRecipeInfo(self.recipeSpellID) then
-		local professionInfo = C_TradeSkillUI.GetProfessionInfoBySkillLineID(self.tradeSkillID)
-		GameTooltip:AddLine('You need to open ' .. professionInfo.professionName .. ' once before Molinari works.')
-		GameTooltip:AddLine('This is a Blizzard bug/issue, don\'t blame Molinari.')
-		GameTooltip:Show()
-	elseif self.itemLink then
+	if self.itemLink then
 		-- this is only ever triggered by the trade skill window
 		GameTooltip:SetHyperlink(self.itemLink)
 	else
