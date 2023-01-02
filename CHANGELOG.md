@@ -1,3 +1,8 @@
+### Changes in 100002.95-Release:
+
+- Fixed: Milling and Prospecting without opening tradeskill first
+- Changed: Update LibProcessable embed
+
 ### Changes in 100002.94-Release:
 
 - Added: Support for disenchanting even more special items
