@@ -1,3 +1,9 @@
+### Changes in 100005.96-Release:
+
+- Added: Support for scrapping with engineering
+- Added: Support for disenchanting Sophic Amalgamation
+- Changed: Update Interface version(s)
+
 ### Changes in 100002.95-Release:
 
 - Fixed: Milling and Prospecting without opening tradeskill first
