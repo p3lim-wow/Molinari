@@ -286,6 +286,12 @@ local function handleItem(itemLink)
 		Molinari:ApplyItem(itemLink, keyItemID, 0, 1, 1)
 		return
 	end
+
+	local isScrappable, scrappingSpellID = LibProcessable:IsScrappable(itemID)
+	if isScrappable and GetItemCount(itemID) >= 5 then
+		Molinari:ApplyTradeSkill(itemLink, scrappingSpellID, 1/5, 1/5, 1/5)
+		return
+	end
 end
 
 if select(4, GetBuildInfo()) >= 100002 then
