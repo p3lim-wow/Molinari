@@ -27,6 +27,7 @@ The following spells/processes are supported:
   - [Jewelcrafting picks](https://www.wowhead.com/items/name:lock?filter=86;7;0)
   - [Inscription picks](https://wowhead.com/items?filter=107:99;0:15;lockpick:0)
   - [Engineering picks](https://wowhead.com/items?filter=107:99;0:5;lockpick:0)
+- [Scrapping](https://www.wowhead.com/spell=382374/rummage-through-scrap)
 
 In addition, Molinari also works for lockpicking in the trade window.
 
