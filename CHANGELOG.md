@@ -1,3 +1,7 @@
+### Changes in 100005.97-Release:
+
+- Fixed: Update LibProcessable embed
+
 ### Changes in 100005.96-Release:
 
 - Added: Support for scrapping with engineering
