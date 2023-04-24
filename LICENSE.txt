@@ -1,4 +1,4 @@
-Copyright (c) 2006-2023 Trond A Ekseth
+Copyright (c) 2006-2008 Trond A Ekseth
 Copyright (c) 2009-2023 Adrian L Lange
 
 Permission is hereby granted, free of charge, to any person
