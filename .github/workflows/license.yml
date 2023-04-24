@@ -13,12 +13,14 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Update license year
-        uses: p3lim/license-year-updater@v1
+        uses: p3lim/license-year-updater@v2
         with:
           files: LICENSE.txt
+          exclude: |
+            Trond A Ekseth
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           title: Update license
           body:
