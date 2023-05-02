@@ -1,0 +1,20 @@
+name: Scrape vanilla
+
+on:
+  push:
+    paths:
+      - 'scripts/**.py'
+  schedule:
+    - cron: '0 8 * * 1' # monday morning
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    uses: ./.github/workflows/scrape.yaml
+    with:
+      flavor: vanilla
+      dbc: wow_classic_era_latest
+      files: |
+        openable: openable_vanilla
+        keys_vanilla: keys_vanilla
+        nondisenchantable: nondisenchantable_vanilla

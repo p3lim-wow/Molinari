@@ -1,0 +1,22 @@
+name: Scrape wrath
+
+on:
+  push:
+    paths:
+      - 'scripts/**.py'
+  schedule:
+    - cron: '0 8 * * 1' # monday morning
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    uses: ./.github/workflows/scrape.yaml
+    with:
+      flavor: wrath
+      dbc: wow_classic_latest
+      files: |
+        openable: openable_wrath
+        keys_wrath: keys_wrath
+        nondisenchantable: nondisenchantable_wrath
+        prospectable_classic: prospectable_wrath
+        millable_classic: millable_wrath
