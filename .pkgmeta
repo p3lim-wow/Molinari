@@ -1,6 +1,8 @@
 package-as: Molinari
 
 externals:
+  libs/Dashi:
+    url: https://github.com/p3lim-wow/Dashi
   libs/LibStub:
     url: https://repos.curseforge.com/wow/libstub/trunk
     tag: 1.0
@@ -12,9 +14,6 @@ externals:
     url: https://repos.curseforge.com/wow/ace3/trunk/AceGUI-3.0
   libs/AceConfig-3.0:
     url: https://repos.curseforge.com/wow/ace3/trunk/AceConfig-3.0
-  libs/LibProcessable:
-    url: https://github.com/p3lim-wow/LibProcessable
-    tag: latest
 
 manual-changelog:
   filename: CHANGELOG.md
