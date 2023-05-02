@@ -1,0 +1,25 @@
+name: Scrape retail
+
+on:
+  push:
+    paths:
+      - 'scripts/**.py'
+  schedule:
+    - cron: '0 8 * * 1' # monday morning
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    uses: ./.github/workflows/scrape.yaml
+    with:
+      flavor: retail
+      dbc: wow_latest
+      files: |
+        openable: openable
+        keys: keys
+        nondisenchantable: nondisenchantable
+        prospectable: prospectable
+        millable: millable
+        disenchantable: disenchantable
+        scrappable: scrappable
+        crushable: crushable
