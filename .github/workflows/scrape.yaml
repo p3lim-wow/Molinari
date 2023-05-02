@@ -37,6 +37,7 @@ jobs:
 
       - name: Scrape DBC
         run: |
+          set -e
           while IFS= read -r files; do
             script="scripts/$(cut -d: -f1 <<< "$files").py"
             output="data/$(cut -d: -f2 <<< "$files" | xargs).lua"
