@@ -9,87 +9,72 @@ ignore = {
 	'631', -- line is too long
 }
 
-exclude_files = {
-}
-
 globals = {
-	-- savedvariables
-	'MolinariDB',
-	'MolinariBlacklistDB',
+	-- FrameXML objects we mutate
+	'StaticPopupDialogs', -- FrameXML/StaticPopup.lua
 }
 
 read_globals = {
 	table = {fields = {'wipe'}},
 
 	-- FrameXML objects
+	'AuctionFrame', -- Blizzard_AuctionUI/Blizzard_AuctionUI.xml (classic)
+	'AuctionHouseFrame', -- Blizzard_AuctionHouseUI/Blizzard_AuctionHouseFrame.xml
+	'GameTooltip', -- FrameXML/GameTooltip.xml
 	'UIParent', -- FrameXML/UIParent.xml
-	'GameTooltip', -- ???
-	'EquipmentFlyoutFrame', -- FrameXML/EquipmentFlyout.xml
-	'AuctionFrame', -- AddOns/Blizzard_AuctionUI/Blizzard_AuctionUI.xml
-	'AuctionHouseFrame', -- AddOns/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseFrame.xml
 
 	'InterfaceOptionsFrameAddOns', -- OLD
 	'InterfaceOptionsFramePanelContainer', -- OLD
 
 	-- FrameXML functions
-	'nop', -- FrameXML/UIParent.lua
-	'GameTooltip_Hide', -- FrameXML/GameTooltip.lua
-	'StaticPopup_Show', -- FrameXML/StaticPopup.lua
-	'RegisterStateDriver', -- FrameXML/SecureStateDriver.lua
 	'AutoCastShine_AutoCastStart', -- FrameXML/UIParent.lua
 	'AutoCastShine_AutoCastStop', -- FrameXML/UIParent.lua
-
-	'InterfaceOptions_AddCategory', -- OLD
-	'InterfaceAddOnsList_Update', -- OLD
-	'InterfaceOptionsFrame_OpenToCategory', -- OLD
+	'CreateColor', -- FrameXML/Color.lua
+	'GameTooltip_Hide', -- FrameXML/GameTooltip.lua
+	'RegisterAttributeDriver', -- FrameXML/SecureStateDriver.lua
+	'StaticPopup_Show', -- FrameXML/StaticPopup.lua
+	'nop', -- FrameXML/UIParent.lua
 
 	-- SharedXML objects
 	'Settings', -- SharedXML/Settings/Blizzard_Settings.lua
 	'SettingsPanel', -- SharedXML/Settings/Blizzard_SettingsPanel.xml
 
 	-- SharedXML functions
-	'Mixin', -- SharedXML/Mixin.lua
 	'CreateFramePool', -- SharedXML/Pools.lua
 	'FramePool_HideAndClearAnchors', -- SharedXML/Pools.lua
 	'GetItemInfoFromHyperlink', -- SharedXML/LinkUtil.lua
-	'CreateColor', -- SharedXML/Color.lua
-	'TooltipDataProcessor', -- SharedXML/Tooltip/TooltipDataHandler.lua
-
-	-- GlobalStrings
-	'ALT_KEY',
-	'ALT_KEY_TEXT',
-	'CTRL_KEY',
-	'ALT_KEY_TEXT',
-	'SHIFT_KEY',
-	'ERR_NOT_IN_COMBAT',
+	'InterfaceOptions_AddCategory', -- SharedXML/Settings/Blizzard_Deprecated.lua
+	'Mixin', -- SharedXML/Mixin.lua
 
 	-- namespaces
+	'C_Item',
 	'C_Timer',
 	'C_TradeSkillUI',
-	'C_Container',
-	'C_Item',
 	'Enum',
+	'TooltipDataProcessor', -- ?
 
 	-- API
 	'CreateFrame',
-	'GetBuildInfo',
-	'GetContainerItemLink',
+	'ExpandSkillHeader', -- (classic)
+	'FindSpellBookSlotBySpellID',
 	'GetItemCount',
 	'GetItemInfo',
 	'GetItemInfoInstant',
-	'GetLocale',
 	'GetMouseFocus',
+	'GetNumSkillLines', -- (classic)
+	'GetProfessionInfo',
+	'GetProfessions',
 	'GetScreenWidth',
+	'GetSkillLineInfo', -- (classic)
 	'GetSpellInfo',
 	'GetTradeTargetItemLink',
 	'InCombatLockdown',
 	'IsAltKeyDown',
 	'IsControlKeyDown',
+	'IsPlayerSpell',
 	'IsShiftKeyDown',
 	'UnitHasVehicleUI',
-
-	-- exposed globals
-	'Molinari',
+	'UnitLevel',
 
 	-- exposed from other addons
 	'LibStub',
