@@ -3,6 +3,7 @@
 ## Version: @project-version@
 ## Title: Molinari
 ## Notes: One-click Milling, Prospecting, Disenchanting, Lockpicking, and more!
+## IconTexture: Interface\Icons\ability_miling
 ## OptionalDeps: LibStub, CallbackHandler-1.0, Ace3
 ## SavedVariables: MolinariBlacklistDB, MolinariDB, MolinariDB2
 
