@@ -47,7 +47,7 @@ for row in itemSparse:
 
 # remove excluded items from the item list
 for itemID in list(items):
-	if itemID in excluded or itemID in ignore:
+	if itemID in excluded or itemID in excluded:
 		del items[itemID]
 
 # print data file structure
