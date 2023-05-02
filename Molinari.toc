@@ -22,6 +22,9 @@
 ..\Dashi\embed.xml
 #@end-debug@
 
+utils.lua
+addon.lua
+
 locale\deDE.lua
 locale\esES.lua
 locale\esMX.lua
@@ -42,8 +45,9 @@ data\disenchantable.lua
 data\scrappable.lua
 data\crushable.lua
 
-Molinari.lua
 api\items.lua
+api\skill.lua
+api\colors.lua
 
 config\ButtonPoolMixin.lua
 config\SavedVariables.lua
