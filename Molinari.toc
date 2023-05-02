@@ -25,6 +25,7 @@
 
 utils.lua
 addon.lua
+hack.lua
 
 locale\deDE.lua
 locale\esES.lua
