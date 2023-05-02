@@ -33,6 +33,9 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
+data\openable_vanilla.lua
+data\keys_vanilla.lua
+data\nondisenchantable_vanilla.lua
 
 Molinari.lua
 

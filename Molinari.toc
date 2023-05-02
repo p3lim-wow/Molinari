@@ -33,6 +33,14 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
+data\openable.lua
+data\keys.lua
+data\nondisenchantable.lua
+data\prospectable.lua
+data\millable.lua
+data\disenchantable.lua
+data\scrappable.lua
+data\crushable.lua
 
 Molinari.lua
 

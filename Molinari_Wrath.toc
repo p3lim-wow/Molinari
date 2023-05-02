@@ -33,6 +33,11 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
+data\openable_wrath.lua
+data\keys_wrath.lua
+data\nondisenchantable_wrath.lua
+data\prospectable_wrath.lua
+data\millable_wrath.lua
 
 Molinari.lua
 
