@@ -40,6 +40,7 @@ data\prospectable_wrath.lua
 data\millable_wrath.lua
 
 Molinari.lua
+api\items.lua
 
 config\ButtonPoolMixin.lua
 config\SavedVariables.lua

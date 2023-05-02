@@ -38,6 +38,7 @@ data\keys_vanilla.lua
 data\nondisenchantable_vanilla.lua
 
 Molinari.lua
+api\items.lua
 
 config\ButtonPoolMixin.lua
 config\SavedVariables.lua

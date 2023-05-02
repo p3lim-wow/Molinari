@@ -43,6 +43,7 @@ data\scrappable.lua
 data\crushable.lua
 
 Molinari.lua
+api\items.lua
 
 config\ButtonPoolMixin.lua
 config\SavedVariables.lua
