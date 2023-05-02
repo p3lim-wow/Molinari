@@ -2,22 +2,26 @@
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: Molinari
-## Notes: One-click Milling, Prospecting, Disenchanting and Lockpicking!
-## OptionalDeps: LibStub, CallbackHandler-1.0, Ace3, LibProcessable
+## Notes: One-click Milling, Prospecting, Disenchanting, Lockpicking, and more!
+## OptionalDeps: LibStub, CallbackHandler-1.0, Ace3
 ## SavedVariables: MolinariBlacklistDB, MolinariDB, MolinariDB2
 
 ## X-Curse-Project-ID: 20338
 ## X-WoWI-ID: 13188
 ## X-Wago-ID: WqKQQEKx
 
-libs\LibStub\LibStub.lua
-libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
-libs\AceDB-3.0\AceDB-3.0.xml
-libs\AceGUI-3.0\AceGUI-3.0.xml
-libs\AceConfig-3.0\AceConfig-3.0.xml
-libs\LibProcessable\embed.xml
+#@non-debug@
+# libs\Dashi\embed.xml
+# libs\LibStub\LibStub.lua
+# libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+# libs\AceDB-3.0\AceDB-3.0.xml
+# libs\AceGUI-3.0\AceGUI-3.0.xml
+# libs\AceConfig-3.0\AceConfig-3.0.xml
+#@end-non-debug@
+#@debug@
+..\Dashi\embed.xml
+#@end-debug@
 
-locale\initialize.lua
 locale\deDE.lua
 locale\esES.lua
 locale\esMX.lua
@@ -29,7 +33,6 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
-mixins\event.lua
 
 Molinari.lua
 
