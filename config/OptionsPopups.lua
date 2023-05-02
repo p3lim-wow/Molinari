@@ -1,5 +1,5 @@
-local addonName, ns = ...
-local L = ns.L
+local addonName, addon = ...
+local L = addon.L
 
 StaticPopupDialogs[addonName .. 'ItemBlocklistPopup'] = {
 	text = L['Block a new item by ID'],

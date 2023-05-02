@@ -1,24 +1,22 @@
-local addonName, ns = ...
-local L = ns.L
+local addonName, addon = ...
+local L = addon.L
 
-local WOW_10 = select(4, GetBuildInfo()) >= 100000
-
-local function UpdateOptions()
-	if((InterfaceOptionsFrameAddOns or SettingsPanel):IsShown()) then
+local function updateOptions()
+	if (InterfaceOptionsFrameAddOns or SettingsPanel):IsShown() then
 		LibStub('AceConfigRegistry-3.0'):NotifyChange(addonName)
 	end
 end
 
-local function CreateOptions()
-	CreateOptions = nop -- we only want to load this once
+local function createOptions()
+	createOptions = nop -- we only want to load this once
 
 	LibStub('AceConfig-3.0'):RegisterOptionsTable(addonName, {
 		type = 'group',
 		get = function(info)
-			return ns.db.profile.general[info[#info]]
+			return addon.db.profile.general[info[#info]]
 		end,
 		set = function(info, value)
-			ns.db.profile.general[info[#info]] = value
+			addon.db.profile.general[info[#info]] = value
 		end,
 		args = {
 			modifierKey = {
@@ -31,8 +29,8 @@ local function CreateOptions()
 					SHIFT = L['ALT + SHIFT key']
 				},
 				set = function(info, value)
-					ns.db.profile.general[info[#info]] = value
-					Molinari:UpdateStateDriver()
+					addon.db.profile.general[info[#info]] = value
+					_G.Molinari:UpdateStateDriver()
 				end,
 				disabled = InCombatLockdown,
 			},
@@ -51,33 +49,17 @@ local function CreateOptions()
 	local EventHandler = CreateFrame('Frame', nil, InterfaceOptionsFrameAddOns or SettingsPanel)
 	EventHandler:RegisterEvent('PLAYER_REGEN_ENABLED')
 	EventHandler:RegisterEvent('PLAYER_REGEN_DISABLED')
-	EventHandler:SetScript('OnEvent', UpdateOptions)
+	EventHandler:SetScript('OnEvent', updateOptions)
 end
 
-if WOW_10 then
-	SettingsPanel:HookScript('OnShow', function()
-		CreateOptions() -- LoD
-		ns.CreateBlocklistOptions() -- LoD
-	end)
-else
-	InterfaceOptionsFrameAddOns:HookScript('OnShow', function()
-		CreateOptions() -- LoD
-		ns.CreateBlocklistOptions() -- LoD
+addon:HookSettings(function()
+	createOptions() -- LoD
+	addon.CreateBlocklistOptions() -- LoD
+end)
 
-		-- we load too late, so we have to manually refresh the list
-		InterfaceAddOnsList_Update()
-	end)
-end
+addon:RegisterSlash('/molinari', function()
+	createOptions() -- LoD
+	addon.CreateBlocklistOptions() -- LoD
 
-_G['SLASH_' .. addonName .. '1'] = '/molinari'
-SlashCmdList[addonName] = function()
-	CreateOptions() -- LoD
-	ns.CreateBlocklistOptions() -- LoD
-
-	if WOW_10 then
-		Settings.OpenToCategory(addonName)
-	else
-		InterfaceOptionsFrame_OpenToCategory(addonName)
-		InterfaceOptionsFrame_OpenToCategory(addonName) -- load twice due to an old bug
-	end
-end
+	addon:OpenSettings(addonName)
+end)

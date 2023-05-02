@@ -1,7 +1,7 @@
-local _, ns = ...
+local _, addon = ...
 
-local ButtonPoolMixin = {}
-function ButtonPoolMixin.Reposition(pool)
+local buttonPoolMixin = {}
+function buttonPoolMixin.Reposition(pool)
 	if pool.parent:GetParent():GetWidth() == 0 then
 		-- until the frame is visible the width is 0
 		C_Timer.After(0.5, function()
@@ -31,13 +31,13 @@ function ButtonPoolMixin.Reposition(pool)
 	pool.parent:SetWidth(pool.parent:GetParent():GetWidth())
 end
 
-function ButtonPoolMixin:SetSortField(field)
+function buttonPoolMixin:SetSortField(field)
 	self.sortField = field
 end
 
 do
 	local objects = {}
-	function ButtonPoolMixin:EnumerateActiveSorted()
+	function buttonPoolMixin:EnumerateActiveSorted()
 		table.wipe(objects)
 
 		for obj in self:EnumerateActive() do
@@ -53,14 +53,14 @@ do
 	end
 end
 
-local function ReleaseButton(pool, button)
+local function releaseButton(pool, button)
 	FramePool_HideAndClearAnchors(pool, button) -- super
 
 	-- reposition remaining buttons
 	pool:Reposition()
 end
 
-local function OnButtonEnter(self)
+local function onButtonEnter(self)
 	self.remove:Show()
 
 	if self.OnEnter then
@@ -68,7 +68,7 @@ local function OnButtonEnter(self)
 	end
 end
 
-local function OnButtonLeave(self)
+local function onButtonLeave(self)
 	if not (self:IsMouseOver() or self.remove:IsMouseOver()) then
 		self.remove:Hide()
 	end
@@ -78,13 +78,13 @@ local function OnButtonLeave(self)
 	end
 end
 
-local function OnRemoveLeave(self)
+local function onRemoveLeave(self)
 	if not (self:IsMouseOver() or self:GetParent():IsMouseOver()) then
 		self:Hide()
 	end
 end
 
-local function OnRemoveClick(self)
+local function onRemoveClick(self)
 	local button = self:GetParent()
 	if button.OnRemove then
 		button:OnRemove()
@@ -93,7 +93,7 @@ local function OnRemoveClick(self)
 	button.pool:Release(button)
 end
 
-function ButtonPoolMixin.CreateButton(pool)
+function buttonPoolMixin.CreateButton(pool)
 	local button = pool:Acquire()
 	if not button.pool then
 		button.pool = pool
@@ -104,10 +104,10 @@ function ButtonPoolMixin.CreateButton(pool)
 		button.remove = remove
 
 		button:SetSize(pool.buttonWidth, pool.buttonHeight)
-		button:SetScript('OnEnter', OnButtonEnter)
-		button:SetScript('OnLeave', OnButtonLeave)
-		remove:SetScript('OnLeave', OnRemoveLeave)
-		remove:SetScript('OnClick', OnRemoveClick)
+		button:SetScript('OnEnter', onButtonEnter)
+		button:SetScript('OnLeave', onButtonLeave)
+		remove:SetScript('OnLeave', onRemoveLeave)
+		remove:SetScript('OnClick', onRemoveClick)
 	end
 
 	button:Show()
@@ -120,8 +120,8 @@ function ButtonPoolMixin.CreateButton(pool)
 	return button
 end
 
-function ns.CreateButtonPool(parent, offset, buttonWidth, buttonHeight, buttonSpacing)
-	local pool = CreateFramePool('Button', parent, 'BackdropTemplate', ReleaseButton)
+function addon.CreateButtonPool(parent, offset, buttonWidth, buttonHeight, buttonSpacing)
+	local pool = CreateFramePool('Button', parent, 'BackdropTemplate', releaseButton)
 	pool:ReleaseAll()
 
 	pool.parent = parent
@@ -130,7 +130,7 @@ function ns.CreateButtonPool(parent, offset, buttonWidth, buttonHeight, buttonSp
 	pool.buttonHeight = buttonHeight
 	pool.buttonSpacing = buttonSpacing
 
-	Mixin(pool, ButtonPoolMixin)
+	Mixin(pool, buttonPoolMixin)
 
 	return pool
 end
