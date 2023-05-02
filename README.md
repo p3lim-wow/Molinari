@@ -10,14 +10,11 @@ It can be downloaded at one of the following sites:
 
 ## Description
 
-Molinari was made to aid the player in processing various items throughout the game.  
-As an example; when you'd want to mill herbs, you would normally cast [Milling](https://wowhead.com/spell=51005) and then click the item in your bags.  
-With Molinari, you simply hold down the `Alt` key and click the item directly.
+Molinari allows the player to easily "salvage" items directly from the inventory by holding down the `Alt` key and clicking on the item in their bags, instead of dealing with the tradeskill UI, spellbook, macros or actions.
 
-The following spells/processes are supported:
+The following "salvaging" is supported:
 
 - [Milling](https://www.wowhead.com/spell=51005)
-  - [Draenic Mortar](https://www.wowhead.com/item=114942)
 - [Prospecting](https://www.wowhead.com/spell=31252)
 - [Disenchanting](https://www.wowhead.com/spell=13262)
 - [Lockpicking](https://www.wowhead.com/spell=1804)
@@ -26,15 +23,22 @@ The following spells/processes are supported:
   - [Blacksmithing picks](https://www.wowhead.com/items/name:key?filter=86;2;0)
   - [Jewelcrafting picks](https://www.wowhead.com/items/name:lock?filter=86;7;0)
   - [Inscription picks](https://wowhead.com/items?filter=107:99;0:15;lockpick:0)
-  - [Engineering picks](https://wowhead.com/items?filter=107:99;0:5;lockpick:0)
-- [Scrapping](https://www.wowhead.com/spell=382374/rummage-through-scrap)
+  - [Engineering picks](https://www.wowhead.com/items/consumables?filter=107:99;0:5;lock:0#0+2+18)
+- [Scrapping](https://www.wowhead.com/spell=382374)
+- [Crushing](https://www.wowhead.com/spell=395696)
 
 In addition, Molinari also works for lockpicking in the trade window.
 
-## Feedback
+## Translations
 
-If you have a question, please use the comments section on Curse/WoWInterface.  
-If you would like to report a bug or contribute to the project, please follow [this link](https://github.com/p3lim-wow/Molinari/issues?q=) to get started.
+If you want to help translate Molinari, please use this form on GitHub:  
+[https://github.com/p3lim-wow/Molinari/issues/new?template=translate.yaml](https://github.com/p3lim-wow/Molinari/issues/new?assignees=p3lim&labels=enhancement%2Ctranslation&template=translate.yaml&title=Translation%3A+)
+
+## Feedback & issues
+
+If you have a question, please use the [discussion section on GitHub](https://github.com/p3lim-wow/Molinari/discussions).  
+If you would like to report a bug or contribute to the project, please visit GitHub:  
+<https://github.com/p3lim-wow/Molinari/issues/new/choose>
 
 ## Legal
 
