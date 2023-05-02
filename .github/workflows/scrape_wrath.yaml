@@ -2,6 +2,10 @@ name: Scrape wrath
 
 on:
   push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
     paths:
       - 'scripts/**.py'
   schedule:
