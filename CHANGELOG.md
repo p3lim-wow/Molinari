@@ -1,3 +1,7 @@
+### Changes in 100100.100-Release:
+
+- Added: Special disenchantable items from 10.1
+
 ### Changes in 100100.99-Release:
 
 - Fixed: Settings not loading correctly
