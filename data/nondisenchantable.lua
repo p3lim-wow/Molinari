@@ -3980,7 +3980,7 @@ addon.data.nondisenchantable = {
 	[192764] = true, -- Verdant Skitterfly
 	[192772] = true, -- Ancient Salamanther
 	[192777] = true, -- Magmashell
-	[192779] = true, -- Scorchpath
+	[192779] = true, -- Seething Slug
 	[192784] = true, -- Shellack
 	[192785] = true, -- Gooey Snailemental
 	[192791] = true, -- Plainswalker Bearer
@@ -4081,4 +4081,5 @@ addon.data.nondisenchantable = {
 	[201719] = true, -- Obsidian Vorquin
 	[201720] = true, -- Bronze Vorquin
 	[202197] = true, -- Emboldened Dracthyr's Tabard
+	[205286] = true, -- Loamm Niffen Tabard
 }

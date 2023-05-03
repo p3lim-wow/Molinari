@@ -28,4 +28,7 @@ addon.data.disenchantable = {
 	[201358] = true, -- Glimmer of Air
 	[201359] = true, -- Glimmer of Earth
 	[201360] = true, -- Glimmer of Order
+	[204990] = true, -- Lava-Drenched Shadow Crystal
+	[204999] = true, -- Shimmering Aqueous Orb
+	[205001] = true, -- Resonating Arcane Crystal
 }
