@@ -1,3 +1,8 @@
+### Changes in 100100.99-Release:
+
+- Fixed: Settings not loading correctly
+- Fixed: Disenchanting error in Wrath
+
 ### Changes in 100100.98-Release:
 
 - Added: Support for gem crushing (Jewelcrafting)
