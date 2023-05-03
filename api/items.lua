@@ -43,7 +43,7 @@ end
 function addon:IsDisenchantable(itemID)
 	-- returns the spell used to disenchant the item if the player can disenchant it
 	if IsPlayerSpell(13262) then
-		if addon.data.disenchantable[itemID] then
+		if not CLASSIC and addon.data.disenchantable[itemID] then
 			return 13262, addon.colors.disenchantable
 		elseif addon.data.nondisenchantable[itemID] then
 			return
