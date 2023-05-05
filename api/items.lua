@@ -11,10 +11,10 @@ end
 
 function addon:IsProspectable(itemID)
 	-- returns the spell used to prospect the item if the player can prospect it
-	if CLASSIC then
+	if addon:IsClassicWrath() then
 		local skillRequired = addon.data.prospectable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and GetItemCount(itemID) >= 5 and 31252, addon.colors.prospectable
-	else
+	elseif not CLASSIC then
 		local professionSkillID = addon.data.prospectable[itemID]
 		return professionSkillID and IsPlayerSpell(professionSkillID) and professionSkillID, addon.colors.prospectable
 	end
@@ -22,10 +22,10 @@ end
 
 function addon:IsMillable(itemID)
 	-- returns the spell used to mill the item if the player can mill it
-	if CLASSIC then
+	if addon:IsClassicWrath() then
 		local skillRequired = addon.data.millable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and GetItemCount(itemID) >= 5 and 51005, addon.colors.millable
-	else
+	elseif not CLASSIC then
 		local professionSkillID = addon.data.millable[itemID]
 		return professionSkillID and IsPlayerSpell(professionSkillID) and GetItemCount(itemID) >= 5 and professionSkillID, addon.colors.millable
 	end
