@@ -2,6 +2,13 @@ local _, addon = ...
 
 local CLASSIC = not addon:IsRetail()
 
+local Enum = Enum -- upvalue so we can modify it
+if CLASSIC then
+	-- these were renamed in 9.0.1
+	Enum.ItemQuality.Common = Enum.ItemQuality.Standard
+	Enum.ItemQuality.Uncommon = Enum.ItemQuality.Good
+end
+
 function addon:IsProspectable(itemID)
 	-- returns the spell used to prospect the item if the player can prospect it
 	if CLASSIC then
