@@ -15,6 +15,8 @@ addon:HookTooltip(function(tooltip, itemLink)
 		return
 	elseif UnitHasVehicleUI and UnitHasVehicleUI('player') then
 		return
+	elseif (PaperDollFrameItemFlyoutButtons or EquipmentFlyoutFrame) and (PaperDollFrameItemFlyoutButtons or EquipmentFlyoutFrame):IsVisible() then
+		return
 	elseif (AuctionFrame or AuctionHouseFrame) and (AuctionFrame or AuctionHouseFrame):IsVisible() then
 		return
 	elseif not IsAltKeyDown() then
