@@ -1,3 +1,10 @@
+### Changes in 100100.101-Release:
+
+- Changed: Now makes sure the player has enough skill to disenchant the item (Classic)
+- Fixed: Glow showing up in flyouts
+- Fixed: Modifier not updating attribute handler
+- Fixed: Various errors on Classic
+
 ### Changes in 100100.100-Release:
 
 - Added: Special disenchantable items from 10.1
