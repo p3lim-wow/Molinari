@@ -30,7 +30,7 @@ local function createOptions()
 				},
 				set = function(info, value)
 					addon.db.profile.general[info[#info]] = value
-					_G.Molinari:UpdateStateDriver()
+					_G.Molinari:UpdateAttributeDriver()
 				end,
 				disabled = InCombatLockdown,
 			},
