@@ -15,7 +15,7 @@
 
 -- in case other addons copies this, make sure it never loads multiple times unless there is a
 -- newer version of it, in which case we disable it and load anyways
-local version = 1
+local version = 2
 if _G['ForceLoadTradeSkillData'] then
 	if _G['ForceLoadTradeSkillData'].version < version then
 		_G['ForceLoadTradeSkillData']:UnregisterAllEvents()
