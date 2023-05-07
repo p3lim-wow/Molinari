@@ -1,3 +1,7 @@
+### Changes in 100100.102-Release:
+
+- Fixed: Sounds and frame spikes when moving after login (Retail)
+
 ### Changes in 100100.101-Release:
 
 - Changed: Now makes sure the player has enough skill to disenchant the item (Classic)
