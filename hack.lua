@@ -44,6 +44,7 @@ hack:SetScript('OnEvent', function(self, event)
 			-- we've triggered the tradeskill UI, close it again and bail out
 			C_TradeSkillUI.CloseTradeSkill()
 			self:UnregisterEvent(event)
+			UIParent:RegisterEvent('TRADE_SKILL_SHOW')
 		end
 	elseif event == 'SKILL_LINES_CHANGED' then
 		if self:GetAnyProfessionID() then
@@ -59,6 +60,7 @@ function hack:OnKeyDown()
 	self:SetScript('OnKeyDown', nil)
 
 	-- listen for tradeskill UI opening then query it
+	UIParent:UnregisterEvent('TRADE_SKILL_SHOW')
 	self:RegisterEvent('TRADE_SKILL_SHOW')
 	C_TradeSkillUI.OpenTradeSkill(self.professionID)
 end
