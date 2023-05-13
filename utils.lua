@@ -48,13 +48,10 @@ function addon:HookTooltip(callback)
 			if itemLink then
 				local bagID, slotID = getBagAndSlotID(tooltip)
 				if bagID and slotID then
-					callback(callback, tooltip, Item:CreateFromItemLocation(ItemLocation:CreateFromBagAndSlot(bagID, slotID)))
+					callback(tooltip, Item:CreateFromItemLocation(ItemLocation:CreateFromBagAndSlot(bagID, slotID)))
 				elseif tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
 					-- special handling for trade window
-					local _, itemLink = tooltip:GetItem()
-					if itemLink then
-						callback(tooltip, Item:CreateFromItemLink(itemLink))
-					end
+					callback(tooltip, Item:CreateFromItemLink(itemLink))
 				end
 			end
 		end)
