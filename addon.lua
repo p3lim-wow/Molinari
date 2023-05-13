@@ -5,11 +5,13 @@ local Molinari = addon:CreateButton('Button', addonName, UIParent, 'SecureAction
 Molinari:SetFrameStrata('TOOLTIP')
 Molinari:Hide()
 
+local activator -- DEBUG
 addon:HookTooltip(function(tooltip, itemLink)
 	if tooltip:GetOwner() == Molinari then
 		-- don't trigger on our own tooltips
 		return
 	end
+	activator = tooltip:GetOwner() -- DEBUG
 
 	if InCombatLockdown() then
 		return
@@ -122,11 +124,13 @@ Molinari:HookScript('OnShow', function(self)
 end)
 
 -- use EnterLeave to securely deactivate when the mouse leaves the item
-Molinari:SetAttribute('_onleave', 'self:ClearAllPoints();self:Hide()')
+-- Molinari:SetAttribute('_onleave', 'self:ClearAllPoints();self:Hide()')
+Molinari:SetAttribute('_onleave', 'print("src-leave");self:ClearAllPoints();self:Hide()') -- DEBUG
 
 -- use attribute driver to securely deactivate when the modifier key is released
 Molinari:SetAttribute('_onattributechanged', [[
 	if name == 'visibility' and value == 'hide' and self:IsShown() then
+		print('driver') -- DEBUG
 		self:ClearAllPoints()
 		self:Hide()
 	end
@@ -135,6 +139,7 @@ Molinari:SetAttribute('_onattributechanged', [[
 -- reset attributes when hidden
 Molinari:HookScript('OnHide', function(self)
 	self.itemLink = nil
+	addon:Print('src-hide') -- DEBUG
 	addon:Defer(self, 'SetAttribute', self, 'target-bag')
 	addon:Defer(self, 'SetAttribute', self, 'target-slot')
 	addon:Defer(self, 'SetAttribute', self, '_entered', false)
@@ -171,6 +176,7 @@ end)
 -- hide whenever a bag update occurs
 function addon:BAG_UPDATE_DELAYED()
 	if Molinari:IsShown() and not InCombatLockdown() then
+		print('src-bud') -- DEBUG
 		Molinari:Hide()
 	end
 end
@@ -187,3 +193,11 @@ function addon:PLAYER_LOGIN()
 	Molinari:UpdateAttributeDriver()
 end
 
+
+-- DEBUG
+Molinari:HookScript('PreClick', function(self)
+	addon:Print('parent', activator:GetDebugName())
+	addon:Print('bag', self:GetAttribute('target-bag'))
+	addon:Print('slot', self:GetAttribute('target-slot'))
+	addon:Print('spell', self:GetAttribute('spell'))
+end)
