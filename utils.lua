@@ -1,6 +1,6 @@
 local _, addon = ...
 
-function addon:GetBagAndSlotID(parent)
+local function getBagAndSlotID(parent)
 	-- wrapper for the multitudes for APIs that exist for getting bag and slot IDs
 	if not parent then
 		return
@@ -32,16 +32,30 @@ end
 function addon:HookTooltip(callback)
 	if addon:IsRetail() then
 		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
-			local itemLink = data.guid and C_Item.GetItemLinkByGUID(data.guid) or data.hyperlink
-			if itemLink then
-				callback(tooltip, itemLink)
+			if data.guid then
+				callback(tooltip, Item:CreateFromItemLocation(C_Item.GetItemLocation(data.guid)))
+			elseif tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
+				-- special handling for trade window
+				local _, itemLink = tooltip:GetItem()
+				if itemLink then
+					callback(tooltip, Item:CreateFromItemLink(itemLink))
+				end
 			end
 		end)
 	else
 		GameTooltip:HookScript('OnTooltipSetItem', function(tooltip)
 			local _, itemLink = tooltip:GetItem()
 			if itemLink then
-				callback(tooltip, itemLink)
+				local bagID, slotID = getBagAndSlotID(tooltip)
+				if bagID and slotID then
+					callback(callback, tooltip, Item:CreateFromItemLocation(ItemLocation:CreateFromBagAndSlot(bagID, slotID)))
+				elseif tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
+					-- special handling for trade window
+					local _, itemLink = tooltip:GetItem()
+					if itemLink then
+						callback(tooltip, Item:CreateFromItemLink(itemLink))
+					end
+				end
 			end
 		end)
 	end

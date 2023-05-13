@@ -6,18 +6,18 @@ Molinari:SetFrameStrata('TOOLTIP')
 Molinari:Hide()
 
 local activator -- DEBUG
-addon:HookTooltip(function(tooltip, itemLink)
+addon:HookTooltip(function(tooltip, item)
 	if tooltip:GetOwner() == Molinari then
 		-- don't trigger on our own tooltips
 		return
 	end
 	activator = tooltip:GetOwner() -- DEBUG
 
-	if InCombatLockdown() then
+	if not item then
+		return
+	elseif InCombatLockdown() then
 		return
 	elseif UnitHasVehicleUI and UnitHasVehicleUI('player') then
-		return
-	elseif (PaperDollFrameItemFlyoutButtons or EquipmentFlyoutFrame) and (PaperDollFrameItemFlyoutButtons or EquipmentFlyoutFrame):IsVisible() then
 		return
 	elseif (AuctionFrame or AuctionHouseFrame) and (AuctionFrame or AuctionHouseFrame):IsVisible() then
 		return
@@ -29,56 +29,56 @@ addon:HookTooltip(function(tooltip, itemLink)
 		return
 	end
 
-	local itemID = GetItemInfoFromHyperlink(itemLink)
+	local itemID = item:GetItemID()
 	if not itemID or addon.db.profile.blocklist.items[itemID] then
 		return
 	end
 
 	local spellID, color = addon:IsSalvagable(itemID)
 	if spellID then
-		return Molinari:ApplySpell(itemLink, spellID, color)
+		return Molinari:ApplySpell(item, spellID, color)
 	end
 
 	local pickItemID
 	pickItemID, color = addon:IsOpenableProfession(itemID)
 	if pickItemID then
-		return Molinari:ApplyItem(pickItemID, color)
+		return Molinari:ApplyItem(item, pickItemID, color)
 	end
 end)
 
 local MACRO_SALVAGE = '/run C_TradeSkillUI.CraftSalvage(%d, 1, ItemLocation:CreateFromBagAndSlot(%d, %d))'
 local MACRO_TRADE = '/cast %s\n/run ClickTargetTradeButton(7)'
 
-function Molinari:ApplySpell(itemLink, spellID, color)
-	if GetTradeTargetItemLink(7) == itemLink then
-		self:SetAttribute('macrotext', MACRO_TRADE:format(GetSpellInfo(spellID)))
-		self.itemLink = itemLink -- store item link for the tooltip
-	else
-		local bagID, slotID = addon:GetBagAndSlotID(GetMouseFocus())
-		if bagID and slotID then
-			self:SetAttribute('target-bag', bagID)
-			self:SetAttribute('target-slot', slotID)
+function Molinari:ApplySpell(item, spellID, color)
+	local location = item:GetItemLocation()
+	if location and location:IsBagAndSlot() then
+		local bagID, slotID = location:GetBagAndSlot()
+		self:SetAttribute('target-bag', bagID)
+		self:SetAttribute('target-slot', slotID)
 
-			if not addon:IsRetail() or FindSpellBookSlotBySpellID(spellID) then
-				self:SetAttribute('spell', spellID)
-			else
-				self:SetAttribute('macrotext', MACRO_SALVAGE:format(spellID, bagID, slotID))
-			end
+		if not addon:IsRetail() or FindSpellBookSlotBySpellID(spellID) then
+			self:SetAttribute('spell', spellID)
 		else
-			return
+			self:SetAttribute('macrotext', MACRO_SALVAGE:format(spellID, bagID, slotID))
 		end
+	elseif item:GetItemLink() == GetTradeTargetItemLink(7) and color == addon.colors.openable then
+		self:SetAttribute('macrotext', MACRO_TRADE:format(GetSpellInfo(spellID)))
+		self.itemLink = item:GetItemLink() -- store item link for the tooltip
+	else
+		return
 	end
 
 	self:Show()
 	self:AddSparkles(color)
 end
 
-function Molinari:ApplyItem(itemID, color)
-	local bagID, slotID = addon:GetBagAndSlotID(GetMouseFocus())
-	if bagID and slotID then
+function Molinari:ApplyItem(item, color)
+	local location = item:GetItemLocation()
+	if location and location:IsBagAndSlot() then
+		local bagID, slotID = location:GetBagAndSlot()
 		self:SetAttribute('target-bag', bagID)
 		self:SetAttribute('target-slot', slotID)
-		self:SetAttribute('item', 'item:' .. itemID)
+		self:SetAttribute('item', 'item:' .. item:GetItemID())
 		self:Show()
 		self:AddSparkles(color)
 	end

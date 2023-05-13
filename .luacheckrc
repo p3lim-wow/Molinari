@@ -20,13 +20,11 @@ read_globals = {
 	-- FrameXML objects
 	'AuctionFrame', -- Blizzard_AuctionUI/Blizzard_AuctionUI.xml (classic)
 	'AuctionHouseFrame', -- Blizzard_AuctionHouseUI/Blizzard_AuctionHouseFrame.xml
-	'EquipmentFlyoutFrame', -- FrameXML/EquipmentFlyout.xml
 	'GameTooltip', -- FrameXML/GameTooltip.xml
 	'UIParent', -- FrameXML/UIParent.xml
 
 	'InterfaceOptionsFrameAddOns', -- OLD
 	'InterfaceOptionsFramePanelContainer', -- OLD
-	'PaperDollFrameItemFlyoutButtons', -- OLD
 
 	-- FrameXML functions
 	'AutoCastShine_AutoCastStart', -- FrameXML/UIParent.lua
@@ -40,6 +38,8 @@ read_globals = {
 	-- SharedXML objects
 	'Settings', -- SharedXML/Settings/Blizzard_Settings.lua
 	'SettingsPanel', -- SharedXML/Settings/Blizzard_SettingsPanel.xml
+	'Item', -- FrameXML/ObjectAPI/Item.lua
+	'ItemLocation', -- FrameXML/ObjectAPI/ItemLocation.lua
 
 	-- SharedXML functions
 	'CreateFramePool', -- SharedXML/Pools.lua
