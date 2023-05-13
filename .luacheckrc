@@ -20,11 +20,13 @@ read_globals = {
 	-- FrameXML objects
 	'AuctionFrame', -- Blizzard_AuctionUI/Blizzard_AuctionUI.xml (classic)
 	'AuctionHouseFrame', -- Blizzard_AuctionHouseUI/Blizzard_AuctionHouseFrame.xml
+	'EquipmentFlyoutFrame', -- FrameXML/EquipmentFlyout.xml
 	'GameTooltip', -- FrameXML/GameTooltip.xml
 	'UIParent', -- FrameXML/UIParent.xml
 
 	'InterfaceOptionsFrameAddOns', -- OLD
 	'InterfaceOptionsFramePanelContainer', -- OLD
+	'PaperDollFrameItemFlyoutButtons', -- OLD
 
 	-- FrameXML functions
 	'AutoCastShine_AutoCastStart', -- FrameXML/UIParent.lua
