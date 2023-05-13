@@ -4,7 +4,13 @@ if addon:IsRetail() then
 	function addon:HookTooltip(callback)
 		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
 			if data.guid then
-				callback(tooltip, Item:CreateFromItemLocation(C_Item.GetItemLocation(data.guid)))
+				local location = C_Item.GetItemLocation(data.guid)
+				if location and location:IsBagAndSlot() then
+					local bagID = location:GetBagAndSlot()
+					if bagID >= 0 and bagID <= 4 then -- limit to player bags
+						callback(tooltip, Item:CreateFromItemLocation(location))
+					end
+				end
 			elseif tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
 				-- special handling for trade window
 				local _, itemLink = tooltip:GetItem()
@@ -49,7 +55,7 @@ else
 			local _, itemLink = tooltip:GetItem()
 			if itemLink then
 				local bagID, slotID = getBagAndSlotID(tooltip)
-				if bagID and slotID then
+				if bagID and slotID and bagID >= 0 and bagID <= 4 then -- limit to player bags
 					callback(tooltip, Item:CreateFromItemLocation(ItemLocation:CreateFromBagAndSlot(bagID, slotID)))
 				elseif tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
 					-- special handling for trade window
