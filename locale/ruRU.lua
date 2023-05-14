@@ -7,7 +7,7 @@ L['You can\'t do that while in combat'] = _G.ERR_NOT_IN_COMBAT
 
 -- config
 -- L['Modifier to activate %s'] -- MISSING! %s = "Molinari"
--- L['Item Blocklist'] = '' -- MISSING!
--- L['Block Item'] = '' -- MISSING!
--- L['Items in this list will not be processed.'] = '' -- MISSING!
--- L['Block a new item by ID'] = '' -- MISSING!
+L['Item Blocklist'] = 'Блок-список предметов'
+L['Block Item'] = 'Заблокированный предмет'
+L['Items in this list will not be processed.'] = 'Предметы из этого списка не будут обрабатываться.'
+L['Block a new item by ID'] = 'Заблокировать новый предмет по ID'
