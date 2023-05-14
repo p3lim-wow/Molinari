@@ -38,7 +38,7 @@ else
 		GameTooltip:HookScript('OnTooltipSetItem', function(tooltip)
 			local _, itemLink = tooltip:GetItem()
 			if itemLink then
-				local bagID, slotID = getBagAndSlotID(tooltip)
+				local bagID, slotID = getBagAndSlotID(tooltip:GetOwner())
 				if bagID and slotID and bagID >= 0 and bagID <= 4 then -- limit to player bags
 					callback(tooltip, Item:CreateFromItemLocation(ItemLocation:CreateFromBagAndSlot(bagID, slotID)))
 				elseif tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
