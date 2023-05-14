@@ -1,3 +1,8 @@
+### Changes in 100100.103-Release:
+
+- Changed: Improved compatibility with bag addons (Retail)
+- Fixed: Clicking not working for some players
+
 ### Changes in 100100.102-Release:
 
 - Fixed: Sounds and frame spikes when moving after login (Retail)
