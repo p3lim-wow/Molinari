@@ -22,31 +22,15 @@ if addon:IsRetail() then
 	end
 else
 	local function getBagAndSlotID(parent)
-		-- wrapper for the multitudes for APIs that exist for getting bag and slot IDs
-		if not parent then
-			return
-		end
-
-		local bagID, slotID
-		if parent.GetSlotAndBagID then
-			-- this is the preferred API to use, added in Dragonflight, as it's 100% accurate
-			slotID, bagID = parent:GetSlotAndBagID()
-		elseif parent.GetBagID then
-			-- still accurate, but requires two calls, the above is preferred
-			bagID = parent:GetBagID()
-			slotID = parent:GetID()
-		elseif parent.GetID then
-			-- this is still required to support classic, and is prone to errors
+		if parent then
 			local grandParent = parent:GetParent()
-			if grandParent and grandParent.GetID then
-				-- bag addons should implement one of the two above APIs
-				bagID = grandParent:GetID()
-				slotID = parent:GetID()
+			if grandParent then
+				local slotID = parent.GetID and parent:GetID()
+				local bagID = grandParent.GetID and grandParent:GetID()
+				if bagID and slotID and slotID >= 0 then
+					return bagID, slotID
+				end
 			end
-		end
-
-		if bagID and bagID >= 0 and slotID and slotID >= 0 then
-			return bagID, slotID
 		end
 	end
 
