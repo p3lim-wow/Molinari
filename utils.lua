@@ -11,11 +11,15 @@ if addon:IsRetail() then
 						callback(tooltip, Item:CreateFromItemLocation(location))
 					end
 				end
-			elseif tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
-				-- special handling for trade window
-				local _, itemLink = tooltip:GetItem()
-				if itemLink then
-					callback(tooltip, Item:CreateFromItemLink(itemLink))
+			else
+				if (tooltip and tooltip:GetOwner()) then
+					if tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
+						-- special handling for trade window
+						local _, itemLink = tooltip:GetItem()
+						if itemLink then
+							callback(tooltip, Item:CreateFromItemLink(itemLink))
+						end
+					end
 				end
 			end
 		end)
@@ -41,9 +45,13 @@ else
 				local bagID, slotID = getBagAndSlotID(tooltip:GetOwner())
 				if bagID and slotID and bagID >= 0 and bagID <= 4 then -- limit to player bags
 					callback(tooltip, Item:CreateFromItemLocation(ItemLocation:CreateFromBagAndSlot(bagID, slotID)))
-				elseif tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
-					-- special handling for trade window
-					callback(tooltip, Item:CreateFromItemLink(itemLink))
+				else
+					if (tooltip and tooltip:GetOwner()) then
+						if tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
+							-- special handling for trade window
+							callback(tooltip, Item:CreateFromItemLink(itemLink))
+						end
+					end
 				end
 			end
 		end)
