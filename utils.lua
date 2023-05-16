@@ -3,6 +3,10 @@ local _, addon = ...
 if addon:IsRetail() then
 	function addon:HookTooltip(callback)
 		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
+			if not (tooltip and tooltip:GetOwner()) then
+				return
+			end
+
 			if data.guid then
 				local location = C_Item.GetItemLocation(data.guid)
 				if location and location:IsBagAndSlot() then
@@ -36,6 +40,10 @@ else
 
 	function addon:HookTooltip(callback)
 		GameTooltip:HookScript('OnTooltipSetItem', function(tooltip)
+			if not (tooltip and tooltip:GetOwner()) then
+				return
+			end
+
 			local _, itemLink = tooltip:GetItem()
 			if itemLink then
 				local bagID, slotID = getBagAndSlotID(tooltip:GetOwner())
