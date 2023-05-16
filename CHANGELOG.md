@@ -1,3 +1,7 @@
+### Changes in 100100.104-Release:
+
+- Fixed: Errors caused by other addons scanning tooltips
+
 ### Changes in 100100.103-Release:
 
 - Changed: Improved compatibility with bag addons (Retail)
