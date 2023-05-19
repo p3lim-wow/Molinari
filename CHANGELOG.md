@@ -1,3 +1,8 @@
+### Changes in 100100.105-Release:
+
+- Fixed: Disenchanting wrong item when holding shift
+- Fixed: Sparkles not respecting modifiers and settings
+
 ### Changes in 100100.104-Release:
 
 - Fixed: Errors caused by other addons scanning tooltips
