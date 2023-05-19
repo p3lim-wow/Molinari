@@ -25,7 +25,11 @@ addon:HookTooltip(function(tooltip, item)
 		return
 	elseif addon.db.profile.general.modifierKey == 'CTRL' and not IsControlKeyDown() then
 		return
+	elseif addon.db.profile.general.modifierKey ~= 'CTRL' and IsControlKeyDown() then
+		return
 	elseif addon.db.profile.general.modifierKey == 'SHIFT' and not IsShiftKeyDown() then
+		return
+	elseif addon.db.profile.general.modifierKey ~= 'SHIFT' and IsShiftKeyDown() then
 		return
 	end
 
@@ -181,6 +185,16 @@ end
 function addon:MODIFIER_STATE_CHANGED()
 	if Molinari:IsShown() then
 		Molinari:GetScript('OnEnter')(Molinari)
+
+		if addon.db.profile.general.modifierKey == 'CTRL' and not IsControlKeyDown() then
+			addon:Defer(Molinari, 'Hide', Molinari)
+		elseif addon.db.profile.general.modifierKey ~= 'CTRL' and IsControlKeyDown() then
+			addon:Defer(Molinari, 'Hide', Molinari)
+		elseif addon.db.profile.general.modifierKey == 'SHIFT' and not IsShiftKeyDown() then
+			addon:Defer(Molinari, 'Hide', Molinari)
+		elseif addon.db.profile.general.modifierKey ~= 'SHIFT' and IsShiftKeyDown() then
+			addon:Defer(Molinari, 'Hide', Molinari)
+		end
 	end
 end
 
