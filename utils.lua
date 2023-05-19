@@ -7,6 +7,11 @@ if addon:IsRetail() then
 				return
 			end
 
+			if tooltip ~= GameTooltip then
+				-- disqualify shopping tooltips
+				return
+			end
+
 			if data.guid then
 				local location = C_Item.GetItemLocation(data.guid)
 				if location and location:IsBagAndSlot() then
