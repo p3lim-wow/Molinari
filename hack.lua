@@ -15,7 +15,7 @@
 
 -- in case other addons copies this, make sure it never loads multiple times unless there is a
 -- newer version of it, in which case we disable it and load anyways
-local version = 2
+local version = 3
 if _G['ForceLoadTradeSkillData'] then
 	if _G['ForceLoadTradeSkillData'].version < version then
 		_G['ForceLoadTradeSkillData']:UnregisterAllEvents()
@@ -47,8 +47,10 @@ hack:SetScript('OnEvent', function(self, event)
 			UIParent:RegisterEvent('TRADE_SKILL_SHOW')
 		end
 	elseif event == 'SKILL_LINES_CHANGED' then
-		if self:GetAnyProfessionID() then
+		local professionID = self:GetAnyProfessionID()
+		if professionID then
 			-- player has learned a profession, listen for key event
+			self.professionID = professionID
 			self:SetScript('OnKeyDown', self.OnKeyDown)
 			self:UnregisterEvent(event)
 		end
