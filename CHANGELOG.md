@@ -1,3 +1,9 @@
+### Changes in 100100.106-Release:
+
+- Added: deDE translations
+- Changed: Update data (wrath)
+- Fixed: Error after learning first profession (retail)
+
 ### Changes in 100100.105-Release:
 
 - Fixed: Disenchanting wrong item when holding shift
