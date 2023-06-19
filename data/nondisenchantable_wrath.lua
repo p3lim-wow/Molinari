@@ -669,7 +669,6 @@ addon.data.nondisenchantable = {
 	[45858] = true, -- Nat's Lucky Fishing Pole
 	[49052] = true, -- Tabard of Conquest
 	[49054] = true, -- Tabard of Conquest
-	[49086] = true, -- Relentless Gladiator's Tabard
 	[49121] = true, -- Ring of Ghoulish Glee
 	[49123] = true, -- The Horseman's Seal
 	[49126] = true, -- The Horseman's Horrific Helm
