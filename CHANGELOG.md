@@ -1,7 +1,14 @@
+### Changes in 100100.107-Release:
+
+- Changed: Update non-disenchantable database (wrath)
+- Changed: Update Interface version (wrath)
+- Fixed: Errors when attempting to disenchant items that were not cached yet
+- Fixed: Disenchanting not working on a lot of items (classic/wrath)
+
 ### Changes in 100100.106-Release:
 
 - Added: deDE translations
-- Changed: Update data (wrath)
+- Changed: Update non-disenchantable database (wrath)
 - Fixed: Error after learning first profession (retail)
 
 ### Changes in 100100.105-Release:
