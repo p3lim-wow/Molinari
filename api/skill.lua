@@ -78,12 +78,12 @@ else
 	end
 
 	function addon:RequiredDisenchantingLevel(itemID)
-		local _, _, _, _, itemRequiredLevel, _, _, _, _, _, _, _, _, _, expansionID = GetItemInfo(itemID)
+		local _, _, _, _, itemRequiredLevel = GetItemInfo(itemID)
 		if not itemRequiredLevel then
 			return
 		end
 
-		if expansionID == 0 or expansionID == 254 then -- item was added in vanilla
+		if itemID < 20470 then -- item was added in vanilla
 			if itemRequiredLevel <= 15 then
 				return 1
 			elseif itemRequiredLevel <= 20 then
@@ -105,13 +105,13 @@ else
 			elseif itemRequiredLevel <= 60 then
 				return 225
 			end
-		elseif expansionID == 1 then -- item was added in tbc
+		elseif itemID < 33084 then -- item was added in tbc
 			if itemRequiredLevel <= 63 then
 				return 225
 			elseif itemRequiredLevel <= 70 then
 				return 275
 			end
-		elseif expansionID == 2 then -- item was added in wrath
+		elseif itemID < 46828 then -- item was added in wrath
 			if itemRequiredLevel <= 72 then
 				return 325
 			elseif itemRequiredLevel <= 80 then
