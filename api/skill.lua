@@ -83,41 +83,35 @@ else
 			return
 		end
 
-		if itemID < 20470 then -- item was added in vanilla
-			if itemRequiredLevel <= 15 then
-				return 1
-			elseif itemRequiredLevel <= 20 then
-				return 25
-			elseif itemRequiredLevel <= 25 then
-				return 50
-			elseif itemRequiredLevel <= 30 then
-				return 75
-			elseif itemRequiredLevel <= 35 then
-				return 100
-			elseif itemRequiredLevel <= 40 then
-				return 125
-			elseif itemRequiredLevel <= 45 then
-				return 150
-			elseif itemRequiredLevel <= 50 then
-				return 175
-			elseif itemRequiredLevel <= 55 then
-				return 200
-			elseif itemRequiredLevel <= 60 then
-				return 225
-			end
-		elseif itemID < 33084 then -- item was added in tbc
-			if itemRequiredLevel <= 63 then
-				return 225
-			elseif itemRequiredLevel <= 70 then
-				return 275
-			end
-		elseif itemID < 46828 then -- item was added in wrath
-			if itemRequiredLevel <= 72 then
-				return 325
-			elseif itemRequiredLevel <= 80 then
-				return 350
-			end
+		-- this is pretty much pure guesswork and probably won't be entirely accurate
+		if itemRequiredLevel <= 15 then
+			return 1
+		elseif itemRequiredLevel <= 20 then
+			return 25
+		elseif itemRequiredLevel <= 25 then
+			return 50
+		elseif itemRequiredLevel <= 30 then
+			return 75
+		elseif itemRequiredLevel <= 35 then
+			return 100
+		elseif itemRequiredLevel <= 40 then
+			return 125
+		elseif itemRequiredLevel <= 45 then
+			return 150
+		elseif itemRequiredLevel <= 50 then
+			return 175
+		elseif itemRequiredLevel <= 55 then
+			return 200
+		elseif itemRequiredLevel <= 63 then
+			return 225
+		elseif itemRequiredLevel <= 70 then
+			return 275
+		elseif itemRequiredLevel <= 72 then
+			return 325
+		elseif itemRequiredLevel <= 80 then
+			return 350
+		else
+			return 9999 -- fallback to avoid errors without information available
 		end
-		return 9999 -- fallback to avoid errors without information available
 	end
 end
