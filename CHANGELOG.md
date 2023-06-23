@@ -1,3 +1,7 @@
+### Changes in 100100.108-Release:
+
+- Fixed: Titanium Ore not considered prospectable (wrath)
+
 ### Changes in 100100.107-Release:
 
 - Changed: Update non-disenchantable database (wrath)
