@@ -792,4 +792,5 @@ addon.data.nondisenchantable = {
 	[199747] = true, -- Collective Plate Gauntlets
 	[200235] = true, -- Collective Cloak
 	[201993] = true, -- Deadly Gladiator's Tabard
+	[206392] = true, -- Tabard of the Sons of Hodir
 }
