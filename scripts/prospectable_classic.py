@@ -4,8 +4,6 @@ from utils import *
 
 itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
 
-# missing: Titanium Ore, became prospectable in patch 3.2
-
 items = {}
 # iterate through ItemSparse for items that can be prospected
 for row in itemSparse:
