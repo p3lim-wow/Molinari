@@ -9,5 +9,6 @@ addon.data.prospectable = {
 	[23424] = 275, -- Fel Iron Ore
 	[23425] = 325, -- Adamantite Ore
 	[36909] = 350, -- Cobalt Ore
+	[36910] = 450, -- Titanium Ore
 	[36912] = 400, -- Saronite Ore
 }
