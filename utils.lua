@@ -16,7 +16,7 @@ if addon:IsRetail() then
 				local location = C_Item.GetItemLocation(data.guid)
 				if location and location:IsBagAndSlot() then
 					local bagID = location:GetBagAndSlot()
-					if bagID >= 0 and bagID <= 4 then -- limit to player bags
+					if bagID >= 0 and bagID <= 5 then -- limit to player bags
 						callback(tooltip, Item:CreateFromItemLocation(location))
 					end
 				end
