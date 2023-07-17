@@ -3987,7 +3987,6 @@ addon.data.nondisenchantable = {
 	[192792] = true, -- PH Thunder Lizard Green
 	[192793] = true, -- PH Thunder Lizard Black
 	[192794] = true, -- PH Thunder Lizard Blue
-	[192796] = true, -- PH Thunder Lizard Light
 	[192799] = true, -- Lizi's Reins
 	[192801] = true, -- PH Primal Tallstrider White
 	[192802] = true, -- PH Primal Tallstrider Black
@@ -4082,4 +4081,8 @@ addon.data.nondisenchantable = {
 	[201720] = true, -- Bronze Vorquin
 	[202197] = true, -- Emboldened Dracthyr's Tabard
 	[205286] = true, -- Loamm Niffen Tabard
+	[206167] = true, -- Way of the Wonderous Wavewhisker
+	[207099] = true, -- Tiny Box of Tiny Rocks
+	[207702] = true, -- Wartorn Scrap
+	[208229] = true, -- Honor of the Forsaken
 }
