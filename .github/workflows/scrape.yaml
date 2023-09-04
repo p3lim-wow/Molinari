@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Clone DBC archive
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: Vladinator/wow-dbc-archive
           ref: release/${{ inputs.dbc }}
