@@ -31,4 +31,7 @@ addon.data.disenchantable = {
 	[204990] = true, -- Lava-Drenched Shadow Crystal
 	[204999] = true, -- Shimmering Aqueous Orb
 	[205001] = true, -- Resonating Arcane Crystal
+	[210228] = true, -- Pure Dream Water
+	[210231] = true, -- Everburning Core
+	[210234] = true, -- Essence of Dreams
 }
