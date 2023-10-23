@@ -4118,4 +4118,6 @@ addon.data.nondisenchantable = {
 	[209064] = true, -- Ensemble: Chromatically Calibrated Retinal Armor
 	[209066] = true, -- Ensemble: Chromatically Calibrated Cranial Cannons
 	[209067] = true, -- Ensemble: Chromatically Calibrated Ectoplasmic Specs
+	[210424] = true, -- Darnassian Tabard
+	[210501] = true, -- Dream Wardens Tabard
 }
