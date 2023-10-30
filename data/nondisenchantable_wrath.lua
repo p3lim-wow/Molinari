@@ -795,4 +795,7 @@ addon.data.nondisenchantable = {
 	[200235] = true, -- Collective Cloak
 	[201993] = true, -- Deadly Gladiator's Tabard
 	[206392] = true, -- Tabard of the Sons of Hodir
+	[211817] = true, -- Ring of Ghoulish Glee
+	[211844] = true, -- The Horseman's Seal
+	[211850] = true, -- The Horseman's Horrific Helm
 }
