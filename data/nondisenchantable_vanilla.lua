@@ -873,4 +873,12 @@ addon.data.nondisenchantable = {
 	[209624] = true, -- Insignia of the Horde
 	[209625] = true, -- Insignia of the Horde
 	[209626] = true, -- Insignia of the Horde
+	[212580] = true, -- Lorekeeper's Staff
+	[212581] = true, -- Outrunner's Bow
+	[212582] = true, -- Protector's Sword
+	[212583] = true, -- Sentinel's Blade
+	[212584] = true, -- Advisor's Gnarled Staff
+	[212585] = true, -- Outrider's Bow
+	[212586] = true, -- Legionnaire's Sword
+	[212587] = true, -- Scout's Blade
 }
