@@ -118,8 +118,13 @@ end)
 
 -- re-anchor when shown
 Molinari:HookScript('OnShow', function(self)
+	-- some addons put slots into a scrollframe for whatever reason, which we can't anchor to,
+	-- lets calculate anchors ourselves instead, adjusting for scale
+	local left, bottom, width, height = GameTooltip:GetOwner():GetScaledRect()
+	local scaleMultiplier = 1/UIParent:GetScale()
 	self:ClearAllPoints()
-	self:SetAllPoints(GetMouseFocus())
+	self:SetPoint('BOTTOMLEFT', left * scaleMultiplier, bottom * scaleMultiplier)
+	self:SetSize(width * scaleMultiplier, height * scaleMultiplier)
 end)
 
 -- set attribute to trigger EnterLeave driver
