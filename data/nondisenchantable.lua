@@ -4121,4 +4121,6 @@ addon.data.nondisenchantable = {
 	[210008] = true, -- Smoldering Rune of Binding
 	[210501] = true, -- Dream Wardens Tabard
 	[210523] = true, -- Timerunning Neck
+	[211873] = true, -- Reins of the Gilnean Prowler
+	[212522] = true, -- Compass Rose
 }
