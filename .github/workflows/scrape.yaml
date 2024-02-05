@@ -47,7 +47,7 @@ jobs:
           wait
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
         with:
           title: Update ${{ inputs.flavor }} data to ${{ env.dbc_version }}
