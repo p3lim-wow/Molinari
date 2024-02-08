@@ -1,9 +1,7 @@
 local _, addon = ...
 
-local CLASSIC = not addon:IsRetail()
-
 local Enum = Enum -- upvalue so we can modify it
-if CLASSIC then
+if not addon:IsRetail() then
 	-- these were renamed in 9.0.1
 	Enum.ItemQuality.Common = Enum.ItemQuality.Standard
 	Enum.ItemQuality.Uncommon = Enum.ItemQuality.Good
@@ -11,10 +9,10 @@ end
 
 function addon:IsProspectable(itemID)
 	-- returns the spell used to prospect the item if the player can prospect it
-	if addon:IsClassicWrath() then
+	if addon:IsClassic() then
 		local skillRequired = addon.data.prospectable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and GetItemCount(itemID) >= 5 and 31252, addon.colors.prospectable
-	elseif not CLASSIC then
+	elseif addon:IsRetail() then
 		local professionSkillID = addon.data.prospectable[itemID]
 		return professionSkillID and IsPlayerSpell(professionSkillID) and professionSkillID, addon.colors.prospectable
 	end
@@ -22,10 +20,10 @@ end
 
 function addon:IsMillable(itemID)
 	-- returns the spell used to mill the item if the player can mill it
-	if addon:IsClassicWrath() then
+	if addon:IsClassic() then
 		local skillRequired = addon.data.millable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and GetItemCount(itemID) >= 5 and 51005, addon.colors.millable
-	elseif not CLASSIC then
+	elseif addon:IsRetail() then
 		local professionSkillID = addon.data.millable[itemID]
 		return professionSkillID and IsPlayerSpell(professionSkillID) and GetItemCount(itemID) >= 5 and professionSkillID, addon.colors.millable
 	end
@@ -33,7 +31,7 @@ end
 
 function addon:IsCrushable(itemID)
 	-- returns the spell used to crush the item if the player can crush it
-	if not CLASSIC then
+	if addon:IsRetail() then
 		local professionSkillID = addon.data.crushable[itemID]
 		return professionSkillID and IsPlayerSpell(professionSkillID) and GetItemCount(itemID) >= 3 and professionSkillID, addon.colors.crushable
 	end
@@ -41,7 +39,7 @@ end
 
 function addon:IsScrappable(itemID)
 	-- returns the spell used to scrap the item if the player can scrap it
-	if not CLASSIC then
+	if addon:IsRetail() then
 		local professionSkillID = addon.data.scrappable[itemID]
 		return professionSkillID and IsPlayerSpell(professionSkillID) and GetItemCount(itemID) >= 5 and professionSkillID, addon.colors.scrappable
 	end
@@ -50,14 +48,14 @@ end
 function addon:IsDisenchantable(itemID)
 	-- returns the spell used to disenchant the item if the player can disenchant it
 	if IsPlayerSpell(13262) then
-		if not CLASSIC and addon.data.disenchantable[itemID] then
+		if addon:IsRetail() and addon.data.disenchantable[itemID] then
 			return 13262, addon.colors.disenchantable
 		elseif addon.data.nondisenchantable[itemID] then
 			return
 		end
 
 		local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = GetItemInfo(itemID)
-		if CLASSIC then
+		if addon:IsClassic() then
 			-- make sure the player has enough skill to disenchant the item
 			if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
 				return
@@ -83,7 +81,7 @@ function addon:IsOpenable(itemID)
 	-- returns the spell used to open the item if the player can open it
 	local requiredLevel = addon.data.openable[itemID]
 	if requiredLevel then
-		if IsPlayerSpell(1804) and requiredLevel <= (UnitLevel('player') * (CLASSIC and 5 or 1)) then
+		if IsPlayerSpell(1804) and requiredLevel <= (UnitLevel('player') * (addon:IsRetail() and 1 or 5)) then
 			return 1804, addon.colors.openable -- Pick Lock, Rogue ability
 		elseif IsPlayerSpell(312890) and requiredLevel <= UnitLevel('player') then
 			return 312890, addon.colors.openable -- Skeleton Pinkie, Mechagnome racial ability
