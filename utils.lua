@@ -3,7 +3,7 @@ local _, addon = ...
 if addon:IsRetail() then
 	function addon:HookTooltip(callback)
 		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
-			if not (tooltip and tooltip:GetOwner()) then
+			if not (tooltip and not tooltip:IsForbidden() and tooltip:GetOwner()) then
 				return
 			end
 
@@ -45,7 +45,7 @@ else
 
 	function addon:HookTooltip(callback)
 		GameTooltip:HookScript('OnTooltipSetItem', function(tooltip)
-			if not (tooltip and tooltip:GetOwner()) then
+			if not (tooltip and not tooltip:IsForbidden() and tooltip:GetOwner()) then
 				return
 			end
 
