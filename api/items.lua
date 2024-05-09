@@ -11,7 +11,7 @@ function addon:IsProspectable(itemID)
 	-- returns the spell used to prospect the item if the player can prospect it
 	if addon:IsClassic() then
 		local skillRequired = addon.data.prospectable[itemID]
-		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and GetItemCount(itemID) >= 5 and 31252, addon.colors.prospectable
+		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and 31252, addon.colors.prospectable
 	elseif addon:IsRetail() then
 		local professionSkillID = addon.data.prospectable[itemID]
 		return professionSkillID and IsPlayerSpell(professionSkillID) and professionSkillID, addon.colors.prospectable
@@ -22,10 +22,10 @@ function addon:IsMillable(itemID)
 	-- returns the spell used to mill the item if the player can mill it
 	if addon:IsClassic() then
 		local skillRequired = addon.data.millable[itemID]
-		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and GetItemCount(itemID) >= 5 and 51005, addon.colors.millable
+		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and 51005, addon.colors.millable
 	elseif addon:IsRetail() then
 		local professionSkillID = addon.data.millable[itemID]
-		return professionSkillID and IsPlayerSpell(professionSkillID) and GetItemCount(itemID) >= 5 and professionSkillID, addon.colors.millable
+		return professionSkillID and IsPlayerSpell(professionSkillID) and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and professionSkillID, addon.colors.millable
 	end
 end
 
@@ -33,7 +33,7 @@ function addon:IsCrushable(itemID)
 	-- returns the spell used to crush the item if the player can crush it
 	if addon:IsRetail() then
 		local professionSkillID = addon.data.crushable[itemID]
-		return professionSkillID and IsPlayerSpell(professionSkillID) and GetItemCount(itemID) >= 3 and professionSkillID, addon.colors.crushable
+		return professionSkillID and IsPlayerSpell(professionSkillID) and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 3 and professionSkillID, addon.colors.crushable
 	end
 end
 
@@ -41,7 +41,7 @@ function addon:IsScrappable(itemID)
 	-- returns the spell used to scrap the item if the player can scrap it
 	if addon:IsRetail() then
 		local professionSkillID = addon.data.scrappable[itemID]
-		return professionSkillID and IsPlayerSpell(professionSkillID) and GetItemCount(itemID) >= 5 and professionSkillID, addon.colors.scrappable
+		return professionSkillID and IsPlayerSpell(professionSkillID) and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and professionSkillID, addon.colors.scrappable
 	end
 end
 
@@ -54,7 +54,7 @@ function addon:IsDisenchantable(itemID)
 			return
 		end
 
-		local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = GetItemInfo(itemID)
+		local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = (GetItemInfo or C_Item.GetItemInfo)(itemID)
 		if addon:IsClassic() then
 			-- make sure the player has enough skill to disenchant the item
 			if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
@@ -129,7 +129,7 @@ function addon:IsOpenableProfession(itemID)
 				info[1] > requiredLevel and
 				info[3] < addon:GetProfessionSkillLevel(info[2]) and
 				info[4] < UnitLevel('player') and
-				GetItemCount(pickItemID) > 0
+				((GetItemCount or C_Item.GetItemCount)(pickItemID)) > 0
 			then
 				return pickItemID, addon.colors.openable
 			end

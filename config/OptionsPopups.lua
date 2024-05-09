@@ -18,7 +18,7 @@ StaticPopupDialogs[addonName .. 'ItemBlocklistPopup'] = {
 		local text = editBox:GetText():trim():match('[0-9]+')
 		editBox:SetText(text or '')
 
-		local itemID  = GetItemInfoInstant(tonumber(text) or '')
+		local itemID  = (GetItemInfoInstant or C_Item.GetItemInfoInstant)(tonumber(text) or '')
 		if itemID then
 			self.data = self.data or {}
 			self.data.link = '|Hitem:' .. itemID .. '|h'

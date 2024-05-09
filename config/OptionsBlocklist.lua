@@ -73,7 +73,7 @@ local function createItemBlocklistOptions()
 
 	local queryItems = {}
 	local function updateTexture(button)
-		local _, _, _, _, _, _, _, _, _, textureFile = GetItemInfo(button.itemID)
+		local _, _, _, _, _, _, _, _, _, textureFile = (GetItemInfo or C_Item.GetItemInfo)(button.itemID)
 		if textureFile then
 			button:SetNormalTexture(textureFile)
 		else
