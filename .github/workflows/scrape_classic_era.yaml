@@ -16,7 +16,7 @@ jobs:
   scrape:
     uses: ./.github/workflows/scrape.yaml
     with:
-      flavor: classic era
+      flavor: classic_era
       dbc: wow_classic_era_latest
       files: |
         openable: openable_classic_era
