@@ -1,4 +1,4 @@
-name: Scrape vanilla
+name: Scrape classic era
 
 on:
   push:
@@ -16,9 +16,9 @@ jobs:
   scrape:
     uses: ./.github/workflows/scrape.yaml
     with:
-      flavor: vanilla
+      flavor: classic era
       dbc: wow_classic_era_latest
       files: |
-        openable: openable_vanilla
-        keys_vanilla: keys_vanilla
-        nondisenchantable: nondisenchantable_vanilla
+        openable: openable_classic_era
+        keys_classic_era: keys_classic_era
+        nondisenchantable: nondisenchantable_classic_era

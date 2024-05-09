@@ -36,9 +36,9 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
-data\openable_vanilla.lua
-data\keys_vanilla.lua
-data\nondisenchantable_vanilla.lua
+data\openable_classic_era.lua
+data\keys_classic_era.lua
+data\nondisenchantable_classic_era.lua
 
 api\items.lua
 api\skill.lua

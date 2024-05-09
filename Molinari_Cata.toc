@@ -36,11 +36,11 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
-data\openable_wrath.lua
-data\keys_wrath.lua
-data\nondisenchantable_wrath.lua
-data\prospectable_wrath.lua
-data\millable_wrath.lua
+data\openable_classic.lua
+data\keys_classic.lua
+data\nondisenchantable_classic.lua
+data\prospectable_classic.lua
+data\millable_classic.lua
 
 api\items.lua
 api\skill.lua

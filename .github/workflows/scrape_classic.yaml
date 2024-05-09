@@ -1,4 +1,4 @@
-name: Scrape wrath
+name: Scrape classic
 
 on:
   push:
@@ -16,11 +16,11 @@ jobs:
   scrape:
     uses: ./.github/workflows/scrape.yaml
     with:
-      flavor: wrath
+      flavor: classic
       dbc: wow_classic_ptr_latest
       files: |
-        openable: openable_wrath
-        keys_wrath: keys_wrath
-        nondisenchantable: nondisenchantable_wrath
-        prospectable_classic: prospectable_wrath
-        millable_classic: millable_wrath
+        openable: openable_classic
+        keys_classic: keys_classic
+        nondisenchantable: nondisenchantable_classic
+        prospectable_classic: prospectable_classic
+        millable_classic: millable_classic
