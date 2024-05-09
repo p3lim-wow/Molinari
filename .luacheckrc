@@ -27,6 +27,8 @@ read_globals = {
 	'InterfaceOptionsFrameAddOns', -- OLD
 	'InterfaceOptionsFramePanelContainer', -- OLD
 	'PaperDollFrameItemFlyoutButtons', -- OLD
+	'InterfaceAddOnsList_Update', -- OLD
+	'InterfaceOptionsFrame_OpenToCategory', -- OLD
 
 	-- FrameXML functions
 	'AutoCastShine_AutoCastStart', -- FrameXML/UIParent.lua
