@@ -52,14 +52,28 @@ local function createOptions()
 	EventHandler:SetScript('OnEvent', updateOptions)
 end
 
-addon:HookSettings(function()
+local function callback()
 	createOptions() -- LoD
 	addon.CreateBlocklistOptions() -- LoD
-end)
+end
+if addon:IsRetail() then
+	SettingsPanel:HookScript('OnShow', callback)
+else
+	InterfaceOptionsFrameAddOns:HookScript('OnShow', function(frame)
+		callback(frame)
+
+		-- we load too late, so we have to manually refresh the list
+		InterfaceAddOnsList_Update()
+	end)
+end
 
 addon:RegisterSlash('/molinari', function()
-	createOptions() -- LoD
-	addon.CreateBlocklistOptions() -- LoD
+	callback()
 
-	addon:OpenSettings(addonName)
+	if addon:IsRetail() then
+		Settings.OpenToCategory(addonName)
+	else
+		InterfaceOptionsFrame_OpenToCategory(addonName)
+		InterfaceOptionsFrame_OpenToCategory(addonName) -- load twice due to an old bug
+	end
 end)
