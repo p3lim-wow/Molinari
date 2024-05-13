@@ -13,7 +13,7 @@ effectSpells = {}
 # iterate through spell effects for effect 33 (lockpicking)
 for row in spellEffect:
 	if row.Effect == 33 and getattr(row, 'EffectMiscValue[0]') == 1:
-		effectSpells[row.SpellID] = row.EffectBasePoints + 1 # it's 1 lower for whatever reason
+		effectSpells[row.SpellID] = row.EffectBasePoints
 
 items = {}
 # iterate through item effects for items with the spell from above
