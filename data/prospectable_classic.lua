@@ -11,4 +11,6 @@ addon.data.prospectable = {
 	[36909] = 350, -- Cobalt Ore
 	[36910] = 450, -- Titanium Ore
 	[36912] = 400, -- Saronite Ore
+	[52183] = 500, -- Pyrite Ore
+	[53038] = 425, -- Obsidium Ore
 }
