@@ -12,9 +12,8 @@ addon.data.openable = {
 	[5760] = 225, -- Eternium Lockbox
 	[6354] = 1, -- Small Locked Chest
 	[6355] = 70, -- Sturdy Locked Chest
-	[6712] = 1, -- Practice Lock
 	[7209] = 1, -- Tazan's Satchel
-	[7869] = 70, -- Lucius's Lockbox
+	[7869] = 70, -- Lucius' Lockbox
 	[12033] = 275, -- Thaurissan Family Jewels
 	[13875] = 175, -- Ironbound Locked Chest
 	[13918] = 250, -- Reinforced Locked Chest
@@ -28,4 +27,6 @@ addon.data.openable = {
 	[43622] = 375, -- Froststeel Lockbox
 	[43624] = 400, -- Titanium Lockbox
 	[45986] = 400, -- Tiny Titanium Lockbox
+	[63349] = 400, -- Flame-Scarred Junkbox
+	[68729] = 425, -- Elementium Lockbox
 }
