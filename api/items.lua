@@ -55,12 +55,12 @@ function addon:IsDisenchantable(itemID)
 		end
 
 		local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = (GetItemInfo or C_Item.GetItemInfo)(itemID)
-		if addon:IsClassic() then
-			-- make sure the player has enough skill to disenchant the item
-			if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
-				return
-			end
-		end
+		-- if addon:IsClassic() then
+		-- 	-- make sure the player has enough skill to disenchant the item
+		-- 	if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
+		-- 		return
+		-- 	end
+		-- end
 
 		-- match against common traits between items that are disenchantable
 		return quality and (
