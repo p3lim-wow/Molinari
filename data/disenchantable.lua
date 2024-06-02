@@ -8,6 +8,7 @@ addon.data.disenchantable = {
 	[182021] = true, -- Antique Kyrian Javelin
 	[182043] = true, -- Antique Necromancer's Staff
 	[182067] = true, -- Antique Duelist's Rapier
+	[190336] = true, -- Thrumming Powerstone
 	[198675] = true, -- Lava-Infused Seed
 	[198689] = true, -- Stormbound Horn
 	[198694] = true, -- Enriched Earthen Shard
