@@ -15,7 +15,7 @@ extra = [
 items = {}
 # iterate through ItemSparse for items that can't be disenchanted
 for row in itemSparse:
-	if (getattr(row, 'Flags[1]') & 0x40001000) != 0 or row.ID in extra:
+	if (getattr(row, 'Flags[1]') & 0x40000000) != 0 and row.InventoryType == 0:
 		items[row.ID] = {
 			'itemID': row.ID,
 			'name': row.Display_lang,
