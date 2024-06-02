@@ -7,7 +7,7 @@ itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
 items = {}
 # iterate through ItemSparse for items that can be prospected
 for row in itemSparse:
-	if getattr(row, 'Flags[0]') == 262144 and row.RequiredSkill == 755:
+	if (getattr(row, 'Flags[0]') & 0x40000) != 0 and row.RequiredSkill == 755:
 		if row.ID == 24115:
 			# random test item
 			continue

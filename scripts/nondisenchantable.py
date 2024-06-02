@@ -7,7 +7,7 @@ itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
 items = {}
 # iterate through ItemSparse for items that can't be disenchanted
 for row in itemSparse:
-	if getattr(row, 'Flags[0]') == 32768:
+	if (getattr(row, 'Flags[0]') & 0x8000) != 0:
 		items[row.ID] = {
 			'itemID': row.ID,
 			'name': row.Display_lang.strip(),
