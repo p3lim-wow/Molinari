@@ -41,7 +41,7 @@ function addon:IsScrappable(itemID)
 	-- returns the spell used to scrap the item if the player can scrap it
 	if addon:IsRetail() then
 		local professionSkillID = addon.data.scrappable[itemID]
-		return professionSkillID and IsPlayerSpell(professionSkillID) and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and professionSkillID, addon.colors.scrappable
+		return professionSkillID and IsPlayerSpell(professionSkillID) and professionSkillID, addon.colors.scrappable
 	end
 end
 
