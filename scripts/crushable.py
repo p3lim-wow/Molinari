@@ -39,7 +39,7 @@ for row in itemSalvageLoot:
 
 # iterate through ItemSparse for crushable items and add their names to the dict
 for row in itemSparse:
-	if row.ID in items:
+	if row.ID in items and row.Gem_properties == 0:
 		items[row.ID]['name'] = row.Display_lang
 
 # print data file structure
