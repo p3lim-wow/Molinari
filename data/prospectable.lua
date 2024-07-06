@@ -44,4 +44,15 @@ addon.data.prospectable = {
 	[192880] = 374627, -- Crumbled Stone
 	[194545] = 374627, -- Prismatic Ore
 	[199344] = 374627, -- Magma Thresher
+	[210930] = 434018, -- Bismuth
+	[210931] = 434018, -- Bismuth
+	[210932] = 434018, -- Bismuth
+	[210933] = 434018, -- Aqirite
+	[210934] = 434018, -- Aqirite
+	[210935] = 434018, -- Aqirite
+	[210936] = 434018, -- Ironclaw Ore
+	[210937] = 434018, -- Ironclaw Ore
+	[210938] = 434018, -- Ironclaw Ore
+	[210939] = 434018, -- Null Stone
+	[213398] = 434018, -- Handful of Pebbles
 }
