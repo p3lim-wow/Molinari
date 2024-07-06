@@ -14,6 +14,10 @@ for row in lock:
 items = {}
 # iterate through ItemSparse for locked items
 for row in itemSparse:
+	if (getattr(row, 'Flags[0]') & 0x10) != 0:
+		# deprecated item
+		continue
+
 	# every item that requires a key or lockpicking has a LockID,
 	# and a corresponding entry in Lock.db2
 	if row.LockID > 0 and row.LockID in locks:

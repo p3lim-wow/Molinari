@@ -51,6 +51,11 @@ for row in itemSalvageLoot:
 # iterate through ItemSparse for prospectable items and add their names to the dict
 for row in itemSparse:
 	if row.ID in items:
+		if (getattr(row, 'Flags[0]') & 0x10) != 0:
+			# deprecated item
+			del items[row.ID]
+			continue
+
 		items[row.ID]['name'] = row.Display_lang
 
 # print data file structure
