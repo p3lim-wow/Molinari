@@ -38,13 +38,17 @@ jobs:
       - name: Scrape DBC
         run: |
           set -e
+          pids=()
           while IFS= read -r files; do
             script="scripts/$(cut -d: -f1 <<< "$files").py"
             output="data/$(cut -d: -f2 <<< "$files" | xargs).lua"
             echo "Running '$script' > '$output'"
             python3 "$script" > "$output" &
+            pids+=($!)
           done < <(sed '/^$/d' <<< "${{ inputs.files }}")
-          wait
+          for pid in "${pids[@]}"; do
+            wait "$pid" || exit
+          done
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
