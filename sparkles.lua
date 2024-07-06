@@ -17,7 +17,6 @@ for _ = 1, 4 do
 	end
 end
 
-local spacing = 6
 local timers = {0, 0, 0, 0}
 local speeds = {2, 4, 6, 8}
 sparkles:SetScript('OnUpdate', function(self, elapsed)
