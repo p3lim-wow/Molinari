@@ -16,6 +16,11 @@ itemSalvageLoot = CSVReader(open('dbc/itemsalvageloot.csv', 'r'))
 # 36th field in SpellEffect.db2 matches SpellID from SkillLineAbility
 # 26th field in SpellEffect.db2 matches ItemSalvageID from ItemSalvage
 
+# tl;dr:
+# 1. find the spellID for prospecting on wowhead
+# 2. match that against the spellID field in SpellEffect.db2
+# 3. find "EffectMiscValue[0]" - this is the ItemSalvageID
+
 recipeSpellIDs = {
 	# ItemSalvageID = SpellID
 	1: 325248, # Shadowlands Prospecting
@@ -27,6 +32,7 @@ recipeSpellIDs = {
 	10: 382979, # Northrend Prospecting
 	11: 382980, # Outland Prospecting
 	12: 382995, # Classic Prospecting
+	69: 434018, # Algari Prospecting
 }
 
 # iterate through ItemSalvageLoot for items that can be prospected

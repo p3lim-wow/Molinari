@@ -8,6 +8,7 @@ itemSalvageLoot = CSVReader(open('dbc/itemsalvageloot.csv', 'r'))
 recipeSpellIDs = {
 	# ItemSalvageID = SpellID
 	35: 382374, # Rummage Through Scrap
+	89: 447311, # Pilfer Through Parts
 }
 
 # iterate through ItemSalvageLoot for items that can be scrapped

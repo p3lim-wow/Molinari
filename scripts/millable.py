@@ -16,6 +16,11 @@ itemSalvageLoot = CSVReader(open('dbc/itemsalvageloot.csv', 'r'))
 # 36th field in SpellEffect.db2 matches SpellID from SkillLineAbility
 # 26th field in SpellEffect.db2 matches ItemSalvageID from ItemSalvage
 
+# tl;dr:
+# 1. find the spellID for milling on wowhead
+# 2. match that against the spellID field in SpellEffect.db2
+# 3. find "EffectMiscValue[0]" - this is the ItemSalvageID
+
 recipeSpellIDs = {
 	# ItemSalvageID = SpellID
 	13: 382981, # Dragon Isles Milling
@@ -28,6 +33,7 @@ recipeSpellIDs = {
 	20: 382990, # Northrend Milling
 	21: 382991, # Outland Milling
 	22: 382994, # Classic Milling
+	67: 444181, # Khaz Algar Milling
 }
 
 # iterate through ItemSalvageLoot for items that can be milled
