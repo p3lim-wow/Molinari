@@ -32,5 +32,10 @@ for row in itemSparse:
 
 		items[row.ID]['name'] = row.Display_lang
 
+# need to filter bad data
+for item in list(items.keys()):
+	if 'name' not in items[item]:
+		del items[item]
+
 # print data file structure
 templateLuaTable('scrappable', '\t[{itemID}] = {recipeSpellID}, -- {name}', items)
