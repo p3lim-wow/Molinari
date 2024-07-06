@@ -1,7 +1,7 @@
 local addonName, addon = ...
 addon.data = {}
 
-local Molinari = addon:CreateButton('Button', addonName, UIParent, 'SecureActionButtonTemplate,SecureHandlerAttributeTemplate,SecureHandlerEnterLeaveTemplate,AutoCastShineTemplate')
+local Molinari = addon:CreateButton('Button', addonName, UIParent, 'SecureActionButtonTemplate,SecureHandlerAttributeTemplate,SecureHandlerEnterLeaveTemplate')
 Molinari:SetFrameStrata('TOOLTIP')
 Molinari:Hide()
 
@@ -89,7 +89,11 @@ function Molinari:ApplyItem(item, color)
 end
 
 function Molinari:AddSparkles(color)
-	AutoCastShine_AutoCastStart(self, color:GetRGB())
+	addon:StartSparkles(self, color)
+end
+
+function Molinari:HideSparkles()
+	addon:StopSparkles()
 end
 
 -- update attribute driver with the correct modifiers
@@ -151,15 +155,8 @@ Molinari:HookScript('OnHide', function(self)
 	addon:Defer(self, 'SetAttribute', self, '_entered', false)
 end)
 
--- adjust the glow sparkles
-for _, sparkle in next, Molinari.sparkles do
-	sparkle:SetHeight(sparkle:GetHeight() * 3)
-	sparkle:SetWidth(sparkle:GetWidth() * 3)
-end
-
 -- remove glow when hidden
--- Molinari:HookScript('OnLeave', AutoCastShine_AutoCastStop)
-Molinari:HookScript('OnHide', AutoCastShine_AutoCastStop)
+Molinari:HookScript('OnHide', Molinari.HideSparkles)
 
 -- tooltips
 Molinari:HookScript('OnLeave', GameTooltip_Hide)

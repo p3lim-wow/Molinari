@@ -23,6 +23,7 @@
 #@end-debug@
 
 utils.lua
+sparkles.lua
 addon.lua
 
 locale\deDE.lua
