@@ -99,14 +99,6 @@ function Molinari:ApplyItem(item, color)
 	end
 end
 
-function Molinari:AddSparkles(color)
-	addon:StartSparkles(self, color)
-end
-
-function Molinari:HideSparkles()
-	addon:StopSparkles()
-end
-
 -- update attribute driver with the correct modifiers
 function Molinari:UpdateAttributeDriver()
 	if addon.db.profile.general.modifierKey == 'CTRL' then
