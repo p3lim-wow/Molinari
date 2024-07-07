@@ -24,7 +24,7 @@ function addon:IsMillable(itemID)
 		local skillRequired = addon.data.millable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and 51005, addon.colors.millable
 	elseif addon:IsRetail() then
-		local professionSkillID = addon.data.millable[itemID]
+		local info = addon.data.millable[itemID]
 		return info and IsPlayerSpell(info[1]) and info[1], addon.colors.millable, info[2]
 	end
 end
