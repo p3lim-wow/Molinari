@@ -47,7 +47,18 @@ local function createOptionsPanel(name, localizedName, description, buttonLocali
 	button:SetHeight(button:GetTextHeight() * 2)
 	panel.button = button
 
-	InterfaceOptions_AddCategory(panel) -- DEPRECATED
+	if InterfaceOptions_AddCategory then
+		InterfaceOptions_AddCategory(panel)
+	else
+		panel.OnCommit = panel.okay
+		panel.OnDefault = panel.default
+		panel.OnRefresh = panel.refresh
+
+		local category = Settings.GetCategory(addonName)
+		local subcategory, layout = Settings.RegisterCanvasLayoutSubcategory(category, panel, panel.name, panel.name)
+		subcategory.ID = panel.name
+	end
+
 	return panel
 end
 

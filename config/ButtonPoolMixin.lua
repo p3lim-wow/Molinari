@@ -4,7 +4,7 @@ local buttonPoolMixin = {}
 function buttonPoolMixin.Reposition(pool)
 	if pool.parent:GetParent():GetWidth() == 0 then
 		-- until the frame is visible the width is 0
-		C_Timer.After(0.5, function()
+		C_Timer.After(0, function()
 			pool:Reposition()
 		end)
 
@@ -54,7 +54,8 @@ do
 end
 
 local function releaseButton(pool, button)
-	FramePool_HideAndClearAnchors(pool, button) -- super
+	button:Hide()
+	button:ClearAllPoints()
 
 	-- reposition remaining buttons
 	pool:Reposition()
@@ -91,6 +92,7 @@ local function onRemoveClick(self)
 	end
 
 	button.pool:Release(button)
+	button.pool:Reposition()
 end
 
 function buttonPoolMixin.CreateButton(pool)
