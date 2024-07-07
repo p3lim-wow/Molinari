@@ -8,73 +8,82 @@ if not addon:IsRetail() then
 end
 
 function addon:IsProspectable(itemID)
-	-- returns the spell used to prospect the item if the player can prospect it
+	-- returns the spell used to prospect the item
 	if addon:IsClassic() then
 		local skillRequired = addon.data.prospectable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and 31252, addon.colors.prospectable
 	elseif addon:IsRetail() then
 		local info = addon.data.prospectable[itemID]
-		return info and IsPlayerSpell(info[1]) and info[1], addon.colors.prospectable, info[2]
+		if info then
+			return info[1], addon.colors.prospectable, info[2]
+		end
 	end
 end
 
 function addon:IsMillable(itemID)
-	-- returns the spell used to mill the item if the player can mill it
+	-- returns the spell used to mill the item
 	if addon:IsClassic() then
 		local skillRequired = addon.data.millable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and 51005, addon.colors.millable
 	elseif addon:IsRetail() then
 		local info = addon.data.millable[itemID]
-		return info and IsPlayerSpell(info[1]) and info[1], addon.colors.millable, info[2]
+		if info then
+			return info[1], addon.colors.millable, info[2]
+		end
 	end
 end
 
 function addon:IsCrushable(itemID)
-	-- returns the spell used to crush the item if the player can crush it
+	-- returns the spell used to crush the item
 	if addon:IsRetail() then
 		local info = addon.data.crushable[itemID]
-		return info and IsPlayerSpell(info[1]) and info[1], addon.colors.crushable, info[2]
+		if info then
+			return info[1], addon.colors.crushable, info[2]
+		end
 	end
 end
 
 function addon:IsScrappable(itemID)
-	-- returns the spell used to scrap the item if the player can scrap it
+	-- returns the spell used to scrap the item
 	if addon:IsRetail() then
 		local info = addon.data.scrappable[itemID]
-		return info and IsPlayerSpell(info[1]) and info[1], addon.colors.scrappable, info[2]
+		if info then
+			return info[1], addon.colors.scrappable, info[2]
+		end
 	end
 end
 
+function addon:NonDisenchantable(itemID)
+	return not not addon.data.nondisenchantable[itemID]
+end
+
 function addon:IsDisenchantable(itemID)
-	-- returns the spell used to disenchant the item if the player can disenchant it
-	if IsPlayerSpell(13262) then
-		if addon:IsRetail() and addon.data.disenchantable[itemID] then
-			return 13262, addon.colors.disenchantable
-		elseif addon.data.nondisenchantable[itemID] then
-			return
-		end
-
-		local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = (GetItemInfo or C_Item.GetItemInfo)(itemID)
-		-- if addon:IsClassic() then
-		-- 	-- make sure the player has enough skill to disenchant the item
-		-- 	if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
-		-- 		return
-		-- 	end
-		-- end
-
-		-- match against common traits between items that are disenchantable
-		return quality and (
-			(
-				quality >= Enum.ItemQuality.Uncommon and quality <= Enum.ItemQuality.Epic
-			) and C_Item.GetItemInventoryTypeByID(itemID) ~= Enum.InventoryType.IndexBodyType and (
-				class == Enum.ItemClass.Weapon or (
-					class == Enum.ItemClass.Armor and subClass ~= Enum.ItemArmorSubclass.Cosmetic
-				) or (
-					class == Enum.ItemClass.Gem and subClass == Enum.ItemGemSubclass.Artifactrelic
-				) or class == Enum.ItemClass.Profession
-			)
-		) and 13262, addon.colors.disenchantable
+	-- returns the spell used to disenchant the item if it can be disenchanted
+	if addon:IsRetail() and addon.data.disenchantable[itemID] then
+		-- special items
+		return 13262, addon.colors.disenchantable
 	end
+
+	local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = (GetItemInfo or C_Item.GetItemInfo)(itemID)
+	-- if addon:IsClassic() then
+	-- 	-- make sure the player has enough skill to disenchant the item
+	-- 	if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
+	-- 		return
+	-- 	end
+	-- end
+
+	-- match against common traits between items that are disenchantable
+	return quality and (
+		(
+			quality >= Enum.ItemQuality.Uncommon and quality <= Enum.ItemQuality.Epic
+		) and C_Item.GetItemInventoryTypeByID(itemID) ~= Enum.InventoryType.IndexBodyType and (
+			class == Enum.ItemClass.Weapon or (
+				class == Enum.ItemClass.Armor and subClass ~= Enum.ItemArmorSubclass.Cosmetic
+			) or (
+				class == Enum.ItemClass.Gem and subClass == Enum.ItemGemSubclass.Artifactrelic
+			) or class == Enum.ItemClass.Profession
+		)
+	) and 13262, addon.colors.disenchantable
 end
 
 function addon:IsOpenable(itemID)

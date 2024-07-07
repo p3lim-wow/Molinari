@@ -49,9 +49,30 @@ addon:HookTooltip(function(tooltip, item)
 		return
 	end
 
-	local spellID, color = addon:IsSalvagable(itemID)
+	if addon:NonDisenchantable(itemID) then
+		GameTooltip:AddLine(_G.ITEM_DISENCHANT_NOT_DISENCHANTABLE, _G.FACTION_RED_COLOR:GetRGB())
+		return
+	end
+
+	local spellID, color, numItemsRequired = addon:IsSalvagable(itemID)
 	if spellID then
-		return Molinari:ApplySpell(item, spellID, color)
+		if not IsPlayerSpell(spellID) then
+			local spellName
+			if GetSpellName then
+				spellName = GetSpellName(spellID)
+			else
+				local spellInfo = C_Spell.GetSpellInfo(spellID)
+				spellName = spellInfo.name
+			end
+
+			GameTooltip:AddLine(_G.ERR_USE_LOCKED_WITH_SPELL_S:format(spellName), _G.FACTION_RED_COLOR:GetRGB())
+			return
+		elseif numItemsRequired and C_Item.GetStackCount(item:GetItemLocation()) < numItemsRequired then
+			GameTooltip:AddLine(_G.SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemName(item:GetItemLocation())), _G.FACTION_RED_COLOR:GetRGB())
+			return
+		else
+			return Molinari:ApplySpell(item, spellID, color)
+		end
 	end
 
 	local pickItemID
