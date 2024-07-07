@@ -13,8 +13,8 @@ function addon:IsProspectable(itemID)
 		local skillRequired = addon.data.prospectable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and 31252, addon.colors.prospectable
 	elseif addon:IsRetail() then
-		local professionSkillID = addon.data.prospectable[itemID]
-		return professionSkillID and IsPlayerSpell(professionSkillID) and professionSkillID, addon.colors.prospectable
+		local info = addon.data.prospectable[itemID]
+		return info and IsPlayerSpell(info[1]) and info[1], addon.colors.prospectable, info[2]
 	end
 end
 
@@ -25,23 +25,23 @@ function addon:IsMillable(itemID)
 		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and 51005, addon.colors.millable
 	elseif addon:IsRetail() then
 		local professionSkillID = addon.data.millable[itemID]
-		return professionSkillID and IsPlayerSpell(professionSkillID) and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and professionSkillID, addon.colors.millable
+		return info and IsPlayerSpell(info[1]) and info[1], addon.colors.millable, info[2]
 	end
 end
 
 function addon:IsCrushable(itemID)
 	-- returns the spell used to crush the item if the player can crush it
 	if addon:IsRetail() then
-		local professionSkillID = addon.data.crushable[itemID]
-		return professionSkillID and IsPlayerSpell(professionSkillID) and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 3 and professionSkillID, addon.colors.crushable
+		local info = addon.data.crushable[itemID]
+		return info and IsPlayerSpell(info[1]) and info[1], addon.colors.crushable, info[2]
 	end
 end
 
 function addon:IsScrappable(itemID)
 	-- returns the spell used to scrap the item if the player can scrap it
 	if addon:IsRetail() then
-		local professionSkillID = addon.data.scrappable[itemID]
-		return professionSkillID and IsPlayerSpell(professionSkillID) and professionSkillID, addon.colors.scrappable
+		local info = addon.data.scrappable[itemID]
+		return info and IsPlayerSpell(info[1]) and info[1], addon.colors.scrappable, info[2]
 	end
 end
 
@@ -94,21 +94,21 @@ end
 function addon:IsSalvagable(itemID)
 	-- wrapper for all of the above
 	local spellID, color
-	spellID, color = addon:IsProspectable(itemID)
+	spellID, color, numItems = addon:IsProspectable(itemID)
 	if spellID then
-		return spellID, color
+		return spellID, color, numItems
 	end
-	spellID, color = addon:IsMillable(itemID)
+	spellID, color, numItems = addon:IsMillable(itemID)
 	if spellID then
-		return spellID, color
+		return spellID, color, numItems
 	end
-	spellID, color = addon:IsCrushable(itemID)
+	spellID, color, numItems = addon:IsCrushable(itemID)
 	if spellID then
-		return spellID, color
+		return spellID, color, numItems
 	end
-	spellID, color = addon:IsScrappable(itemID)
+	spellID, color, numItems = addon:IsScrappable(itemID)
 	if spellID then
-		return spellID, color
+		return spellID, color, numItems
 	end
 	spellID, color = addon:IsDisenchantable(itemID)
 	if spellID then

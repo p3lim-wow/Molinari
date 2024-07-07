@@ -4,6 +4,7 @@ from utils import *
 
 itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
 itemSalvageLoot = CSVReader(open('dbc/itemsalvageloot.csv', 'r'))
+spellEffect = CSVReader(open('dbc/spelleffect.csv', 'r'))
 
 recipeSpellIDs = {
 	# ItemSalvageID = SpellID
@@ -13,13 +14,23 @@ recipeSpellIDs = {
 	89: 447311, # Pilfer Through Parts
 }
 
+# figure out how many items are needed to perform the salvage
+spellItemsRequired = {}
+for _, spellID in recipeSpellIDs.items():
+	spellItemsRequired[spellID] = 0
+
+for row in spellEffect:
+	if row.SpellID in spellItemsRequired:
+		spellItemsRequired[row.SpellID] = row.EffectBasePointsF
+
 # iterate through ItemSalvageLoot for items that can be scrapped
 items = {}
 for row in itemSalvageLoot:
 	if row.ItemSalvageID in recipeSpellIDs:
 		items[row.SalvagedItemID] = {
 			'itemID': row.SalvagedItemID,
-			'recipeSpellID': recipeSpellIDs[row.ItemSalvageID]
+			'recipeSpellID': recipeSpellIDs[row.ItemSalvageID],
+			'numItems': spellItemsRequired[recipeSpellIDs[row.ItemSalvageID]],
 		}
 
 # iterate through ItemSparse for scrappable items and add their names to the dict
@@ -38,4 +49,4 @@ for item in list(items.keys()):
 		del items[item]
 
 # print data file structure
-templateLuaTable('scrappable', '\t[{itemID}] = {recipeSpellID}, -- {name}', items)
+templateLuaTable('scrappable', '\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}', items)

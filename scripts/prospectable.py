@@ -4,6 +4,7 @@ from utils import *
 
 itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
 itemSalvageLoot = CSVReader(open('dbc/itemsalvageloot.csv', 'r'))
+spellEffect = CSVReader(open('dbc/spelleffect.csv', 'r'))
 
 # 2nd field in ItemSalvageLoot.db2 gives us the item that can be prospected
 # 3rd field in ItemSalvageLoot.db2 gives us the ItemSalvageID used to prospect the item
@@ -35,13 +36,23 @@ recipeSpellIDs = {
 	69: 434018, # Algari Prospecting
 }
 
+# figure out how many items are needed to perform the salvage
+spellItemsRequired = {}
+for _, spellID in recipeSpellIDs.items():
+	spellItemsRequired[spellID] = 0
+
+for row in spellEffect:
+	if row.SpellID in spellItemsRequired:
+		spellItemsRequired[row.SpellID] = row.EffectBasePointsF
+
 # iterate through ItemSalvageLoot for items that can be prospected
 items = {}
 for row in itemSalvageLoot:
 	if row.ItemSalvageID in recipeSpellIDs:
 		items[row.SalvagedItemID] = {
 			'itemID': row.SalvagedItemID,
-			'recipeSpellID': recipeSpellIDs[row.ItemSalvageID]
+			'recipeSpellID': recipeSpellIDs[row.ItemSalvageID],
+			'numItems': spellItemsRequired[recipeSpellIDs[row.ItemSalvageID]],
 		}
 
 # TODO: check if Runic Core is prospectable with BfA Prospecting
@@ -59,4 +70,4 @@ for row in itemSparse:
 		items[row.ID]['name'] = row.Display_lang
 
 # print data file structure
-templateLuaTable('prospectable', '\t[{itemID}] = {recipeSpellID}, -- {name}', items)
+templateLuaTable('prospectable', '\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}', items)

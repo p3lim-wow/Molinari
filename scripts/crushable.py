@@ -4,6 +4,7 @@ from utils import *
 
 itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
 itemSalvageLoot = CSVReader(open('dbc/itemsalvageloot.csv', 'r'))
+spellEffect = CSVReader(open('dbc/spelleffect.csv', 'r'))
 
 # 2nd field in ItemSalvageLoot.db2 gives us the item that can be prospected
 # 3rd field in ItemSalvageLoot.db2 gives us the ItemSalvageID used to prospect the item
@@ -28,13 +29,23 @@ recipeSpellIDs = {
 	70: 434020, # Algari Crushing
 }
 
+# figure out how many items are needed to perform the salvage
+spellItemsRequired = {}
+for _, spellID in recipeSpellIDs.items():
+	spellItemsRequired[spellID] = 0
+
+for row in spellEffect:
+	if row.SpellID in spellItemsRequired:
+		spellItemsRequired[row.SpellID] = row.EffectBasePointsF
+
 # iterate through ItemSalvageLoot for items that can be crushed
 items = {}
 for row in itemSalvageLoot:
 	if row.ItemSalvageID in recipeSpellIDs:
 		items[row.SalvagedItemID] = {
 			'itemID': row.SalvagedItemID,
-			'recipeSpellID': recipeSpellIDs[row.ItemSalvageID]
+			'recipeSpellID': recipeSpellIDs[row.ItemSalvageID],
+			'numItems': spellItemsRequired[recipeSpellIDs[row.ItemSalvageID]],
 		}
 
 # iterate through ItemSparse for crushable items and add their names to the dict
@@ -48,4 +59,4 @@ for row in itemSparse:
 		items[row.ID]['name'] = row.Display_lang
 
 # print data file structure
-templateLuaTable('crushable', '\t[{itemID}] = {recipeSpellID}, -- {name}', items)
+templateLuaTable('crushable', '\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}', items)
