@@ -54,6 +54,7 @@ read_globals = {
 
 	-- namespaces
 	'C_Item',
+	'C_Spell',
 	'C_Timer',
 	'C_TradeSkillUI',
 	'Enum',
@@ -72,7 +73,8 @@ read_globals = {
 	'GetProfessions',
 	'GetScreenWidth',
 	'GetSkillLineInfo', -- (classic)
-	'GetSpellInfo',
+	'GetSpellInfo', -- (classic)
+	'GetSpellName', -- (classic)
 	'GetTradeTargetItemLink',
 	'InCombatLockdown',
 	'IsAltKeyDown',
