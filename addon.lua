@@ -1,7 +1,18 @@
 local addonName, addon = ...
 addon.data = {}
 
-local Molinari = addon:CreateButton('Button', addonName, UIParent, 'SecureActionButtonTemplate,SecureHandlerAttributeTemplate,SecureHandlerEnterLeaveTemplate')
+local TEMPLATES = {
+	'SecureActionButtonTemplate',
+	'SecureHandlerAttributeTemplate',
+	'SecureHandlerEnterLeaveTemplate',
+}
+
+if not addon:IsRetail() then
+	-- AutoCastShine was removed in 11.0, but we'll keep on using it in classic
+	table.insert(TEMPLATES, 'AutoCastShineTemplate')
+end
+
+local Molinari = addon:CreateButton('Button', addonName, UIParent, table.concat(TEMPLATES, ','))
 Molinari:SetFrameStrata('TOOLTIP')
 Molinari:Hide()
 
@@ -73,7 +84,7 @@ function Molinari:ApplySpell(item, spellID, color)
 	end
 
 	self:Show()
-	self:AddSparkles(color)
+	self:SetColor(color)
 end
 
 function Molinari:ApplyItem(item, color)
@@ -84,7 +95,7 @@ function Molinari:ApplyItem(item, color)
 		self:SetAttribute('target-slot', slotID)
 		self:SetAttribute('item', 'item:' .. item:GetItemID())
 		self:Show()
-		self:AddSparkles(color)
+		self:SetColor(color)
 	end
 end
 
@@ -155,9 +166,6 @@ Molinari:HookScript('OnHide', function(self)
 	addon:Defer(self, 'SetAttribute', self, '_entered', false)
 end)
 
--- remove glow when hidden
-Molinari:HookScript('OnHide', Molinari.HideSparkles)
-
 -- tooltips
 Molinari:HookScript('OnLeave', GameTooltip_Hide)
 Molinari:HookScript('OnEnter', function(self)
@@ -203,4 +211,51 @@ end
 -- register state driver
 function addon:PLAYER_LOGIN()
 	Molinari:UpdateAttributeDriver()
+end
+
+if addon:IsRetail() then
+	-- glow animation
+	local Glow = Molinari:CreateTexture(nil, 'ARTWORK')
+	Glow:SetPoint('CENTER')
+	Glow:SetAtlas('UI-HUD-ActionBar-Proc-Loop-Flipbook')
+	Glow:SetDesaturated(true) -- it's normally yellow, can't color that
+
+	local Animation = Molinari:CreateAnimationGroup()
+	Animation:SetLooping('REPEAT')
+
+	local FlipBook = Animation:CreateAnimation('FlipBook')
+	FlipBook:SetTarget(Glow)
+	FlipBook:SetDuration(1)
+	FlipBook:SetFlipBookColumns(5)
+	FlipBook:SetFlipBookRows(6)
+	FlipBook:SetFlipBookFrames(30)
+
+	function Molinari:SetColor(color)
+		Glow:SetVertexColor(color:GetRGB())
+
+		-- need to adjust the size too
+		local width, height = self:GetSize()
+		Glow:SetSize(width * 1.4, height * 1.4)
+	end
+
+	Molinari:HookScript('OnShow', function()
+		Animation:Play()
+	end)
+
+	Molinari:HookScript('OnHide', function()
+		Animation:Stop()
+	end)
+else
+	-- use AutoCastShine
+	function Molinari:SetColor(color)
+		AutoCastShine_AutoCastStart(self, color:GetRGB())
+	end
+
+	-- adjust the glow sparkles
+	for _, sparkle in next, Molinari.sparkles do
+		sparkle:SetHeight(sparkle:GetHeight() * 3)
+		sparkle:SetWidth(sparkle:GetWidth() * 3)
+	end
+
+	Molinari:HookScript('OnHide', AutoCastShine_AutoCastStop)
 end
