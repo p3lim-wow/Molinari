@@ -93,7 +93,7 @@ end
 
 function addon:IsSalvagable(itemID)
 	-- wrapper for all of the above
-	local spellID, color
+	local spellID, color, numItems
 	spellID, color, numItems = addon:IsProspectable(itemID)
 	if spellID then
 		return spellID, color, numItems
