@@ -25,4 +25,5 @@ addon.data.openable = {
 	[16885] = 250, -- Heavy Junkbox
 	[24282] = 5000, -- Rogue's Diary
 	[208838] = 1, -- Dark Iron Lockbox
+	[227937] = 175, -- Puzzle Box
 }
