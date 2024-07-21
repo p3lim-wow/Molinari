@@ -99,6 +99,7 @@ function Molinari:ApplySpell(item, spellID, color)
 		return
 	end
 
+	self.spellID = spellID -- for tooltips
 	self:Show()
 	self:SetColor(color)
 end
@@ -110,6 +111,8 @@ function Molinari:ApplyItem(item, color)
 		self:SetAttribute('target-bag', bagID)
 		self:SetAttribute('target-slot', slotID)
 		self:SetAttribute('item', 'item:' .. item:GetItemID())
+
+		self.itemID = item:GetItemID() -- for tooltips
 		self:Show()
 		self:SetColor(color)
 	end
@@ -169,6 +172,8 @@ Molinari:SetAttribute('_onattributechanged', [[
 -- reset attributes when hidden
 Molinari:HookScript('OnHide', function(self)
 	self.itemLink = nil
+	self.spellID = nil
+	self.itemID = nil
 	addon:Defer(self, 'SetAttribute', self, 'target-bag')
 	addon:Defer(self, 'SetAttribute', self, 'target-slot')
 	addon:Defer(self, 'SetAttribute', self, '_entered', false)
@@ -187,6 +192,15 @@ Molinari:HookScript('OnEnter', function(self)
 		GameTooltip:SetHyperlink(self.itemLink)
 	else
 		GameTooltip:SetBagItem(self:GetAttribute('target-bag'), self:GetAttribute('target-slot'))
+	end
+
+	if addon:IsRetail() then
+		if self.spellID then
+			local spellName = (C_Spell.GetSpellName or GetSpellInfo)(self.spellID)
+			GameTooltip:AddLine((('\n'):split(NPEV2_CASTER_ABILITYINITIAL:gsub(' %%s ', '%s'))):format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. spellName .. '|r'))
+		elseif self.itemID then
+			GameTooltip:AddLine(NPEV2_ABILITYINITIAL:format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Item.GetItemName(self.itemID) .. '|r'))
+		end
 	end
 
 	GameTooltip:Show()
