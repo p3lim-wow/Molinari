@@ -65,7 +65,7 @@ else
 
 		for index = 1, GetNumSkillLines() do
 			local skillName, isHeader, isExpanded, skillLevel = GetSkillLineInfo(index)
-			if skillName == _G.TRADE_SKILLS and isHeader and not isExpanded then
+			if skillName == TRADE_SKILLS and isHeader and not isExpanded then
 				ExpandSkillHeader(index)
 				return
 			else

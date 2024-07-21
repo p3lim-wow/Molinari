@@ -52,7 +52,7 @@ addon:HookTooltip(function(tooltip, item)
 	end
 
 	if addon:NonDisenchantable(itemID) then
-		GameTooltip:AddLine(_G.ITEM_DISENCHANT_NOT_DISENCHANTABLE, _G.FACTION_RED_COLOR:GetRGB())
+		GameTooltip:AddLine(ITEM_DISENCHANT_NOT_DISENCHANTABLE, FACTION_RED_COLOR:GetRGB())
 		return
 	end
 
@@ -67,10 +67,10 @@ addon:HookTooltip(function(tooltip, item)
 				spellName = spellInfo.name
 			end
 
-			GameTooltip:AddLine(_G.ERR_USE_LOCKED_WITH_SPELL_S:format(spellName), _G.FACTION_RED_COLOR:GetRGB())
+			GameTooltip:AddLine(ERR_USE_LOCKED_WITH_SPELL_S:format(spellName), FACTION_RED_COLOR:GetRGB())
 			return
 		elseif numItemsRequired and C_Item.GetStackCount(item:GetItemLocation()) < numItemsRequired then
-			GameTooltip:AddLine(_G.SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemName(item:GetItemLocation())), _G.FACTION_RED_COLOR:GetRGB())
+			GameTooltip:AddLine(SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemName(item:GetItemLocation())), FACTION_RED_COLOR:GetRGB())
 			return
 		else
 			return Molinari:ApplySpell(item, spellID, color)
