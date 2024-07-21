@@ -59,14 +59,7 @@ addon:HookTooltip(function(tooltip, item)
 	local spellID, color, numItemsRequired = addon:IsSalvagable(itemID)
 	if spellID then
 		if not IsPlayerSpell(spellID) then
-			local spellName
-			if GetSpellName then
-				spellName = GetSpellName(spellID)
-			else
-				local spellInfo = C_Spell.GetSpellInfo(spellID)
-				spellName = spellInfo.name
-			end
-
+			local spellName = (C_Spell.GetSpellName or GetSpellInfo)(spellID)
 			GameTooltip:AddLine(ERR_USE_LOCKED_WITH_SPELL_S:format(spellName), FACTION_RED_COLOR:GetRGB())
 			return
 		elseif numItemsRequired and C_Item.GetStackCount(item:GetItemLocation()) < numItemsRequired then
@@ -100,7 +93,7 @@ function Molinari:ApplySpell(item, spellID, color)
 			self:SetAttribute('macrotext', MACRO_SALVAGE:format(spellID, bagID, slotID))
 		end
 	elseif item:GetItemLink() == GetTradeTargetItemLink(7) and color == addon.colors.openable then
-		self:SetAttribute('macrotext', MACRO_TRADE:format(GetSpellInfo(spellID)))
+		self:SetAttribute('macrotext', MACRO_TRADE:format((C_Spell.GetSpellName or GetSpellInfo)(spellID)))
 		self.itemLink = item:GetItemLink() -- store item link for the tooltip
 	else
 		return

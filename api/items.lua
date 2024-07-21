@@ -11,7 +11,7 @@ function addon:IsProspectable(itemID)
 	-- returns the spell used to prospect the item
 	if addon:IsClassic() then
 		local skillRequired = addon.data.prospectable[itemID]
-		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and 31252, addon.colors.prospectable
+		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 31252, addon.colors.prospectable
 	elseif addon:IsRetail() then
 		local info = addon.data.prospectable[itemID]
 		if info then
@@ -24,7 +24,7 @@ function addon:IsMillable(itemID)
 	-- returns the spell used to mill the item
 	if addon:IsClassic() then
 		local skillRequired = addon.data.millable[itemID]
-		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and ((GetItemCount or C_Item.GetItemCount)(itemID)) >= 5 and 51005, addon.colors.millable
+		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 51005, addon.colors.millable
 	elseif addon:IsRetail() then
 		local info = addon.data.millable[itemID]
 		if info then
@@ -64,7 +64,7 @@ function addon:IsDisenchantable(itemID)
 		return 13262, addon.colors.disenchantable
 	end
 
-	local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = (GetItemInfo or C_Item.GetItemInfo)(itemID)
+	local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = C_Item.GetItemInfo(itemID)
 	-- if addon:IsClassic() then
 	-- 	-- make sure the player has enough skill to disenchant the item
 	-- 	if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
@@ -138,7 +138,7 @@ function addon:IsOpenableProfession(itemID)
 				info[1] > requiredLevel and
 				info[3] < addon:GetProfessionSkillLevel(info[2]) and
 				info[4] < UnitLevel('player') and
-				((GetItemCount or C_Item.GetItemCount)(pickItemID)) > 0
+				C_Item.GetItemCount(pickItemID) > 0
 			then
 				return pickItemID, addon.colors.openable
 			end
