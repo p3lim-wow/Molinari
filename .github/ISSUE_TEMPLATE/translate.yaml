@@ -37,23 +37,3 @@ body:
       label: '"Modifier to activate %s"'
       description: Used in the settings, "%s" is the addon name "Molinari"
       placeholder: Translation here
-  - type: input
-    attributes:
-      label: '"Item Blocklist"'
-      description: Used in the settings
-      placeholder: Translation here
-  - type: input
-    attributes:
-      label: '"Block Item"'
-      description: Used in the settings
-      placeholder: Translation here
-  - type: input
-    attributes:
-      label: '"Items in this list will not be processed."'
-      description: Used in the settings
-      placeholder: Translation here
-  - type: input
-    attributes:
-      label: '"Block a new item by ID"'
-      description: Used in the settings
-      placeholder: Translation here

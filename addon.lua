@@ -1,6 +1,8 @@
 local addonName, addon = ...
 addon.data = {}
 
+local modifier
+
 local TEMPLATES = {
 	'SecureActionButtonTemplate',
 	'SecureHandlerAttributeTemplate',
@@ -34,18 +36,18 @@ addon:HookTooltip(function(tooltip, item)
 		return
 	elseif not IsAltKeyDown() then
 		return
-	elseif addon.db.profile.general.modifierKey == 'CTRL' and not IsControlKeyDown() then
+	elseif modifier == 'CTRL' and not IsControlKeyDown() then
 		return
-	elseif addon.db.profile.general.modifierKey ~= 'CTRL' and IsControlKeyDown() then
+	elseif modifier ~= 'CTRL' and IsControlKeyDown() then
 		return
-	elseif addon.db.profile.general.modifierKey == 'SHIFT' and not IsShiftKeyDown() then
+	elseif modifier == 'SHIFT' and not IsShiftKeyDown() then
 		return
-	elseif addon.db.profile.general.modifierKey ~= 'SHIFT' and IsShiftKeyDown() then
+	elseif modifier ~= 'SHIFT' and IsShiftKeyDown() then
 		return
 	end
 
 	local itemID = item:GetItemID()
-	if not itemID or addon.db.profile.blocklist.items[itemID] then
+	if not itemID then
 		return
 	end
 
@@ -122,9 +124,9 @@ end
 
 -- update attribute driver with the correct modifiers
 function Molinari:UpdateAttributeDriver()
-	if addon.db.profile.general.modifierKey == 'CTRL' then
+	if modifier == 'CTRL' then
 		addon:Defer(RegisterAttributeDriver, self, 'visibility', '[mod:alt,mod:ctrl] show; hide')
-	elseif addon.db.profile.general.modifierKey == 'SHIFT' then
+	elseif modifier == 'SHIFT' then
 		addon:Defer(RegisterAttributeDriver, self, 'visibility', '[mod:alt,mod:shift] show; hide')
 	else
 		addon:Defer(RegisterAttributeDriver, self, 'visibility', '[mod:alt] show; hide')
@@ -134,9 +136,9 @@ end
 -- update secure attribute type when setting the action
 Molinari:HookScript('OnAttributeChanged', function(self, name)
 	if name == 'spell' or name == 'item' or name == 'macrotext' then
-		if addon.db.profile.general.modifierKey == 'CTRL' then
+		if modifier == 'CTRL' then
 			self:SetAttribute('alt-ctrl-type1', name:gsub('macrotext', 'macro'))
-		elseif addon.db.profile.general.modifierKey == 'SHIFT' then
+		elseif modifier == 'SHIFT' then
 			self:SetAttribute('alt-shift-type1', name:gsub('macrotext', 'macro'))
 		else
 			self:SetAttribute('alt-type1', name:gsub('macrotext', 'macro'))
@@ -209,22 +211,23 @@ function addon:MODIFIER_STATE_CHANGED()
 	if Molinari:IsShown() then
 		Molinari:GetScript('OnEnter')(Molinari)
 
-		if addon.db.profile.general.modifierKey == 'CTRL' and not IsControlKeyDown() then
+		if modifier == 'CTRL' and not IsControlKeyDown() then
 			addon:Defer(Molinari, 'Hide', Molinari)
-		elseif addon.db.profile.general.modifierKey ~= 'CTRL' and IsControlKeyDown() then
+		elseif modifier ~= 'CTRL' and IsControlKeyDown() then
 			addon:Defer(Molinari, 'Hide', Molinari)
-		elseif addon.db.profile.general.modifierKey == 'SHIFT' and not IsShiftKeyDown() then
+		elseif modifier == 'SHIFT' and not IsShiftKeyDown() then
 			addon:Defer(Molinari, 'Hide', Molinari)
-		elseif addon.db.profile.general.modifierKey ~= 'SHIFT' and IsShiftKeyDown() then
+		elseif modifier ~= 'SHIFT' and IsShiftKeyDown() then
 			addon:Defer(Molinari, 'Hide', Molinari)
 		end
 	end
 end
 
--- register state driver
-function addon:PLAYER_LOGIN()
-	Molinari:UpdateAttributeDriver()
-end
+-- update state driver when setting changes
+addon:RegisterOptionCallback('modifier', function(value)
+	modifier = value
+	Molinari:UpdateAttributeDriver() -- TODO: defer
+end)
 
 if addon:IsRetail() then
 	-- glow animation
