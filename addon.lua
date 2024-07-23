@@ -121,11 +121,11 @@ end
 -- update attribute driver with the correct modifiers
 function Molinari:UpdateAttributeDriver()
 	if modifier == 'CTRL' then
-		addon:Defer(RegisterAttributeDriver, self, 'visibility', '[mod:alt,mod:ctrl] show; hide')
+		addon:Defer('RegisterAttributeDriver', self, 'visibility', '[mod:alt,mod:ctrl] show; hide')
 	elseif modifier == 'SHIFT' then
-		addon:Defer(RegisterAttributeDriver, self, 'visibility', '[mod:alt,mod:shift] show; hide')
+		addon:Defer('RegisterAttributeDriver', self, 'visibility', '[mod:alt,mod:shift] show; hide')
 	else
-		addon:Defer(RegisterAttributeDriver, self, 'visibility', '[mod:alt] show; hide')
+		addon:Defer('RegisterAttributeDriver', self, 'visibility', '[mod:alt] show; hide')
 	end
 end
 
@@ -174,9 +174,9 @@ Molinari:HookScript('OnHide', function(self)
 	self.itemLink = nil
 	self.spellID = nil
 	self.itemID = nil
-	addon:Defer(self, 'SetAttribute', self, 'target-bag')
-	addon:Defer(self, 'SetAttribute', self, 'target-slot')
-	addon:Defer(self, 'SetAttribute', self, '_entered', false)
+	addon:DeferMethod(self, 'SetAttribute', 'target-bag')
+	addon:DeferMethod(self, 'SetAttribute', 'target-slot')
+	addon:DeferMethod(self, 'SetAttribute', '_entered', false)
 end)
 
 -- tooltips
@@ -219,13 +219,13 @@ function addon:MODIFIER_STATE_CHANGED()
 		Molinari:GetScript('OnEnter')(Molinari)
 
 		if modifier == 'CTRL' and not IsControlKeyDown() then
-			addon:Defer(Molinari, 'Hide', Molinari)
+			addon:DeferMethod(Molinari, 'Hide')
 		elseif modifier ~= 'CTRL' and IsControlKeyDown() then
-			addon:Defer(Molinari, 'Hide', Molinari)
+			addon:DeferMethod(Molinari, 'Hide')
 		elseif modifier == 'SHIFT' and not IsShiftKeyDown() then
-			addon:Defer(Molinari, 'Hide', Molinari)
+			addon:DeferMethod(Molinari, 'Hide')
 		elseif modifier ~= 'SHIFT' and IsShiftKeyDown() then
-			addon:Defer(Molinari, 'Hide', Molinari)
+			addon:DeferMethod(Molinari, 'Hide')
 		end
 	end
 end
@@ -233,7 +233,7 @@ end
 -- update state driver when setting changes
 addon:RegisterOptionCallback('modifier', function(value)
 	modifier = value
-	Molinari:UpdateAttributeDriver() -- TODO: defer
+	addon:DeferMethod(Molinari, 'UpdateAttributeDriver')
 end)
 
 if addon:IsRetail() then
