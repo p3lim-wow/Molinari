@@ -17,6 +17,6 @@ addon:RegisterSettings('MolinariDB3', {
 
 addon:RegisterSettingsSlash('/molinari')
 
-function addon:PLAYER_LOGIN()
+function addon:OnLoad()
 	-- TODO: migrate old settings
 end
