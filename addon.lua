@@ -63,17 +63,17 @@ addon:HookTooltip(function(tooltip, item)
 			GameTooltip:AddLine(ERR_USE_LOCKED_WITH_SPELL_S:format(spellName), FACTION_RED_COLOR:GetRGB())
 			return
 		elseif numItemsRequired and C_Item.GetStackCount(item:GetItemLocation()) < numItemsRequired then
-			GameTooltip:AddLine(SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemName(item:GetItemLocation())), FACTION_RED_COLOR:GetRGB())
+			GameTooltip:AddLine(SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemNameByID(itemID)), FACTION_RED_COLOR:GetRGB())
 			return
 		else
 			return Molinari:ApplySpell(item, spellID, color)
 		end
 	end
 
-	local pickItemID
-	pickItemID, color = addon:IsOpenableProfession(itemID)
-	if pickItemID then
-		return Molinari:ApplyItem(item, pickItemID, color)
+	local key
+	key, color = addon:IsOpenableProfession(itemID)
+	if key then
+		return Molinari:ApplyItem(item, key, color)
 	end
 end)
 
@@ -104,13 +104,13 @@ function Molinari:ApplySpell(item, spellID, color)
 	self:SetColor(color)
 end
 
-function Molinari:ApplyItem(item, color)
+function Molinari:ApplyItem(item, key, color)
 	local location = item:GetItemLocation()
 	if location and location:IsBagAndSlot() then
 		local bagID, slotID = location:GetBagAndSlot()
 		self:SetAttribute('target-bag', bagID)
 		self:SetAttribute('target-slot', slotID)
-		self:SetAttribute('item', 'item:' .. item:GetItemID())
+		self:SetAttribute('item', 'item:' .. key)
 
 		self.itemID = item:GetItemID() -- for tooltips
 		self:Show()
@@ -199,7 +199,7 @@ Molinari:HookScript('OnEnter', function(self)
 			local spellName = (C_Spell.GetSpellName or GetSpellInfo)(self.spellID)
 			GameTooltip:AddLine((('\n'):split(NPEV2_CASTER_ABILITYINITIAL:gsub(' %%s ', '%s'))):format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. spellName .. '|r'))
 		elseif self.itemID then
-			GameTooltip:AddLine(NPEV2_ABILITYINITIAL:format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Item.GetItemName(self.itemID) .. '|r'))
+			GameTooltip:AddLine(NPEV2_ABILITYINITIAL:format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Item.GetItemNameByID(self.itemID) .. '|r'))
 		end
 	end
 
