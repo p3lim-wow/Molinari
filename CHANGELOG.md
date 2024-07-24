@@ -1,3 +1,7 @@
+### Changes in 110000.116-Release:
+
+- Fixed: Errors when using profession keys to open lockboxes
+
 ### Changes in 110000.115-Release:
 
 - Added: Tooltip information in retail if the item can't be processed, and why
