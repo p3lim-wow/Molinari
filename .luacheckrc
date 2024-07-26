@@ -33,6 +33,7 @@ read_globals = {
 	'Item',
 	'ItemLocation',
 	'PaperDollFrameItemFlyoutButtons', -- classic
+	'SOUNDKIT', -- retail
 
 	-- FrameXML functions
 	'AutoCastShine_AutoCastStart', -- classic
@@ -81,6 +82,8 @@ read_globals = {
 	'IsControlKeyDown',
 	'IsPlayerSpell',
 	'IsShiftKeyDown',
+	'MuteSoundFile', -- retail
 	'UnitHasVehicleUI',
 	'UnitLevel',
+	'UnmuteSoundFile', -- retail
 }
