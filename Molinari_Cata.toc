@@ -10,10 +10,10 @@
 ## X-Wago-ID: WqKQQEKx
 
 #@non-debug@
-# libs\Dashi\embed.xml
+# libs\Dashi\embed_classic.xml
 #@end-non-debug@
 #@debug@
-..\Dashi\embed.xml
+..\Dashi\embed_classic.xml
 #@end-debug@
 
 utils.lua
