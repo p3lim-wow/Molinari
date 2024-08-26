@@ -1883,4 +1883,5 @@ addon.data.nondisenchantable = {
 	[211847] = true, -- Wicked Witch's Band
 	[211850] = true, -- The Horseman's Horrific Helm
 	[211851] = true, -- The Horseman's Baleful Blade
+	[224002] = true, -- Swoopy
 }
