@@ -10163,8 +10163,6 @@ addon.data.nondisenchantable = {
 	[220782] = true, -- Thunder
 	[221022] = true, -- Cowboy Bee[DNT]
 	[221195] = true, -- Illskitter
-	[221476] = true, -- Engineering - 1H Wrench [DNT]
-	[221477] = true, -- Engineering - 2H Wrench [DNT]
 	[221486] = true, -- Baleclaw
 	[221492] = true, -- Moss Skipper
 	[221493] = true, -- Admiral
@@ -10363,4 +10361,5 @@ addon.data.nondisenchantable = {
 	[228984] = true, -- Unbreakable Iron Idol
 	[229000] = true, -- Machine-Warden's Cog
 	[229353] = true, -- Rage-Filled Idol
+	[229899] = true, -- Coffer Key Shard
 }
