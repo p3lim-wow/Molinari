@@ -41,6 +41,7 @@ data\millable.lua
 data\disenchantable.lua
 data\scrappable.lua
 data\crushable.lua
+data\shatterable.lua
 
 api\items.lua
 api\skill.lua
