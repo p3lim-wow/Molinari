@@ -27,3 +27,4 @@ jobs:
         disenchantable: disenchantable
         scrappable: scrappable
         crushable: crushable
+        shatterable: shatterable

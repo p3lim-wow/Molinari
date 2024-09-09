@@ -26,6 +26,7 @@ The following "salvaging" is supported:
   - [Engineering picks](https://www.wowhead.com/items/consumables?filter=107:99;0:5;lock:0#0+2+18)
 - [Scrapping](https://www.wowhead.com/spell=382374)
 - [Crushing](https://www.wowhead.com/spell=395696)
+- [Shattering](https://www.wowhead.com/spell=391302)
 
 In addition, Molinari also works for lockpicking in the trade window.
 

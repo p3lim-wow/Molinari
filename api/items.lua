@@ -53,6 +53,15 @@ function addon:IsScrappable(itemID)
 	end
 end
 
+function addon:IsShatterable(itemID)
+	if addon:IsRetail() then
+		local info = addon.data.shatterable[itemID]
+		if info then
+			return info[1], addon.colors.disenchantable, info[2]
+		end
+	end
+end
+
 function addon:NonDisenchantable(itemID)
 	return not not addon.data.nondisenchantable[itemID]
 end
@@ -116,6 +125,10 @@ function addon:IsSalvagable(itemID)
 		return spellID, color, numItems
 	end
 	spellID, color, numItems = addon:IsScrappable(itemID)
+	if spellID then
+		return spellID, color, numItems
+	end
+	spellID, color, numItems = addon:IsShatterable(itemID)
 	if spellID then
 		return spellID, color, numItems
 	end
