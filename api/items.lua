@@ -73,6 +73,11 @@ function addon:IsDisenchantable(itemID)
 		return 13262, addon.colors.disenchantable
 	end
 
+	if addon:IsRetail() and C_Item.IsCosmeticItem(itemID) then
+		-- cosmetic items can't be disenchanted
+		return
+	end
+
 	local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = C_Item.GetItemInfo(itemID)
 	-- if addon:IsClassic() then
 	-- 	-- make sure the player has enough skill to disenchant the item
