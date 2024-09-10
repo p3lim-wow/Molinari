@@ -20,8 +20,12 @@ for row in itemSparse:
 		continue
 
 	if row.InventoryType == 0 or row.InventoryType == 4:
-		 # not equippable or a shirt
-		 continue
+		# not equippable or a shirt
+		continue
+
+	if (getattr(row, 'Flags[3]') & 0x10000) != 0:
+		# cosmetic item
+		continue
 
 	items[row.ID] = {
 		'itemID': row.ID,
