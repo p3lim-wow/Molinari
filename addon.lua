@@ -18,7 +18,7 @@ local Molinari = addon:CreateButton('Button', addonName, UIParent, table.concat(
 Molinari:SetFrameStrata('TOOLTIP')
 Molinari:Hide()
 
-addon:HookTooltip(function(tooltip, item)
+local function tooltipHook(tooltip, item)
 	if tooltip:GetOwner() == Molinari then
 		-- don't trigger on our own tooltips
 		return
@@ -75,7 +75,13 @@ addon:HookTooltip(function(tooltip, item)
 	if key then
 		return Molinari:ApplyItem(item, key, color)
 	end
-end)
+end
+
+function addon:OnLogin()
+	-- load late so our hooks are added late, that way our tooltip lines are more
+	-- likely to render at the bottom of the tooltip (but no guarantee)
+	addon:HookTooltip(tooltipHook)
+end
 
 local MACRO_SALVAGE = '/run C_TradeSkillUI.CraftSalvage(%d, 1, ItemLocation:CreateFromBagAndSlot(%d, %d))'
 local MACRO_TRADE = '/cast %s\n/run ClickTargetTradeButton(7)'
