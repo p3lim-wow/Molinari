@@ -3,6 +3,7 @@ addon.data = {}
 
 local modifier
 
+local ERR_COLOR = CreateColor(1, 32/255, 32/255)
 local TEMPLATES = {
 	'SecureActionButtonTemplate',
 	'SecureHandlerAttributeTemplate',
@@ -17,6 +18,12 @@ end
 local Molinari = addon:CreateButton('Button', addonName, UIParent, table.concat(TEMPLATES, ','))
 Molinari:SetFrameStrata('TOOLTIP')
 Molinari:Hide()
+
+local function tooltipHelp(msg, color)
+	GameTooltip:AddLine(' ')
+	GameTooltip:AddLine(msg, color and color:GetRGB())
+	GameTooltip:Show() -- re-render
+end
 
 local function tooltipHook(tooltip, item)
 	if tooltip:GetOwner() == Molinari then
@@ -51,8 +58,8 @@ local function tooltipHook(tooltip, item)
 		return
 	end
 
-	if addon:NonDisenchantable(itemID) then
-		GameTooltip:AddLine(ITEM_DISENCHANT_NOT_DISENCHANTABLE, FACTION_RED_COLOR:GetRGB())
+	if addon:NonDisenchantable(itemID) or (C_Item.IsCosmeticItem and C_Item.IsCosmeticItem(itemID)) then
+		tooltipHelp(ITEM_DISENCHANT_NOT_DISENCHANTABLE, ERR_COLOR)
 		return
 	end
 
@@ -60,10 +67,10 @@ local function tooltipHook(tooltip, item)
 	if spellID then
 		if not IsPlayerSpell(spellID) then
 			local spellName = (C_Spell.GetSpellName or GetSpellInfo)(spellID)
-			GameTooltip:AddLine(ERR_USE_LOCKED_WITH_SPELL_S:format(spellName), FACTION_RED_COLOR:GetRGB())
+			tooltipHelp(ERR_USE_LOCKED_WITH_SPELL_S:format(spellName), ERR_COLOR)
 			return
 		elseif numItemsRequired and C_Item.GetStackCount(item:GetItemLocation()) < numItemsRequired then
-			GameTooltip:AddLine(SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemNameByID(itemID)), FACTION_RED_COLOR:GetRGB())
+			tooltipHelp(SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemNameByID(itemID)), ERR_COLOR)
 			return
 		else
 			return Molinari:ApplySpell(item, spellID, color)
@@ -203,9 +210,9 @@ Molinari:HookScript('OnEnter', function(self)
 	if addon:IsRetail() then
 		if self.spellID then
 			local spellName = (C_Spell.GetSpellName or GetSpellInfo)(self.spellID)
-			GameTooltip:AddLine((('\n'):split(NPEV2_CASTER_ABILITYINITIAL:gsub(' %%s ', '%s'))):format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. spellName .. '|r'))
+			tooltipHelp((('\n'):split(NPEV2_CASTER_ABILITYINITIAL:gsub(' %%s ', '%s'))):format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. spellName .. '|r'))
 		elseif self.itemID then
-			GameTooltip:AddLine(NPEV2_ABILITYINITIAL:format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Item.GetItemNameByID(self.itemID) .. '|r'))
+			tooltipHelp(NPEV2_ABILITYINITIAL:format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Item.GetItemNameByID(self.itemID) .. '|r'))
 		end
 	end
 
