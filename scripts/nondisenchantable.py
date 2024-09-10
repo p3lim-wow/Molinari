@@ -11,7 +11,7 @@ for row in itemSparse:
 		continue
 
 	if (getattr(row, 'Flags[0]') & 0x8000) != 0: # "No Disenchant" flag
-		if row.InventoryType != 0: # equippable
+		if row.InventoryType != 0 and row.InventoryType != 4: # equippable and not a shirt
 			items[row.ID] = {
 				'itemID': row.ID,
 				'name': row.Display_lang.strip(),
