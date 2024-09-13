@@ -10,7 +10,7 @@ recipeSpellIDs = {
   44: 391302, # Crystalline Shatter (Dragon Isles)
   45: 391304, # Elemental Shatter (Dragon Isles)
   86: 445466, # Shatter Essence (Khaz Algar)
-  # TODO: add new shatter recipe for Gleaming Shard
+  102: 470726, # Gleaming Shatter (Khaz Algar)
 }
 
 # figure out how many items are needed to perform the salvage
