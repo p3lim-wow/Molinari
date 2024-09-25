@@ -27,10 +27,7 @@ jobs:
           ref: release/${{ inputs.dbc }}
           path: dbc
           fetch-depth: 1
-
-      - name: Store commit hash
-        run: echo "dbc_hash=$(git -C dbc log -1 --pretty=%H)" >> "$GITHUB_ENV"
-        # see https://github.com/actions/checkout/pull/1180
+        id: checkout
 
       - name: Store game version
         run: echo "dbc_version=$(git -C dbc log -1 --pretty=%B | grep -Eow '[0-9.]+')" >> "$GITHUB_ENV"
@@ -55,7 +52,7 @@ jobs:
         # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
         with:
           title: Update ${{ inputs.flavor }} data to ${{ env.dbc_version }}
+          body: 'Full diff: https://github.com/Vladinator/wow-dbc-archive/commit/${{ steps.checkout.outputs.commit }}'
           commit-message: Update ${{ inputs.flavor }} data to ${{ env.dbc_version }}
-          body: 'Full diff: https://github.com/Vladinator/wow-dbc-archive/commit/${{ env.dbc_hash }}'
           branch: update-data-${{ inputs.flavor }}
           delete-branch: true
