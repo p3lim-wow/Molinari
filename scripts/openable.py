@@ -5,6 +5,10 @@ from utils import *
 itemSparse = dbc('itemsparse')
 lock = dbc('lock')
 
+FLAG_COLS = 'Flags_{}'
+if not has_header('itemsparse', 'Flags_0'):
+	FLAG_COLS = 'Flags[{}]'
+
 # iterate through and store every single lock type, keyed by ID,
 # so we can easily check using it later
 locks = {}
@@ -14,7 +18,7 @@ for row in lock:
 items = {}
 # iterate through ItemSparse for locked items
 for row in itemSparse:
-	if (getattr(row, 'Flags[0]') & 0x10) != 0:
+	if (getattr(row, FLAG_COLS.format(0)) & 0x10) != 0:
 		# deprecated item
 		continue
 

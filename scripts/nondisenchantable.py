@@ -4,14 +4,18 @@ from utils import *
 
 itemSparse = dbc('itemsparse')
 
+FLAGS_COL = 'Flags_{}'
+if not has_header('itemsparse', 'Flags_0'):
+	FLAGS_COL = 'Flags[{}]'
+
 items = {}
 # iterate through ItemSparse for items that can't be disenchanted
 for row in itemSparse:
-	if (getattr(row, 'Flags[0]') & 0x10) != 0:
+	if (getattr(row, FLAGS_COL.format(0)) & 0x10) != 0:
 		# deprecated item
 		continue
 
-	if (getattr(row, 'Flags[0]') & 0x8000) == 0:
+	if (getattr(row, FLAGS_COL.format(0)) & 0x8000) == 0:
 		# "No Disenchant" flag
 		continue
 
@@ -23,7 +27,7 @@ for row in itemSparse:
 		# not equippable or a shirt
 		continue
 
-	if (getattr(row, 'Flags[3]') & 0x10000) != 0:
+	if (getattr(row, FLAGS_COL.format(3)) & 0x10000) != 0:
 		# cosmetic item
 		continue
 

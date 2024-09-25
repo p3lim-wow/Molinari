@@ -16,6 +16,10 @@ class CSVReader(csv.DictReader):
 def dbc(file):
 	return CSVReader(open(f'dbc/{file}.csv', 'r'))
 
+def has_header(file, header):
+	f = csv.DictReader(open(f'dbc/{file}.csv', 'r'))
+	return not not (header in f.fieldnames)
+
 template = '''
 -- this file is auto-generated
 local _, addon = ...
