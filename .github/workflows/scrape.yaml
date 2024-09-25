@@ -36,7 +36,7 @@ jobs:
         # Vladinator can't seem to get this sorted
         run: |
           set -e
-          curl -sfL "https://wago.tools/db2/ItemSparse/csv?build=${{ steps.output }}" -o dbc/itemsparse.csv
+          curl -sfL "https://wago.tools/db2/ItemSparse/csv?build=${{ env.dbc_build }}" -o dbc/itemsparse.csv
         if: inputs.flavor == 'classic_era'
 
       - name: Scrape DBC
