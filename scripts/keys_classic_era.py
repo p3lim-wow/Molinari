@@ -14,9 +14,9 @@ excluded = [
 # SpellEffect does not have EffectBasePointsF (effectiveSkill),
 # so we have to manually keep this updated with the effective skill?
 
-itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
-itemEffect = CSVReader(open('dbc/itemeffect.csv', 'r'))
-spellEffect = CSVReader(open('dbc/spelleffect.csv', 'r'))
+itemSparse = dbc('itemsparse')
+itemEffect = dbc('itemeffect')
+spellEffect = dbc('spelleffect')
 
 effectSpells = {}
 # iterate through spell effects for effect 33 (lockpicking)

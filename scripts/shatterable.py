@@ -2,9 +2,9 @@
 
 from utils import *
 
-itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
-itemSalvageLoot = CSVReader(open('dbc/itemsalvageloot.csv', 'r'))
-spellEffect = CSVReader(open('dbc/spelleffect.csv', 'r'))
+itemSparse = dbc('itemsparse')
+itemSalvageLoot = dbc('itemsalvageloot')
+spellEffect = dbc('spelleffect')
 
 recipeSpellIDs = {
   44: 391302, # Crystalline Shatter (Dragon Isles)

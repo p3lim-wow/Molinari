@@ -2,7 +2,7 @@
 
 from utils import *
 
-itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
+itemSparse = dbc('itemsparse')
 
 items = {}
 # iterate through ItemSparse for items that can be prospected

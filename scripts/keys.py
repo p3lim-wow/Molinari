@@ -2,10 +2,10 @@
 
 from utils import *
 
-spellEffect = CSVReader(open('dbc/spelleffect.csv', 'r'))
-itemEffect = CSVReader(open('dbc/itemeffect.csv', 'r'))
-itemXItemEffect = CSVReader(open('dbc/itemxitemeffect.csv', 'r'))
-itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
+spellEffect = dbc('spelleffect')
+itemEffect = dbc('itemeffect')
+itemXItemEffect = dbc('itemxitemeffect')
+itemSparse = dbc('itemsparse')
 
 effectSpells = {}
 # iterate through spell effects for effect 33 (lockpicking)

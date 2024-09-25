@@ -13,6 +13,8 @@ class CSVReader(csv.DictReader):
 				pass
 		return SimpleNamespace(**row)
 
+def dbc(file):
+	return CSVReader(open(f'dbc/{file}.csv', 'r'))
 
 template = '''
 -- this file is auto-generated

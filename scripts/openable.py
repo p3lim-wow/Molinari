@@ -2,8 +2,8 @@
 
 from utils import *
 
-itemSparse = CSVReader(open('dbc/itemsparse.csv', 'r'))
-lock = CSVReader(open('dbc/lock.csv', 'r'))
+itemSparse = dbc('itemsparse')
+lock = dbc('lock')
 
 # iterate through and store every single lock type, keyed by ID,
 # so we can easily check using it later
