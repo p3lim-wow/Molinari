@@ -29,8 +29,15 @@ jobs:
           fetch-depth: 1
         id: checkout
 
-      - name: Store game version
-        run: echo "dbc_version=$(git -C dbc log -1 --pretty=%B | grep -Eow '[0-9.]+')" >> "$GITHUB_ENV"
+      - name: Store build version
+        run: echo "dbc_build=$(git -C dbc log -1 --pretty=%B | grep -Eow '[0-9.]+')" >> "$GITHUB_ENV"
+
+      - name: Fetch external ItemSparse
+        # Vladinator can't seem to get this sorted
+        run: |
+          set -e
+          curl -sfL "https://wago.tools/db2/ItemSparse/csv?build=${{ steps.output }}" -o dbc/itemsparse.csv
+        if: inputs.flavor == 'classic_era'
 
       - name: Scrape DBC
         run: |
@@ -51,8 +58,8 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
         with:
-          title: Update ${{ inputs.flavor }} data to ${{ env.dbc_version }}
+          title: Update ${{ inputs.flavor }} data to ${{ env.dbc_build }}
+          commit-message: Update ${{ inputs.flavor }} data to ${{ env.dbc_build }}
           body: 'Full diff: https://github.com/Vladinator/wow-dbc-archive/commit/${{ steps.checkout.outputs.commit }}'
-          commit-message: Update ${{ inputs.flavor }} data to ${{ env.dbc_version }}
           branch: update-data-${{ inputs.flavor }}
           delete-branch: true
