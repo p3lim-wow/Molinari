@@ -93,7 +93,7 @@ function addon:IsDisenchantable(itemID)
 	elseif C_Item.GetItemInventoryTypeByID(itemID) == Enum.InventoryType.IndexBodyType then
 		-- shirts can't be disenchanted
 		return
-	elseif C_Item.IsCosmeticItem(itemID) then
+	elseif addon:IsRetail() and C_Item.IsCosmeticItem(itemID) then
 		-- cosmetic items can't be disenchanted
 		return
 	end
