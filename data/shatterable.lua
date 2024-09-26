@@ -14,4 +14,7 @@ addon.data.shatterable = {
 	[213611] = {445466, 1}, -- Writhing Sample
 	[213612] = {445466, 1}, -- Viridescent Spores
 	[213613] = {445466, 1}, -- Leyline Residue
+	[219949] = {470726, 1}, -- Gleaming Shard
+	[219950] = {470726, 1}, -- Gleaming Shard
+	[219951] = {470726, 1}, -- Gleaming Shard
 }
