@@ -8,6 +8,8 @@ on:
       - '**'
     paths:
       - 'scripts/**.py'
+      - '.github/workflows/scrape.yaml'
+      - '.github/workflows/scrape_classic.yaml'
   schedule:
     - cron: '0 8 * * 1' # monday morning
   workflow_dispatch:
