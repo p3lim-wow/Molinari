@@ -10,8 +10,4 @@ addon.data.shatterable = {
 	[190329] = {391304, 1}, -- Awakened Frost
 	[194124] = {391302, 1}, -- Vibrant Shard
 	[200113] = {391302, 1}, -- Resonant Crystal
-	[213610] = {445466, 1}, -- Crystalline Powder
-	[213611] = {445466, 1}, -- Writhing Sample
-	[213612] = {445466, 1}, -- Viridescent Spores
-	[213613] = {445466, 1}, -- Leyline Residue
 }
