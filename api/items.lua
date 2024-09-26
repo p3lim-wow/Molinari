@@ -87,7 +87,7 @@ function addon:IsDisenchantable(itemID)
 	elseif class == Enum.ItemClass.Gem and subClass ~= Enum.ItemGemSubclass.Artifactrelic then
 		-- any gem other than artifact relics can't be disenchanted
 		return
-	elseif class ~= Enum.ItemClass.Weapon and class ~= Enum.ItemClass.Armor then
+	elseif class ~= Enum.ItemClass.Weapon and class ~= Enum.ItemClass.Armor and class ~= Enum.ItemClass.Profession then
 		-- only armor or weapons can be disenchanted
 		return
 	elseif C_Item.GetItemInventoryTypeByID(itemID) == Enum.InventoryType.IndexBodyType then
@@ -165,5 +165,3 @@ function addon:IsOpenableProfession(itemID)
 		end
 	end
 end
-
-
