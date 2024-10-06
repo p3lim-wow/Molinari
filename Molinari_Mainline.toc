@@ -17,11 +17,6 @@
 ..\Dashi\embed.xml
 #@end-debug@
 
-utils.lua
-addon.lua
-hack.lua
-settings.lua
-
 locale\deDE.lua
 locale\esES.lua
 locale\esMX.lua
@@ -32,6 +27,11 @@ locale\ptBR.lua
 locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
+
+utils.lua
+addon.lua
+hack.lua
+settings.lua
 
 data\openable.lua
 data\keys.lua
