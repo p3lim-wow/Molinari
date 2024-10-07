@@ -1,3 +1,8 @@
+### Changes in 110000.122-Release:
+
+- Changed: Updated item database for cataclysm
+- Fixed: Localization not working
+
 ### Changes in 110000.121-Release:
 
 - Changed: Updated shatterable items (Gleaming Shatter support)
