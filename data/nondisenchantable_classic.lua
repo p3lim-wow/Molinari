@@ -1634,4 +1634,8 @@ addon.data.nondisenchantable = {
 	[211847] = true, -- Wicked Witch's Band
 	[211850] = true, -- The Horseman's Horrific Helm
 	[211851] = true, -- The Horseman's Baleful Blade
+	[232536] = true, -- Band of Ghoulish Glee
+	[232537] = true, -- The Horseman's Signet
+	[232538] = true, -- Seal of the Petrified Pumpkin
+	[232540] = true, -- Wicked Witch's Ring
 }
