@@ -242,7 +242,7 @@ function addon:MODIFIER_STATE_CHANGED()
 		end
 	elseif GameTooltip:IsShown() then
 		local owner = GameTooltip:GetOwner()
-		if owner and owner:IsMouseOver() then
+		if owner and not (GameTooltip:IsForbidden() or GameTooltip:IsProtected()) and owner:IsMouseOver() then
 			if owner.GetSlotAndBagID then
 				local slotIndex, bagID = owner:GetSlotAndBagID()
 				if slotIndex and bagID then
