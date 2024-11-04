@@ -5973,6 +5973,7 @@ addon.data.nondisenchantable = {
 	[228426] = true, -- Gloves of Irradiating Imprisonment
 	[228427] = true, -- Wraps of Depleting Brilliance
 	[228428] = true, -- Gauntlets of Dimming Fluorescence
+	[231290] = true, -- Reven's Comfy Carrier
 	[231839] = true, -- Trailseeker Longbow
 	[231840] = true, -- Trailseeker Crossbow
 	[232032] = true, -- Creche-Binder's Gloves
