@@ -84,11 +84,8 @@ function addon:IsDisenchantable(itemID)
 	if not quality or quality < Enum.ItemQuality.Uncommon or quality > Enum.ItemQuality.Epic then
 		-- grey, white, and legendary items, plus artifacts and heirlooms can't be disenchanted
 		return
-	elseif class == Enum.ItemClass.Gem and subClass ~= Enum.ItemGemSubclass.Artifactrelic then
-		-- any gem other than artifact relics can't be disenchanted
-		return
-	elseif class ~= Enum.ItemClass.Weapon and class ~= Enum.ItemClass.Armor and class ~= Enum.ItemClass.Profession then
-		-- only armor or weapons can be disenchanted
+	elseif class ~= Enum.ItemClass.Weapon and class ~= Enum.ItemClass.Armor and class ~= Enum.ItemClass.Profession and not (class == Enum.ItemClass.Gem and subClass == Enum.ItemGemSubclass.Artifactrelic) then
+		-- only armor, weapons, tools and gems can be disenchanted
 		return
 	elseif C_Item.GetItemInventoryTypeByID(itemID) == Enum.InventoryType.IndexBodyType then
 		-- shirts can't be disenchanted
