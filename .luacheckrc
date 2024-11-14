@@ -62,6 +62,7 @@ read_globals = {
 	-- namespaces
 	'C_Item',
 	'C_Spell',
+	'C_Timer', -- retail
 	'C_TradeSkillUI', -- retail
 	'Enum',
 	'TooltipDataProcessor', -- retail
