@@ -15,7 +15,7 @@
 
 -- in case other addons copies this, make sure it never loads multiple times unless there is a
 -- newer version of it, in which case we disable it and load anyways
-local version = 4
+local version = 5
 if _G['ForceLoadTradeSkillData'] then
 	if _G['ForceLoadTradeSkillData'].version < version then
 		_G['ForceLoadTradeSkillData']:UnregisterAllEvents()
@@ -44,7 +44,10 @@ hack:SetScript('OnEvent', function(self, event)
 	elseif event == 'TRADE_SKILL_SHOW' then
 		if not (C_TradeSkillUI.IsTradeSkillLinked() or C_TradeSkillUI.IsTradeSkillGuild()) then
 			-- we've triggered the tradeskill UI, close it again and bail out
-			C_TradeSkillUI.CloseTradeSkill()
+			C_Timer.After(0, function()
+				-- wait for next frame so we can get full data
+				C_TradeSkillUI.CloseTradeSkill()
+			end)
 			self:UnregisterEvent(event)
 			UIParent:RegisterEvent(event)
 
