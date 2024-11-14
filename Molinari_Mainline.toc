@@ -28,9 +28,10 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
+hack.lua
+
 utils.lua
 addon.lua
-hack.lua
 settings.lua
 
 data\openable.lua
