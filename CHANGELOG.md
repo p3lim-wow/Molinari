@@ -1,3 +1,8 @@
+### Changes in 110000.126-Release:
+
+- Changed: Update Interface version (classic)
+- Changed: Updated item database (classic)
+
 ### Changes in 110000.125-Release:
 
 - Changed: Update Interface version (classic)
