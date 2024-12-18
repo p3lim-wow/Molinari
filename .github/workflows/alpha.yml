@@ -16,7 +16,7 @@ jobs:
       - name: Package
         uses: BigWigsMods/packager@v2
         with:
-          args: -z -r _packager
+          args: -z
 
       - name: Get short commit sha
         id: sha
@@ -26,4 +26,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Molinari-${{ steps.sha.outputs.sha_short }}
-          path: _packager
+          path: .release/
+          include-hidden-files: true
