@@ -4,6 +4,10 @@ on:
   push:
     tags:
       - '**'
+  workflow_dispatch: # so we can trigger it from another workflow
+
+permissions:
+  contents: write # required to create a release
 
 jobs:
   release:
@@ -17,8 +21,20 @@ jobs:
 
       - name: Package and release
         uses: BigWigsMods/packager@v2
-    env:
-      CF_API_KEY: ${{ secrets.CF_API_KEY }}
-      WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
-      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
-      WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+        if: github.ref_type == 'tag' # ensure no rogue triggers
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+
+      - name: Notify on failures
+        # when triggered by another workflow we won't get notifications from failures, this is a workaround
+        if: ${{ failure() }}
+        uses: appleboy/discord-action@v1.1.0
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          message: |
+            Workflow "${{ github.workflow }}" failed during job "${{ github.job }}"
+            <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}>

@@ -1,0 +1,35 @@
+name: Create pull request from translation form
+
+on:
+  issues:
+    types: [labeled]
+
+env:
+  GITHUB_EVENT_ISSUE: ${{ github.event.issue.number }}
+
+jobs:
+  extract:
+    if: ${{ github.event.label.name == 'translation' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v4
+
+      - name: Extract translations
+        uses: p3lim/lua-translations@master
+        with:
+          action: extract
+        id: extract
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: Update ${{ steps.extract.outputs.lang }} translation
+          body:
+          commit-message: |
+            Update ${{ steps.extract.outputs.lang }} translation
+
+            Fixes #${{ github.event.issue.number }}
+          branch: update-translation-${{ github.event.issue.number }}
+          delete-branch: true
