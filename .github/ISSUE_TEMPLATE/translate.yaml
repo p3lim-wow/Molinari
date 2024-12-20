@@ -1,11 +1,11 @@
+# This file is auto-generated!
 name: Translation
 description: Provide a translation for in-game strings.
 title: 'Translation: '
 labels:
-  - enhancement
   - translation
 assignees:
-  - p3lim
+  - p3lim-wow
 body:
   - type: dropdown
     id: locale
@@ -28,12 +28,11 @@ body:
     attributes:
       value: |
         Please translate each sentence below into the fields next to them.  
-        It is not required to translate all of them.
 
         ---
-# the rest is a list of strings to translate
   - type: input
     attributes:
-      label: '"Modifier to activate %s"'
-      description: Used in the settings, "%s" is the addon name "Molinari"
+      label: Modifier to activate %s
       placeholder: Translation here
+    validations:
+      required: true
