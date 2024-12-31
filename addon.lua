@@ -241,8 +241,12 @@ function addon:MODIFIER_STATE_CHANGED()
 			addon:DeferMethod(Molinari, 'Hide')
 		end
 	elseif GameTooltip:IsShown() then
+		if GameTooltip:IsForbidden() or GameTooltip:IsProtected() then
+			return
+		end
+
 		local owner = GameTooltip:GetOwner()
-		if owner and not (GameTooltip:IsForbidden() or GameTooltip:IsProtected()) and owner:IsMouseOver() then
+		if owner and not owner:IsAnchoringRestricted() and owner:IsMouseOver() then
 			if owner.GetSlotAndBagID then
 				local slotIndex, bagID = owner:GetSlotAndBagID()
 				if slotIndex and bagID then
