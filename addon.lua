@@ -84,6 +84,31 @@ local function tooltipHook(tooltip, item)
 	end
 end
 
+local function tooltipShow(self)
+	if self:GetRight() >= GetScreenWidth() / 2 then
+		GameTooltip:SetOwner(self, 'ANCHOR_LEFT')
+	else
+		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT')
+	end
+
+	if self.itemLink then
+		GameTooltip:SetHyperlink(self.itemLink)
+	else
+		GameTooltip:SetBagItem(self:GetAttribute('target-bag'), self:GetAttribute('target-slot'))
+	end
+
+	if addon:IsRetail() then
+		if self.spellID then
+			local spellName = (C_Spell.GetSpellName or GetSpellInfo)(self.spellID)
+			tooltipHelp((('\n'):split(NPEV2_CASTER_ABILITYINITIAL:gsub(' %%s ', '%s'))):format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. spellName .. '|r'))
+		elseif self.itemID then
+			tooltipHelp(NPEV2_ABILITYINITIAL:format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Item.GetItemNameByID(self.itemID) .. '|r'))
+		end
+	end
+
+	GameTooltip:Show()
+end
+
 function addon:OnLogin()
 	-- load late so our hooks are added late, that way our tooltip lines are more
 	-- likely to render at the bottom of the tooltip (but no guarantee)
@@ -194,30 +219,7 @@ end)
 
 -- tooltips
 Molinari:HookScript('OnLeave', GameTooltip_Hide)
-Molinari:HookScript('OnEnter', function(self)
-	if self:GetRight() >= GetScreenWidth() / 2 then
-		GameTooltip:SetOwner(self, 'ANCHOR_LEFT')
-	else
-		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT')
-	end
-
-	if self.itemLink then
-		GameTooltip:SetHyperlink(self.itemLink)
-	else
-		GameTooltip:SetBagItem(self:GetAttribute('target-bag'), self:GetAttribute('target-slot'))
-	end
-
-	if addon:IsRetail() then
-		if self.spellID then
-			local spellName = (C_Spell.GetSpellName or GetSpellInfo)(self.spellID)
-			tooltipHelp((('\n'):split(NPEV2_CASTER_ABILITYINITIAL:gsub(' %%s ', '%s'))):format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. spellName .. '|r'))
-		elseif self.itemID then
-			tooltipHelp(NPEV2_ABILITYINITIAL:format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Item.GetItemNameByID(self.itemID) .. '|r'))
-		end
-	end
-
-	GameTooltip:Show()
-end)
+Molinari:HookScript('OnEnter', tooltipShow)
 
 -- hide whenever a bag update occurs
 function addon:BAG_UPDATE_DELAYED()
@@ -229,7 +231,7 @@ end
 -- force-update tooltip whenever a modifier changes, as the state driver doesn't handle OnEnter
 function addon:MODIFIER_STATE_CHANGED()
 	if Molinari:IsShown() then
-		Molinari:GetScript('OnEnter')(Molinari)
+		tooltipShow(Molinari)
 
 		if modifier == 'CTRL' and not IsControlKeyDown() then
 			addon:DeferMethod(Molinari, 'Hide')
