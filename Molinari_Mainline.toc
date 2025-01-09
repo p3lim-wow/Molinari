@@ -28,8 +28,6 @@ locale\ruRU.lua
 locale\zhCN.lua
 locale\zhTW.lua
 
-hack.lua
-
 utils.lua
 addon.lua
 settings.lua
@@ -45,5 +43,4 @@ data\crushable.lua
 data\shatterable.lua
 
 api\items.lua
-api\skill.lua
 api\colors.lua
