@@ -19,20 +19,18 @@ for row in itemEffect:
 	if row.SpellID in effectSpells:
 		effects[row.ID] = row.SpellID
 
-excluded = [
-	109645, # not available
-]
-
 items = {}
 # iterate through the ItemXItemEffect dbc to match item effects to items
 for row in itemXItemEffect:
 	if row.ItemEffectID in effects:
-		if not row.ItemID in excluded:
-			items[row.ItemID] = {
-				'itemID': row.ItemID,
-				'effectiveSkill': effectSpells[effects[row.ItemEffectID]]
-			}
+		items[row.ItemID] = {
+			'itemID': row.ItemID,
+			'effectiveSkill': effectSpells[effects[row.ItemEffectID]]
+		}
 
+excluded = [
+	109645, # not available
+]
 
 # iterate through ItemSparse to fill in extra info
 for row in itemSparse:
@@ -44,6 +42,11 @@ for row in itemSparse:
 
 		items[row.ID]['name'] = row.Display_lang
 		items[row.ID]['requiredLevel'] = row.RequiredLevel
+
+# remove excluded items from the item list
+for itemID in list(items):
+	if itemID in excluded:
+		del items[itemID]
 
 # print data file structure
 templateLuaTable('keys', '\t[{itemID}] = {{{effectiveSkill}, {requiredLevel}}}, -- {name}', items)
