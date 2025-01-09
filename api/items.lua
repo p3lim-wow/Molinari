@@ -146,19 +146,56 @@ function addon:IsSalvagable(itemID)
 	end
 end
 
-function addon:IsOpenableProfession(itemID)
-	-- returns the pick used to open the item if the player can open it
-	local requiredLevel = addon.data.openable[itemID]
-	if requiredLevel then
-		local playerLevel = UnitLevel('player')
-		for pickItemID, info in next, addon.data.keys do
-			if
-				info[1] >= requiredLevel and
-				info[3] <= addon:GetProfessionSkillLevel(info[2]) and
-				info[4] <= playerLevel and
-				C_Item.GetItemCount(pickItemID) > 0
-			then
-				return pickItemID, addon.colors.openable
+if addon:IsRetail() then
+	-- use tooltip scanning to check if the key is usable
+	local COLOR_WHITE = CreateColor(1, 1, 1)
+	local function isKeyUsable(itemID)
+		local data = C_TooltipInfo.GetItemByID(itemID)
+		if data and data.lines then
+			for index = 3, #data.lines do -- skip a few lines that holds item name and such
+				local line = data.lines[index]
+				if line.type == Enum.TooltipDataLineType.RestrictedSkill then
+					if line.leftColor:IsRGBEqualTo(COLOR_WHITE) then
+						rawset(self, itemID, true)
+						return true
+					end
+				end
+			end
+		end
+	end
+
+	function addon:IsOpenableProfession(itemID)
+		-- returns the pick used to open the item if the player can open it
+		local requiredLevel = addon.data.openable[itemID]
+		if requiredLevel then
+			local playerLevel = UnitLevel('player')
+			for pickItemID, info in next, addon.data.keys do
+				if
+					info[1] >= requiredLevel and
+					info[2] <= playerLevel and
+					C_Item.GetItemCount(pickItemID) and
+					isKeyUsable(pickItemID)
+				then
+					return pickItemID, addon.colors.openable
+				end
+			end
+		end
+	end
+else
+	function addon:IsOpenableProfession(itemID)
+		-- returns the pick used to open the item if the player can open it
+		local requiredLevel = addon.data.openable[itemID]
+		if requiredLevel then
+			local playerLevel = UnitLevel('player')
+			for pickItemID, info in next, addon.data.keys do
+				if
+					info[1] >= requiredLevel and
+					info[3] <= addon:GetProfessionSkillLevel(info[2]) and
+					info[4] <= playerLevel and
+					C_Item.GetItemCount(pickItemID) > 0
+				then
+					return pickItemID, addon.colors.openable
+				end
 			end
 		end
 	end

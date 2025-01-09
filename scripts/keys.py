@@ -43,9 +43,7 @@ for row in itemSparse:
 			continue
 
 		items[row.ID]['name'] = row.Display_lang
-		items[row.ID]['requiredSkill'] = row.RequiredSkill
-		items[row.ID]['requiredSkillLevel'] = row.RequiredSkillRank
 		items[row.ID]['requiredLevel'] = row.RequiredLevel
 
 # print data file structure
-templateLuaTable('keys', '\t[{itemID}] = {{{effectiveSkill}, {requiredSkill}, {requiredSkillLevel}, {requiredLevel}}}, -- {name}', items)
+templateLuaTable('keys', '\t[{itemID}] = {{{effectiveSkill}, {requiredLevel}}}, -- {name}', items)
