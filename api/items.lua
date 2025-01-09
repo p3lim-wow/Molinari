@@ -155,10 +155,7 @@ if addon:IsRetail() then
 			for index = 3, #data.lines do -- skip a few lines that holds item name and such
 				local line = data.lines[index]
 				if line.type == Enum.TooltipDataLineType.RestrictedSkill then
-					if line.leftColor:IsRGBEqualTo(COLOR_WHITE) then
-						rawset(self, itemID, true)
-						return true
-					end
+					return line.leftColor:IsRGBEqualTo(COLOR_WHITE)
 				end
 			end
 		end

@@ -63,6 +63,7 @@ read_globals = {
 	'C_Item',
 	'C_Spell',
 	'C_Timer', -- retail
+	'C_TooltipInfo', -- retail
 	'C_TradeSkillUI', -- retail
 	'Enum',
 	'TooltipDataProcessor', -- retail
