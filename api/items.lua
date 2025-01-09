@@ -150,11 +150,12 @@ function addon:IsOpenableProfession(itemID)
 	-- returns the pick used to open the item if the player can open it
 	local requiredLevel = addon.data.openable[itemID]
 	if requiredLevel then
+		local playerLevel = UnitLevel('player')
 		for pickItemID, info in next, addon.data.keys do
 			if
-				info[1] > requiredLevel and
-				info[3] < addon:GetProfessionSkillLevel(info[2]) and
-				info[4] < UnitLevel('player') and
+				info[1] >= requiredLevel and
+				info[3] <= addon:GetProfessionSkillLevel(info[2]) and
+				info[4] <= playerLevel and
 				C_Item.GetItemCount(pickItemID) > 0
 			then
 				return pickItemID, addon.colors.openable
