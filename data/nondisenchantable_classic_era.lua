@@ -1746,12 +1746,4 @@ addon.data.nondisenchantable = {
 	[235011] = true, -- Blade of Eternal Justice
 	[235012] = true, -- Mace of Unending Life
 	[235013] = true, -- Blade of Vaulted Secrets
-	[235473] = true, -- Grand Marshal's Barricade
-	[235474] = true, -- High Warlord's Barricade
-	[235476] = true, -- High Warlord's Hacker
-	[235477] = true, -- High Warlord's Bonecracker
-	[235478] = true, -- High Warlord's Shiv
-	[235479] = true, -- Grand Marshal's Shiv
-	[235480] = true, -- Grand Marshal's Bonecracker
-	[235481] = true, -- Grand Marshal's Hacker
 }
