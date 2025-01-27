@@ -3,7 +3,7 @@
 ## Version: @project-version@
 ## Title: Molinari
 ## Notes: One-click Milling, Prospecting, Disenchanting, Lockpicking, and more!
-## SavedVariables: MolinariBlacklistDB, MolinariDB, MolinariDB2, MolinariDB3
+## SavedVariables: MolinariDB2, MolinariDB3
 
 ## X-Curse-Project-ID: 20338
 ## X-WoWI-ID: 13188
