@@ -170,7 +170,7 @@ if addon:IsRetail() then
 				if
 					info[1] >= requiredLevel and
 					info[2] <= playerLevel and
-					C_Item.GetItemCount(pickItemID) and
+					C_Item.GetItemCount(pickItemID) > 0 and
 					isKeyUsable(pickItemID)
 				then
 					return pickItemID, addon.colors.openable
