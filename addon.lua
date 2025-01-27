@@ -150,7 +150,7 @@ function Molinari:ApplyItem(item, key, color)
 		self:SetAttribute('target-slot', slotID)
 		self:SetAttribute('item', 'item:' .. key)
 
-		self.itemID = item:GetItemID() -- for tooltips
+		self.itemID = key -- for tooltips
 		self:Show()
 		self:SetColor(color)
 	end
