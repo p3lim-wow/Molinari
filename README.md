@@ -32,8 +32,8 @@ In addition, Molinari also works for lockpicking in the trade window.
 
 ## Translations
 
-If you want to help translate Molinari, please use this form on GitHub:  
-[https://github.com/p3lim-wow/Molinari/issues/new?template=translate.yaml](https://github.com/p3lim-wow/Molinari/issues/new?assignees=p3lim&labels=enhancement%2Ctranslation&template=translate.yaml&title=Translation%3A+)
+If you want to help translate Molinari, please go here:  
+<https://legacy.curseforge.com/wow/addons/molinari/localization>
 
 ## Feedback & issues
 
