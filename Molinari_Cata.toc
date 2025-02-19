@@ -1,4 +1,4 @@
-## Interface: 40401, 40402
+## Interface: 40402
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: Molinari
