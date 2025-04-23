@@ -62,6 +62,15 @@ function addon:IsShatterable(itemID)
 	end
 end
 
+function addon:IsTransmutable(itemID)
+	if addon:IsRetail() then
+		local info = addon.data.transmutable[itemID]
+		if info and IsPlayerSpell(info[1]) then
+			return info[1], addon.colors.transmutable, info[2]
+		end
+	end
+end
+
 function addon:NonDisenchantable(itemID)
 	return not not addon.data.nondisenchantable[itemID]
 end
@@ -133,6 +142,10 @@ function addon:IsSalvagable(itemID)
 		return spellID, color, numItems
 	end
 	spellID, color, numItems = addon:IsShatterable(itemID)
+	if spellID then
+		return spellID, color, numItems
+	end
+	spellID, color, numItems = addon:IsTransmutable(itemID)
 	if spellID then
 		return spellID, color, numItems
 	end

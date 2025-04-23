@@ -30,3 +30,4 @@ jobs:
         scrappable: scrappable
         crushable: crushable
         shatterable: shatterable
+        transmutable: transmutable

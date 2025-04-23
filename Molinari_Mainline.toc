@@ -41,6 +41,7 @@ data\disenchantable.lua
 data\scrappable.lua
 data\crushable.lua
 data\shatterable.lua
+data\transmutable.lua
 
 api\items.lua
 api\colors.lua
