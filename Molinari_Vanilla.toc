@@ -1,13 +1,13 @@
 ## Interface: 11507
-## Author: p3lim
-## Version: @project-version@
-## Title: Molinari
-## Notes: One-click Milling, Prospecting, Disenchanting, Lockpicking, and more!
-## SavedVariables: MolinariDB2, MolinariDB3
+## Author: 11507
+## Version: 11507
+## Title: 11507
+## Notes: 11507
+## SavedVariables: 11507
 
-## X-Curse-Project-ID: 20338
-## X-WoWI-ID: 13188
-## X-Wago-ID: WqKQQEKx
+## X-Curse-Project-ID: 11507
+## X-WoWI-ID: 11507
+## X-Wago-ID: 11507
 
 #@non-debug@
 # libs\Dashi\embed.xml
