@@ -53,4 +53,11 @@ addon.data.millable = {
 	[52987] = 475, -- Twilight Jasmine
 	[52988] = 475, -- Whiptail
 	[52989] = 500, -- Deathspore Pod
+	[72234] = 500, -- Green Tea Leaf
+	[72235] = 500, -- Silkweed
+	[72237] = 500, -- Rain Poppy
+	[79010] = 500, -- Snow Lily
+	[79011] = 500, -- Fool's Cap
+	[87821] = 500, -- Coagulated Tiger's Blood
+	[89639] = 500, -- Desecrated Herb
 }
