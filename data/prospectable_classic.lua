@@ -16,4 +16,8 @@ addon.data.prospectable = {
 	[52184] = 425, -- Black Iron Ore
 	[52185] = 475, -- Elementium Ore
 	[53038] = 425, -- Obsidium Ore
+	[72092] = 500, -- Ghost Iron Ore
+	[72093] = 550, -- Kyparite
+	[72094] = 600, -- Black Trillium Ore
+	[72103] = 600, -- White Trillium Ore
 }

@@ -11,6 +11,8 @@ addon.data.keys = {
 	[23819] = {350, 202, 350, 0}, -- Elemental Seaforium Charge
 	[43853] = {400, 164, 430, 0}, -- Titanium Skeleton Key
 	[43854] = {375, 164, 350, 0}, -- Cobalt Skeleton Key
-	[55053] = {525, 164, 475, 0}, -- Obsidium Skeleton Key
-	[60853] = {525, 202, 425, 0}, -- Volatile Seaforium Blastpack
+	[55053] = {425, 164, 475, 0}, -- Obsidium Skeleton Key
+	[60853] = {400, 202, 425, 0}, -- Volatile Seaforium Blastpack
+	[77532] = {450, 202, 525, 0}, -- Locksmith's Powderkeg
+	[82960] = {450, 164, 500, 0}, -- Ghostly Skeleton Key
 }

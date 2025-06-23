@@ -29,4 +29,6 @@ addon.data.openable = {
 	[45986] = 400, -- Tiny Titanium Lockbox
 	[63349] = 400, -- Flame-Scarred Junkbox
 	[68729] = 425, -- Elementium Lockbox
+	[88165] = 450, -- Vine-Cracked Junkbox
+	[88567] = 450, -- Ghost Iron Lockbox
 }
