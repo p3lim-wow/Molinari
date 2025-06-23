@@ -1,3 +1,9 @@
+### Changes in 110100.132-Release:
+
+- Added: Preliminary data for Mists of Pandaria
+- Changed: Update Interface versions
+- Changed: Update item databases
+
 ### Changes in 110100.131-Release:
 
 - Added: Support for alchemy thaumaturgy/transmutions
