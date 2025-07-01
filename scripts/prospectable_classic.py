@@ -20,6 +20,6 @@ for row in util.dbc('itemsparse'):
 util.templateLuaTable(
 	'local _, addon = ...',
 	'addon.data.prospectable',
-	'\t[{itemID}] = {recipeSpellID}, -- {name}',
+	'\t[{itemID}] = {requiredSkillLevel}, -- {name}',
 	items
 )
