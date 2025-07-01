@@ -55,4 +55,6 @@ addon.data.prospectable = {
 	[210938] = {434018, 5}, -- Ironclaw Ore
 	[210939] = {434018, 5}, -- Null Stone
 	[213398] = {434018, 5}, -- Handful of Pebbles
+	[240216] = {434018, 5}, -- K'areshi Resonating Stone
+	[249218] = {434018, 5}, -- Manaforged Instrument
 }
