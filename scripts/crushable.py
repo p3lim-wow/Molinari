@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-from utils import *
-
-itemSparse = dbc('itemsparse')
-itemSalvageLoot = dbc('itemsalvageloot')
-spellEffect = dbc('spelleffect')
+import util
 
 # 2nd field in ItemSalvageLoot.db2 gives us the item that can be prospected
 # 3rd field in ItemSalvageLoot.db2 gives us the ItemSalvageID used to prospect the item
@@ -34,13 +30,13 @@ spellItemsRequired = {}
 for _, spellID in recipeSpellIDs.items():
 	spellItemsRequired[spellID] = 0
 
-for row in spellEffect:
+for row in util.dbc('spelleffect'):
 	if row.SpellID in spellItemsRequired:
 		spellItemsRequired[row.SpellID] = row.EffectBasePointsF
 
 # iterate through ItemSalvageLoot for items that can be crushed
 items = {}
-for row in itemSalvageLoot:
+for row in util.dbc('itemsalvageloot'):
 	if row.ItemSalvageID in recipeSpellIDs:
 		items[row.SalvagedItemID] = {
 			'itemID': row.SalvagedItemID,
@@ -49,9 +45,9 @@ for row in itemSalvageLoot:
 		}
 
 # iterate through ItemSparse for crushable items and add their names to the dict
-for row in itemSparse:
+for row in util.dbc('itemsparse'):
 	if row.ID in items:
-		if (getattr(row, 'Flags[0]') & 0x10) != 0:
+		if (row.Flags_0 & 0x10) != 0:
 			# deprecated item
 			del items[row.ID]
 			continue
@@ -59,4 +55,9 @@ for row in itemSparse:
 		items[row.ID]['name'] = row.Display_lang
 
 # print data file structure
-templateLuaTable('crushable', '\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}', items)
+util.templateLuaTable(
+	'local _, addon = ...',
+	'addon.data.crushable',
+	'\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}',
+	items
+)

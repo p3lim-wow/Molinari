@@ -8,19 +8,35 @@ on:
       - '**'
     paths:
       - 'scripts/**.py'
-      - '.github/workflows/scrape.yaml'
-      - '.github/workflows/scrape_classic_era.yaml'
   schedule:
-    - cron: '0 8 * * 1' # monday morning
+    - cron: '0 8 * * *' # every morning
   workflow_dispatch:
 
 jobs:
   scrape:
-    uses: ./.github/workflows/scrape.yaml
-    with:
-      flavor: classic_era
-      dbc: wow_classic_era_latest
-      files: |
-        openable: openable_classic_era
-        keys_classic_era: keys_classic_era
-        nondisenchantable: nondisenchantable_classic_era
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v4
+
+      - name: Scrape
+        uses: p3lim/dbc-helper@master
+        id: scraper
+        with:
+          flavor: classic_era
+          beta: true
+          ptr: true
+          files: |
+            scripts/openable.py: data/openable_classic_era.lua
+            scripts/keys_classic_era.py: data/keys_classic_era.lua
+            scripts/nondisenchantable.py: data/nondisenchantable_classic_era.lua
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
+        with:
+          title: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          commit-message: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          body: ''
+          branch: update-data-${{ steps.scraper.outputs.flavor }}
+          delete-branch: true

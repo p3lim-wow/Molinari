@@ -1,27 +1,22 @@
 #!/usr/bin/env python3
 
-from utils import *
-
-spellEffect = dbc('spelleffect')
-itemEffect = dbc('itemeffect')
-itemXItemEffect = dbc('itemxitemeffect')
-itemSparse = dbc('itemsparse')
+import util
 
 effectSpells = {}
 # iterate through spell effects for effect 33 (lockpicking)
-for row in spellEffect:
-	if row.Effect == 33 and row.EffectBasePointsF > 0 and getattr(row, 'EffectMiscValue[0]') == 1:
+for row in util.dbc('spelleffect'):
+	if row.Effect == 33 and row.EffectBasePointsF > 0 and row.EffectMiscValue_0 == 1:
 		effectSpells[row.SpellID] = row.EffectBasePointsF
 
 effects = {}
 # iterate through item effects that matches the spells from above
-for row in itemEffect:
+for row in util.dbc('itemeffect'):
 	if row.SpellID in effectSpells:
 		effects[row.ID] = row.SpellID
 
 items = {}
 # iterate through the ItemXItemEffect dbc to match item effects to items
-for row in itemXItemEffect:
+for row in util.dbc('itemxitemeffect'):
 	if row.ItemEffectID in effects:
 		items[row.ItemID] = {
 			'itemID': row.ItemID,
@@ -33,9 +28,9 @@ excluded = [
 ]
 
 # iterate through ItemSparse to fill in extra info
-for row in itemSparse:
+for row in util.dbc('itemsparse'):
 	if row.ID in items:
-		if getattr(row, 'Flags[3]') != 16384 or row.RequiredSkill == 0:
+		if row.Flags_3 != 16384 or row.RequiredSkill == 0: # TODO: use bitwise operator to check
 			# items that are not profession keys, like one-off quest rewards and such
 			excluded.append(row.ID)
 			continue
@@ -49,4 +44,9 @@ for itemID in list(items):
 		del items[itemID]
 
 # print data file structure
-templateLuaTable('keys', '\t[{itemID}] = {{{effectiveSkill}, {requiredLevel}}}, -- {name}', items)
+util.templateLuaTable(
+	'local _, addon = ...',
+	'addon.data.keys',
+	'\t[{itemID}] = {{{effectiveSkill}, {requiredLevel}}}, -- {name}',
+	items
+)

@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-from utils import *
-
-itemSparse = dbc('itemsparse')
+import util
 
 # non-equipment disenchantable items I can't find a flag for
 extra = [
@@ -14,12 +12,17 @@ extra = [
 
 items = {}
 # iterate through ItemSparse for items that can't be disenchanted
-for row in itemSparse:
-	if (getattr(row, 'Flags[1]') & 0x40000000) != 0 and row.InventoryType == 0:
+for row in util.dbc('itemsparse'):
+	if (row.Flags_1 & 0x40000000) != 0 and row.InventoryType == 0:
 		items[row.ID] = {
 			'itemID': row.ID,
 			'name': row.Display_lang,
 		}
 
 # print data file structure
-templateLuaTable('disenchantable', '\t[{itemID}] = true, -- {name}', items)
+util.templateLuaTable(
+	'local _, addon = ...',
+	'addon.data.disenchantable',
+	'\t[{itemID}] = true, -- {name}',
+	items
+)

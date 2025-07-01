@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
-from utils import *
-
-itemSparse = dbc('itemsparse')
+import util
 
 items = {}
 # iterate through ItemSparse for items that can be prospected
-for row in itemSparse:
-	if (getattr(row, 'Flags[0]') & 0x40000) != 0 and row.RequiredSkill == 755:
+for row in util.dbc('itemsparse'):
+	if (row.Flags_0 & 0x40000) != 0 and row.RequiredSkill == 755:
 		if row.ID == 24115:
 			# random test item
 			continue
@@ -18,6 +16,10 @@ for row in itemSparse:
 			'requiredSkillLevel': row.RequiredSkillRank,
 		}
 
-
 # print data file structure
-templateLuaTable('prospectable', '\t[{itemID}] = {requiredSkillLevel}, -- {name}', items)
+util.templateLuaTable(
+	'local _, addon = ...',
+	'addon.data.prospectable',
+	'\t[{itemID}] = {recipeSpellID}, -- {name}',
+	items
+)

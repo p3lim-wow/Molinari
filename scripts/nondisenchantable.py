@@ -1,21 +1,15 @@
 #!/usr/bin/env python3
 
-from utils import *
-
-itemSparse = dbc('itemsparse')
-
-FLAGS_COL = 'Flags_{}'
-if not has_header('itemsparse', 'Flags_0'):
-	FLAGS_COL = 'Flags[{}]'
+import util
 
 items = {}
 # iterate through ItemSparse for items that can't be disenchanted
-for row in itemSparse:
-	if (getattr(row, FLAGS_COL.format(0)) & 0x10) != 0:
+for row in util.dbc('itemsparse'):
+	if (row.Flags_0 & 0x10) != 0:
 		# deprecated item
 		continue
 
-	if (getattr(row, FLAGS_COL.format(0)) & 0x8000) == 0:
+	if (row.Flags_0 & 0x8000) == 0:
 		# "No Disenchant" flag
 		continue
 
@@ -27,7 +21,7 @@ for row in itemSparse:
 		# not equippable or a shirt
 		continue
 
-	if (getattr(row, FLAGS_COL.format(3)) & 0x10000) != 0:
+	if (row.Flags_3 & 0x10000) != 0:
 		# cosmetic item
 		continue
 
@@ -37,4 +31,9 @@ for row in itemSparse:
 	}
 
 # print data file structure
-templateLuaTable('nondisenchantable', '\t[{itemID}] = true, -- {name}', items)
+util.templateLuaTable(
+	'local _, addon = ...',
+	'addon.data.nondisenchantable',
+	'\t[{itemID}] = true, -- {name}',
+	items
+)

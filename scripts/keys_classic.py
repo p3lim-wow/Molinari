@@ -1,23 +1,19 @@
 #!/usr/bin/env python3
 
-from utils import *
+import util
 
 # SpellEffect does not have EffectBasePointsF (effectiveSkill),
 # so we have to manually keep this updated with the effective skill?
 
-itemSparse = dbc('itemsparse')
-itemEffect = dbc('itemeffect')
-spellEffect = dbc('spelleffect')
-
 effectSpells = {}
 # iterate through spell effects for effect 33 (lockpicking)
-for row in spellEffect:
-	if row.Effect == 33 and getattr(row, 'EffectMiscValue[0]') == 1:
+for row in util.dbc('spelleffect'):
+	if row.Effect == 33 and row.EffectMiscValue_0 == 1:
 		effectSpells[row.SpellID] = row.EffectBasePoints
 
 items = {}
 # iterate through item effects for items with the spell from above
-for row in itemEffect:
+for row in util.dbc('itemeffect'):
 	if row.SpellID in effectSpells:
 		items[row.ParentItemID] = {
 			'itemID': row.ParentItemID,
@@ -26,7 +22,7 @@ for row in itemEffect:
 
 excluded = []
 # iterate through ItemSparse to fill in extra info
-for row in itemSparse:
+for row in util.dbc('itemsparse'):
 	if row.ID in items:
 		if row.RequiredSkill == 0:
 			# items that are not profession keys, like one-off quest rewards and such
@@ -43,4 +39,9 @@ for itemID in list(items):
 		del items[itemID]
 
 # print data file structure
-templateLuaTable('keys', '\t[{itemID}] = {{{effectiveSkill}, {requiredSkill}, {requiredSkillLevel}, 0}}, -- {name}', items)
+util.templateLuaTable(
+	'local _, addon = ...',
+	'addon.data.keys',
+	'\t[{itemID}] = {{{effectiveSkill}, {requiredSkill}, {requiredSkillLevel}, 0}}, -- {name}',
+	items
+)
