@@ -30,10 +30,10 @@ excluded = [
 # iterate through ItemSparse to fill in extra info
 for row in util.dbc('itemsparse'):
 	if row.ID in items:
-		if row.Flags_3 != 16384 or row.RequiredSkill == 0: # TODO: use bitwise operator to check
-			# items that are not profession keys, like one-off quest rewards and such
-			excluded.append(row.ID)
-			continue
+		# if row.Flags_3 != 16384 or row.RequiredSkill == 0: # TODO: use bitwise operator to check
+		# 	# items that are not profession keys, like one-off quest rewards and such
+		# 	excluded.append(row.ID)
+		# 	continue
 
 		items[row.ID]['name'] = row.Display_lang
 		items[row.ID]['requiredLevel'] = row.RequiredLevel
