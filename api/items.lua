@@ -176,6 +176,8 @@ if addon:IsRetail() then
 				end
 			end
 		end
+
+		return true
 	end
 
 	function addon:IsOpenableProfession(itemID)
