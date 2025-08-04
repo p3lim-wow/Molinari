@@ -1,3 +1,8 @@
+### Changes in 110200.133-Release:
+
+- Added: Support for Coreforged Skeleton Key
+- Changed: Update retail data
+
 ### Changes in 110100.132-Release:
 
 - Added: Preliminary data for Mists of Pandaria
