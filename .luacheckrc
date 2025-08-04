@@ -33,19 +33,12 @@ read_globals = {
 	'Item',
 	'ItemLocation',
 	'PaperDollFrameItemFlyoutButtons', -- classic
-	'SOUNDKIT', -- retail
 
 	-- FrameXML functions
 	'AutoCastShine_AutoCastStart', -- classic
 	'AutoCastShine_AutoCastStop', -- classic
 	'CreateColor',
 	'GameTooltip_Hide',
-	'RegisterAttributeDriver',
-	'Mixin',
-	'nop',
-
-	-- FrameXML constants
-	'FACTION_RED_COLOR',
 
 	-- GlobalStrings
 	'ALT_KEY',
@@ -62,19 +55,15 @@ read_globals = {
 	-- namespaces
 	'C_Item',
 	'C_Spell',
-	'C_Timer', -- retail
+	'C_SpellBook',
 	'C_TooltipInfo', -- retail
-	'C_TradeSkillUI', -- retail
 	'Enum',
 	'TooltipDataProcessor', -- retail
 
 	-- API
-	'CreateFrame',
 	'ExpandSkillHeader', -- classic
 	'FindSpellBookSlotBySpellID',
 	'GetNumSkillLines', -- classic
-	'GetProfessionInfo', -- hack
-	'GetProfessions', -- hack
 	'GetScreenWidth',
 	'GetSkillLineInfo', -- classic
 	'GetSpellInfo', -- classic
@@ -82,10 +71,8 @@ read_globals = {
 	'InCombatLockdown',
 	'IsAltKeyDown',
 	'IsControlKeyDown',
-	'IsPlayerSpell',
+	'IsPlayerSpell', -- deprecated
 	'IsShiftKeyDown',
-	'MuteSoundFile', -- retail
 	'UnitHasVehicleUI',
 	'UnitLevel',
-	'UnmuteSoundFile', -- retail
 }
