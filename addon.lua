@@ -10,6 +10,8 @@ local TEMPLATES = {
 	'SecureHandlerEnterLeaveTemplate',
 }
 
+local IsPlayerSpell = C_SpellBook.IsSpellKnown or IsPlayerSpell -- 12.x deprecation
+
 if not addon:IsRetail() then
 	-- AutoCastShine was removed in 11.0, but we'll keep on using it in classic
 	table.insert(TEMPLATES, 'AutoCastShineTemplate')
