@@ -75,4 +75,5 @@ read_globals = {
 	'IsShiftKeyDown',
 	'UnitHasVehicleUI',
 	'UnitLevel',
+	'hooksecurefunc',
 }
