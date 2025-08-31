@@ -1,4 +1,4 @@
-## Interface: 50500
+## Interface: 50500, 50501
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: Molinari
