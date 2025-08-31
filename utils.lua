@@ -1,6 +1,6 @@
 local _, addon = ...
 
-if addon:IsRetail() then
+if TooltipDataProcessor and C_TooltipInfo then
 	function addon:HookTooltip(callback)
 		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
 			if not (tooltip and not tooltip:IsForbidden() and tooltip:GetOwner()) then
@@ -31,6 +31,7 @@ if addon:IsRetail() then
 	end
 else
 	local function getBagAndSlotID(parent)
+		-- what a fucking mess, just give us C_TooltipInfo on classic already
 		if parent then
 			local grandParent = parent:GetParent()
 			if grandParent then
@@ -49,9 +50,15 @@ else
 				return
 			end
 
+			local owner = tooltip:GetOwner()
+			if owner.action and owner.buttonType then
+				-- this is an action button, atleast in the default UI, bail out
+				return
+			end
+
 			local _, itemLink = tooltip:GetItem()
 			if itemLink then
-				local bagID, slotID = getBagAndSlotID(tooltip:GetOwner())
+				local bagID, slotID = getBagAndSlotID(owner)
 				if bagID and slotID and bagID >= 0 and bagID <= 4 then -- limit to player bags
 					callback(tooltip, Item:CreateFromItemLocation(ItemLocation:CreateFromBagAndSlot(bagID, slotID)))
 				elseif tooltip:GetOwner():GetName() == 'TradeRecipientItem7ItemButton' then
