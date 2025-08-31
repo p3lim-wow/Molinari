@@ -1,3 +1,8 @@
+### Changes in 110200.134-Release:
+
+- Changed: Update Interface version
+- Fixed: Accidentally activating on actions buttons in classic
+
 ### Changes in 110200.133-Release:
 
 - Added: Support for Coreforged Skeleton Key
