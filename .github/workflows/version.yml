@@ -15,7 +15,7 @@ jobs:
       - name: Update TOC Interface version
         uses: p3lim/toc-interface-updater@v4
         with:
-          beta: true
+          # beta: true
           ptr: true
 
       - name: Create pull request
