@@ -14,24 +14,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  scrape:
-    strategy:
-      matrix:
-        flavor:
-          - retail
-          - classic
-          - classic_era
+  scrape-retail:
     runs-on: ubuntu-latest
     steps:
       - name: Clone
         uses: actions/checkout@v5
 
-      - name: Scrape retail
-        if: matrix.flavor == 'retail'
+      - name: Scrape
         uses: p3lim/dbc-helper@master
         id: scraper
         with:
-          flavor: ${{ matrix.flavor }}
           # beta: true
           ptr: true
           files: |
@@ -46,12 +38,27 @@ jobs:
             scripts/shatterable.py: data/shatterable.lua
             scripts/transmutable.py: data/transmutable.lua
 
-      - name: Scrape classic
-        if: matrix.flavor == 'classic'
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
+        with:
+          title: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          commit-message: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          body: ''
+          branch: update-data-${{ steps.scraper.outputs.flavor }}
+          delete-branch: true
+
+  scrape-classic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v5
+
+      - name: Scrape
         uses: p3lim/dbc-helper@master
         id: scraper
         with:
-          flavor: ${{ matrix.flavor }}
+          flavor: classic
           # beta: true
           ptr: true
           files: |
@@ -61,12 +68,27 @@ jobs:
             scripts/prospectable_classic.py: data/prospectable_classic.lua
             scripts/millable_classic.py: data/millable_classic.lua
 
-      - name: Scrape classic_era
-        if: matrix.flavor == 'classic_era'
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
+        with:
+          title: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          commit-message: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          body: ''
+          branch: update-data-${{ steps.scraper.outputs.flavor }}
+          delete-branch: true
+
+  scrape-era:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v5
+
+      - name: Scrape
         uses: p3lim/dbc-helper@master
         id: scraper
         with:
-          flavor: ${{ matrix.flavor }}
+          flavor: classic_era
           # beta: true
           ptr: true
           files: |
@@ -78,8 +100,8 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
         with:
-          title: Update ${{ matrix.flavor }} data to ${{ steps.scraper.outputs.version }}
-          commit-message: Update ${{ matrix.flavor }} data to ${{ steps.scraper.outputs.version }}
+          title: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          commit-message: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
           body: ''
-          branch: update-data-${{ matrix.flavor }}
+          branch: update-data-${{ steps.scraper.outputs.flavor }}
           delete-branch: true
