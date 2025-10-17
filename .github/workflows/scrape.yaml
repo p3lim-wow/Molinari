@@ -24,7 +24,7 @@ jobs:
         uses: p3lim/dbc-helper@master
         id: scraper
         with:
-          beta: true
+          # beta: true
           ptr: true
           files: |
             scripts/openable.py: data/openable.lua
@@ -59,7 +59,7 @@ jobs:
         id: scraper
         with:
           flavor: classic
-          beta: true
+          # beta: true
           ptr: true
           files: |
             scripts/openable.py: data/openable_classic.lua
@@ -89,7 +89,7 @@ jobs:
         id: scraper
         with:
           flavor: classic_era
-          beta: true
+          # beta: true
           ptr: true
           files: |
             scripts/openable.py: data/openable_classic_era.lua
