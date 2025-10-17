@@ -6,6 +6,11 @@ on:
       - master
     tags-ignore:
       - '**'
+    paths:
+      - '**.toc'
+      - '**.lua'
+      - '**.xml'
+      - '.github/workflows/update-translations.yml'
 
 jobs:
   upload:
