@@ -1,0 +1,106 @@
+name: Scrape
+
+on:
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
+    paths:
+      - 'scripts/**.py'
+  schedule:
+    - cron: '0 8 * * *' # every morning
+  workflow_dispatch:
+
+jobs:
+  scrape-retail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v5
+
+      - name: Scrape
+        uses: p3lim/dbc-helper@master
+        id: scraper
+        with:
+          beta: true
+          ptr: true
+          files: |
+            scripts/openable.py: data/openable.lua
+            scripts/keys.py: data/keys.lua
+            scripts/nondisenchantable.py: data/nondisenchantable.lua
+            scripts/prospectable.py: data/prospectable.lua
+            scripts/millable.py: data/millable.lua
+            scripts/disenchantable.py: data/disenchantable.lua
+            scripts/scrappable.py: data/scrappable.lua
+            scripts/crushable.py: data/crushable.lua
+            scripts/shatterable.py: data/shatterable.lua
+            scripts/transmutable.py: data/transmutable.lua
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
+        with:
+          title: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          commit-message: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          body: ''
+          branch: update-data-${{ steps.scraper.outputs.flavor }}
+          delete-branch: true
+
+  scrape-classic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v5
+
+      - name: Scrape
+        uses: p3lim/dbc-helper@master
+        id: scraper
+        with:
+          flavor: classic
+          beta: true
+          ptr: true
+          files: |
+            scripts/openable.py: data/openable_classic.lua
+            scripts/keys_classic.py: data/keys_classic.lua
+            scripts/nondisenchantable.py: data/nondisenchantable_classic.lua
+            scripts/prospectable_classic.py: data/prospectable_classic.lua
+            scripts/millable_classic.py: data/millable_classic.lua
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
+        with:
+          title: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          commit-message: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          body: ''
+          branch: update-data-${{ steps.scraper.outputs.flavor }}
+          delete-branch: true
+
+  scrape-era:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v5
+
+      - name: Scrape
+        uses: p3lim/dbc-helper@master
+        id: scraper
+        with:
+          flavor: classic_era
+          beta: true
+          ptr: true
+          files: |
+            scripts/openable.py: data/openable_classic_era.lua
+            scripts/keys_classic_era.py: data/keys_classic_era.lua
+            scripts/nondisenchantable.py: data/nondisenchantable_classic_era.lua
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
+        with:
+          title: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          commit-message: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          body: ''
+          branch: update-data-${{ steps.scraper.outputs.flavor }}
+          delete-branch: true
