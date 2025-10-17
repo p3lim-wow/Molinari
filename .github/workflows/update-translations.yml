@@ -11,6 +11,8 @@ on:
       - '**.lua'
       - '**.xml'
       - '.github/workflows/update-translations.yml'
+      - '!data/'
+      - '!locale/'
 
 jobs:
   upload:
