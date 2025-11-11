@@ -3042,4 +3042,7 @@ addon.data.nondisenchantable = {
 	[265327] = true, -- Azure Greaves of the Golden King
 	[265328] = true, -- Azure Mantle of the Golden King
 	[265329] = true, -- Azure Bracers of the Golden King
+	[265783] = true, -- Tabard of Fury
+	[265784] = true, -- Tabard of Brilliance
+	[265785] = true, -- Tabard of the Void
 }
