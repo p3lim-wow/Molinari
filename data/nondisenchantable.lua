@@ -778,6 +778,7 @@ addon.data.nondisenchantable = {
 	[50402] = true, -- Ashen Band of Endless Vengeance
 	[50403] = true, -- Ashen Band of Unmatched Courage
 	[50404] = true, -- Ashen Band of Endless Courage
+	[50741] = true, -- Vile Fumigator's Mask
 	[51534] = true, -- Wrathful Gladiator's Tabard
 	[52252] = true, -- Tabard of the Lightbringer
 	[52569] = true, -- Ashen Band of Might
