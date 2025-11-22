@@ -27,16 +27,16 @@ jobs:
           # beta: true
           ptr: true
           files: |
-            scripts/openable.py: data/openable.lua
-            scripts/keys.py: data/keys.lua
-            scripts/nondisenchantable.py: data/nondisenchantable.lua
-            scripts/prospectable.py: data/prospectable.lua
-            scripts/millable.py: data/millable.lua
-            scripts/disenchantable.py: data/disenchantable.lua
-            scripts/scrappable.py: data/scrappable.lua
-            scripts/crushable.py: data/crushable.lua
-            scripts/shatterable.py: data/shatterable.lua
-            scripts/transmutable.py: data/transmutable.lua
+            scripts/openable.py: data/Standard/openable.lua
+            scripts/keys.py: data/Standard/keys.lua
+            scripts/nondisenchantable.py: data/Standard/nondisenchantable.lua
+            scripts/prospectable.py: data/Standard/prospectable.lua
+            scripts/millable.py: data/Standard/millable.lua
+            scripts/disenchantable.py: data/Standard/disenchantable.lua
+            scripts/scrappable.py: data/Standard/scrappable.lua
+            scripts/crushable.py: data/Standard/crushable.lua
+            scripts/shatterable.py: data/Standard/shatterable.lua
+            scripts/transmutable.py: data/Standard/transmutable.lua
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
@@ -62,11 +62,11 @@ jobs:
           # beta: true
           ptr: true
           files: |
-            scripts/openable.py: data/openable_classic.lua
-            scripts/keys_classic.py: data/keys_classic.lua
-            scripts/nondisenchantable.py: data/nondisenchantable_classic.lua
-            scripts/prospectable_classic.py: data/prospectable_classic.lua
-            scripts/millable_classic.py: data/millable_classic.lua
+            scripts/openable.py: data/Mists/openable.lua
+            scripts/keys_classic.py: data/Mists/keys.lua
+            scripts/nondisenchantable.py: data/Mists/nondisenchantable.lua
+            scripts/prospectable_classic.py: data/Mists/prospectable.lua
+            scripts/millable_classic.py: data/Mists/millable.lua
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
@@ -92,9 +92,9 @@ jobs:
           # beta: true
           ptr: true
           files: |
-            scripts/openable.py: data/openable_classic_era.lua
-            scripts/keys_classic_era.py: data/keys_classic_era.lua
-            scripts/nondisenchantable.py: data/nondisenchantable_classic_era.lua
+            scripts/openable.py: data/Vanilla/openable.lua
+            scripts/keys_classic_era.py: data/Vanilla/keys.lua
+            scripts/nondisenchantable.py: data/Vanilla/nondisenchantable.lua
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
