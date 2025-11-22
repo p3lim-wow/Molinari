@@ -1,4 +1,4 @@
-## Interface: 11508
+## Interface: 11508, 20505
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: Molinari
