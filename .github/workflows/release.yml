@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone project
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Trim changelog
         run: sed -ni '1p;2,/^###/{/^###/q;p;}' CHANGELOG.md
