@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Upload localizations
-        uses: p3lim/curseforge-localizations@master
+        uses: p3lim/curseforge-localizations@v2
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           HANDLE_MISSING: DeletePhrase
