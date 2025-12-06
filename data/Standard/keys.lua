@@ -24,4 +24,5 @@ addon.data.keys = {
 	[173065] = {60, 51}, -- Writ of Grave Robbing
 	[191256] = {70, 61}, -- Serevite Skeleton Key
 	[222523] = {80, 1}, -- Coreforged Skeleton Key
+	[260232] = {90, 1}, -- Thalassian Skeleton Key
 }
