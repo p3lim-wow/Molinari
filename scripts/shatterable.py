@@ -2,45 +2,74 @@
 
 import util
 
-recipeSpellIDs = {
-  44: 391302, # Crystalline Shatter (Dragon Isles)
-  45: 391304, # Elemental Shatter (Dragon Isles)
-  86: 445466, # Shatter Essence (Khaz Algar)
-  102: 470726, # Gleaming Shatter (Khaz Algar)
-}
+PROFESSION_ID = 333
+PROFESSION_SALVAGE_SUFFIX = 'Shatter'
 
-# figure out how many items are needed to perform the salvage
-spellItemsRequired = {}
-for _, spellID in recipeSpellIDs.items():
-  spellItemsRequired[spellID] = 0
+# gather all profession expansions
+professionIDs = [PROFESSION_ID]
+for row in util.dbc('skillline'):
+  if row.ParentSkillLineID == PROFESSION_ID:
+    professionIDs.append(row.ID)
 
+# find all profession abilities
+professionAbilities = []
+for row in util.dbc('skilllineability'):
+  if row.SkillupSkillLineID in professionIDs:
+    professionAbilities.append(row.Spell)
+
+# check spell effect info
+numSpellReagents = {}
+salvageSpellIDs = {}
+spellSalvageIDs = {}
 for row in util.dbc('spelleffect'):
-  if row.SpellID in spellItemsRequired:
-    spellItemsRequired[row.SpellID] = row.EffectBasePointsF
+  if not row.SpellID in professionAbilities:
+    continue
+  if row.EffectMiscValue_0 == 0:
+    # all salvage abilities have this value, it's the salvage ID
+    continue
+  if row.EffectBasePointsF == 0:
+    # all salvage abilities have this value, it's how many items are salvaged
+    continue
+  if row.EffectMiscValue_0 == 13:
+    # BUG: the incorrect EffectMiscValue0 for 4 spells, we just ignore it
+    continue
 
-# iterate through ItemSalvageLoot for items that can be shattered
+  if not row.EffectMiscValue_0 in salvageSpellIDs:
+    # this value might be used for other things not related to salvaging,
+    # so we gotta track all spells using it and instead narrow it down later
+    salvageSpellIDs[row.EffectMiscValue_0] = []
+
+  # store info
+  salvageSpellIDs[row.EffectMiscValue_0].append(row.SpellID)
+  spellSalvageIDs[row.SpellID] = row.EffectMiscValue_0
+  numSpellReagents[row.SpellID] = row.EffectBasePointsF
+
+# check spell names
+for row in util.dbc('spellname'):
+  if row.ID in spellSalvageIDs:
+    if not (row.Name_lang.startswith(PROFESSION_SALVAGE_SUFFIX) or row.Name_lang.endswith(PROFESSION_SALVAGE_SUFFIX)):
+      # sadly the only proper way to check if it's the correct salvage spell,
+      # there's no unique global ID for each type of salvage
+      if spellSalvageIDs[row.ID] in salvageSpellIDs:
+        salvageSpellIDs[spellSalvageIDs[row.ID]].remove(row.ID)
+
+# iterate through salvage loot for items that can be milled
 items = {}
 for row in util.dbc('itemsalvageloot'):
-  if row.ItemSalvageID in recipeSpellIDs:
+  if row.ItemSalvageID in salvageSpellIDs:
+    spells = salvageSpellIDs[row.ItemSalvageID]
+    if len(spells) == 0:
+      continue
+    if len(spells) > 1:
+      util.bail(f'ERROR: multiple spells for salvage {row.ItemSalvageID}: {",".join(map(str, spells))}')
+
     items[row.SalvagedItemID] = {
       'itemID': row.SalvagedItemID,
-      'recipeSpellID': recipeSpellIDs[row.ItemSalvageID],
-      'numItems': spellItemsRequired[recipeSpellIDs[row.ItemSalvageID]],
+      'recipeSpellID': spells[0],
+      'numItems': numSpellReagents[spells[0]],
     }
 
-# shatterable items somehow not in ItemSalvageLoot
-items[124441] = { # Leylight Shard
-  'itemID': 124441,
-  'recipeSpellID': 224199, # Ley Shatter (Legion)
-  'numItems': 1,
-}
-items[124442] = { # Chaos Crystal
-  'itemID': 124442,
-  'recipeSpellID': 252106, # Chaos Shatter (Legion)
-  'numItems': 1,
-}
-
-# iterate through ItemSparse for shatterable items and add their names to the dict
+# get item names
 for row in util.dbc('itemsparse'):
   if row.ID in items:
     if (row.Flags_0 & 0x10) != 0:

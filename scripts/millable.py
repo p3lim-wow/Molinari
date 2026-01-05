@@ -2,70 +2,84 @@
 
 import util
 
-# 2nd field in ItemSalvageLoot.db2 gives us the item that can be milled
-# 3rd field in ItemSalvageLoot.db2 gives us the ItemSalvageID used to mill the item
-# 1st field in ItemSalvage.db2 matches the ItemSalvageID from ItemSalvageLoot
-# 2nd field in ItemSalvage.db2 gives us the SkillLineID for Inscription
-# 6th field in SkillLine.db2 matches the SkillLineID from ItemSalvage
-# 5th/1st field in SkillLine.db2 gives us the profession name
-# 17th field in SkillLineAbility.db2 matches the SkillLineID from ItemSalvage
-# 6th field in SkillLineAbility.db2 gives us the SpellID for the milling spell, but also a lot of other spells
-# 36th field in SpellEffect.db2 matches SpellID from SkillLineAbility
-# 26th field in SpellEffect.db2 matches ItemSalvageID from ItemSalvage
+PROFESSION_ID = 773
+PROFESSION_SALVAGE_SUFFIX = 'Milling'
 
-# tl;dr:
-# 1. find the spellID for milling on wowhead
-# 2. match that against the spellID field in SpellEffect.db2
-# 3. find "EffectMiscValue[0]" - this is the ItemSalvageID
+# gather all profession expansions
+professionIDs = [PROFESSION_ID]
+for row in util.dbc('skillline'):
+  if row.ParentSkillLineID == PROFESSION_ID:
+    professionIDs.append(row.ID)
 
-recipeSpellIDs = {
-	# ItemSalvageID = SpellID
-	13: 382981, # Dragon Isles Milling
-	14: 382982, # Shadowlands Milling
-	15: 382984, # Kul Tiras and Zandalar Milling
-	16: 382986, # Legion Milling
-	17: 382987, # Draenor Milling
-	18: 382988, # Pandaria Milling
-	19: 382989, # Cataclysm Milling
-	20: 382990, # Northrend Milling
-	21: 382991, # Outland Milling
-	22: 382994, # Classic Milling
-	67: 444181, # Khaz Algar Milling
-}
+# find all profession abilities
+professionAbilities = []
+for row in util.dbc('skilllineability'):
+  if row.SkillupSkillLineID in professionIDs:
+    professionAbilities.append(row.Spell)
 
-# figure out how many items are needed to perform the salvage
-spellItemsRequired = {}
-for _, spellID in recipeSpellIDs.items():
-	spellItemsRequired[spellID] = 0
-
+# check spell effect info
+numSpellReagents = {}
+salvageSpellIDs = {}
+spellSalvageIDs = {}
 for row in util.dbc('spelleffect'):
-	if row.SpellID in spellItemsRequired:
-		spellItemsRequired[row.SpellID] = row.EffectBasePointsF
+  if not row.SpellID in professionAbilities:
+    continue
+  if row.EffectBasePointsF == 0:
+    # all salvage abilities have this value, it's how many items are salvaged
+    continue
+  if row.EffectMiscValue_0 == 0:
+    # all salvage abilities have this value, it's the salvage ID
+    continue
 
-# iterate through ItemSalvageLoot for items that can be milled
+  if not row.EffectMiscValue_0 in salvageSpellIDs:
+    # this value might be used for other things not related to salvaging,
+    # so we gotta track all spells using it and instead narrow it down later
+    salvageSpellIDs[row.EffectMiscValue_0] = []
+
+  # store info
+  salvageSpellIDs[row.EffectMiscValue_0].append(row.SpellID)
+  spellSalvageIDs[row.SpellID] = row.EffectMiscValue_0
+  numSpellReagents[row.SpellID] = row.EffectBasePointsF
+
+# check spell names
+for row in util.dbc('spellname'):
+  if row.ID in spellSalvageIDs:
+    if not row.Name_lang.endswith(PROFESSION_SALVAGE_SUFFIX):
+      # sadly the only proper way to check if it's the correct salvage spell,
+      # there's no unique global ID for each type of salvage
+      if spellSalvageIDs[row.ID] in salvageSpellIDs:
+        salvageSpellIDs[spellSalvageIDs[row.ID]].remove(row.ID)
+
+# iterate through salvage loot for items that can be milled
 items = {}
 for row in util.dbc('itemsalvageloot'):
-	if row.ItemSalvageID in recipeSpellIDs:
-		items[row.SalvagedItemID] = {
-			'itemID': row.SalvagedItemID,
-			'recipeSpellID': recipeSpellIDs[row.ItemSalvageID],
-			'numItems': spellItemsRequired[recipeSpellIDs[row.ItemSalvageID]],
-		}
+  if row.ItemSalvageID in salvageSpellIDs:
+    spells = salvageSpellIDs[row.ItemSalvageID]
+    if len(spells) == 0:
+      continue
+    if len(spells) > 1:
+      util.bail(f'ERROR: multiple spells for salvage {row.ItemSalvageID}: {",".join(map(str, spells))}')
 
-# iterate through ItemSparse for millable items and add their names to the dict
+    items[row.SalvagedItemID] = {
+      'itemID': row.SalvagedItemID,
+      'recipeSpellID': spells[0],
+      'numItems': numSpellReagents[spells[0]],
+    }
+
+# get item names
 for row in util.dbc('itemsparse'):
-	if row.ID in items:
-		if (row.Flags_0 & 0x10) != 0:
-			# deprecated item
-			del items[row.ID]
-			continue
+  if row.ID in items:
+    if (row.Flags_0 & 0x10) != 0:
+      # deprecated item
+      del items[row.ID]
+      continue
 
-		items[row.ID]['name'] = row.Display_lang
+    items[row.ID]['name'] = row.Display_lang
 
 # print data file structure
 util.templateLuaTable(
-	'local _, addon = ...',
-	'addon.data.millable',
-	'\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}',
-	items
+  'local _, addon = ...',
+  'addon.data.millable',
+  '\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}',
+  items
 )
