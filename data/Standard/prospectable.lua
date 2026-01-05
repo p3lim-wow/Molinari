@@ -55,6 +55,13 @@ addon.data.prospectable = {
 	[210938] = {434018, 5}, -- Ironclaw Ore
 	[210939] = {434018, 5}, -- Null Stone
 	[213398] = {434018, 5}, -- Handful of Pebbles
+	[237359] = {1231127, 5}, -- Refulgent Copper Ore
+	[237361] = {1231127, 5}, -- Refulgent Copper Ore
+	[237362] = {1231127, 5}, -- Umbral Tin Ore
+	[237363] = {1231127, 5}, -- Umbral Tin Ore
+	[237364] = {1231127, 5}, -- Brilliant Silver Ore
+	[237365] = {1231127, 5}, -- Brilliant Silver Ore
+	[237366] = {1231127, 5}, -- Dazzling Thorium
 	[240216] = {434018, 5}, -- K'areshi Resonating Stone
 	[249218] = {434018, 5}, -- Manaforged Instrument
 }
