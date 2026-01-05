@@ -77,7 +77,7 @@ for row in util.dbc('itemsparse'):
     items[row.ID]['name'] = row.Display_lang
 
 # deal with broken items
-for itemID in items.keys():
+for itemID in list(items):
   if not 'name' in items[itemID]:
     del items[itemID]
 
