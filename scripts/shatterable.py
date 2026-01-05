@@ -21,7 +21,13 @@ for row in util.dbc('skilllineability'):
 numSpellReagents = {}
 salvageSpellIDs = {}
 spellSalvageIDs = {}
-for row in util.dbc('spelleffect'):
+for row in util.dbc('spelleffect', [
+  # BUG: these 4 spells have an incorrect EffectMiscValue0, so we add fake ones to correct it
+  {'SpellID': 224199, 'EffectMiscValue_0': -991, 'EffectBasePointsF': 1}, # Ley Shatter
+  {'SpellID': 252106, 'EffectMiscValue_0': -992, 'EffectBasePointsF': 1}, # Chaos Shatter
+  {'SpellID': 290360, 'EffectMiscValue_0': -993, 'EffectBasePointsF': 1}, # Umbra Shatter
+  {'SpellID': 290361, 'EffectMiscValue_0': -994, 'EffectBasePointsF': 1}, # Veiled Shatter
+]):
   if not row.SpellID in professionAbilities:
     continue
   if row.EffectMiscValue_0 == 0:
@@ -31,7 +37,7 @@ for row in util.dbc('spelleffect'):
     # all salvage abilities have this value, it's how many items are salvaged
     continue
   if row.EffectMiscValue_0 == 13:
-    # BUG: the incorrect EffectMiscValue0 for 4 spells, we just ignore it
+    # BUG: the incorrect EffectMiscValue0 for the 4 spells, we just ignore it
     continue
 
   if not row.EffectMiscValue_0 in salvageSpellIDs:
@@ -55,7 +61,13 @@ for row in util.dbc('spellname'):
 
 # iterate through salvage loot for items that can be milled
 items = {}
-for row in util.dbc('itemsalvageloot'):
+for row in util.dbc('itemsalvageloot', [
+  # BUG: the 4 spells we added above are also missing their items in this table
+  {'ItemSalvageID': -991, 'SalvagedItemID': 124441}, # Leylight Shard
+  {'ItemSalvageID': -992, 'SalvagedItemID': 124442}, # Chaos Crystal
+  {'ItemSalvageID': -993, 'SalvagedItemID': 152876}, # Umbra Shard
+  {'ItemSalvageID': -994, 'SalvagedItemID': 152877}, # Veiled Crystal
+]):
   if row.ItemSalvageID in salvageSpellIDs:
     spells = salvageSpellIDs[row.ItemSalvageID]
     if len(spells) == 0:
