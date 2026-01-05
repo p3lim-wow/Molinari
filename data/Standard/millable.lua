@@ -113,4 +113,12 @@ addon.data.millable = {
 	[210806] = {444181, 10}, -- Blessing Blossom
 	[210807] = {444181, 10}, -- Blessing Blossom
 	[220141] = {444181, 10}, -- Specular Rainbowfish
+	[236761] = {1269575, 10}, -- Tranquility Bloom
+	[236767] = {1269575, 10}, -- Tranquility Bloom
+	[236770] = {1269575, 10}, -- Sanguithorn
+	[236771] = {1269575, 10}, -- Sanguithorn
+	[236776] = {1269575, 10}, -- Argentleaf
+	[236777] = {1269575, 10}, -- Argentleaf
+	[236778] = {1269575, 10}, -- Mana Lily
+	[236779] = {1269575, 10}, -- Mana Lily
 }
