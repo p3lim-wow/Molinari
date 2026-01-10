@@ -19,12 +19,4 @@ addon.data.shatterable = {
 	[219949] = {470726, 1}, -- Gleaming Shard
 	[219950] = {470726, 1}, -- Gleaming Shard
 	[219951] = {470726, 1}, -- Gleaming Shard
-	[236949] = {1235731, 1}, -- Mote of Light
-	[236950] = {1235731, 1}, -- Mote of Primal Energy
-	[236951] = {1235731, 1}, -- Mote of Wild Magic
-	[236952] = {1235731, 1}, -- Mote of Pure Void
-	[243602] = {1280394, 1}, -- Radiant Shard
-	[243603] = {1280394, 1}, -- Radiant Shard
-	[243605] = {1280401, 1}, -- Dawn Crystal
-	[243606] = {1280401, 1}, -- Dawn Crystal
 }

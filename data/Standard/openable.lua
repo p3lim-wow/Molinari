@@ -46,5 +46,4 @@ addon.data.openable = {
 	[203743] = 15, -- Jostled Gurubashi Cache
 	[204307] = 15, -- Ornate Bronze Lockbox
 	[220376] = 75, -- Bismuth Lockbox
-	[264475] = 85, -- Umbral Tin Lockbox
 }
