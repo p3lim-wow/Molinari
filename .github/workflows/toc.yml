@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Update TOC Interface version
-        uses: p3lim/toc-interface-updater@v4
+        uses: p3lim/toc-interface-updater@master
         with:
           # beta: true
           ptr: true
