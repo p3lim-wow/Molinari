@@ -19,7 +19,9 @@ jobs:
           ptr: true
           flavor: |
             retail
-            classic
+            mists
+            wrath
+            tbc
             vanilla
 
       - name: Create pull request
