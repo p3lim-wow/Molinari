@@ -12,7 +12,7 @@ local TEMPLATES = {
 
 local IsPlayerSpell = C_SpellBook.IsSpellKnown or IsPlayerSpell -- 12.x deprecation
 
-if not addon:IsRetail() then
+if AutoCastShine_AutoCastStart then
 	-- AutoCastShine was removed in 11.0, but we'll keep on using it in classic
 	table.insert(TEMPLATES, 'AutoCastShineTemplate')
 end
@@ -274,7 +274,7 @@ addon:RegisterOptionCallback('modifier', function(value)
 	addon:DeferMethod(Molinari, 'UpdateAttributeDriver')
 end)
 
-if addon:IsRetail() then
+if not AutoCastShine_AutoCastStart then
 	-- glow animation
 	local Glow = Molinari:CreateTexture(nil, 'ARTWORK')
 	Glow:SetPoint('CENTER')
