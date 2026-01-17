@@ -26,15 +26,14 @@ settings.lua
 data\[Game]\crushable.lua [AllowLoadGameType standard]
 data\[Game]\disenchantable.lua [AllowLoadGameType standard]
 data\[Game]\keys.lua
-data\[Game]\millable.lua [AllowLoadGameType standard, mists]
+data\[Game]\millable.lua [AllowLoadGameType standard, mists, wrath]
 data\[Game]\nondisenchantable.lua
 data\[Game]\openable.lua
-data\[Game]\prospectable.lua [AllowLoadGameType mists]
-data\[Game]\prospectable.lua [AllowLoadGameType standard]
+data\[Game]\prospectable.lua [AllowLoadGameType standard, mists, wrath, tbc]
 data\[Game]\scrappable.lua [AllowLoadGameType standard]
 data\[Game]\shatterable.lua [AllowLoadGameType standard]
 data\[Game]\transmutable.lua [AllowLoadGameType standard]
 
 api\items.lua
-api\skill.lua [AllowLoadGameType mists, vanilla]
+api\skill.lua [AllowLoadGameType mists, wrath, tbc, vanilla]
 api\colors.lua
