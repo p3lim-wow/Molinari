@@ -1,13 +1,16 @@
 name: Package and create artifact
+
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
     tags-ignore:
       - '**'
     paths:
-      - '!.github/'
-      - '!scripts/'
+      - '**.lua'
+      - '**.toc'
+      - '.pkgmeta'
 
 jobs:
   alpha:
