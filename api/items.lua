@@ -18,14 +18,14 @@ if addon:IsRetail() then
 		end
 	end
 
-	professionSalvagers:insert(addon.IsProspectable)
+	professionSalvagers:insert('IsProspectable')
 elseif addon.data.prospectable then
 	function addon:IsProspectable(itemID)
 		local skillRequired = addon.data.prospectable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 31252, addon.colors.prospectable
 	end
 
-	professionSalvagers:insert(addon.IsProspectable)
+	professionSalvagers:insert('IsProspectable')
 end
 
 if addon:IsRetail() then
@@ -36,14 +36,14 @@ if addon:IsRetail() then
 		end
 	end
 
-	professionSalvagers:insert(addon.IsMillable)
+	professionSalvagers:insert('IsMillable')
 elseif addon.data.millable then
 	function addon:IsMillable(itemID)
 		local skillRequired = addon.data.millable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 51005, addon.colors.millable
 	end
 
-	professionSalvagers:insert(addon.IsMillable)
+	professionSalvagers:insert('IsMillable')
 end
 
 if addon.data.crushable then
@@ -54,7 +54,7 @@ if addon.data.crushable then
 		end
 	end
 
-	professionSalvagers:insert(addon.IsCrushable)
+	professionSalvagers:insert('IsCrushable')
 end
 
 if addon.data.scrappable then
@@ -65,7 +65,7 @@ if addon.data.scrappable then
 		end
 	end
 
-	professionSalvagers:insert(addon.IsScrappable)
+	professionSalvagers:insert('IsScrappable')
 end
 
 if addon.data.shatterable then
@@ -76,7 +76,7 @@ if addon.data.shatterable then
 		end
 	end
 
-	professionSalvagers:insert(addon.IsShatterable)
+	professionSalvagers:insert('IsShatterable')
 end
 
 if addon.data.transmutable then
@@ -87,7 +87,7 @@ if addon.data.transmutable then
 		end
 	end
 
-	professionSalvagers:insert(addon.IsTransmutable)
+	professionSalvagers:insert('IsTransmutable')
 end
 
 function addon:NonDisenchantable(itemID)
@@ -131,7 +131,7 @@ function addon:IsDisenchantable(itemID)
 	return 13262, addon.colors.disenchantable
 end
 
-professionSalvagers:insert(addon.IsDisenchantable)
+professionSalvagers:insert('IsDisenchantable')
 
 function addon:IsOpenable(itemID)
 	local requiredLevel = addon.data.openable[itemID]
@@ -148,7 +148,7 @@ end
 
 function addon:IsSalvagable(itemID)
 	for _, method in next, professionSalvagers do
-		local spellID, color, numItems = method(itemID)
+		local spellID, color, numItems = addon[method](addon, itemID)
 		if spellID then
 			return spellID, color, numItems
 		end
