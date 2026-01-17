@@ -4,17 +4,17 @@ local _, addon = ...
 local PROFESSION_IDS = {
 	-- these are all the apprentice-level spells, except herbalism since there's no matching
 	-- apprentice skill for it, an item effect is used instead
-	[(GetSpellInfo(2259))] = 171, -- Alchemy
-	[(GetSpellInfo(2018))] = 164, -- Blacksmithing
-	[(GetSpellInfo(7411))] = 333, -- Enchanting
-	[(GetSpellInfo(4036))] = 202, -- Engineering
-	[(GetSpellInfo(9134))] = 182, -- Herbalism
-	[(GetSpellInfo(45357)) or 0] = 773, -- Inscription
-	[(GetSpellInfo(25229)) or 0] = 755, -- Jewelcrafting
-	[(GetSpellInfo(2108))] = 165, -- Leatherworking
-	[(GetSpellInfo(2575))] = 186, -- Mining
-	[(GetSpellInfo(8613))] = 393, -- Skinning
-	[(GetSpellInfo(3908))] = 197, -- Tailoring
+	[((C_Spell.GetSpellName or GetSpellInfo)(2259))] = 171, -- Alchemy
+	[((C_Spell.GetSpellName or GetSpellInfo)(2018))] = 164, -- Blacksmithing
+	[((C_Spell.GetSpellName or GetSpellInfo)(7411))] = 333, -- Enchanting
+	[((C_Spell.GetSpellName or GetSpellInfo)(4036))] = 202, -- Engineering
+	[((C_Spell.GetSpellName or GetSpellInfo)(9134))] = 182, -- Herbalism
+	[((C_Spell.GetSpellName or GetSpellInfo)(45357)) or 0] = 773, -- Inscription
+	[((C_Spell.GetSpellName or GetSpellInfo)(25229)) or 0] = 755, -- Jewelcrafting
+	[((C_Spell.GetSpellName or GetSpellInfo)(2108))] = 165, -- Leatherworking
+	[((C_Spell.GetSpellName or GetSpellInfo)(2575))] = 186, -- Mining
+	[((C_Spell.GetSpellName or GetSpellInfo)(8613))] = 393, -- Skinning
+	[((C_Spell.GetSpellName or GetSpellInfo)(3908))] = 197, -- Tailoring
 }
 
 local professionSkillLevels = {}
