@@ -9,68 +9,85 @@ end
 
 local IsPlayerSpell = (C_SpellBook.IsSpellKnown or IsPlayerSpell) -- 12.x deprecation
 
-function addon:IsProspectable(itemID)
-	-- returns the spell used to prospect the item
-	if addon:IsClassic() then
-		local skillRequired = addon.data.prospectable[itemID]
-		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 31252, addon.colors.prospectable
-	elseif addon:IsRetail() then
+local professionSalvagers = addon.T{}
+if addon:IsRetail() then
+	function addon:IsProspectable(itemID)
 		local info = addon.data.prospectable[itemID]
 		if info and IsPlayerSpell(info[1]) then
 			return info[1], addon.colors.prospectable, info[2]
 		end
 	end
+
+	professionSalvagers:insert(addon.IsProspectable)
+elseif addon.data.prospectable then
+	function addon:IsProspectable(itemID)
+		local skillRequired = addon.data.prospectable[itemID]
+		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 31252, addon.colors.prospectable
+	end
+
+	professionSalvagers:insert(addon.IsProspectable)
 end
 
-function addon:IsMillable(itemID)
-	-- returns the spell used to mill the item
-	if addon:IsClassic() then
-		local skillRequired = addon.data.millable[itemID]
-		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 51005, addon.colors.millable
-	elseif addon:IsRetail() then
+if addon:IsRetail() then
+	function addon:IsMillable(itemID)
 		local info = addon.data.millable[itemID]
 		if info and IsPlayerSpell(info[1]) then
 			return info[1], addon.colors.millable, info[2]
 		end
 	end
+
+	professionSalvagers:insert(addon.IsMillable)
+elseif addon.data.millable then
+	function addon:IsMillable(itemID)
+		local skillRequired = addon.data.millable[itemID]
+		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 51005, addon.colors.millable
+	end
+
+	professionSalvagers:insert(addon.IsMillable)
 end
 
-function addon:IsCrushable(itemID)
-	-- returns the spell used to crush the item
-	if addon:IsRetail() then
+if addon.data.crushable then
+	function addon:IsCrushable(itemID)
 		local info = addon.data.crushable[itemID]
 		if info and IsPlayerSpell(info[1]) then
 			return info[1], addon.colors.crushable, info[2]
 		end
 	end
+
+	professionSalvagers:insert(addon.IsCrushable)
 end
 
-function addon:IsScrappable(itemID)
-	-- returns the spell used to scrap the item
-	if addon:IsRetail() then
+if addon.data.scrappable then
+	function addon:IsScrappable(itemID)
 		local info = addon.data.scrappable[itemID]
 		if info and IsPlayerSpell(info[1]) then
 			return info[1], addon.colors.scrappable, info[2]
 		end
 	end
+
+	professionSalvagers:insert(addon.IsScrappable)
 end
 
-function addon:IsShatterable(itemID)
-	if addon:IsRetail() then
+if addon.data.shatterable then
+	function addon:IsShatterable(itemID)
 		local info = addon.data.shatterable[itemID]
 		if info and IsPlayerSpell(info[1]) then
 			return info[1], addon.colors.disenchantable, info[2]
 		end
 	end
+
+	professionSalvagers:insert(addon.IsShatterable)
 end
 
-function addon:IsTransmutable(itemID)
-	if addon:IsRetail() then
+if addon.data.transmutable then
+	function addon:IsTransmutable(itemID)
 		local info = addon.data.transmutable[itemID]
 		if info and IsPlayerSpell(info[1]) then
 			return info[1], addon.colors.transmutable, info[2]
 		end
 	end
+
+	professionSalvagers:insert(addon.IsTransmutable)
 end
 
 function addon:NonDisenchantable(itemID)
@@ -114,8 +131,9 @@ function addon:IsDisenchantable(itemID)
 	return 13262, addon.colors.disenchantable
 end
 
+professionSalvagers:insert(addon.IsDisenchantable)
+
 function addon:IsOpenable(itemID)
-	-- returns the spell used to open the item if the player can open it
 	local requiredLevel = addon.data.openable[itemID]
 	if requiredLevel then
 		if IsPlayerSpell(1804) and requiredLevel <= (UnitLevel('player') * (addon:IsRetail() and 1 or 5)) then
@@ -129,40 +147,14 @@ function addon:IsOpenable(itemID)
 end
 
 function addon:IsSalvagable(itemID)
-	-- wrapper for all of the above
-	local spellID, color, numItems
-	spellID, color, numItems = addon:IsProspectable(itemID)
-	if spellID then
-		return spellID, color, numItems
+	for _, method in next, professionSalvagers do
+		local spellID, color, numItems = method(itemID)
+		if spellID then
+			return spellID, color, numItems
+		end
 	end
-	spellID, color, numItems = addon:IsMillable(itemID)
-	if spellID then
-		return spellID, color, numItems
-	end
-	spellID, color, numItems = addon:IsCrushable(itemID)
-	if spellID then
-		return spellID, color, numItems
-	end
-	spellID, color, numItems = addon:IsScrappable(itemID)
-	if spellID then
-		return spellID, color, numItems
-	end
-	spellID, color, numItems = addon:IsShatterable(itemID)
-	if spellID then
-		return spellID, color, numItems
-	end
-	spellID, color, numItems = addon:IsTransmutable(itemID)
-	if spellID then
-		return spellID, color, numItems
-	end
-	spellID, color = addon:IsDisenchantable(itemID)
-	if spellID then
-		return spellID, color
-	end
-	spellID, color = addon:IsOpenable(itemID)
-	if spellID then
-		return spellID, color
-	end
+
+	return addon:IsOpenable(itemID)
 end
 
 if addon:IsRetail() then
