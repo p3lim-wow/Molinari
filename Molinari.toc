@@ -37,3 +37,8 @@ data\[Game]\transmutable.lua [AllowLoadGameType standard]
 api\items.lua
 api\skill.lua [AllowLoadGameType mists, wrath, tbc, vanilla]
 api\colors.lua
+
+autoMolinari\init.lua
+autoMolinari\locale.lua
+autoMolinari\core.lua
+autoMolinari\frame.lua
