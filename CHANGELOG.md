@@ -1,3 +1,8 @@
+### Changes in 120000.139-Release:
+
+- Changed: Update Interface version
+- Changed: Update retail and wrath data
+
 ### Changes in 120000.138-Release:
 
 - Added: Support for TBC Anniversary
