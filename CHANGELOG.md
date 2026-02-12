@@ -1,3 +1,7 @@
+### Changes in 120000.140-Release:
+
+- Fixed: Compatibility error with some bag addons
+
 ### Changes in 120000.139-Release:
 
 - Changed: Update Interface version
