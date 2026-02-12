@@ -70,11 +70,14 @@ local function tooltipHook(tooltip, item)
 		if not IsPlayerSpell(spellID) then
 			tooltipHelp(ERR_USE_LOCKED_WITH_SPELL_S:format(C_Spell.GetSpellName(spellID)), ERR_COLOR)
 			return
-		elseif numItemsRequired and C_Item.GetStackCount(item:GetItemLocation()) < numItemsRequired then
-			tooltipHelp(SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemNameByID(itemID)), ERR_COLOR)
-			return
 		else
-			return Molinari:ApplySpell(item, spellID, color)
+			local itemLocation = item:GetItemLocation()
+			if numItemsRequired and itemLocation and C_Item.GetStackCount(itemLocation) < numItemsRequired then
+				tooltipHelp(SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemNameByID(itemID)), ERR_COLOR)
+				return
+			else
+				return Molinari:ApplySpell(item, spellID, color)
+			end
 		end
 	end
 
