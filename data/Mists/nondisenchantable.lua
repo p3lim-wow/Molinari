@@ -3045,4 +3045,14 @@ addon.data.nondisenchantable = {
 	[265783] = true, -- Tabard of Fury
 	[265784] = true, -- Tabard of Brilliance
 	[265785] = true, -- Tabard of the Void
+	[270884] = true, -- Winking Eye of Love
+	[270885] = true, -- Winking Eye of Love
+	[270886] = true, -- Choker of the Pure Heart
+	[270889] = true, -- Choker of the Pure Heart
+	[270890] = true, -- Heartbreak Charm
+	[270891] = true, -- Heartbreak Charm
+	[270892] = true, -- Sweet Perfume Broach
+	[270893] = true, -- Sweet Perfume Broach
+	[270894] = true, -- Shard of Pirouetting Happiness
+	[270895] = true, -- Shard of Pirouetting Happiness
 }
