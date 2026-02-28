@@ -1,3 +1,8 @@
+### Changes in 120000.141-Release:
+
+- Changed: Update classic data
+- Fixed: Some taint errors
+
 ### Changes in 120000.140-Release:
 
 - Fixed: Compatibility error with some bag addons
