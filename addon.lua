@@ -238,6 +238,10 @@ end
 
 -- force-update tooltip whenever a modifier changes, as the state driver doesn't handle OnEnter
 function addon:MODIFIER_STATE_CHANGED()
+	if InCombatLockdown() then
+		return
+	end
+
 	if Molinari:IsShown() then
 		tooltipShow(Molinari)
 
