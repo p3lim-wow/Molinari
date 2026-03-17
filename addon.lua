@@ -260,21 +260,32 @@ function addon:MODIFIER_STATE_CHANGED()
 		end
 
 		local owner = GameTooltip:GetOwner()
-		if owner and not owner:IsAnchoringRestricted() and owner:IsMouseOver() then
-			if owner.GetSlotAndBagID then
-				local slotIndex, bagID = owner:GetSlotAndBagID()
-				if slotIndex and bagID then
-					local item = Item:CreateFromBagAndSlot(bagID, slotIndex)
-					if item then
-						tooltipHook(GameTooltip, item)
-						return
-					end
-				end
+		if owner then
+			if owner.HasAnySecretAspect and owner:HasAnySecretAspect() then
+				-- just play it safe, classic compatible
+				return
 			end
 
-			local _, itemLink = GameTooltip:GetItem()
-			if itemLink then
-				tooltipHook(GameTooltip, Item:CreateFromItemLink(itemLink))
+			if owner:IsAnchoringRestricted() then
+				return
+			end
+
+			if owner:IsMouseOver() then
+				if owner.GetSlotAndBagID then
+					local slotIndex, bagID = owner:GetSlotAndBagID()
+					if slotIndex and bagID then
+						local item = Item:CreateFromBagAndSlot(bagID, slotIndex)
+						if item then
+							tooltipHook(GameTooltip, item)
+							return
+						end
+					end
+				end
+
+				local _, itemLink = GameTooltip:GetItem()
+				if itemLink then
+					tooltipHook(GameTooltip, Item:CreateFromItemLink(itemLink))
+				end
 			end
 		end
 	end
