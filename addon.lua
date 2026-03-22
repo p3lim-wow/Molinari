@@ -261,12 +261,7 @@ function addon:MODIFIER_STATE_CHANGED()
 
 		local owner = GameTooltip:GetOwner()
 		if owner then
-			if owner.HasAnySecretAspect and owner:HasAnySecretAspect() then
-				-- just play it safe, classic compatible
-				return
-			end
-
-			if owner:IsAnchoringRestricted() then
+			if owner:IsAnchoringRestricted() or (owner.IsAnchoringSecret and owner:IsAnchoringSecret()) then
 				return
 			end
 
