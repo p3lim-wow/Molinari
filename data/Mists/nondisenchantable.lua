@@ -3073,4 +3073,14 @@ addon.data.nondisenchantable = {
 	[276078] = true, -- Tabard of the Arcane
 	[276079] = true, -- Tabard of Frost
 	[276080] = true, -- Tabard of Flame
+	[280378] = true, -- Icebound Cloak
+	[280379] = true, -- The Frost Lord's Battle Shroud
+	[280380] = true, -- Shroud of Winter's Chill
+	[280381] = true, -- Cloak of the Frigid Winds
+	[280382] = true, -- The Frost Lord's War Cloak
+	[280383] = true, -- Icebound Cloak
+	[280384] = true, -- The Frost Lord's Battle Shroud
+	[280385] = true, -- Shroud of Winter's Chill
+	[280386] = true, -- Cloak of the Frigid Winds
+	[280387] = true, -- The Frost Lord's War Cloak
 }
