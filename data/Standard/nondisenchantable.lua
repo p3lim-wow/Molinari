@@ -6602,4 +6602,14 @@ addon.data.nondisenchantable = {
 	[270443] = true, -- Wildbloom Haranir Bastion
 	[270444] = true, -- Wildbloom Haranir Carver
 	[271050] = true, -- Forest Hunter's Quiver
+	[272005] = true, -- Venomous Gladiator's Tabard
+	[272006] = true, -- Venomous Gladiator's Tabard
+	[276531] = true, -- Cursebreaker's Vambraces
+	[276532] = true, -- Cursebreaker's Bracers
+	[276533] = true, -- Cursebreaker's Wristwraps
+	[276534] = true, -- Cursebreaker's Cuffs
+	[276641] = true, -- Corroded Cursebreaker's Vambraces
+	[276642] = true, -- Corroded Cursebreaker's Bracers
+	[276643] = true, -- Corroded Cursebreaker's Wristwraps
+	[276644] = true, -- Corroded Cursebreaker's Cuffs
 }
