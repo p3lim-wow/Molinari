@@ -149,7 +149,7 @@ jobs:
         with:
           flavor: vanilla
           # beta: true
-          ptr: true
+          # ptr: true
           files: |
             scripts/openable.py: data/Vanilla/openable.lua
             scripts/keys_classic_era.py: data/Vanilla/keys.lua
