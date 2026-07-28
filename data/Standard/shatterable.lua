@@ -27,4 +27,6 @@ addon.data.shatterable = {
 	[243603] = {1280394, 1}, -- Radiant Shard
 	[243605] = {1280401, 1}, -- Dawn Crystal
 	[243606] = {1280401, 1}, -- Dawn Crystal
+	[274777] = {1235731, 1}, -- Neutralized Venom Clot
+	[274781] = {1235731, 1}, -- Cursebound Globe
 }
