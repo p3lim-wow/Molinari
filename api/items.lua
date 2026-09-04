@@ -9,7 +9,7 @@ end
 
 local IsPlayerSpell = (C_SpellBook.IsSpellKnown or IsPlayerSpell) -- 12.x deprecation
 
-local professionSalvagers = addon.T{}
+local professionSalvagers = addon:T()
 if addon:IsRetail() then
 	function addon:IsProspectable(itemID)
 		local info = addon.data.prospectable[itemID]
