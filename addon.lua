@@ -10,8 +10,6 @@ local TEMPLATES = {
 	'SecureHandlerEnterLeaveTemplate',
 }
 
-local IsPlayerSpell = C_SpellBook.IsSpellKnown or IsPlayerSpell -- 12.x deprecation
-
 if AutoCastShine_AutoCastStart then
 	-- AutoCastShine was removed in 11.0, but we'll keep on using it in classic
 	table.insert(TEMPLATES, 'AutoCastShineTemplate')
@@ -67,7 +65,7 @@ local function tooltipHook(tooltip, item)
 
 	local spellID, color, numItemsRequired = addon:IsSalvagable(itemID)
 	if spellID then
-		if not IsPlayerSpell(spellID) then
+		if not C_SpellBook.IsSpellKnown(spellID) then
 			tooltipHelp(ERR_USE_LOCKED_WITH_SPELL_S:format(C_Spell.GetSpellName(spellID)), ERR_COLOR)
 			return
 		else

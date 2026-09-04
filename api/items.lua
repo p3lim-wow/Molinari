@@ -7,13 +7,11 @@ if not addon:IsRetail() then
 	Enum.ItemQuality.Uncommon = Enum.ItemQuality.Good
 end
 
-local IsPlayerSpell = (C_SpellBook.IsSpellKnown or IsPlayerSpell) -- 12.x deprecation
-
 local professionSalvagers = addon:T()
 if addon:IsRetail() then
 	function addon:IsProspectable(itemID)
 		local info = addon.data.prospectable[itemID]
-		if info and IsPlayerSpell(info[1]) then
+		if info and C_SpellBook.IsSpellKnown(info[1]) then
 			return info[1], addon.colors.prospectable, info[2]
 		end
 	end
@@ -31,7 +29,7 @@ end
 if addon:IsRetail() then
 	function addon:IsMillable(itemID)
 		local info = addon.data.millable[itemID]
-		if info and IsPlayerSpell(info[1]) then
+		if info and C_SpellBook.IsSpellKnown(info[1]) then
 			return info[1], addon.colors.millable, info[2]
 		end
 	end
@@ -49,7 +47,7 @@ end
 if addon.data.crushable then
 	function addon:IsCrushable(itemID)
 		local info = addon.data.crushable[itemID]
-		if info and IsPlayerSpell(info[1]) then
+		if info and C_SpellBook.IsSpellKnown(info[1]) then
 			return info[1], addon.colors.crushable, info[2]
 		end
 	end
@@ -60,7 +58,7 @@ end
 if addon.data.scrappable then
 	function addon:IsScrappable(itemID)
 		local info = addon.data.scrappable[itemID]
-		if info and IsPlayerSpell(info[1]) then
+		if info and C_SpellBook.IsSpellKnown(info[1]) then
 			return info[1], addon.colors.scrappable, info[2]
 		end
 	end
@@ -71,7 +69,7 @@ end
 if addon.data.shatterable then
 	function addon:IsShatterable(itemID)
 		local info = addon.data.shatterable[itemID]
-		if info and IsPlayerSpell(info[1]) then
+		if info and C_SpellBook.IsSpellKnown(info[1]) then
 			return info[1], addon.colors.disenchantable, info[2]
 		end
 	end
@@ -82,7 +80,7 @@ end
 if addon.data.transmutable then
 	function addon:IsTransmutable(itemID)
 		local info = addon.data.transmutable[itemID]
-		if info and IsPlayerSpell(info[1]) then
+		if info and C_SpellBook.IsSpellKnown(info[1]) then
 			return info[1], addon.colors.transmutable, info[2]
 		end
 	end
@@ -95,7 +93,7 @@ function addon:NonDisenchantable(itemID)
 end
 
 function addon:IsDisenchantable(itemID)
-	if not IsPlayerSpell(13262) then
+	if not C_SpellBook.IsSpellKnown(13262) then
 		return
 	end
 
@@ -136,11 +134,11 @@ professionSalvagers:insert('IsDisenchantable')
 function addon:IsOpenable(itemID)
 	local requiredLevel = addon.data.openable[itemID]
 	if requiredLevel then
-		if IsPlayerSpell(1804) and requiredLevel <= (UnitLevel('player') * (addon:IsRetail() and 1 or 5)) then
+		if C_SpellBook.IsSpellKnown(1804) and requiredLevel <= (UnitLevel('player') * (addon:IsRetail() and 1 or 5)) then
 			return 1804, addon.colors.openable -- Pick Lock, Rogue ability
-		elseif IsPlayerSpell(312890) and requiredLevel <= UnitLevel('player') then
+		elseif C_SpellBook.IsSpellKnown(312890) and requiredLevel <= UnitLevel('player') then
 			return 312890, addon.colors.openable -- Skeleton Pinkie, Mechagnome racial ability
-		elseif IsPlayerSpell(323427) and requiredLevel <= 60 then
+		elseif C_SpellBook.IsSpellKnown(323427) and requiredLevel <= 60 then
 			return 323427, addon.colors.openable -- Kevin's Keyring, Necrolord soulbind ability
 		end
 	end
