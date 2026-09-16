@@ -19,6 +19,7 @@ jobs:
           ptr: true
           flavor: |
             retail
+            forever
             mists
             wrath
             tbc
