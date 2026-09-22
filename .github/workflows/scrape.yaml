@@ -48,6 +48,34 @@ jobs:
           branch: update-data-${{ steps.scraper.outputs.flavor }}
           delete-branch: true
 
+  scrape-forever:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v7
+
+      - name: Scrape
+        uses: p3lim/dbc-helper@master
+        id: scraper
+        with:
+          flavor: forever
+          # beta: true
+          # ptr: true
+          files: |
+            scripts/openable.py: data/Camelot/openable.lua
+            scripts/keys.py: data/Camelot/keys.lua
+            scripts/nondisenchantable.py: data/Camelot/nondisenchantable.lua
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8
+        # requires permissions, see https://github.com/peter-evans/create-pull-request#workflow-permissions
+        with:
+          title: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          commit-message: Update ${{ steps.scraper.outputs.flavor }} data to ${{ steps.scraper.outputs.version }}
+          body: ''
+          branch: update-data-${{ steps.scraper.outputs.flavor }}
+          delete-branch: true
+
   scrape-mists:
     runs-on: ubuntu-latest
     steps:
