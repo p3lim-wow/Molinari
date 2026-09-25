@@ -54,6 +54,7 @@ read_globals = {
 
 	-- namespaces
 	'C_Item',
+	'C_SkillInfo',
 	'C_Spell',
 	'C_SpellBook',
 	'C_TooltipInfo', -- retail

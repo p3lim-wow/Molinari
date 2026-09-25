@@ -36,5 +36,5 @@ data\[Game]\shatterable.lua [AllowLoadGameType standard]
 data\[Game]\transmutable.lua [AllowLoadGameType standard]
 
 api\items.lua
-api\skill.lua [AllowLoadGameType mists, wrath, tbc, vanilla]
+api\skill.lua [AllowLoadGameType mists, wrath, tbc, vanilla, camelot]
 api\colors.lua
