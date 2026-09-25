@@ -65,6 +65,7 @@ jobs:
             scripts/openable.py: data/Camelot/openable.lua
             scripts/keys.py: data/Camelot/keys.lua
             scripts/nondisenchantable.py: data/Camelot/nondisenchantable.lua
+            scripts/comprehension.py: data/Camelot/comprehensible.lua
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v8

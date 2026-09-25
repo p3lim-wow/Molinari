@@ -23,6 +23,7 @@ utils.lua
 addon.lua
 settings.lua
 
+data\[Game]\comprehensible.lua [AllowLoadGameType camelot][ExcludeLoadGameType standard, classic]
 data\[Game]\crushable.lua [AllowLoadGameType standard]
 data\[Game]\disenchantable.lua [AllowLoadGameType standard]
 data\[Game]\keys.lua

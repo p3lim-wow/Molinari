@@ -7,7 +7,7 @@ if not addon:IsRetail() then
 	Enum.ItemQuality.Uncommon = Enum.ItemQuality.Good
 end
 
-local professionSalvagers = addon:T()
+local salvagers = addon:T()
 if addon:IsRetail() then
 	function addon:IsProspectable(itemID)
 		local info = addon.data.prospectable[itemID]
@@ -16,14 +16,14 @@ if addon:IsRetail() then
 		end
 	end
 
-	professionSalvagers:insert('IsProspectable')
+	salvagers:insert('IsProspectable')
 elseif addon.data.prospectable then
 	function addon:IsProspectable(itemID)
 		local skillRequired = addon.data.prospectable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 31252, addon.colors.prospectable
 	end
 
-	professionSalvagers:insert('IsProspectable')
+	salvagers:insert('IsProspectable')
 end
 
 if addon:IsRetail() then
@@ -34,14 +34,14 @@ if addon:IsRetail() then
 		end
 	end
 
-	professionSalvagers:insert('IsMillable')
+	salvagers:insert('IsMillable')
 elseif addon.data.millable then
 	function addon:IsMillable(itemID)
 		local skillRequired = addon.data.millable[itemID]
 		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 51005, addon.colors.millable
 	end
 
-	professionSalvagers:insert('IsMillable')
+	salvagers:insert('IsMillable')
 end
 
 if addon.data.crushable then
@@ -52,7 +52,7 @@ if addon.data.crushable then
 		end
 	end
 
-	professionSalvagers:insert('IsCrushable')
+	salvagers:insert('IsCrushable')
 end
 
 if addon.data.scrappable then
@@ -63,7 +63,7 @@ if addon.data.scrappable then
 		end
 	end
 
-	professionSalvagers:insert('IsScrappable')
+	salvagers:insert('IsScrappable')
 end
 
 if addon.data.shatterable then
@@ -74,7 +74,7 @@ if addon.data.shatterable then
 		end
 	end
 
-	professionSalvagers:insert('IsShatterable')
+	salvagers:insert('IsShatterable')
 end
 
 if addon.data.transmutable then
@@ -85,7 +85,16 @@ if addon.data.transmutable then
 		end
 	end
 
-	professionSalvagers:insert('IsTransmutable')
+	salvagers:insert('IsTransmutable')
+end
+
+if addon.data.comprehensible then
+	function addon:IsComprehensible(itemID)
+		local skillRequired = addon.data.comprehensible[itemID]
+		return skillRequired and addon:GetProfessionSkillLevel(3012) >= skillRequired and 1296017, addon.colors.comprehensible, 1
+	end
+
+	salvagers:insert('IsComprehensible')
 end
 
 function addon:NonDisenchantable(itemID)
@@ -129,7 +138,7 @@ function addon:IsDisenchantable(itemID)
 	return 13262, addon.colors.disenchantable
 end
 
-professionSalvagers:insert('IsDisenchantable')
+salvagers:insert('IsDisenchantable')
 
 function addon:IsOpenable(itemID)
 	local requiredLevel = addon.data.openable[itemID]
@@ -145,7 +154,7 @@ function addon:IsOpenable(itemID)
 end
 
 function addon:IsSalvagable(itemID)
-	for _, method in next, professionSalvagers do
+	for _, method in next, salvagers do
 		local spellID, color, numItems = addon[method](addon, itemID)
 		if spellID then
 			return spellID, color, numItems
