@@ -94,7 +94,7 @@ end
 for kind, data in next, addon.data.salvage do
 	salvagers[kind] = function(itemID)
 		local info = data[itemID]
-		if info and C_Spell.IsSpellKnown(info[1]) then
+		if info and C_SpellBook.IsSpellKnown(info[1]) then
 			return unpack(info)
 		end
 	end
