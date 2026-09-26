@@ -1,3 +1,13 @@
+### Changes in 120100.148-Release:
+
+- Added: Support for Forever
+- Added: Support for feeding pets
+- Added: Support for mage comprehension spell
+- Changed: Now checks skill levels in Forever/Classic properly
+- Changed: Optimized code a bit
+- Removed: Old compatibility checks
+- Removed: Migration of old savedvariables
+
 ### Changes in 120100.147-Release:
 
 - Changed: Update Interface version for retail
