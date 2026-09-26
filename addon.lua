@@ -105,7 +105,7 @@ local function tooltipShow(self)
 		GameTooltip:SetBagItem(self:GetAttribute('target-bag'), self:GetAttribute('target-slot'))
 	end
 
-	if addon:IsRetail() then
+	if not addon:IsClassic() then
 		if self.spellID then
 			tooltipHelp((('\n'):split(NPEV2_CASTER_ABILITYINITIAL:gsub(' %%s ', '%s'))):format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Spell.GetSpellName(self.spellID) .. '|r'))
 		elseif self.itemID then
