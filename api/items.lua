@@ -1,144 +1,11 @@
 local _, addon = ...
 
-local Enum = Enum -- upvalue so we can modify it
-if not addon:IsRetail() then
+local ItemQuality = CopyTable(Enum.ItemQuality)
+if addon:IsClassic() then
 	-- these were renamed in 9.0.1
-	Enum.ItemQuality.Common = Enum.ItemQuality.Standard
-	Enum.ItemQuality.Uncommon = Enum.ItemQuality.Good
+	ItemQuality.Common = ItemQuality.Standard
+	ItemQuality.Uncommon = ItemQuality.Good
 end
-
-local salvagers = addon:T()
-if addon:IsRetail() then
-	function addon:IsProspectable(itemID)
-		local info = addon.data.prospectable[itemID]
-		if info and C_SpellBook.IsSpellKnown(info[1]) then
-			return info[1], addon.colors.prospectable, info[2]
-		end
-	end
-
-	salvagers:insert('IsProspectable')
-elseif addon.data.prospectable then
-	function addon:IsProspectable(itemID)
-		local skillRequired = addon.data.prospectable[itemID]
-		return skillRequired and addon:GetProfessionSkillLevel(755) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 31252, addon.colors.prospectable
-	end
-
-	salvagers:insert('IsProspectable')
-end
-
-if addon:IsRetail() then
-	function addon:IsMillable(itemID)
-		local info = addon.data.millable[itemID]
-		if info and C_SpellBook.IsSpellKnown(info[1]) then
-			return info[1], addon.colors.millable, info[2]
-		end
-	end
-
-	salvagers:insert('IsMillable')
-elseif addon.data.millable then
-	function addon:IsMillable(itemID)
-		local skillRequired = addon.data.millable[itemID]
-		return skillRequired and addon:GetProfessionSkillLevel(773) >= skillRequired and C_Item.GetItemCount(itemID) >= 5 and 51005, addon.colors.millable
-	end
-
-	salvagers:insert('IsMillable')
-end
-
-if addon.data.crushable then
-	function addon:IsCrushable(itemID)
-		local info = addon.data.crushable[itemID]
-		if info and C_SpellBook.IsSpellKnown(info[1]) then
-			return info[1], addon.colors.crushable, info[2]
-		end
-	end
-
-	salvagers:insert('IsCrushable')
-end
-
-if addon.data.scrappable then
-	function addon:IsScrappable(itemID)
-		local info = addon.data.scrappable[itemID]
-		if info and C_SpellBook.IsSpellKnown(info[1]) then
-			return info[1], addon.colors.scrappable, info[2]
-		end
-	end
-
-	salvagers:insert('IsScrappable')
-end
-
-if addon.data.shatterable then
-	function addon:IsShatterable(itemID)
-		local info = addon.data.shatterable[itemID]
-		if info and C_SpellBook.IsSpellKnown(info[1]) then
-			return info[1], addon.colors.disenchantable, info[2]
-		end
-	end
-
-	salvagers:insert('IsShatterable')
-end
-
-if addon.data.transmutable then
-	function addon:IsTransmutable(itemID)
-		local info = addon.data.transmutable[itemID]
-		if info and C_SpellBook.IsSpellKnown(info[1]) then
-			return info[1], addon.colors.transmutable, info[2]
-		end
-	end
-
-	salvagers:insert('IsTransmutable')
-end
-
-if addon.data.comprehensible then
-	function addon:IsComprehensible(itemID)
-		local skillRequired = addon.data.comprehensible[itemID]
-		return skillRequired and addon:GetProfessionSkillLevel(3012) >= skillRequired and 1296017, addon.colors.comprehensible, 1
-	end
-
-	salvagers:insert('IsComprehensible')
-end
-
-function addon:NonDisenchantable(itemID)
-	return not not addon.data.nondisenchantable[itemID]
-end
-
-function addon:IsDisenchantable(itemID)
-	if not C_SpellBook.IsSpellKnown(13262) then
-		return
-	end
-
-	-- returns the spell used to disenchant the item if it can be disenchanted
-	if addon:IsRetail() and addon.data.disenchantable[itemID] then
-		-- special items
-		return 13262, addon.colors.disenchantable
-	end
-
-	local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = C_Item.GetItemInfo(itemID)
-	-- if addon:IsClassic() then
-	-- 	-- make sure the player has enough skill to disenchant the item
-	-- 	if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
-	-- 		return
-	-- 	end
-	-- end
-
-	if not quality or quality < Enum.ItemQuality.Uncommon or quality > Enum.ItemQuality.Epic then
-		-- grey, white, and legendary items, plus artifacts and heirlooms can't be disenchanted
-		return
-	elseif class ~= Enum.ItemClass.Weapon and class ~= Enum.ItemClass.Armor and class ~= Enum.ItemClass.Profession and not (class == Enum.ItemClass.Gem and subClass == Enum.ItemGemSubclass.Artifactrelic) then
-		-- only armor, weapons, tools and gems can be disenchanted
-		return
-	elseif C_Item.GetItemInventoryTypeByID(itemID) == Enum.InventoryType.IndexBodyType then
-		-- shirts can't be disenchanted
-		return
-	elseif addon:IsRetail() and C_Item.IsCosmeticItem(itemID) then
-		-- cosmetic items can't be disenchanted
-		return
-	end
-
-	-- TODO: check if profession items can still be disenchanted
-	return 13262, addon.colors.disenchantable
-end
-
-salvagers:insert('IsDisenchantable')
 
 function addon:IsOpenable(itemID)
 	local requiredLevel = addon.data.openable[itemID]
@@ -151,17 +18,6 @@ function addon:IsOpenable(itemID)
 			return 323427, addon.colors.openable -- Kevin's Keyring, Necrolord soulbind ability
 		end
 	end
-end
-
-function addon:IsSalvagable(itemID)
-	for _, method in next, salvagers do
-		local spellID, color, numItems = addon[method](addon, itemID)
-		if spellID then
-			return spellID, color, numItems
-		end
-	end
-
-	return addon:IsOpenable(itemID)
 end
 
 if addon:IsRetail() then
@@ -186,14 +42,14 @@ if addon:IsRetail() then
 		local requiredLevel = addon.data.openable[itemID]
 		if requiredLevel then
 			local playerLevel = UnitLevel('player')
-			for pickItemID, info in next, addon.data.keys do
+			for keyItemID, info in next, addon.data.keys do
 				if
 					info[1] >= requiredLevel and
 					info[2] <= playerLevel and
-					C_Item.GetItemCount(pickItemID) > 0 and
-					isKeyUsable(pickItemID)
+					C_Item.GetItemCount(keyItemID) > 0 and
+					isKeyUsable(keyItemID)
 				then
-					return pickItemID, addon.colors.openable
+					return keyItemID, addon.colors.openable
 				end
 			end
 		end
@@ -204,16 +60,78 @@ else
 		local requiredLevel = addon.data.openable[itemID]
 		if requiredLevel then
 			local playerLevel = UnitLevel('player')
-			for pickItemID, info in next, addon.data.keys do
+			for keyItemID, info in next, addon.data.keys do
 				if
 					info[1] >= requiredLevel and
-					info[3] <= addon:GetProfessionSkillLevel(info[2]) and
+					(info[2] == 0 or info[3] <= addon:GetProfessionSkillLevel(info[2])) and
 					info[4] <= playerLevel and
-					C_Item.GetItemCount(pickItemID) > 0
+					C_Item.GetItemCount(keyItemID) > 0
 				then
-					return pickItemID, addon.colors.openable
+					return keyItemID, addon.colors.openable
 				end
 			end
 		end
 	end
+end
+
+local salvagers = addon:T()
+function addon:IsSalvagable(itemID)
+	for kind, salvager in next, salvagers do
+		local spellID, numItems, skillID, skillRequired = salvager(itemID)
+		if spellID then
+			if skillRequired and skillID then
+				local skillLevel = addon:GetProfessionSkillLevel(skillID)
+				if skillLevel >= skillRequired then
+					return spellID, addon.colors[kind], numItems
+				end
+			else
+				return spellID, addon.colors[kind], numItems
+			end
+		end
+	end
+end
+
+for kind, data in next, addon.data.salvage do
+	salvagers[kind] = function(itemID)
+		local info = data[itemID]
+		if info and C_Spell.IsSpellKnown(info[1]) then
+			return unpack(info)
+		end
+	end
+end
+
+function salvagers.disenchantable(itemID)
+	if not C_SpellBook.IsSpellKnown(13262) then
+		return
+	end
+
+	-- returns the spell used to disenchant the item if it can be disenchanted
+	if addon:IsRetail() and addon.data.disenchantable[itemID] then
+		-- special items
+		return 13262
+	end
+
+	local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = C_Item.GetItemInfo(itemID)
+	-- if not addon:IsRetail() then
+	-- 	-- make sure the player has enough skill to disenchant the item
+	-- 	if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
+	-- 		return
+	-- 	end
+	-- end
+
+	if not quality or quality < ItemQuality.Uncommon or quality > ItemQuality.Epic then
+		-- grey, white, legendary, artifacts and heirlooms can't be disenchanted
+		return
+	elseif class ~= Enum.ItemClass.Weapon and class ~= Enum.ItemClass.Armor and class ~= Enum.ItemClass.Profession and not (class == Enum.ItemClass.Gem and subClass == Enum.ItemGemSubclass.Artifactrelic) then
+		-- only armor, weapons, tools and artifact relics can be disenchanted
+		return
+	elseif C_Item.GetItemInventoryTypeByID(itemID) == Enum.InventoryType.IndexBodyType then
+		-- shirts can't be disenchanted
+		return
+	elseif C_Item.IsCosmeticItem and C_Item.IsCosmeticItem(itemID) then
+		-- cosmetic items can't be disenchanted
+		return
+	end
+
+	return 13262
 end

@@ -84,7 +84,7 @@ for itemID in list(items):
 # print data file structure
 util.templateLuaTable(
   'local _, addon = ...',
-  'addon.data.scrappable',
+  'addon.data.salvage.scrappable',
   '\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}',
   items
 )

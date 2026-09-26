@@ -24,6 +24,7 @@ jobs:
         uses: p3lim/dbc-helper@master
         id: scraper
         with:
+          flavor: retail
           # beta: true
           ptr: true
           files: |
@@ -63,7 +64,7 @@ jobs:
           # ptr: true
           files: |
             scripts/openable.py: data/Camelot/openable.lua
-            scripts/keys_forever.py: data/Camelot/keys.lua
+            scripts/keys.py: data/Camelot/keys.lua
             scripts/nondisenchantable.py: data/Camelot/nondisenchantable.lua
             scripts/comprehension.py: data/Camelot/comprehensible.lua
 
@@ -89,10 +90,10 @@ jobs:
         with:
           flavor: mists
           # beta: true
-          ptr: true
+          # ptr: true
           files: |
             scripts/openable.py: data/Mists/openable.lua
-            scripts/keys_classic.py: data/Mists/keys.lua
+            scripts/keys.py: data/Mists/keys.lua
             scripts/nondisenchantable.py: data/Mists/nondisenchantable.lua
             scripts/prospectable_classic.py: data/Mists/prospectable.lua
             scripts/millable_classic.py: data/Mists/millable.lua
@@ -119,10 +120,10 @@ jobs:
         with:
           flavor: wrath
           # beta: true
-          ptr: true
+          # ptr: true
           files: |
             scripts/openable.py: data/Wrath/openable.lua
-            scripts/keys_classic.py: data/Wrath/keys.lua
+            scripts/keys.py: data/Wrath/keys.lua
             scripts/nondisenchantable.py: data/Wrath/nondisenchantable.lua
             scripts/prospectable_classic.py: data/Wrath/prospectable.lua
             scripts/millable_classic.py: data/Wrath/millable.lua
@@ -149,10 +150,10 @@ jobs:
         with:
           flavor: tbc
           # beta: true
-          ptr: true
+          # ptr: true
           files: |
             scripts/openable.py: data/TBC/openable.lua
-            scripts/keys_classic.py: data/TBC/keys.lua
+            scripts/keys.py: data/TBC/keys.lua
             scripts/nondisenchantable.py: data/TBC/nondisenchantable.lua
             scripts/prospectable_classic.py: data/TBC/prospectable.lua
 
@@ -181,7 +182,7 @@ jobs:
           # ptr: true
           files: |
             scripts/openable.py: data/Vanilla/openable.lua
-            scripts/keys_classic_era.py: data/Vanilla/keys.lua
+            scripts/keys.py: data/Vanilla/keys.lua
             scripts/nondisenchantable.py: data/Vanilla/nondisenchantable.lua
 
       - name: Create pull request

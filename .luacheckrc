@@ -37,6 +37,7 @@ read_globals = {
 	-- FrameXML functions
 	'AutoCastShine_AutoCastStart', -- classic
 	'AutoCastShine_AutoCastStop', -- classic
+	'CopyTable',
 	'CreateColor',
 	'GameTooltip_Hide',
 

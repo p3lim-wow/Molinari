@@ -44,7 +44,7 @@ for item in list(items.keys()):
 # print data file structure
 util.templateLuaTable(
 	'local _, addon = ...',
-	'addon.data.transmutable',
+	'addon.data.salvage.transmutable',
 	'\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}',
 	items
 )

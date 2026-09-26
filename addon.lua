@@ -1,5 +1,6 @@
 local addonName, addon = ...
 addon.data = {}
+addon.data.salvage = {}
 
 local modifier
 
@@ -58,17 +59,17 @@ local function tooltipHook(tooltip, item)
 		return
 	end
 
-	if addon:NonDisenchantable(itemID) or (C_Item.IsCosmeticItem and C_Item.IsCosmeticItem(itemID)) then
-		tooltipHelp(ITEM_DISENCHANT_NOT_DISENCHANTABLE, ERR_COLOR)
-		return
-	end
-
 	local spellID, color, numItemsRequired = addon:IsSalvagable(itemID)
 	if spellID then
 		if not C_SpellBook.IsSpellKnown(spellID) then
 			tooltipHelp(ERR_USE_LOCKED_WITH_SPELL_S:format(C_Spell.GetSpellName(spellID)), ERR_COLOR)
 			return
 		else
+			if spellID == 13262 and (addon.data.nondisenchantable[itemID] or (C_Item.IsCosmeticItem and C_Item.IsCosmeticItem(itemID))) then
+				tooltipHelp(ITEM_DISENCHANT_NOT_DISENCHANTABLE, ERR_COLOR)
+				return
+			end
+
 			local itemLocation = item:GetItemLocation()
 			if numItemsRequired and itemLocation and C_Item.GetStackCount(itemLocation) < numItemsRequired then
 				tooltipHelp(SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemNameByID(itemID)), ERR_COLOR)

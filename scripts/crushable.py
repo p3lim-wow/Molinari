@@ -79,7 +79,7 @@ for row in util.dbc('itemsparse'):
 # print data file structure
 util.templateLuaTable(
   'local _, addon = ...',
-  'addon.data.crushable',
+  'addon.data.salvage.crushable',
   '\t[{itemID}] = {{{recipeSpellID}, {numItems}}}, -- {name}',
   items
 )
