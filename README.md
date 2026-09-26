@@ -31,7 +31,7 @@ The following "salvaging" is supported:
 - [Comprehension](https://www.wowhead.com/forever/skill=3012)
 - [Feed Pet](https://www.wowhead.com/forever/spell=6991) ([Forever](https://warcraft.wiki.gg/wiki/World_of_Warcraft:_Forever) only)
 
-In addition, Molinari also works for lockpicking in the trade window.
+In addition, Molinari also works for picking locks in the trade window.
 
 ## Translations
 
