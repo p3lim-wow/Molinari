@@ -1,11 +1,12 @@
 -- this file is auto-generated
 local _, addon = ...
-addon.data.prospectable = {
-	[2770] = 1, -- Copper Ore
-	[2771] = 50, -- Tin Ore
-	[2772] = 125, -- Iron Ore
-	[3858] = 175, -- Mithril Ore
-	[10620] = 250, -- Thorium Ore
-	[23424] = 275, -- Fel Iron Ore
-	[23425] = 325, -- Adamantite Ore
+addon.data.salvage.prospectable = {
+	[2770] = {31252, 5, 755, 1}, -- Copper Ore
+	[2771] = {31252, 5, 755, 50}, -- Tin Ore
+	[2772] = {31252, 5, 755, 125}, -- Iron Ore
+	[3858] = {31252, 5, 755, 175}, -- Mithril Ore
+	[10620] = {31252, 5, 755, 250}, -- Thorium Ore
+	[23424] = {31252, 5, 755, 275}, -- Fel Iron Ore
+	[23425] = {31252, 5, 755, 325}, -- Adamantite Ore
+	[24115] = {31252, 5, 755, 150}, -- TestProspectIronOre
 }
