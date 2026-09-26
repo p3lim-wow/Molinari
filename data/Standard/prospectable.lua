@@ -1,6 +1,6 @@
 -- this file is auto-generated
 local _, addon = ...
-addon.data.prospectable = {
+addon.data.salvage.prospectable = {
 	[2770] = {382995, 5}, -- Copper Ore
 	[2771] = {382995, 5}, -- Tin Ore
 	[2772] = {382995, 5}, -- Iron Ore

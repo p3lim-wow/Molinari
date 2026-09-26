@@ -1,6 +1,6 @@
 -- this file is auto-generated
 local _, addon = ...
-addon.data.transmutable = {
+addon.data.salvage.transmutable = {
 	[210796] = {430315, 20}, -- Mycobloom
 	[210797] = {430315, 20}, -- Mycobloom
 	[210798] = {430315, 20}, -- Mycobloom

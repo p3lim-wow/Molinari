@@ -1,6 +1,6 @@
 -- this file is auto-generated
 local _, addon = ...
-addon.data.crushable = {
+addon.data.salvage.crushable = {
 	[52177] = {404740, 3}, -- Carnelian
 	[52178] = {404740, 3}, -- Zephyrite
 	[52179] = {404740, 3}, -- Alicite

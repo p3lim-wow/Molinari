@@ -1,6 +1,6 @@
 -- this file is auto-generated
 local _, addon = ...
-addon.data.scrappable = {
+addon.data.salvage.scrappable = {
 	[4359] = {447311, 5}, -- Handful of Copper Bolts
 	[4371] = {447311, 5}, -- Bronze Tube
 	[4375] = {447311, 5}, -- Whirring Bronze Gizmo

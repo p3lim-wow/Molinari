@@ -1,6 +1,6 @@
 -- this file is auto-generated
 local _, addon = ...
-addon.data.millable = {
+addon.data.salvage.millable = {
 	[765] = {382994, 5}, -- Silverleaf
 	[785] = {382994, 5}, -- Mageroyal
 	[2447] = {382994, 5}, -- Peacebloom
