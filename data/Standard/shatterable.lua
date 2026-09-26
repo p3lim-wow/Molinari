@@ -1,6 +1,6 @@
 -- this file is auto-generated
 local _, addon = ...
-addon.data.shatterable = {
+addon.data.salvage.shatterable = {
 	[124441] = {224199, 1}, -- Leylight Shard
 	[124442] = {252106, 1}, -- Chaos Crystal
 	[152876] = {290360, 1}, -- Umbra Shard
