@@ -55,6 +55,7 @@ read_globals = {
 
 	-- namespaces
 	'C_Item',
+	'C_PetInfo',
 	'C_SkillInfo',
 	'C_Spell',
 	'C_SpellBook',
@@ -75,6 +76,7 @@ read_globals = {
 	'IsControlKeyDown',
 	'IsPlayerSpell', -- deprecated
 	'IsShiftKeyDown',
+	'UnitClassBase',
 	'UnitHasVehicleUI',
 	'UnitLevel',
 	'hooksecurefunc',
