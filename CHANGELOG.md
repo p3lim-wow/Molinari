@@ -1,3 +1,8 @@
+### Changes in 120100.149-Release:
+
+- Addded: Tooltips help text to all clients
+- Fixed: Errors on Anniversary/Era
+
 ### Changes in 120100.148-Release:
 
 - Added: Support for Forever
