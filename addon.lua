@@ -1,4 +1,6 @@
 local addonName, addon = ...
+local L = addon.L
+
 addon.data = {}
 addon.data.salvage = {}
 
@@ -62,17 +64,17 @@ local function tooltipHook(tooltip, item)
 	local spellID, color, numItemsRequired = addon:IsSalvagable(itemID)
 	if spellID then
 		if not C_SpellBook.IsSpellKnown(spellID) then
-			tooltipHelp(ERR_USE_LOCKED_WITH_SPELL_S:format(C_Spell.GetSpellName(spellID)), ERR_COLOR)
+			tooltipHelp(L['Requires %s']:format(C_Spell.GetSpellName(spellID)), ERR_COLOR)
 			return
 		else
 			if spellID == 13262 and (addon.data.nondisenchantable[itemID] or (C_Item.IsCosmeticItem and C_Item.IsCosmeticItem(itemID))) then
-				tooltipHelp(ITEM_DISENCHANT_NOT_DISENCHANTABLE, ERR_COLOR)
+				tooltipHelp(L['Cannot be disenchanted'], ERR_COLOR)
 				return
 			end
 
 			local itemLocation = item:GetItemLocation()
 			if numItemsRequired and itemLocation and C_Item.GetStackCount(itemLocation) < numItemsRequired then
-				tooltipHelp(SPELL_FAILED_NEED_MORE_ITEMS:format(numItemsRequired, C_Item.GetItemNameByID(itemID)), ERR_COLOR)
+				tooltipHelp(L['Requires %d %s.']:format(numItemsRequired, C_Item.GetItemNameByID(itemID)), ERR_COLOR)
 				return
 			else
 				return Molinari:ApplySpell(item, spellID, color)
@@ -105,12 +107,10 @@ local function tooltipShow(self)
 		GameTooltip:SetBagItem(self:GetAttribute('target-bag'), self:GetAttribute('target-slot'))
 	end
 
-	if not addon:IsClassic() then
-		if self.spellID then
-			tooltipHelp((('\n'):split(NPEV2_CASTER_ABILITYINITIAL:gsub(' %%s ', '%s'))):format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Spell.GetSpellName(self.spellID) .. '|r'))
-		elseif self.itemID then
-			tooltipHelp(NPEV2_ABILITYINITIAL:format('|A:NPE_LeftClick:18:18|a', '|cff0090ff' .. C_Item.GetItemNameByID(self.itemID) .. '|r'))
-		end
+	if self.spellID then
+		tooltipHelp(L['Press |A:NPE_LeftClick:18:18|a to cast |cff0090ff%s|r']:format(C_Spell.GetSpellName(self.spellID)))
+	elseif self.itemID then
+		tooltipHelp(L['Press |A:NPE_LeftClick:18:18|a to use |cff0090ff%s|r']:format(C_Item.GetItemNameByID(self.itemID)))
 	end
 
 	GameTooltip:Show()
