@@ -1,8 +1,8 @@
 local _, addon = ...
 
 local ItemQuality = CopyTable(Enum.ItemQuality)
-if addon:IsClassic() then
-	-- these were renamed in 9.0.1
+if not ItemQuality.Common then
+	-- these were renamed in 9.0.1, but are still used for classic game versions
 	ItemQuality.Common = ItemQuality.Standard
 	ItemQuality.Uncommon = ItemQuality.Good
 end
