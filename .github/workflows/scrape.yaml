@@ -28,14 +28,15 @@ jobs:
           # beta: true
           ptr: true
           files: |
-            scripts/openable.py: data/Standard/openable.lua
-            scripts/keys.py: data/Standard/keys.lua
-            scripts/nondisenchantable.py: data/Standard/nondisenchantable.lua
-            scripts/prospectable.py: data/Standard/prospectable.lua
-            scripts/millable.py: data/Standard/millable.lua
-            scripts/disenchantable.py: data/Standard/disenchantable.lua
-            scripts/scrappable.py: data/Standard/scrappable.lua
+            scripts/cooking.py: data/Standard/cooking.lua
             scripts/crushable.py: data/Standard/crushable.lua
+            scripts/disenchantable.py: data/Standard/disenchantable.lua
+            scripts/keys.py: data/Standard/keys.lua
+            scripts/millable.py: data/Standard/millable.lua
+            scripts/nondisenchantable.py: data/Standard/nondisenchantable.lua
+            scripts/openable.py: data/Standard/openable.lua
+            scripts/prospectable.py: data/Standard/prospectable.lua
+            scripts/scrappable.py: data/Standard/scrappable.lua
             scripts/shatterable.py: data/Standard/shatterable.lua
             scripts/transmutable.py: data/Standard/transmutable.lua
 
@@ -63,10 +64,10 @@ jobs:
           # beta: true
           # ptr: true
           files: |
-            scripts/openable.py: data/Camelot/openable.lua
+            scripts/comprehension.py: data/Camelot/comprehensible.lua
             scripts/keys.py: data/Camelot/keys.lua
             scripts/nondisenchantable.py: data/Camelot/nondisenchantable.lua
-            scripts/comprehension.py: data/Camelot/comprehensible.lua
+            scripts/openable.py: data/Camelot/openable.lua
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v8
@@ -92,11 +93,11 @@ jobs:
           # beta: true
           # ptr: true
           files: |
-            scripts/openable.py: data/Mists/openable.lua
             scripts/keys.py: data/Mists/keys.lua
-            scripts/nondisenchantable.py: data/Mists/nondisenchantable.lua
-            scripts/prospectable_classic.py: data/Mists/prospectable.lua
             scripts/millable_classic.py: data/Mists/millable.lua
+            scripts/nondisenchantable.py: data/Mists/nondisenchantable.lua
+            scripts/openable.py: data/Mists/openable.lua
+            scripts/prospectable_classic.py: data/Mists/prospectable.lua
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v8
@@ -122,11 +123,11 @@ jobs:
           # beta: true
           # ptr: true
           files: |
-            scripts/openable.py: data/Wrath/openable.lua
             scripts/keys.py: data/Wrath/keys.lua
-            scripts/nondisenchantable.py: data/Wrath/nondisenchantable.lua
-            scripts/prospectable_classic.py: data/Wrath/prospectable.lua
             scripts/millable_classic.py: data/Wrath/millable.lua
+            scripts/nondisenchantable.py: data/Wrath/nondisenchantable.lua
+            scripts/openable.py: data/Wrath/openable.lua
+            scripts/prospectable_classic.py: data/Wrath/prospectable.lua
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v8
@@ -152,9 +153,9 @@ jobs:
           # beta: true
           # ptr: true
           files: |
-            scripts/openable.py: data/TBC/openable.lua
             scripts/keys.py: data/TBC/keys.lua
             scripts/nondisenchantable.py: data/TBC/nondisenchantable.lua
+            scripts/openable.py: data/TBC/openable.lua
             scripts/prospectable_classic.py: data/TBC/prospectable.lua
 
       - name: Create pull request
@@ -181,9 +182,9 @@ jobs:
           # beta: true
           # ptr: true
           files: |
-            scripts/openable.py: data/Vanilla/openable.lua
             scripts/keys.py: data/Vanilla/keys.lua
             scripts/nondisenchantable.py: data/Vanilla/nondisenchantable.lua
+            scripts/openable.py: data/Vanilla/openable.lua
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v8

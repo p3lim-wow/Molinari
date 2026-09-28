@@ -30,6 +30,7 @@ The following "salvaging" is supported:
 - [Transmuting](https://www.wowhead.com/spell=430315)
 - [Comprehension](https://www.wowhead.com/forever/skill=3012)
 - [Feed Pet](https://www.wowhead.com/forever/spell=6991) ([Forever](https://warcraft.wiki.gg/wiki/World_of_Warcraft:_Forever) only)
+- Cooking [Hearty Food](https://www.wowhead.com/search?q=hearty%20food#professions), [Hearty Feast](https://www.wowhead.com/search?q=hearty%20feast#professions;reagents=%3D0) and [Prepared Ingredients](https://warcraft.wiki.gg/wiki/Midnight_cooking_recipes)
 
 In addition, Molinari also works for picking locks in the trade window.
 
