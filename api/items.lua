@@ -137,7 +137,7 @@ function salvagers.disenchantable(itemID)
 end
 
 if addon:IsForever() and UnitClassBase('player') == 'HUNTER' then
-	function salvagers.food(itemID) -- not really a "salvager" but w/e
+	function salvagers.feed(itemID) -- not really a "salvager" but w/e
 		return C_PetInfo.CanPetEatItem(itemID) and 6991
 	end
 end

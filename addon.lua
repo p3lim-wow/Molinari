@@ -87,10 +87,10 @@ local function tooltipHook(tooltip, item)
 		return Molinari:ApplySpell(item, spellID, color)
 	end
 
-	local key
-	key, color = addon:IsOpenableProfession(itemID)
-	if key then
-		return Molinari:ApplyItem(item, key, color)
+	local keyItemID
+	keyItemID, color = addon:IsOpenableProfession(itemID)
+	if keyItemID then
+		return Molinari:ApplyItem(item, keyItemID, color)
 	end
 end
 
