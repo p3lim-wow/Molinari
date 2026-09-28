@@ -7,8 +7,8 @@ recipeSpellIDs = { # ItemSalvageID = SpellID
   108: 1226167, # Hearty Food
   109: 1232247, # Hearty Feast
   103: 1259655, # Thalassian Fillet
-  256: 1296450, # Plant Protein
-  257: 1296449, # Practically Pork
+  257: 1296450, # Plant Protein
+  256: 1296449, # Practically Pork
 }
 
 # figure out how many items are needed to perform the salvage
