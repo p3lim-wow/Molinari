@@ -77,11 +77,11 @@ end
 local salvagers = addon:T()
 function addon:IsSalvagable(itemID)
 	for kind, salvager in next, salvagers do
-		local spellID, numItems, skillID, skillRequired = salvager(itemID)
+		local spellID, numItems, skillID, requiredSkillLevel = salvager(itemID)
 		if spellID then
-			if skillRequired and skillID then
+			if requiredSkillLevel and skillID then
 				local skillLevel = addon:GetProfessionSkillLevel(skillID)
-				if skillLevel >= skillRequired then
+				if skillLevel >= requiredSkillLevel then
 					return spellID, addon.colors[kind], numItems
 				end
 			else
