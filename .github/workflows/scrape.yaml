@@ -93,6 +93,7 @@ jobs:
           # beta: true
           # ptr: true
           files: |
+            scripts/disenchanting.py: data/Mists/disenchanting.lua
             scripts/keys.py: data/Mists/keys.lua
             scripts/millable_classic.py: data/Mists/millable.lua
             scripts/nondisenchantable.py: data/Mists/nondisenchantable.lua
@@ -123,6 +124,7 @@ jobs:
           # beta: true
           # ptr: true
           files: |
+            scripts/disenchanting.py: data/Wrath/disenchanting.lua
             scripts/keys.py: data/Wrath/keys.lua
             scripts/millable_classic.py: data/Wrath/millable.lua
             scripts/nondisenchantable.py: data/Wrath/nondisenchantable.lua
@@ -153,6 +155,7 @@ jobs:
           # beta: true
           # ptr: true
           files: |
+            scripts/disenchanting.py: data/TBC/disenchanting.lua
             scripts/keys.py: data/TBC/keys.lua
             scripts/nondisenchantable.py: data/TBC/nondisenchantable.lua
             scripts/openable.py: data/TBC/openable.lua

@@ -26,6 +26,7 @@ settings.lua
 data\[Game]\cooking.lua [AllowLoadGameType standard]
 data\[Game]\comprehensible.lua [AllowLoadGameType camelot][ExcludeLoadGameType standard, classic]
 data\[Game]\crushable.lua [AllowLoadGameType standard]
+data\[Game]\disenchanting.lua [AllowLoadGameType mists, wrath, tbc]
 data\[Game]\disenchantable.lua [AllowLoadGameType standard]
 data\[Game]\keys.lua
 data\[Game]\millable.lua [AllowLoadGameType standard, mists, wrath]

@@ -111,13 +111,14 @@ function salvagers.disenchantable(itemID)
 		return 13262
 	end
 
-	local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = C_Item.GetItemInfo(itemID)
-	-- if not addon:IsRetail() then
-	-- 	-- make sure the player has enough skill to disenchant the item
-	-- 	if addon:GetProfessionSkillLevel(333) < addon:RequiredDisenchantingLevel(itemID) then
-	-- 		return
-	-- 	end
-	-- end
+	local _, _, quality, itemLevel, _, _, _, _, _, _, _, class, subClass = C_Item.GetItemInfo(itemID)
+	if addon.GetRequiredDisenchantingLevel then
+		local requiredSkillLevel = addon:GetRequiredDisenchantingLevel(quality, itemLevel)
+		if requiredSkillLevel and addon:GetProfessionSkillLevel(333) < requiredSkillLevel then
+			-- make sure the player has enough skill to disenchant the item
+			return
+		end
+	end
 
 	if not quality or quality < ItemQuality.Uncommon or quality > ItemQuality.Epic then
 		-- grey, white, legendary, artifacts and heirlooms can't be disenchanted
