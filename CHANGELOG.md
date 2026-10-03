@@ -1,6 +1,11 @@
+### Changes in 120100.150-Release:
+
+- Added: Support for Hearty Food/Feast and Prepared Ingredients for Cooking
+- Fixed: Enchanting skill requirement for disenchanting in TBC/Wrath/Mists
+
 ### Changes in 120100.149-Release:
 
-- Addded: Tooltips help text to all clients
+- Added: Tooltip help text to all clients
 - Fixed: Errors on Anniversary/Era
 
 ### Changes in 120100.148-Release:
