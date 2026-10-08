@@ -4388,4 +4388,6 @@ addon.data.nondisenchantable = {
 	[277467] = true, -- Secondhand Plate Greaves
 	[277468] = true, -- Secondhand Chestguard
 	[277469] = true, -- Secondhand Band of Devastation
+	[280404] = true, -- Lordaeron Forever Tabard
+	[280448] = true, -- Shen'dorei Tabard
 }
