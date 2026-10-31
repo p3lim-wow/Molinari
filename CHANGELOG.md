@@ -1,3 +1,9 @@
+### Changes in 120100.151-Release:
+
+- Changed: Update Interface version for retail
+- Changed: Update retail data
+- Changed: Update wrath data
+
 ### Changes in 120100.150-Release:
 
 - Added: Support for Hearty Food/Feast and Prepared Ingredients for Cooking
