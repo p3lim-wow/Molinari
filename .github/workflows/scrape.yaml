@@ -65,6 +65,7 @@ jobs:
           # ptr: true
           files: |
             scripts/comprehension.py: data/Camelot/comprehensible.lua
+            scripts/disenchantable.py: data/Standard/disenchantable.lua
             scripts/keys.py: data/Camelot/keys.lua
             scripts/nondisenchantable.py: data/Camelot/nondisenchantable.lua
             scripts/openable.py: data/Camelot/openable.lua
