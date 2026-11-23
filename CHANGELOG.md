@@ -1,3 +1,7 @@
+### Changes in 120100.152-Release:
+
+- Added: Disenchanting support for certain quest related items
+
 ### Changes in 120100.151-Release:
 
 - Changed: Update Interface version for retail
